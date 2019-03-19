@@ -12,6 +12,9 @@ class pokemon
 	bool isFound;
 	attack attackChoice[4];
 
+	Public:
+
+	void launchAttack(pokemon poke1,attack att) //Fonction qui retourne le pokemon avec des points de vie en moins
 };
 
 #endif
