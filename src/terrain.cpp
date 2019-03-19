@@ -2,7 +2,11 @@
 
 using namespace std;
 
-void terrain::initTerrain(int idTerrain)
+terrain::terrain(){
+	
+}
+
+terrain::terrain(int idTerrain)
 {
 	ifstream fichier ("./data/terrain1.txt");
 
