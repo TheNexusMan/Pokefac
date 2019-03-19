@@ -1,11 +1,16 @@
 #ifndef _POKEMON_H
 #define _POKEMON_H
 
-#include "attack.h"
 #include <string.h>
 #include <iostream>
 
 using namespace std;
+
+struct attack
+{
+	string name; 
+	unsigned int damagePoints;
+};
 
 class pokemon 
 {

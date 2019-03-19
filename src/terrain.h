@@ -1,5 +1,5 @@
-#ifndef _TERRAIN
-#define _TERRAIN
+#ifndef _TERRAIN_H
+#define _TERRAIN_H
 
 #include <iostream>
 #include <fstream>
