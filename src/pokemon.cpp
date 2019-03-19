@@ -1,7 +1,7 @@
 #include "attack.h"
 #include "pokemon.h"
 
-pokemon:: launchAttack(pokemon poke,attack att)
+void pokemon::launchAttack(pokemon poke,attack att)
 { 
 
 	if( poke.health > 0 && poke.health >= (att.damagePoints - poke.defenseStat))
