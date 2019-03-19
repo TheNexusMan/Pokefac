@@ -12,7 +12,7 @@ public:
 	int idTerrain;
 	char terrain[sizeTerrain][sizeTerrain];
 
-	void initTerrain(int idTerrain); //Initialise le terrain en fonctionde son id
+	void initTerrain(int idTerrain); //Initialise le terrain en fonction de son id
 	void displayTerrain(); // Affiche le terrain
 };
 

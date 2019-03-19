@@ -14,15 +14,13 @@ void terrain::initTerrain(int idTerrain)
 		{
 			getline(fichier, ligne);
 			
-			for(int j = 0; j < ligne.length(); j++)
+			for(unsigned int j = 0; j < ligne.length(); j++)
 			{
-				cout << ligne[j];
 
 				if (ligne[j] != ' ') {
 					terrain[i][(int) j / 2] = ligne[j];
 				}
 			}
-			cout << endl;
 			i++;
 		}
 
@@ -38,7 +36,7 @@ void terrain::displayTerrain()
 	{
 		for(int j = 0; j < sizeTerrain; j++)
 		{
-			cout << terrain[i][j];
+			cout << terrain[i][j] << " ";
 		}
 		cout << endl;
 	}
