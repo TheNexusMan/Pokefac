@@ -17,7 +17,7 @@ void battle::launchBattle(player play1, pokemon poke)
 
 		
 		do{
-		
+
 		cout<<"choose your attack : 1-"<< play1.tabPokemon[0].attackChoice[0].name << endl << "2-" <<play1.tabPokemon[0].attackChoice[1].name <<endl
 		<<"3-"<< play1.tabPokemon[0].attackChoice[2].name <<endl<<"4-"<<play1.tabPokemon[0].attackChoice[3].name <<endl;
 		cin>>a;
@@ -50,7 +50,7 @@ void battle::launchBattle(player play1, pokemon poke)
  {
  	cout<<"You win the fight!! "<<endl
  	play1.addmoney(100);
- 	cout<<"Your money : "<<play1.money; 
+ 	cout<<"Your money : "<<play1.getmoney(); 
  	system("pause");
  }
  else {
