@@ -6,7 +6,6 @@
 class battle
 {
 	Public: 
-	void displayBattle() //Ouvre une nouvelle fenêtre lors d'un combat 
-	void launchAttack(pokemon pokemon, attack attack) //diminue les points de cie des pokémons en fonction des point d'attack 
+	void launchBattle(player play1, pokemon poke) //le combat entre le player et le npc
 };
 #endif 
