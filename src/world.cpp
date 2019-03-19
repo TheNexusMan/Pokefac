@@ -1,7 +1,4 @@
-#include <iostream>
-#include <stdlib.h>
-
-using namespace std;
+#include "world.h"
 
 world::world()
 {
@@ -9,33 +6,30 @@ world::world()
 
 	if(fichier.is_open())
 	{
-
-		string ligne;
-		int i = 0;
 		while(!fichier.eof())
 		{
 			for(unsigned int i = 0; i < NBPOKEMON; i++)
 			{
-				poke[i].id << fichier;
-				poke[i].name << fichier;
-				poke[i].type << fichier;
-				poke[i].isfound << fichier;
-				poke[i].level << fichier;
-				poke[i].health << fichier;
-				poke[i].maxhealth << fichier;
-				poke[i].attackStat << fichier;
-				poke[i].defenseStat << fichier;
+				fichier >> poke[i].id;
+				fichier >> poke[i].name;
+				fichier >> poke[i].type;
+				fichier >> poke[i].isFound;
+				fichier >> poke[i].level;
+				fichier >> poke[i].health;
+				fichier >> poke[i].maxHealth;
+				fichier >> poke[i].attackStat;
+				fichier >> poke[i].defenseStat;
 				
-				for(unsigned int i = 0; i < 4; i++)
+				for(unsigned int j = 0; j < 4; j++)
 				{
-					attack[i].name << fichier;
-					attack[i].damagePoints << fichier;
+					fichier >> poke[i].attackChoice[j].name;
+					fichier >> poke[i].attackChoice[j].damagePoints;
 				}
 			}
 		}
 
 		fichier.close();
 	}else{
-		cout << "Erreur d'ouverture du terrain" << idTerrain << endl;
+		cout << "Erreur d'ouverture du fichier pokemons" << endl;
 	}
 }

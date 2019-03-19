@@ -1,12 +1,10 @@
 #include "terrain.h"
 
-using namespace std;
-
 terrain::terrain(){
 	
 }
 
-terrain::terrain(int idTerrain)
+void terrain::initTerrain(int idTerrain)
 {
 	ifstream fichier ("./data/terrain1.txt");
 
@@ -22,7 +20,7 @@ terrain::terrain(int idTerrain)
 			{
 
 				if (ligne[j] != ' ') {
-					terrain[i][(int) j / 2] = ligne[j];
+					terrainTab[i][(int) j / 2] = ligne[j];
 				}
 			}
 			i++;
@@ -40,7 +38,7 @@ void terrain::displayTerrain()
 	{
 		for(int j = 0; j < sizeTerrain; j++)
 		{
-			cout << terrain[i][j] << " ";
+			cout << terrainTab[i][j] << " ";
 		}
 		cout << endl;
 	}

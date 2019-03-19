@@ -1,4 +1,3 @@
-#include "attack.h"
 #include "pokemon.h"
 
 void pokemon::launchAttack(pokemon poke, attack att)
@@ -16,7 +15,7 @@ void pokemon::initPokemon(const pokemon & poke)
 	id = poke.id;
 	name = poke.name;
 	type = poke.type;
-	isfound = poke.isfound;
+	isFound = poke.isFound;
 	level = poke.level;
 	health = poke.health;
 	maxHealth = poke.maxHealth;
@@ -25,7 +24,7 @@ void pokemon::initPokemon(const pokemon & poke)
 
 	for(unsigned int i = 0; i < 4; i++)
 	{
-		attack[i].name = poke.attack[i].name;
-		attack[i].damagePoints = poke.attack[i].damagePoints;
+		attackChoice[i].name = poke.attackChoice[i].name;
+		attackChoice[i].damagePoints = poke.attackChoice[i].damagePoints;
 	}
 }

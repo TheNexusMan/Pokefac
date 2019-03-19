@@ -1,8 +1,9 @@
 1
 Linuchu
 OS
-false
+0
 1
+50
 50
 10
 10
@@ -13,8 +14,9 @@ Make 15
 2
 Windosu
 Windows
-false
+0
 1
+60
 60
 10
 10
@@ -25,8 +27,9 @@ Store 15
 3
 Salashell
 Linux
-false
+0
 1
+40
 40
 15
 15

@@ -5,15 +5,17 @@
 #include <fstream>
 #include <stdlib.h>
 
+using namespace std;
+
 const int sizeTerrain = 20;
 
 class terrain{
 public:
 	int idTerrain;
-	char terrain[sizeTerrain][sizeTerrain];
+	char terrainTab[sizeTerrain][sizeTerrain];
 
 	terrain();
-	terrain(int idTerrain); //Initialise le terrain en fonction de son id
+	void initTerrain(int idTerrain); //Initialise le terrain en fonction de son id
 	void displayTerrain(); // Affiche le terrain
 };
 

@@ -2,25 +2,28 @@
 #define _WORLD
 
 #include <iostream>
-#include "terrain.h"
-#include "pokemon.h"
+#include <stdlib.h>
+#include <fstream>
+#include <string>
 //#include <SDL.h>
 //#include <SDL_image.h>
+#include "terrain.h"
+#include "pokemon.h"
+//#include "NPC.h"
+//#include "player.h"
+
+using namespace std;
 
 const unsigned int NBPOKEMON = 3;
 
 class world{
 public:
-	terrain terrain(1);
-	NPC NPCTab[10];
-	player mainPlayer;
-	pokemon poke[NBPOKEMON];
-
-	void displayTerrain();
-
 	world();
 
-
+	terrain worldTerrain;
+	//NPC NPCTab[10];
+	//player mainPlayer;
+	pokemon poke[NBPOKEMON];
 };
 
 #endif

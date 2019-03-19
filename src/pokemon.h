@@ -2,21 +2,22 @@
 #define _POKEMON_H
 
 #include "attack.h"
+#include <string.h>
+#include <iostream>
+
+using namespace std;
 
 class pokemon 
 {
-	Private: 
+public:
 
-	unsigned int id, level, health, maxHealth, attackStat, defenseStat;
+	unsigned int id, level, health, maxHealth, attackStat, defenseStat, isFound;
 	string name, type;
-	bool isFound;
 	attack attackChoice[4];
-
-	Public:
 
 	void launchAttack(pokemon poke, attack att); //Fonction qui retourne le pokemon avec des points de vie en moins
 
-	void initPokemon(unsigned int id, const pokemon poke[NBPOKEMON]);
+	void initPokemon(const pokemon & poke);
 };
 
 #endif
