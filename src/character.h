@@ -1,8 +1,9 @@
-#pragma once
+#ifndef _CHARACTER_H
+#define _CHARACTER_H
 
 #include <iostream>
 #include <string>
-#include "characterTexture.h"
+//#include "characterTexture.h"
 
 using namespace std;
 
@@ -14,15 +15,19 @@ public:
 
 
 	string name;
-	unsigned int posX;
-	unsigned int posY;
-	characterTexture texture;
+	//characterTexture texture;
 
 	void setName(string name);
-	void setPos(int x, int y);
-	int getPosX();
-	int getPosY();
+	void setNewPos(unsigned int x, unsigned int y);
+	void setPosX(unsigned int x);
+	void setPosY(unsigned int y);
+	unsigned int getPosX();
+	unsigned int getPosY();
 	void setIdleTexture();
 
-
+private:
+	unsigned int posX;
+	unsigned int posY;
 };
+
+#endif
