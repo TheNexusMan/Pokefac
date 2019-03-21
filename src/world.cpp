@@ -5,8 +5,7 @@ world::world()
 {
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
-	//initPlayer(mainPlayer); // Initialise le Joueur de d�part
-	mainPlayer.initPlayer();
+	mainPlayer.initPlayer(); // Initialise le Joueur de d�part
 	mainTerrain.initTerrain(1);
 	randomNumber();
 }
