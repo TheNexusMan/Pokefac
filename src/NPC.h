@@ -4,10 +4,10 @@
 #include "character.h"
 #include <iostream>
 #include <fstream>
+#include "pokemon.h"
 
 using namespace std;
 
-const unsigned int NB_DIALOG = 3;
 
 class NPC :
 	public character
@@ -15,20 +15,13 @@ class NPC :
 public:
 	NPC();
 	~NPC();
-	int getRotation(); // Detecte la rotation des pnj pour la ligne (1,2 3 ou 4)
-					   // 1 = Nord; 2 = Est; 3 = Sud; 4 = Ouest
+	char getRotation(); // Detecte la rotation des pnj pour la ligne (n, s, e ou o)
+					   // n = Nord; s = Sud; e = Est; o = Ouest
 	unsigned int id;
-	unsigned int rotation;
-	string dialog[NB_DIALOG];
-
-private:
-	
-
-
-	//pokemon pokemon;
-	//string dialog[];
-
-
+	char rotation;
+	unsigned int nbDialog;
+	string dialog[4];
+	pokemon NPCpokemon;
 };
 
 #endif

@@ -3,9 +3,10 @@
 
 world::world()
 {
-	initPokeTab(); //Initialisation du tableau Pokémon
-	//initNPCTab(); // Initialisation du tableau NPC
-	//initPlayer(mainPlayer); // Initialise le Joueur de départ
+	initPokeTab(); //Initialisation du tableau Pokï¿½mon
+	initNPCTab(); // Initialisation du tableau NPC
+	//initPlayer(mainPlayer); // Initialise le Joueur de dï¿½part
+	mainTerrain.initTerrain(1);
 }
 
 void world::initPlayer(player mainPlayer)
@@ -15,8 +16,8 @@ void world::initPlayer(player mainPlayer)
 	if (DEBUG)
 	{
 		displayStars();
-		cout << "Position du joueur de départ : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
-		cout << "Argent de départ : " << mainPlayer.getMoney() << endl;
+		cout << "Position du joueur de dï¿½part : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
+		cout << "Argent de dï¿½part : " << mainPlayer.getMoney() << endl;
 		cout << "Nombre de pokeballs : " << mainPlayer.getPokeball() << endl;
 		displayStars();
 	}
@@ -33,20 +34,20 @@ void world::initPokeTab()
 		{
 			for (unsigned int i = 0; i < NBPOKEMON; i++)
 			{
-				file >> poke[i].id;
-				file >> poke[i].name;
-				file >> poke[i].type;
-				file >> poke[i].isFound;
-				file >> poke[i].level;
-				file >> poke[i].health;
-				file >> poke[i].maxHealth;
-				file >> poke[i].attackStat;
-				file >> poke[i].defenseStat;
+				file >> pokeTab[i].id;
+				file >> pokeTab[i].name;
+				file >> pokeTab[i].type;
+				file >> pokeTab[i].isFound;
+				file >> pokeTab[i].level;
+				file >> pokeTab[i].health;
+				file >> pokeTab[i].maxHealth;
+				file >> pokeTab[i].attackStat;
+				file >> pokeTab[i].defenseStat;
 
 				for (unsigned int j = 0; j < 4; j++)
 				{
-					file >> poke[i].attackChoice[j].name;
-					file >> poke[i].attackChoice[j].damagePoints;
+					file >> pokeTab[i].attackChoice[j].name;
+					file >> pokeTab[i].attackChoice[j].damagePoints;
 				}
 			}
 		}
@@ -60,15 +61,15 @@ void world::initPokeTab()
 
 void world::initNPCTab()
 {
-	//A remplir en fonction d'un fichier TXT (se baser sur le code au dessus)
-	ifstream file("./data/NPC.txt");
-	ifstream dialog("./data/NPCDialog.txt");
+	ifstream file("./data/NPCs.txt");
 	if (file.is_open())
 	{
-		int pos;
+		unsigned int pos;
+		string sentence;
+		unsigned int idPokemon;
 
-		while (!file.eof())
-		{
+		//while (!file.eof())
+		//{
 			for (unsigned int i = 0; i < NB_NPC; i++)
 			{
 				file >> NPCTab[i].id;
@@ -78,36 +79,23 @@ void world::initNPCTab()
 				file >> pos;
 				NPCTab[i].setPosY(pos);
 				file >> NPCTab[i].rotation;
+				file >> NPCTab[i].nbDialog;
+				file >> idPokemon;
+				NPCTab[i].NPCpokemon.initPokemon(pokeTab[idPokemon]);
+				getline(file, sentence);
+
+				for(unsigned int j = 0; j < NPCTab[i].nbDialog; j++)
+				{
+					getline(file, sentence);
+					NPCTab[i].dialog[j] = sentence;
+				}
 			}
-		}
+		//}
 		file.close();
 	}
 	else {
-		cout << "Erreur dans l'ouverture du fichier ./data/NPC.txt" << endl;
+		cout << "Erreur dans l'ouverture du fichier ./data/NPCs.txt" << endl;
 	}
-
-	//Remplie via un fichier secondaire les dialogues des NPC
-	if (dialog.is_open())
-	{
-		while (!file.eof())
-		{
-			for (unsigned int i = 0; i < NB_NPC; i++)
-			{
-				for (unsigned j = 0; j < NB_DIALOG; j++)
-				{
-					dialog >> NPCTab[i].dialog[j];
-				}
-			}
-		}
-		file.close();
-	}
-	else
-	{
-		cout << "Erreur dans l'ouverture du fichier ./data/NPCDialog.txt" << endl;
-		
-	}
-
-
 }
 
 void world::displayStars() const
@@ -182,60 +170,60 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	{
 
 		// Nord
-	case 1: if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
-	{
-		if (DEBUG)
+		case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
 		{
-			displayStars();
-			cout << "Le joueur est au nord d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
+			if (DEBUG)
+			{
+				displayStars();
+				cout << "Le joueur est au nord d'un npc et < 3 cases" << endl;
+				cout << "Le combat se lance" << endl;
+				displayStars();
+			}
+			//Engage le combat
+			break;
 		}
-		//Engage le combat
-		break;
-	}
 
-			//Est
-	case 2:	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
-	{
-		if (DEBUG)
+				//Est
+		case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
 		{
-			displayStars();
-			cout << "Le joueur est a l'est d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
+			if (DEBUG)
+			{
+				displayStars();
+				cout << "Le joueur est a l'est d'un npc et < 3 cases" << endl;
+				cout << "Le combat se lance" << endl;
+				displayStars();
+			}
+			//Engage le combat
+			break;
 		}
-		//Engage le combat
-		break;
-	}
 
-			//Sud
-	case 3:	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
-	{
-		if (DEBUG)
+				//Sud
+		case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
 		{
-			displayStars();
-			cout << "Le joueur est au sud d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
+			if (DEBUG)
+			{
+				displayStars();
+				cout << "Le joueur est au sud d'un npc et < 3 cases" << endl;
+				cout << "Le combat se lance" << endl;
+				displayStars();
+			}
+			//Engage le combat
+			break;
 		}
-		//Engage le combat
-		break;
-	}
 
-			// Ouest
-	case 4:if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
-	{
-		if (DEBUG)
+				// Ouest
+		case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
 		{
-			displayStars();
-			cout << "Le joueur est a l'ouest d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
+			if (DEBUG)
+			{
+				displayStars();
+				cout << "Le joueur est a l'ouest d'un npc et < 3 cases" << endl;
+				cout << "Le combat se lance" << endl;
+				displayStars();
+			}
+			//Engage le combats
+			break;
 		}
-		//Engage le combats
-		break;
-	}
 	}
 }
 
@@ -259,7 +247,7 @@ void world::setHerb()
 		{
 			cout << "Tirage de x = " << x << endl;
 			cout << "Tirage de Y = " << y << endl;
-			cout << "Placement de l'herbe au coordonnées : (" << x << "," << y << ")" << endl << endl;
+			cout << "Placement de l'herbe au coordonnï¿½es : (" << x << "," << y << ")" << endl << endl;
 		}
 		mainTerrain.terrain[x][y] = 'H';
 	}
