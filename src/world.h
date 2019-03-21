@@ -7,12 +7,12 @@
 @date 19/03/2019
 
 */
-#ifndef _WORLD
-#define _WORLD
+#ifndef _WORLD_H
+#define _WORLD_H
 
 #include <iostream>
-#include <SDL.h>
-#include <SDL_image.h>
+//#include <SDL.h>
+//#include <SDL_image.h>
 #include <time.h>
 #include <stdlib.h>
 #include <fstream>
@@ -28,7 +28,7 @@ using namespace std;
 
 const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 3;
-const unsigned int NB_DIALOG = 3;
+
 
 class world{
 public:
