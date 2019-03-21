@@ -56,7 +56,7 @@ public:
 
 	/**
 	@brief
-	Initialise les caractéristiques de bases du player
+	Initialise les caractï¿½ristiques de bases du player
 	
 	@param none
 	@return none

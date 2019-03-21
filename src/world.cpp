@@ -3,24 +3,12 @@
 
 world::world()
 {
-	initPokeTab(); //Initialisation du tableau Pokémon
-	//initNPCTab(); // Initialisation du tableau NPC
-	//initPlayer(mainPlayer); // Initialise le Joueur de départ
-}
-
-void world::initPlayer(player mainPlayer)
-{
+	initPokeTab(); //Initialisation du tableau Pokï¿½mon
+	initNPCTab(); // Initialisation du tableau NPC
+	//initPlayer(mainPlayer); // Initialise le Joueur de dï¿½part
 	mainPlayer.initPlayer();
-
-	if (DEBUG)
-	{
-		displayStars();
-		cout << "Position du joueur de départ : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
-		cout << "Argent de départ : " << mainPlayer.getMoney() << endl;
-		cout << "Nombre de pokeballs : " << mainPlayer.getPokeball() << endl;
-		displayStars();
-	}
-
+	mainTerrain.initTerrain(1);
+	randomNumber();
 }
 
 void world::initPokeTab()
@@ -33,20 +21,20 @@ void world::initPokeTab()
 		{
 			for (unsigned int i = 0; i < NBPOKEMON; i++)
 			{
-				file >> poke[i].id;
-				file >> poke[i].name;
-				file >> poke[i].type;
-				file >> poke[i].isFound;
-				file >> poke[i].level;
-				file >> poke[i].health;
-				file >> poke[i].maxHealth;
-				file >> poke[i].attackStat;
-				file >> poke[i].defenseStat;
+				file >> pokeTab[i].id;
+				file >> pokeTab[i].name;
+				file >> pokeTab[i].type;
+				file >> pokeTab[i].isFound;
+				file >> pokeTab[i].level;
+				file >> pokeTab[i].health;
+				file >> pokeTab[i].maxHealth;
+				file >> pokeTab[i].attackStat;
+				file >> pokeTab[i].defenseStat;
 
 				for (unsigned int j = 0; j < 4; j++)
 				{
-					file >> poke[i].attackChoice[j].name;
-					file >> poke[i].attackChoice[j].damagePoints;
+					file >> pokeTab[i].attackChoice[j].name;
+					file >> pokeTab[i].attackChoice[j].damagePoints;
 				}
 			}
 		}
@@ -60,54 +48,40 @@ void world::initPokeTab()
 
 void world::initNPCTab()
 {
-	//A remplir en fonction d'un fichier TXT (se baser sur le code au dessus)
-	ifstream file("./data/NPC.txt");
-	ifstream dialog("./data/NPCDialog.txt");
+	ifstream file("./data/NPCs.txt");
 	if (file.is_open())
 	{
-		int pos;
+		unsigned int pos;
+		string sentence;
+		unsigned int idPokemon;
+		unsigned int i = 0;
 
-		while (!file.eof())
+		while (!file.eof() && i < NB_NPC)
 		{
-			for (unsigned int i = 0; i < NB_NPC; i++)
+			file >> NPCTab[i].id;
+			file >> NPCTab[i].name;
+			file >> pos;
+			NPCTab[i].setPosX(pos);
+			file >> pos;
+			NPCTab[i].setPosY(pos);
+			file >> NPCTab[i].rotation;
+			file >> NPCTab[i].nbDialog;
+			file >> idPokemon;
+			NPCTab[i].NPCPokemon.initPokemon(pokeTab[idPokemon]);
+			getline(file, sentence);
+
+			for(unsigned int j = 0; j < NPCTab[i].nbDialog; j++)
 			{
-				file >> NPCTab[i].id;
-				file >> NPCTab[i].name;
-				file >> pos;
-				NPCTab[i].setPosX(pos);
-				file >> pos;
-				NPCTab[i].setPosY(pos);
-				file >> NPCTab[i].rotation;
+				getline(file, sentence);
+				NPCTab[i].dialog[j] = sentence;
 			}
+			i++;
 		}
 		file.close();
 	}
 	else {
-		cout << "Erreur dans l'ouverture du fichier ./data/NPC.txt" << endl;
+		cout << "Erreur dans l'ouverture du fichier ./data/NPCs.txt" << endl;
 	}
-
-	//Remplie via un fichier secondaire les dialogues des NPC
-	if (dialog.is_open())
-	{
-		while (!file.eof())
-		{
-			for (unsigned int i = 0; i < NB_NPC; i++)
-			{
-				for (unsigned j = 0; j < NB_DIALOG; j++)
-				{
-					dialog >> NPCTab[i].dialog[j];
-				}
-			}
-		}
-		file.close();
-	}
-	else
-	{
-		cout << "Erreur dans l'ouverture du fichier ./data/NPCDialog.txt" << endl;
-		
-	}
-
-
 }
 
 void world::displayStars() const
@@ -137,12 +111,13 @@ void world::initGame(NPC npc)
 
 int world::randomNumber()
 {
-	int random;
-	return random = rand() % 100;
+	int random = rand() % 100;
 	if (DEBUG)
 	{
 		cout << "Nombre aleatoire genere par randomNumber() => " << random << endl;
 	}
+	return random;
+
 }
 
 void world::randomCombat(player mainPlayer)
@@ -159,13 +134,14 @@ void world::randomCombat(player mainPlayer)
 			displayStars();
 
 		}
+		cout << "Yeah" << endl;
 		//Lance le combat
 	} //Sinon rien
 }
 
 bool world::isInHerb(player mainPlayer, const int x, const int y) const
 {
-	return(mainTerrain.terrainTab[x][y] == 'H');
+	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
 
@@ -182,7 +158,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	{
 
 		// Nord
-	case 1: if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
+	case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
 	{
 		if (DEBUG)
 		{
@@ -196,7 +172,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 
 			//Est
-	case 2:	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
+	case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
 	{
 		if (DEBUG)
 		{
@@ -210,7 +186,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 
 			//Sud
-	case 3:	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
+	case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
 	{
 		if (DEBUG)
 		{
@@ -224,7 +200,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 
 			// Ouest
-	case 4:if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
+	case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
 	{
 		if (DEBUG)
 		{
@@ -259,7 +235,11 @@ void world::setHerb()
 		{
 			cout << "Tirage de x = " << x << endl;
 			cout << "Tirage de Y = " << y << endl;
-			cout << "Placement de l'herbe au coordonnées : (" << x << "," << y << ")" << endl << endl;
+<<<<<<< HEAD
+			cout << "Placement de l'herbe au coordonnï¿½es : (" << x << "," << y << ")" << endl << endl;
+=======
+			cout << "Placement de l'herbe au coordonnï¿½es : (" << x << "," << y << ")" << endl << endl;
+>>>>>>> arnaud
 		}
 		mainTerrain.terrain[x][y] = 'H';
 	}
