@@ -32,13 +32,17 @@ void terrain::initTerrain(int idTerrain)
 	}
 }
 
-void terrain::displayTerrain()
+void terrain::displayTerrain(player mainPlayer)
 {
-	for(int i = 0; i < sizeTerrain; i++)
+	for(unsigned int i = 0; i < SIZETERRAIN; i++)
 	{
-		for(int j = 0; j < sizeTerrain; j++)
+		for(unsigned int j = 0; j < SIZETERRAIN; j++)
 		{
-			cout << terrainTab[i][j] << " ";
+			if((mainPlayer.getPosX() == i) && (mainPlayer.getPosY() == j)){
+				cout << 'P' << ' ';
+			}else{
+				cout << terrainTab[i][j] << " ";
+			}
 		}
 		cout << endl;
 	}
