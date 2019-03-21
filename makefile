@@ -1,7 +1,7 @@
 all: bin/pokefac
 
-bin/pokefac: obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o
-	g++ -g -Wall obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o -o bin/pokefac
+bin/pokefac: obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o
+	g++ -g -Wall obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o -o bin/pokefac
 
 obj/main.o: src/main.cpp src/terrain.h src/world.h
 	g++ -g -Wall -c src/main.cpp -o obj/main.o
@@ -23,6 +23,13 @@ obj/NPC.o: src/NPC.cpp src/NPC.h
 
 obj/character.o: src/character.cpp src/character.h
 	g++ -g -Wall -c src/character.cpp -o obj/character.o
+
+obj/loopTxT.o: src/loopTxT.cpp src/loopTxT.h
+	g++ -g -Wall -c src/loopTxT.cpp -o obj/loopTxT.o
+
+obj/winTxt.o: src/winTxt.cpp src/winTxt.h
+	g++ -g -Wall -c src/winTxt.cpp -o obj/winTxt.o
+
 
 clean:
 	rm -f obj/*.o

@@ -6,22 +6,9 @@ world::world()
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
 	//initPlayer(mainPlayer); // Initialise le Joueur de d�part
-	mainTerrain.initTerrain(1);
-}
-
-void world::initPlayer(player mainPlayer)
-{
 	mainPlayer.initPlayer();
-
-	if (DEBUG)
-	{
-		displayStars();
-		cout << "Position du joueur de d�part : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
-		cout << "Argent de d�part : " << mainPlayer.getMoney() << endl;
-		cout << "Nombre de pokeballs : " << mainPlayer.getPokeball() << endl;
-		displayStars();
-	}
-
+	mainTerrain.initTerrain(1);
+	randomNumber();
 }
 
 void world::initPokeTab()
@@ -67,30 +54,29 @@ void world::initNPCTab()
 		unsigned int pos;
 		string sentence;
 		unsigned int idPokemon;
+		unsigned int i = 0;
 
-		//while (!file.eof())
-		//{
-			for (unsigned int i = 0; i < NB_NPC; i++)
+		while (!file.eof() && i < NB_NPC)
+		{
+			file >> NPCTab[i].id;
+			file >> NPCTab[i].name;
+			file >> pos;
+			NPCTab[i].setPosX(pos);
+			file >> pos;
+			NPCTab[i].setPosY(pos);
+			file >> NPCTab[i].rotation;
+			file >> NPCTab[i].nbDialog;
+			file >> idPokemon;
+			NPCTab[i].NPCPokemon.initPokemon(pokeTab[idPokemon]);
+			getline(file, sentence);
+
+			for(unsigned int j = 0; j < NPCTab[i].nbDialog; j++)
 			{
-				file >> NPCTab[i].id;
-				file >> NPCTab[i].name;
-				file >> pos;
-				NPCTab[i].setPosX(pos);
-				file >> pos;
-				NPCTab[i].setPosY(pos);
-				file >> NPCTab[i].rotation;
-				file >> NPCTab[i].nbDialog;
-				file >> idPokemon;
-				NPCTab[i].NPCpokemon.initPokemon(pokeTab[idPokemon]);
 				getline(file, sentence);
-
-				for(unsigned int j = 0; j < NPCTab[i].nbDialog; j++)
-				{
-					getline(file, sentence);
-					NPCTab[i].dialog[j] = sentence;
-				}
+				NPCTab[i].dialog[j] = sentence;
 			}
-		//}
+			i++;
+		}
 		file.close();
 	}
 	else {
@@ -125,12 +111,13 @@ void world::initGame(NPC npc)
 
 int world::randomNumber()
 {
-	int random;
-	return random = rand() % 100;
+	int random = rand() % 100;
 	if (DEBUG)
 	{
 		cout << "Nombre aleatoire genere par randomNumber() => " << random << endl;
 	}
+	return random;
+
 }
 
 void world::randomCombat(player mainPlayer)
@@ -147,13 +134,14 @@ void world::randomCombat(player mainPlayer)
 			displayStars();
 
 		}
+		cout << "Yeah" << endl;
 		//Lance le combat
 	} //Sinon rien
 }
 
 bool world::isInHerb(player mainPlayer, const int x, const int y) const
 {
-	return(mainTerrain.terrainTab[x][y] == 'H');
+	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
 
@@ -170,60 +158,60 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	{
 
 		// Nord
-		case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
+	case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
+	{
+		if (DEBUG)
 		{
-			if (DEBUG)
-			{
-				displayStars();
-				cout << "Le joueur est au nord d'un npc et < 3 cases" << endl;
-				cout << "Le combat se lance" << endl;
-				displayStars();
-			}
-			//Engage le combat
-			break;
+			displayStars();
+			cout << "Le joueur est au nord d'un npc et < 3 cases" << endl;
+			cout << "Le combat se lance" << endl;
+			displayStars();
 		}
+		//Engage le combat
+		break;
+	}
 
-				//Est
-		case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
+			//Est
+	case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
+	{
+		if (DEBUG)
 		{
-			if (DEBUG)
-			{
-				displayStars();
-				cout << "Le joueur est a l'est d'un npc et < 3 cases" << endl;
-				cout << "Le combat se lance" << endl;
-				displayStars();
-			}
-			//Engage le combat
-			break;
+			displayStars();
+			cout << "Le joueur est a l'est d'un npc et < 3 cases" << endl;
+			cout << "Le combat se lance" << endl;
+			displayStars();
 		}
+		//Engage le combat
+		break;
+	}
 
-				//Sud
-		case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
+			//Sud
+	case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
+	{
+		if (DEBUG)
 		{
-			if (DEBUG)
-			{
-				displayStars();
-				cout << "Le joueur est au sud d'un npc et < 3 cases" << endl;
-				cout << "Le combat se lance" << endl;
-				displayStars();
-			}
-			//Engage le combat
-			break;
+			displayStars();
+			cout << "Le joueur est au sud d'un npc et < 3 cases" << endl;
+			cout << "Le combat se lance" << endl;
+			displayStars();
 		}
+		//Engage le combat
+		break;
+	}
 
-				// Ouest
-		case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
+			// Ouest
+	case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
+	{
+		if (DEBUG)
 		{
-			if (DEBUG)
-			{
-				displayStars();
-				cout << "Le joueur est a l'ouest d'un npc et < 3 cases" << endl;
-				cout << "Le combat se lance" << endl;
-				displayStars();
-			}
-			//Engage le combats
-			break;
+			displayStars();
+			cout << "Le joueur est a l'ouest d'un npc et < 3 cases" << endl;
+			cout << "Le combat se lance" << endl;
+			displayStars();
 		}
+		//Engage le combats
+		break;
+	}
 	}
 }
 

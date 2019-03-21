@@ -21,7 +21,7 @@ public:
 	char rotation;
 	unsigned int nbDialog;
 	string dialog[4];
-	pokemon NPCpokemon;
+	pokemon NPCPokemon;
 };
 
 #endif

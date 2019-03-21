@@ -169,7 +169,7 @@ private:
 	initPlayer(mainPlayer);
 	@endcode	
 	*/
-	void initPlayer(player mainPlayer); // Remplira toutes les caract�ristiques du joueurs
+	void initPlayer(player & mainPlayer); // Remplira toutes les caract�ristiques du joueurs
 									   // Position && Nom ...
 
 
