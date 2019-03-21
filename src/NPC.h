@@ -15,7 +15,7 @@ class NPC :
 public:
 	NPC();
 	~NPC();
-	unsigned int getRotation(); // Detecte la rotation des pnj pour la ligne (1,2 3 ou 4)
+	int getRotation(); // Detecte la rotation des pnj pour la ligne (1,2 3 ou 4)
 					   // 1 = Nord; 2 = Est; 3 = Sud; 4 = Ouest
 	unsigned int id;
 	unsigned int rotation;
@@ -32,4 +32,3 @@ private:
 };
 
 #endif
-

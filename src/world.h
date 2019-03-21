@@ -1,5 +1,5 @@
 /**
-@brief Class World, gère tout le jeu et les mets en relations
+@brief Class World, gï¿½re tout le jeu et les mets en relations
 
 @author pokeFac team
 @file world.h
@@ -22,13 +22,14 @@
 #include "terrain.h"
 #include <cassert>
 
-#define DEBUG false
+#define DEBUG true
+
+
 
 using namespace std;
 
 const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 3;
-
 
 class world{
 public:
@@ -56,7 +57,7 @@ public:
 	
 	/**
 	@brief
-	Retourne un nombre aléatoire entre 0 et 100
+	Retourne un nombre alï¿½atoire entre 0 et 100
 
 	@param none
 	@return rand()%100;
@@ -69,26 +70,26 @@ public:
 	int randomNumber();
 	/**
 	@brief
-	Lance un combat aléatoire en fonction de la position (Hautes herbes ou non)
+	Lance un combat alï¿½atoire en fonction de la position (Hautes herbes ou non)
 
 
-	@param playerOne
+	@param mainPlayer
 	@return none
 
 	Exemple Code Block / Visual
 	@code
-	randomCombat(playerOne);
+	randomCombat(mainPlayer);
 	@endcode
 	*/
-	void randomCombat(player playerOne);
+	void randomCombat(player mainPlayer);
 
 	/**
 	@brief
-	Retourne true si le déplacement est autorisé, false sinon
-	(Si Caractère = # || N => false else => true)
+	Retourne true si le dï¿½placement est autorisï¿½, false sinon
+	(Si Caractï¿½re = # || N => false else => true)
 
 
-	@param x, y, playerOne
+	@param x, y, mainPlayer
 	@return ((x >= 0) && (x < sizeTerrain) && (y >= 0) && (y < sizeTerrain) && (terrain.terrain[x][y] != '#') && (terrain.terrain[x][y] != 'N'))
 
 	Exemple Code Block / Visual
@@ -96,27 +97,27 @@ public:
 	moveIsAllowed(10,15);
 	@endcode
 	*/
-	bool moveIsAllowed(player playerOne, const int x, const int y) const;
+	bool moveIsAllowed(player mainPlayer, const int x, const int y) const;
 
 	/**
 	@brief
 	Verifie si le personnage est dans la ligne d'un NPC
 
-	@param npc, playerOne, x, y
+	@param npc, mainPlayer, x, y
 	@return none
 
 	Exemple Code Block / Visual
 	@code
-	isInLine(npc,playerOne,x,y);
+	isInLine(npc,mainPlayer,x,y);
 	@endcode
 	*/
-	void isInLine(NPC npc, player playerOne, const int x, const int y) const;
+	void isInLine(NPC npc, player mainPlayer, const int x, const int y) const;
 	
 
 	
 	/**
 	@brief
-	Initialise le jeu (Fais appel à tous les inits de toutes les classes)
+	Initialise le jeu (Fais appel ï¿½ tous les inits de toutes les classes)
 
 	@param npc
 	@return none
@@ -131,7 +132,7 @@ public:
 private:
 	/**
 	@brief
-	Remplie le tableau de pokemon et met leurs caractéristiques en fonction d'un fichier txt
+	Remplie le tableau de pokemon et met leurs caractï¿½ristiques en fonction d'un fichier txt
 	
 	@param none
 	@return none
@@ -145,7 +146,7 @@ private:
 
 	/**
 	@brief
-	Remplie le tableau de NPC et met leurs caractéristiques en fonction d'un fichier txt
+	Remplie le tableau de NPC et met leurs caractï¿½ristiques en fonction d'un fichier txt
 	
 	@param none
 	@return none
@@ -162,7 +163,7 @@ private:
 	/**
 	@brief
 	Initialise le personnage joueur
-	@param player playerOne
+	@param player mainPlayer
 	@return none
 
 	Exemple Code Block / Visual
@@ -170,30 +171,30 @@ private:
 	initPlayer(mainPlayer);
 	@endcode	
 	*/
-	void initPlayer(player playerOne); // Remplira toutes les caractéristiques du joueurs
+	void initPlayer(player & mainPlayer); // Remplira toutes les caractï¿½ristiques du joueurs
 									   // Position && Nom ...
 
 
 	/**
 	@brief
 	Verifie si le Joueur est dans les hautes herbes
-	True si la position est dans un caractère 'H'
+	True si la position est dans un caractï¿½re 'H'
 	false sinon
 
-	@param playerOne, x, y
+	@param mainPlayer, x, y
 	@return (terrain.terrain[x][y] == 'H');
 
 	Exemple Code Block / Visual
 	@code
-	isInHerb(playerOne, x, y);
+	isInHerb(mainPlayer, x, y);
 	@endcode
 	*/
-	bool isInHerb(player playerOne, const int x, const int y) const;
+	bool isInHerb(player mainPlayer, const int x, const int y) const;
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
 	/**
 	@brief
-	Affiche des '*' pour le DEBUG, donne des informations suplémentaires
+	Affiche des '*' pour le DEBUG, donne des informations suplï¿½mentaires
 
 	@param none
 	@return none
@@ -206,8 +207,8 @@ private:
 	void displayStars() const;
 	/**
 	@brief
-	Prévient dans la console que le mode DEBUG est activé
-	Affiche des informations suplémentaires à l'utilisateur
+	Prï¿½vient dans la console que le mode DEBUG est activï¿½
+	Affiche des informations suplï¿½mentaires ï¿½ l'utilisateur
 
 	@param none
 	@return none

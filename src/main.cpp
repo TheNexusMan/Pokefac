@@ -3,9 +3,11 @@
 
 int main(int argc, char** argv)
 {  
+	srand(time(NULL));
 	termClear();
 	world world;
-	txtLoop(world);
-	termClear();
+	//txtLoop(world);
+	//termClear();
 	return 0;
 }
+

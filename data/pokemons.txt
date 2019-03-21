@@ -1,0 +1,39 @@
+1
+Linuchu
+OS
+0
+1
+50
+50
+10
+10
+Shell 10
+Crash 5
+Mult 20
+Make 15
+2
+Windosu
+Windows
+0
+1
+60
+60
+10
+10
+Crash 10
+BlueScreen 5
+CMD 20
+Store 15
+3
+Salashell
+Linux
+0
+1
+40
+40
+15
+15
+git 10
+ls 5
+cp 20
+cd 15

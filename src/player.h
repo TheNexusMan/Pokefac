@@ -2,13 +2,12 @@
 #define PLAYER_H 
 
 #include "character.h"
-#include "terrain.h"
 #include "pokemon.h"
 //#include "object.h"
 //#include "dynamicClassTab.h" 
 //#include "badge.h"
-
 #include <iostream>
+
 using namespace std;
 
 const int MAXB = 5;
@@ -24,64 +23,12 @@ private:
 //	dynamicClassTab object[];
 
 public:
-	
 
-	/**
-	@brief
-	Deplace le joueur vers le haut
 
-	@param none
-	@return none
-
-	Exemple Visual Studio
-	@code
-	player.moveUp();
-	@endcode*/
 	void moveUp();
-
-	/**
-	@brief
-	Deplace le joueur vers le bas
-
-	@param none
-	@return none
-
-	Exemple Visual Studio
-	@code
-	player.moveDown();
-	@endcode*/
 	void moveDown();
-
-
-	/**
-	@brief
-	Deplace le joueur vers la gauche
-
-	@param none
-	@return none
-
-	Exemple Visual Studio
-	@code
-	player.moveLeft();
-	@endcode*/
 	void moveLeft();
-
-
-	/** 
-	@brief
-	Deplace le joueur vers la droite
-	
-	@param none
-	@return none
-	
-	Exemple Visual Studio
-	@code
-	player.moveRight();
-	@endcode*/
 	void moveRight();
-
-
-
 
 	/**
 	@brief
@@ -110,7 +57,7 @@ public:
 
 	/**
 	@brief
-	Initialise les caractéristiques de bases du player
+	Initialise les caractï¿½ristiques de bases du player
 	
 	@param none
 	@return none
@@ -145,7 +92,7 @@ public:
 	
 	Exemple Code Block / Visual
 	@code
-	playerOne.getPokeball();
+	mainPlayer.getPokeball();
 	@endcode */
 	unsigned int getPokeball();
 };

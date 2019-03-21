@@ -1,10 +1,5 @@
 #include "player.h"
 
-#include <math.h>
-#include <iostream>
-
-
-
 
 unsigned int player::getMoney()
 {
@@ -17,9 +12,9 @@ void player::addMoney(unsigned int adding)
 }
 
 void player::initPlayer()
-{
-	posX = 10;
-	posY = 7;  //Place le joueur aux coordonnées (10,7)
+{	
+	setPosX(1);
+	setPosY(2); //Place le joueur aux coordonnï¿½es (2,2)
 	addMoney(100); //Lui donne 100 en Argent
 	setPokeball(5); // Lui donne 5 pokeballs
 }
@@ -40,7 +35,8 @@ void player::moveUp()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x - 1, y);
+	setNewPos(x-1, y);
+	
 }
 
 void player::moveDown()
@@ -54,12 +50,12 @@ void player::moveLeft()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x, y - 1);
+	setNewPos(x, y-1);
 }
 
 void player::moveRight()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x, y + 1);
+	setNewPos(x, y+ 1);
 }

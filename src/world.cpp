@@ -3,26 +3,25 @@
 
 world::world()
 {
-	initPokeTab(); //Initialisation du tableau Pokémon
-	initNPCTab(); // Initialisation du tableau NPC
-	initPlayer(mainPlayer); // Initialise le Joueur de départ
+	initPokeTab(); //Initialisation du tableau Pokï¿½mon
+	//initNPCTab(); // Initialisation du tableau NPC
+	mainTerrain.initTerrain(1);
+	initPlayer(mainPlayer); // Initialise le Joueur de dï¿½part
+	randomNumber();
 }
 
-void world::initPlayer(player mainPlayer)
+void world::initPlayer(player & mainPlayer)
 {
-
 	mainPlayer.initPlayer();
 
 	if (DEBUG)
 	{
 		displayStars();
-		cout << "Position du joueur de départ : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
-		cout << "Argent de départ : " << mainPlayer.getMoney() << endl;
+		cout << "Position du joueur de dï¿½part : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
+		cout << "Argent de dï¿½part : " << mainPlayer.getMoney() << endl;
 		cout << "Nombre de pokeballs : " << mainPlayer.getPokeball() << endl;
 		displayStars();
 	}
-
-
 
 }
 
@@ -68,14 +67,18 @@ void world::initNPCTab()
 	ifstream dialog("./data/NPCDialog.txt");
 	if (file.is_open())
 	{
+		int pos;
+
 		while (!file.eof())
 		{
 			for (unsigned int i = 0; i < NB_NPC; i++)
 			{
 				file >> NPCTab[i].id;
 				file >> NPCTab[i].name;
-				file >> NPCTab[i].posX;
-				file >> NPCTab[i].posY;
+				file >> pos;
+				NPCTab[i].setPosX(pos);
+				file >> pos;
+				NPCTab[i].setPosY(pos);
 				file >> NPCTab[i].rotation;
 			}
 		}
@@ -109,8 +112,6 @@ void world::initNPCTab()
 
 }
 
-
-
 void world::displayStars() const
 {
 	for (int i = 0; i < 50; i++)
@@ -129,7 +130,6 @@ void world::debugWarning() const
 	cout << endl << endl;
 }
 
-
 void world::initGame(NPC npc)
 {
 	//Placer toutes les inits ici
@@ -137,15 +137,15 @@ void world::initGame(NPC npc)
 
 }
 
-
 int world::randomNumber()
 {
-	int random;
-	return random = rand() % 100;
+	int random = rand() % 100;
 	if (DEBUG)
 	{
 		cout << "Nombre aleatoire genere par randomNumber() => " << random << endl;
 	}
+	return random;
+
 }
 
 void world::randomCombat(player mainPlayer)
@@ -162,14 +162,14 @@ void world::randomCombat(player mainPlayer)
 			displayStars();
 
 		}
+		cout << "Yeah" << endl;
 		//Lance le combat
 	} //Sinon rien
 }
 
-
 bool world::isInHerb(player mainPlayer, const int x, const int y) const
 {
-	return(mainTerrain.terrainTab[x][y] == 'H');
+	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
 
@@ -186,7 +186,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	{
 
 		// Nord
-	case 1: if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
+	case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
 	{
 		if (DEBUG)
 		{
@@ -200,7 +200,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 
 			//Est
-	case 2:	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
+	case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
 	{
 		if (DEBUG)
 		{
@@ -214,7 +214,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 
 			//Sud
-	case 3:	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
+	case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
 	{
 		if (DEBUG)
 		{
@@ -228,7 +228,7 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 
 			// Ouest
-	case 4:if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
+	case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
 	{
 		if (DEBUG)
 		{
@@ -255,17 +255,17 @@ void world::setHerb()
 	for (int i = 0; i < 10; i++)
 	{
 		do {
-			x = rand() % sizeTerrain;
-			y = rand() % sizeTerrain;
+			x = rand() % SIZETERRAIN;
+			y = rand() % SIZETERRAIN;
 
-		} while (terrain.terrain[x][y] == '#' || 'N' || 'H');
+		} while (mainTerrain.terrain[x][y] == '#' || 'N' || 'H');
 		if (DEBUG)
 		{
 			cout << "Tirage de x = " << x << endl;
 			cout << "Tirage de Y = " << y << endl;
-			cout << "Placement de l'herbe au coordonnées : (" << x << "," << y << ")" << endl << endl;
+			cout << "Placement de l'herbe au coordonnï¿½es : (" << x << "," << y << ")" << endl << endl;
 		}
-		terrain.terrain[x][y] = 'H';
+		mainTerrain.terrain[x][y] = 'H';
 	}
 	if (DEBUG) displayStars();
 
