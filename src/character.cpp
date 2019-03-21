@@ -20,12 +20,12 @@ void character::setIdleTexture()
 	// A definir
 }
 
-int character::getPosX()
+unsigned int character::getPosX()
 {
 	return posX;
 }
 
-int character::getPosY()
+unsigned int character::getPosY()
 {
 	return posY;
 }

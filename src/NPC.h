@@ -1,11 +1,13 @@
-#pragma once
+#ifndef _NPC_H
+#define _NPC_H
+
 #include "character.h"
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-
+const unsigned int NB_DIALOG = 3;
 
 class NPC :
 	public character
@@ -13,7 +15,7 @@ class NPC :
 public:
 	NPC();
 	~NPC();
-	int getRotation(); // Detecte la rotation des pnj pour la ligne (1,2 3 ou 4)
+	unsigned int getRotation(); // Detecte la rotation des pnj pour la ligne (1,2 3 ou 4)
 					   // 1 = Nord; 2 = Est; 3 = Sud; 4 = Ouest
 	unsigned int id;
 	unsigned int rotation;
@@ -28,4 +30,6 @@ private:
 
 
 };
+
+#endif
 

@@ -14,7 +14,7 @@ NPC::~NPC()
 
 
 
-int NPC::getRotation()
+unsigned int NPC::getRotation()
 {
 	return rotation;
 }

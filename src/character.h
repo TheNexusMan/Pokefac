@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "characterTexture.h"
+//#include "characterTexture.h"
 
 using namespace std;
 
@@ -17,11 +17,11 @@ public:
 	string name;
 	unsigned int posX;
 	unsigned int posY;
-	characterTexture texture;
+	//characterTexture texture;
 
 	void setName(string name);
-	int getPosX();
-	int getPosY();
+	unsigned int getPosX();
+	unsigned int getPosY();
 	void setIdleTexture();
 	void setNewPos(unsigned int x, unsigned int y);
 

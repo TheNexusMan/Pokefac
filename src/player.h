@@ -26,10 +26,58 @@ private:
 public:
 	
 
+	/**
+	@brief
+	Deplace le joueur vers le haut
 
+	@param none
+	@return none
+
+	Exemple Visual Studio
+	@code
+	player.moveUp();
+	@endcode*/
 	void moveUp();
+
+	/**
+	@brief
+	Deplace le joueur vers le bas
+
+	@param none
+	@return none
+
+	Exemple Visual Studio
+	@code
+	player.moveDown();
+	@endcode*/
 	void moveDown();
+
+
+	/**
+	@brief
+	Deplace le joueur vers la gauche
+
+	@param none
+	@return none
+
+	Exemple Visual Studio
+	@code
+	player.moveLeft();
+	@endcode*/
 	void moveLeft();
+
+
+	/** 
+	@brief
+	Deplace le joueur vers la droite
+	
+	@param none
+	@return none
+	
+	Exemple Visual Studio
+	@code
+	player.moveRight();
+	@endcode*/
 	void moveRight();
 
 

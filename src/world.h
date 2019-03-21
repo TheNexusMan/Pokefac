@@ -7,8 +7,8 @@
 @date 19/03/2019
 
 */
-#ifndef _WORLD_H
-#define _WORLD_H
+#ifndef _WORLD
+#define _WORLD
 
 #include <iostream>
 //#include <SDL.h>
