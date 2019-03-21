@@ -8,18 +8,17 @@ world::world()
 	initPlayer(mainPlayer); // Initialise le Joueur de départ
 }
 
-void world::initPlayer(player playerOne)
+void world::initPlayer(player mainPlayer)
 {
 
-	playerOne.initPlayer();
-	terrain.terrain[playerOne.getPosX][playerOne.getPosY] = 'P';
+	mainPlayer.initPlayer();
 
 	if (DEBUG)
 	{
 		displayStars();
-		cout << "Position du joueur de départ : (" << playerOne.getPosX() << "," << playerOne.getPosY() << ")" << endl;
-		cout << "Argent de départ : " << playerOne.getMoney() << endl;
-		cout << "Nombre de pokeballs : " << playerOne.getPokeball() << endl;
+		cout << "Position du joueur de départ : (" << mainPlayer.getPosX() << "," << mainPlayer.getPosY() << ")" << endl;
+		cout << "Argent de départ : " << mainPlayer.getMoney() << endl;
+		cout << "Nombre de pokeballs : " << mainPlayer.getPokeball() << endl;
 		displayStars();
 	}
 
@@ -149,10 +148,10 @@ int world::randomNumber()
 	}
 }
 
-void world::randomCombat(player playerOne)
+void world::randomCombat(player mainPlayer)
 {
 	int random = randomNumber();
-	if ((isInHerb(playerOne, playerOne.getPosX(), playerOne.getPosY()) && (random % 5 == 0)))
+	if ((isInHerb(mainPlayer, mainPlayer.getPosX(), mainPlayer.getPosY()) && (random % 5 == 0)))
 	{
 		if (DEBUG)
 		{
@@ -168,18 +167,18 @@ void world::randomCombat(player playerOne)
 }
 
 
-bool world::isInHerb(player playerOne, const int x, const int y) const
+bool world::isInHerb(player mainPlayer, const int x, const int y) const
 {
-	return(terrain.terrain[x][y] == 'H');
+	return(mainTerrain.terrainTab[x][y] == 'H');
 }
 
 
-bool world::moveIsAllowed(player playerOne, const int x, const int y) const
+bool world::moveIsAllowed(player mainPlayer, const int x, const int y) const
 {
-	return ((x >= 0) && (x < sizeTerrain) && (y >= 0) && (y < sizeTerrain) && (terrain.terrain[x][y] != '#') && (terrain.terrain[x][y] != 'N'));
+	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N'));
 }
 
-void world::isInLine(NPC npc, player playerOne, const int x, const int y) const
+void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 {
 	int npcPosX = npc.getPosX();
 	int npcPosY = npc.getPosY();

@@ -32,7 +32,7 @@ const unsigned int NB_NPC = 3;
 
 class world{
 public:
-	terrain terrain;
+	terrain mainTerrain;
 	NPC NPCTab[NB_NPC];
 	player mainPlayer;
 	pokemon poke[NBPOKEMON];
