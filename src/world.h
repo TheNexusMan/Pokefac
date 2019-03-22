@@ -11,16 +11,24 @@
 #define _WORLD
 
 #include <iostream>
-//#include <SDL.h>
-//#include <SDL_image.h>
 #include <time.h>
 #include <stdlib.h>
 #include <fstream>
+#include <cassert>
+//#include <SDL.h>
+//#include <SDL_image.h>
 #include "pokemon.h"
 #include "NPC.h"
 #include "player.h"
 #include "terrain.h"
-#include <cassert>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
+#include "winTxt.h"
 
 #define DEBUG false
 

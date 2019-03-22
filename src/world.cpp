@@ -115,7 +115,7 @@ int world::randomNumber()
 	{
 		cout << "Nombre aleatoire genere par randomNumber() => " << random << endl;
 	}
-	
+
 	return random;
 }
 
@@ -146,7 +146,9 @@ bool world::isInHerb(const int x, const int y) const
 void world::launchBattle(player & mainPlayer, pokemon & poke)
 {
 	srand(time(NULL));
-	int attack; 
+	WinTXT win(SIZETERRAIN, SIZETERRAIN);
+	char attack;
+	int trainerAttack;
 
 	while(mainPlayer.tabPokemon[0].health > 0 || poke.health > 0)
 	{
@@ -154,23 +156,19 @@ void world::launchBattle(player & mainPlayer, pokemon & poke)
 		cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
 		
 		do{
-			cout << "choose your attack :" << endl
-			<< "1-" << mainPlayer.tabPokemon[0].attackChoice[0].name << endl << "2-" << mainPlayer.tabPokemon[0].attackChoice[1].name << endl
-			<< "3-" << mainPlayer.tabPokemon[0].attackChoice[2].name << endl << "4-" << mainPlayer.tabPokemon[0].attackChoice[3].name << endl;
-			cin >> attack;
-
-        }while(attack > 4 || attack < 1);
-
-		if(attack == 1)
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[0]);
-		if(attack == 2)
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[1]);
-		if(attack == 3)
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[2]);
-		if(attack == 4)
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[3]);
+			cout << "choose your attack :" << endl;
+			attack = win.getCh();
+        }while(attack != 'a' || attack != 'b' || attack != 'c' || attack != 'd');
 
 		
+		if(attack == 'a')
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[0]);
+		if(attack == 'b')
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[1]);
+		if(attack == 'c')
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[2]);
+		if(attack == 'd')
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[3]);
 
 		system("clear");
 
@@ -183,8 +181,8 @@ void world::launchBattle(player & mainPlayer, pokemon & poke)
 
 			system("pause");
 
-			attack = rand() % 3;
-			mainPlayer.tabPokemon[0].receiveAttack(mainPlayer.tabPokemon[0], poke.attackChoice[attack]);
+			trainerAttack = rand() % 3;
+			mainPlayer.tabPokemon[0].receiveAttack(mainPlayer.tabPokemon[0], poke.attackChoice[trainerAttack]);
 
 			cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
 			cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
