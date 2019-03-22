@@ -5,7 +5,7 @@ world::world()
 {
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
-	mainPlayer.initPlayer(); // Initialise le Joueur de d�part
+	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
 	mainTerrain.initTerrain(1);
 	randomNumber();
 }
@@ -115,14 +115,14 @@ int world::randomNumber()
 	{
 		cout << "Nombre aleatoire genere par randomNumber() => " << random << endl;
 	}
+	
 	return random;
-
 }
 
-void world::randomCombat(player mainPlayer)
+void world::randomCombat(player & mainPlayer)
 {
-	int random = randomNumber();
-	if ((isInHerb(mainPlayer, mainPlayer.getPosX(), mainPlayer.getPosY()) && (random % 5 == 0)))
+	unsigned int random = randomNumber();
+	if ((isInHerb(mainPlayer.getPosX(), mainPlayer.getPosY()) && (random % 5 == 0)))
 	{
 		if (DEBUG)
 		{
@@ -133,16 +133,80 @@ void world::randomCombat(player mainPlayer)
 			displayStars();
 
 		}
-		cout << "Yeah" << endl;
-		//Lance le combat
-	} //Sinon rien
+		unsigned int randomPoke = rand() % 3;
+		launchBattle(mainPlayer, pokeTab[randomPoke]);
+	}
 }
 
-bool world::isInHerb(player mainPlayer, const int x, const int y) const
+bool world::isInHerb(const int x, const int y) const
 {
 	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
+void world::launchBattle(player & mainPlayer, pokemon & poke)
+{
+	srand(time(NULL));
+	int attack; 
+
+	while(mainPlayer.tabPokemon[0].health > 0 || poke.health > 0)
+	{
+		cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
+		cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
+		
+		do{
+			cout << "choose your attack :" << endl
+			<< "1-" << mainPlayer.tabPokemon[0].attackChoice[0].name << endl << "2-" << mainPlayer.tabPokemon[0].attackChoice[1].name << endl
+			<< "3-" << mainPlayer.tabPokemon[0].attackChoice[2].name << endl << "4-" << mainPlayer.tabPokemon[0].attackChoice[3].name << endl;
+			cin >> attack;
+
+        }while(attack > 4 || attack < 1);
+
+		if(attack == 1)
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[0]);
+		if(attack == 2)
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[1]);
+		if(attack == 3)
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[2]);
+		if(attack == 4)
+			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[3]);
+
+		
+
+		system("clear");
+
+		cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
+		cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
+
+		if(mainPlayer.tabPokemon[0].health > 0)
+		{
+			cout << "The Trainer attacks you ! Be careful !" << endl;
+
+			system("pause");
+
+			attack = rand() % 3;
+			mainPlayer.tabPokemon[0].receiveAttack(mainPlayer.tabPokemon[0], poke.attackChoice[attack]);
+
+			cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
+			cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
+
+			system("pause");
+		}
+	}
+
+	if(mainPlayer.tabPokemon[0].health != 0)
+	{
+		cout << "You win the fight!!" << endl;
+		mainPlayer.addMoney(100);
+		cout << "Your money : " << mainPlayer.getMoney() << endl;
+
+		system("pause");
+	}
+	else{
+		cout << "You loose" << endl;
+
+		system("pause");
+	}
+}
 
 bool world::moveIsAllowed(player mainPlayer, const int x, const int y) const
 {
@@ -234,11 +298,7 @@ void world::setHerb()
 		{
 			cout << "Tirage de x = " << x << endl;
 			cout << "Tirage de Y = " << y << endl;
-<<<<<<< HEAD
 			cout << "Placement de l'herbe au coordonn�es : (" << x << "," << y << ")" << endl << endl;
-=======
-			cout << "Placement de l'herbe au coordonn�es : (" << x << "," << y << ")" << endl << endl;
->>>>>>> arnaud
 		}
 		mainTerrain.terrain[x][y] = 'H';
 	}

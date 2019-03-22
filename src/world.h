@@ -36,9 +36,6 @@ public:
 	player mainPlayer;
 	pokemon pokeTab[NBPOKEMON];
 
-	
-
-
 	/**
 	@brief
 	Constructeur de la classe world
@@ -79,7 +76,7 @@ public:
 	randomCombat(mainPlayer);
 	@endcode
 	*/
-	void randomCombat(player mainPlayer);
+	void randomCombat(player & mainPlayer);
 
 	/**
 	@brief
@@ -169,7 +166,7 @@ private:
 	initPlayer(mainPlayer);
 	@endcode	
 	*/
-	void initPlayer(player & mainPlayer); // Remplira toutes les caract�ristiques du joueurs
+	//void initPlayer(player & mainPlayer); // Remplira toutes les caract�ristiques du joueurs
 									   // Position && Nom ...
 
 
@@ -187,7 +184,21 @@ private:
 	isInHerb(mainPlayer, x, y);
 	@endcode
 	*/
-	bool isInHerb(player mainPlayer, const int x, const int y) const;
+	bool isInHerb(const int x, const int y) const;
+
+	/**
+	@brief
+	Lance la boucle de combat
+
+	@param mainPlayer, poke
+	@return none
+
+	Exemple Code Block / Visual
+	@code
+	launchBattle(mainPlayer, poke);
+	@endcode
+	*/
+	void launchBattle(player & mainPlayer, pokemon & poke);
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
 	/**

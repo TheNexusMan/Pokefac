@@ -11,6 +11,7 @@
 using namespace std;
 
 const int MAXB = 5;
+const int NBPLAYERPOKE = 6;
 
 class player : public character
 {
@@ -19,10 +20,10 @@ private:
 	unsigned int money;
 //	badge tab[MAXB];
 	unsigned int pokeball = 0;
-//	pokemon nbPokemon[];
 //	dynamicClassTab object[];
 
 public:
+	pokemon tabPokemon[NBPLAYERPOKE];
 
 	void moveUp();
 	void moveDown();
@@ -66,7 +67,7 @@ public:
 	initPlayer();
 	//Definie la position / argent et nb pokeballs
 	@endcode */
-	void initPlayer();
+	void initPlayer(const pokemon poke);
 		
 	/**
 	@brief

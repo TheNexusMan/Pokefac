@@ -24,6 +24,7 @@ void txtLoop(world & world)
 #endif
 		termClear();
 		world.mainTerrain.displayTerrain(world.mainPlayer);
+		world.randomCombat(world.mainPlayer);
 		key = win.getCh();
 		{
 			switch (key)
@@ -57,8 +58,6 @@ void txtLoop(world & world)
 				break;
 
 			}
-
 		}
 	} while (isOk);
-	
 }
