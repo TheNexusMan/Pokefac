@@ -143,7 +143,7 @@ bool world::isInHerb(const int x, const int y) const
 	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
-void world::launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPokemon)
+void world::launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemon)
 {
 	srand(time(NULL));
 	char attack;
@@ -160,13 +160,7 @@ void world::launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPoke
 		do{
 			termClear();
 
-			cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
-			mainPlayer.tabPokemon[0].displayHealth();
-			cout << endl;
-			isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
-			cout << poke.name << " ";
-			poke.displayHealth();
-			cout << endl << "---------------------------------" << endl << endl;
+			displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
 
 			cout << "Choose your attack :" << endl;
 
@@ -187,13 +181,7 @@ void world::launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPoke
 
 		termClear();
 
-		cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
-		mainPlayer.tabPokemon[0].displayHealth();
-		cout << endl;
-		isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
-		cout << poke.name << " ";
-		poke.displayHealth();
-		cout << endl << "---------------------------------" << endl << endl;
+		displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
 		cout << mainPlayer.tabPokemon[0].name << " attacks with: " << mainPlayer.tabPokemon[0].attackChoice[attack - '0' - 1].name << " " << mainPlayer.tabPokemon[0].attackChoice[attack - '0' - 1].damagePoints << endl;
 
 		if(mainPlayer.tabPokemon[0].health > 0 && poke.health > 0)
@@ -205,20 +193,16 @@ void world::launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPoke
 
 			trainerAttack = rand() % 3;
 			mainPlayer.tabPokemon[0].receiveAttack(mainPlayer.tabPokemon[0], poke.attackChoice[trainerAttack]);
-			cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
-			mainPlayer.tabPokemon[0].displayHealth();
-			cout << endl;
-			isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
-			cout << poke.name << " ";
-			poke.displayHealth();
-			cout << endl << "---------------------------------" << endl << endl;
+			
+			displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
 			cout << poke.name << " attacks with: " << poke.attackChoice[trainerAttack].name << " " << poke.attackChoice[trainerAttack].damagePoints << endl;
 
 			getchar();
 		}
-		
-		termClear();
 	}
+
+	termClear();
+	displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
 
 	if(mainPlayer.tabPokemon[0].health != 0 && isAgainstPokemon && mainPlayer.getPokeball() > 0 && mainPlayer.hasFreePokeLocation() && !mainPlayer.hasThisPokemon(poke))
 	{
@@ -241,12 +225,25 @@ void world::launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPoke
 
 		getchar();
 	}else{
-		if(!mainPlayer.hasFreePokeLocation()) cout << "You can't carry another Pokémon with you." << endl;
-		if(mainPlayer.hasThisPokemon(poke)) cout << "You already have this Pokémon" << endl;
-		if(mainPlayer.getPokeball()== 0) cout << "You don't have Pokéball to capture this Pokémon" << endl;
+		cout << "You win but ";
+		if(!mainPlayer.hasFreePokeLocation()) cout << "you can't carry another Pokémon with you." << endl;
+		if(mainPlayer.hasThisPokemon(poke)) cout << "you already have this Pokémon" << endl;
+		if(mainPlayer.getPokeball()== 0) cout << "you don't have Pokéball to capture this Pokémon" << endl;
 
 		getchar();
 	}
+	mainPlayer.tabPokemon[0].health = mainPlayer.tabPokemon[0].maxHealth;
+}
+
+void world::displayOpponentsLife(const player mainPlayer, const pokemon poke, const bool isAgainstPokemon) const
+{
+	cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
+	mainPlayer.tabPokemon[0].displayHealth();
+	cout << endl;
+	isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
+	cout << poke.name << " ";
+	poke.displayHealth();
+	cout << endl << "---------------------------------" << endl << endl;
 }
 
 bool world::moveIsAllowed(player mainPlayer, const int x, const int y) const

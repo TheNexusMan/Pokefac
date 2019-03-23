@@ -29,12 +29,12 @@ void pokemon::initPokemon(const pokemon & poke)
 	}
 }
 
-void pokemon::displayHealth()
+void pokemon::displayHealth() const
 {
 	cout << health << "/" << maxHealth << "PV";
 }
 
-void pokemon::displayInfos()
+void pokemon::displayInfos() const
 {
 	cout << "Id: #" << id << endl;
 	cout << "Name: " << name << endl;

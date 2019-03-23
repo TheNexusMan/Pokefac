@@ -24,9 +24,9 @@ public:
 
 	void initPokemon(const pokemon & poke);
 
-	void displayHealth();
+	void displayHealth() const;
 
-	void displayInfos();
+	void displayInfos() const;
 };
 
 #endif

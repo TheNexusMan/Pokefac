@@ -155,8 +155,6 @@ private:
 	*/
 	void initNPCTab();
 
-
-
 	/**
 	@brief
 	Initialise le personnage joueur
@@ -170,7 +168,6 @@ private:
 	*/
 	//void initPlayer(player & mainPlayer); // Remplira toutes les caract�ristiques du joueurs
 									   // Position && Nom ...
-
 
 	/**
 	@brief
@@ -200,7 +197,7 @@ private:
 	launchBattle(mainPlayer, poke);
 	@endcode
 	*/
-	void launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPokemon);
+	void launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemon);
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
 	/**
@@ -216,6 +213,7 @@ private:
 	@endcode
 	*/
 	void displayStars() const;
+
 	/**
 	@brief
 	Pr�vient dans la console que le mode DEBUG est activ�
@@ -230,6 +228,20 @@ private:
 	@endcode
 	*/
 	void debugWarning() const;
+
+	/**
+	@brief
+	Affiche la vie des deux adversaires
+
+	@param mainPlayer, poke, isAgainsPokemon
+	@return none
+
+	Exemple Code Block / Visual
+	@code
+	displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
+	@endcode
+	*/
+	void displayOpponentsLife(const player mainPlayer, const pokemon poke, const bool isAgainstPokemon) const;
 
 };
 
