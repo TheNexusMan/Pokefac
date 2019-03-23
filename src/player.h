@@ -19,11 +19,12 @@ private:
 
 	unsigned int money;
 //	badge tab[MAXB];
-	unsigned int pokeball = 0;
+	unsigned int pokeball;
 //	dynamicClassTab object[];
 
 public:
 	pokemon tabPokemon[NBPLAYERPOKE];
+	unsigned int nbPokemon;
 
 	void moveUp();
 	void moveDown();
@@ -95,6 +96,45 @@ public:
 	mainPlayer.getPokeball();
 	@endcode */
 	unsigned int getPokeball();
+
+	/**
+	@brief 
+	Ajoute le pokemon passé en paramètre
+	
+	@param poke
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.addPokemon(poke);
+	@endcode */
+	void addPokemon(const pokemon & poke);
+
+	/**
+	@brief 
+	Renvoie vrai si le pokemon passé en paramètre est déjà possédé par le joueur
+	
+	@param poke
+	@return bool
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.hasThisPokemon(poke);
+	@endcode */
+	bool hasThisPokemon(const pokemon & poke);
+
+	/**
+	@brief 
+	Renvoie vrai si le joueur a encore de la place pour un pokémon
+	
+	@param none
+	@return bool
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.hasFreePokeLocation();
+	@endcode */
+	bool hasFreePokeLocation();
 };
 
 #endif

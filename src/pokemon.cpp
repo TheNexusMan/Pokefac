@@ -3,10 +3,10 @@
 void pokemon::receiveAttack(pokemon & poke, attack att)
 { 
 
-	if(poke.health > 0 && poke.health >= (att.damagePoints - poke.defenseStat))
-		poke.health = poke.health - (att.damagePoints - poke.defenseStat);
-	else if (poke.health < (att.damagePoints - poke.defenseStat))
-		poke.health=0;
+	if(poke.health > 0 && poke.health >= att.damagePoints)
+		poke.health -= att.damagePoints;
+	else if (poke.health < att.damagePoints)
+		poke.health = 0;
 
 }
 
@@ -17,7 +17,7 @@ void pokemon::initPokemon(const pokemon & poke)
 	type = poke.type;
 	isFound = poke.isFound;
 	level = poke.level;
-	health = poke.health;
+	health = poke.maxHealth;
 	maxHealth = poke.maxHealth;
 	attackStat = poke.attackStat;
 	defenseStat = poke.defenseStat;
@@ -27,4 +27,17 @@ void pokemon::initPokemon(const pokemon & poke)
 		attackChoice[i].name = poke.attackChoice[i].name;
 		attackChoice[i].damagePoints = poke.attackChoice[i].damagePoints;
 	}
+}
+
+void pokemon::displayHealth()
+{
+	cout << health << "/" << maxHealth << "PV";
+}
+
+void pokemon::displayInfos()
+{
+	cout << "Id: #" << id << endl;
+	cout << "Name: " << name << endl;
+	cout << "Type: " << type << endl;
+	displayHealth();
 }

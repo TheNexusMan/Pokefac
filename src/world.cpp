@@ -134,7 +134,7 @@ void world::randomCombat(player & mainPlayer)
 
 		}
 		unsigned int randomPoke = rand() % 3;
-		launchBattle(mainPlayer, pokeTab[randomPoke]);
+		launchBattle(mainPlayer, pokeTab[randomPoke], true);
 	}
 }
 
@@ -143,66 +143,109 @@ bool world::isInHerb(const int x, const int y) const
 	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
-void world::launchBattle(player & mainPlayer, pokemon & poke)
+void world::launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPokemon)
 {
 	srand(time(NULL));
-	WinTXT win(SIZETERRAIN, SIZETERRAIN);
 	char attack;
 	int trainerAttack;
 
-	while(mainPlayer.tabPokemon[0].health > 0 || poke.health > 0)
+	termClear();
+
+	if(isAgainstPokemon) cout << "A wild " << poke.name << " appears!" << endl;
+
+	getchar();
+
+	while(mainPlayer.tabPokemon[0].health > 0 && poke.health > 0)
 	{
-		cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
-		cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
-		
 		do{
-			cout << "choose your attack :" << endl;
-			attack = win.getCh();
-        }while(attack != 'a' || attack != 'b' || attack != 'c' || attack != 'd');
+			termClear();
 
-		
-		if(attack == 'a')
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[0]);
-		if(attack == 'b')
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[1]);
-		if(attack == 'c')
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[2]);
-		if(attack == 'd')
-			poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[3]);
+			cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
+			mainPlayer.tabPokemon[0].displayHealth();
+			cout << endl;
+			isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
+			cout << poke.name << " ";
+			poke.displayHealth();
+			cout << endl << "---------------------------------" << endl << endl;
 
-		system("clear");
+			cout << "Choose your attack :" << endl;
 
-		cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
-		cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
+			for(unsigned int i = 0; i < 4; i++)
+			{
+				cout << i+1 << "-" << mainPlayer.tabPokemon[0].attackChoice[i].name << " " << mainPlayer.tabPokemon[0].attackChoice[i].damagePoints << endl;
+			}
 
-		if(mainPlayer.tabPokemon[0].health > 0)
+			if(isAgainstPokemon) cout << "5-Escape" << endl;
+
+			attack = getchar();
+
+			if(isAgainstPokemon && (attack - '0') == 5) return;
+
+        }while((attack - '0') < 1 || (attack - '0') > 4);
+
+		poke.receiveAttack(poke, mainPlayer.tabPokemon[0].attackChoice[attack - '0' - 1]);
+
+		termClear();
+
+		cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
+		mainPlayer.tabPokemon[0].displayHealth();
+		cout << endl;
+		isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
+		cout << poke.name << " ";
+		poke.displayHealth();
+		cout << endl << "---------------------------------" << endl << endl;
+		cout << mainPlayer.tabPokemon[0].name << " attacks with: " << mainPlayer.tabPokemon[0].attackChoice[attack - '0' - 1].name << " " << mainPlayer.tabPokemon[0].attackChoice[attack - '0' - 1].damagePoints << endl;
+
+		if(mainPlayer.tabPokemon[0].health > 0 && poke.health > 0)
 		{
-			cout << "The Trainer attacks you ! Be careful !" << endl;
+			isAgainstPokemon ? cout << "The wild Pokemon attacks you!" << endl : cout << "The Trainer attacks you!" << endl;
 
-			system("pause");
+			getchar();
+			termClear();
 
 			trainerAttack = rand() % 3;
 			mainPlayer.tabPokemon[0].receiveAttack(mainPlayer.tabPokemon[0], poke.attackChoice[trainerAttack]);
+			cout << "Your Pokémon: " << mainPlayer.tabPokemon[0].name << " ";
+			mainPlayer.tabPokemon[0].displayHealth();
+			cout << endl;
+			isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
+			cout << poke.name << " ";
+			poke.displayHealth();
+			cout << endl << "---------------------------------" << endl << endl;
+			cout << poke.name << " attacks with: " << poke.attackChoice[trainerAttack].name << " " << poke.attackChoice[trainerAttack].damagePoints << endl;
 
-			cout << "The trainer's pokemon health : " << poke.health << "/" << poke.maxHealth << endl;
-			cout << "Your pokemon health : " << mainPlayer.tabPokemon[0].health << "/" << mainPlayer.tabPokemon[0].maxHealth << endl;
-
-			system("pause");
+			getchar();
 		}
+		
+		termClear();
 	}
 
-	if(mainPlayer.tabPokemon[0].health != 0)
+	if(mainPlayer.tabPokemon[0].health != 0 && isAgainstPokemon && mainPlayer.getPokeball() > 0 && mainPlayer.hasFreePokeLocation() && !mainPlayer.hasThisPokemon(poke))
 	{
-		cout << "You win the fight!!" << endl;
-		mainPlayer.addMoney(100);
-		cout << "Your money : " << mainPlayer.getMoney() << endl;
+		mainPlayer.addPokemon(poke);
+		cout << "You've captured:" << endl;
+		mainPlayer.tabPokemon[mainPlayer.nbPokemon-1].displayInfos();
 
-		system("pause");
+		getchar();
+
+	}else if(mainPlayer.tabPokemon[0].health != 0 && !isAgainstPokemon)
+	{
+		cout << "You win the fight!" << endl;
+		mainPlayer.addMoney(100);
+		cout << "Your money: " << mainPlayer.getMoney() << endl;
+
+		getchar();
 	}
-	else{
+	else if(mainPlayer.tabPokemon[0].health == 0){
 		cout << "You loose" << endl;
 
-		system("pause");
+		getchar();
+	}else{
+		if(!mainPlayer.hasFreePokeLocation()) cout << "You can't carry another Pokémon with you." << endl;
+		if(mainPlayer.hasThisPokemon(poke)) cout << "You already have this Pokémon" << endl;
+		if(mainPlayer.getPokeball()== 0) cout << "You don't have Pokéball to capture this Pokémon" << endl;
+
+		getchar();
 	}
 }
 

@@ -14,6 +14,7 @@ void txtLoop(world & world)
 {
 	WinTXT win(SIZETERRAIN, SIZETERRAIN); //Get SizeTerrain (A modifier)
 	bool isOk = true;
+	bool hasMoved = false;
 	int key;
 
 	do {
@@ -24,7 +25,11 @@ void txtLoop(world & world)
 #endif
 		termClear();
 		world.mainTerrain.displayTerrain(world.mainPlayer);
-		world.randomCombat(world.mainPlayer);
+		if(hasMoved)
+		{
+			world.randomCombat(world.mainPlayer);
+			hasMoved = false;
+		}
 		key = win.getCh();
 		{
 			switch (key)
@@ -33,30 +38,33 @@ void txtLoop(world & world)
 			if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX() -1, world.mainPlayer.getPosY()))
 			{
 				world.mainPlayer.moveUp();
+				hasMoved = true;
 			}
 				break;
 			case 'j':
 			if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
 			{
 				world.mainPlayer.moveLeft();
+				hasMoved = true;
 			}
 				break;
 			case 'k':
 			if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1, world.mainPlayer.getPosY()))
 			{
 				world.mainPlayer.moveDown();
+				hasMoved = true;
 			}
 				break;
 			case 'l':
 			if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()+1))
 			{
 				world.mainPlayer.moveRight();
+				hasMoved = true;
 			}
 				break;
 			case 'q':
 				isOk = false;
 				break;
-
 			}
 		}
 	} while (isOk);

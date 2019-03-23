@@ -22,12 +22,6 @@
 #include "player.h"
 #include "terrain.h"
 
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
-
 #include "winTxt.h"
 
 #define DEBUG false
@@ -206,7 +200,7 @@ private:
 	launchBattle(mainPlayer, poke);
 	@endcode
 	*/
-	void launchBattle(player & mainPlayer, pokemon & poke);
+	void launchBattle(player & mainPlayer, pokemon & poke, bool isAgainstPokemon);
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
 	/**
