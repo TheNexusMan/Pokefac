@@ -1,0 +1,3 @@
+# Ignorer les dossiers .vscode
+.vscode
+src/.vscode
