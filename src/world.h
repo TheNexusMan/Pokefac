@@ -30,10 +30,6 @@ using namespace std;
 
 const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 2;
-
-
-
-
 const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 
 	struct Door
@@ -54,13 +50,10 @@ public:
 	player mainPlayer;
 	pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
-	string terrainName;
 
 
 
-	void initDoor();
-	Door whichDoor(player mainPlayer);
-	void door();
+
 
 
 	/**
@@ -155,6 +148,50 @@ public:
 	@endcode
 	*/
 	void initGame(NPC npc);
+
+
+	/**
+	@brief
+	Initialise toutes les portes via un fichier .txt
+
+	@param none
+	@return none
+
+	Exemple Visual
+	@code
+	world.initDoor();
+	@endcode
+	*/
+	void initDoor();
+	/**
+	@brief
+	Fonction retournant une porte
+	Permet de tester sur quelle porte se situe le joueur et de le téléporter ensuite
+
+	@param mainPlayer
+	@return returnedDoor
+
+	Exemple Visual
+	@code
+	world.whichDoor(mainPlayer);
+	@endcode
+	 */
+	Door whichDoor(player mainPlayer);
+
+	/** 
+	@brief
+	Procedure faisant appel à la fonction whichDoor
+	permet de téléporter le joueur dans un nouveau terrain
+
+	@param none
+	@return none
+
+	Exemple Visual
+	@code
+	world.door();
+	@endCode
+	*/
+	void door();
 
 private:
 	/**
