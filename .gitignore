@@ -1,3 +1,9 @@
 # Ignorer les dossiers .vscode
 .vscode
 src/.vscode
+
+# Ignorer les fichier objets .o dans obj/
+obj/*.o
+
+# Ignorer les executables dan bin/
+bin/pokefac
