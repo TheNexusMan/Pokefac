@@ -37,8 +37,10 @@ void txtLoop(world & world)
 			case 'i':
 			if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX() -1, world.mainPlayer.getPosY()))
 			{
+
 				world.mainPlayer.moveUp();
 				hasMoved = true;
+								
 			}
 				break;
 			case 'j':
@@ -46,6 +48,7 @@ void txtLoop(world & world)
 			{
 				world.mainPlayer.moveLeft();
 				hasMoved = true;
+				
 			}
 				break;
 			case 'k':
@@ -53,6 +56,7 @@ void txtLoop(world & world)
 			{
 				world.mainPlayer.moveDown();
 				hasMoved = true;
+			
 			}
 				break;
 			case 'l':
@@ -60,12 +64,15 @@ void txtLoop(world & world)
 			{
 				world.mainPlayer.moveRight();
 				hasMoved = true;
+				
 			}
 				break;
 			case 'q':
 				isOk = false;
 				break;
 			}
+			world.door();
+			
 		}
 	} while (isOk);
 }

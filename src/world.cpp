@@ -5,9 +5,35 @@ world::world()
 {
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
+	mainTerrain.initTerrain(1, "terrain1");
 	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
-	mainTerrain.initTerrain(1);
-	randomNumber();
+	initDoor();
+}
+
+void world::initDoor()
+{
+	ifstream file("./data/doors.txt");
+
+	if(file.is_open())
+	{
+		while(!file.eof())
+		{
+			for(unsigned int i = 0; i < NB_DOOR; i++)
+			{
+				file >> doors[i].id;
+				file >> doors[i].posX;
+				file >> doors[i].posY;
+				file >> doors[i].destPosX;
+				file >> doors[i].destPosY;
+				file >> doors[i].terrainNamePos;
+				file >> doors[i].terrainNameDest;
+			}
+		}
+		file.close();
+	}
+	else cout << "Erreur dans l'ouverture du fichier" << endl;
+
+	
 }
 
 void world::initPokeTab()
@@ -316,31 +342,39 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 }
 
-/*
-void world::setHerb()
-{
-	if (DEBUG)
-	{
-		displayStars();
-		cout << "Debut du placement des Herbes dans le terrain de maniere aleatoire" << endl << endl;
-	}
-	int x = 0, y = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		do {
-			x = rand() % SIZETERRAIN;
-			y = rand() % SIZETERRAIN;
 
-		} while (mainTerrain.terrain[x][y] == '#' || 'N' || 'H');
-		if (DEBUG)
-		{
-			cout << "Tirage de x = " << x << endl;
-			cout << "Tirage de Y = " << y << endl;
-			cout << "Placement de l'herbe au coordonn�es : (" << x << "," << y << ")" << endl << endl;
-		}
-		mainTerrain.terrain[x][y] = 'H';
+void world::door()
+{
+	if(mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == 'O')
+	{
+	Door actualDoor = whichDoor(mainPlayer);
+	teleport(mainPlayer, actualDoor.id, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
 	}
-	if (DEBUG) displayStars();
+}
+
+Door world::whichDoor(player mainPlayer)
+{
+	Door returnedDoor;
+	for(unsigned int i = 0; i < NB_DOOR; i++)
+	{
+		if((mainPlayer.getPosX() == doors[i].posX) && (mainPlayer.getPosY() == doors[i].posY) && mainTerrain.terrainName == doors[i].terrainNamePos)
+		{
+			 returnedDoor = doors[i];
+		} 
+	} 
+	return returnedDoor;
+}
+
+void world::teleport(player & mainPlayer,unsigned int id, string terrain, unsigned int x, unsigned int y)
+{
+	if(terrain == mainTerrain.terrainName)
+	{
+		mainPlayer.setNewPos(x,y);
+	}else
+	{	
+		mainTerrain.initTerrain(id, terrain);
+		mainPlayer.setNewPos(x,y);
+
+	}
 
 }
-*/

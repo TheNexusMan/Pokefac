@@ -31,12 +31,37 @@ using namespace std;
 const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 2;
 
+
+
+
+const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
+
+	struct Door
+	{
+		unsigned int id;
+		unsigned int posX;
+		unsigned int posY;
+		unsigned int destPosX;
+		unsigned int destPosY;
+		string terrainNamePos;
+		string terrainNameDest;
+	};
+
 class world{
 public:
 	terrain mainTerrain;
 	NPC NPCTab[NB_NPC];
 	player mainPlayer;
 	pokemon pokeTab[NBPOKEMON];
+	Door doors[NB_DOOR];
+	string terrainName;
+
+
+
+	void initDoor();
+	Door whichDoor(player mainPlayer);
+	void door();
+
 
 	/**
 	@brief
@@ -52,6 +77,11 @@ public:
 	*/
 	world();
 	
+
+
+	void teleport(player & mainPlayer, unsigned int id, string terrain, unsigned int x, unsigned int y);
+
+
 	/**
 	@brief
 	Retourne un nombre al�atoire entre 0 et 100
