@@ -26,9 +26,52 @@ public:
 	pokemon tabPokemon[NBPLAYERPOKE];
 	unsigned int nbPokemon;
 
+	/**
+	@brief
+	Déplace le joueur vers le haut
+	
+	@param none
+	@return none
+	Exemple Code Block / Visual
+	@code
+	player.moveUp()
+	@endcode */
 	void moveUp();
+
+	/**
+	@brief
+	Déplace le joueur vers le bas
+	
+	@param none
+	@return none
+	Exemple Code Block / Visual
+	@code
+	player.moveDown()
+	@endcode */
 	void moveDown();
+
+	/**
+	@brief
+	Déplace le joueur vers la gauche
+	
+	@param none
+	@return none
+	Exemple Code Block / Visual
+	@code
+	player.moveLeft()
+	@endcode */
 	void moveLeft();
+
+	/**
+	@brief
+	Déplace le joueur vers la droite
+	
+	@param none
+	@return none
+	Exemple Code Block / Visual
+	@code
+	player.moveRight()
+	@endcode */
 	void moveRight();
 
 	/**
@@ -49,7 +92,7 @@ public:
 	Recupere l'argent du joueur
 	
 	@param none
-	@return unsigned int
+	@return money
 	Exemple Code Block / Visual
 	@code
 	player.getMoney();
@@ -89,7 +132,7 @@ public:
 	Retourne le nombre de pokeballs actuelles
 	
 	@param none
-	@return unsigned int
+	@return pokeball
 	
 	Exemple Code Block / Visual
 	@code
@@ -115,7 +158,7 @@ public:
 	Renvoie un pokémon par référence en fonction de l'id passé en paramètre
 
 	@param id
-	@return pokemon&
+	@return tabPokemon[id]
 	
 	Exemple Code Block / Visual
 	@code
@@ -128,7 +171,7 @@ public:
 	Renvoie un pokémon par en donnée en fonction de l'id passé en paramètre
 	
 	@param id
-	@return pokemon&
+	@return tabPokemon[id]
 	
 	Exemple Code Block / Visual
 	@code
@@ -138,10 +181,23 @@ public:
 
 	/**
 	@brief 
+	Renvoie vrai si le pokemon passé en paramètre est déjà possédé par le joueur
+	
+	@param poke
+	@return bool
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.hasThisPokemon(poke);
+	@endcode */
+	bool hasThisPokemon(const pokemon & poke);
+
+	/**
+	@brief 
 	Retourne le premier pokémon vivant du tableau
 	
 	@param none
-	@return pokemon
+	@return tabPokemon[idPokeAlive]
 	
 	Exemple Code Block / Visual
 	@code
@@ -187,19 +243,6 @@ public:
 	mainPlayer.changePlacePoke(0, 5);
 	@endcode */
 	void changePlacePoke(unsigned int id1, unsigned int id2);
-
-	/**
-	@brief 
-	Renvoie vrai si le pokemon passé en paramètre est déjà possédé par le joueur
-	
-	@param poke
-	@return bool
-	
-	Exemple Code Block / Visual
-	@code
-	mainPlayer.hasThisPokemon(poke);
-	@endcode */
-	bool hasThisPokemon(const pokemon & poke);
 
 	/**
 	@brief 

@@ -197,7 +197,7 @@ public:
 private:
 	/**
 	@brief
-	Remplie le tableau de pokemon et met leurs caract�ristiques en fonction d'un fichier txt
+	Remplie le tableau de pokemon et leurs caractéristiques en fonction du fichier pokemons.txt
 	
 	@param none
 	@return none
@@ -211,7 +211,7 @@ private:
 
 	/**
 	@brief
-	Remplie le tableau de NPC et met leurs caract�ristiques en fonction d'un fichier txt
+	Remplie le tableau de NPC et met leurs caractéristiques en fonction d'un fichier txt
 	
 	@param none
 	@return none
@@ -229,12 +229,12 @@ private:
 	True si la position est dans un caract�re 'H'
 	false sinon
 
-	@param mainPlayer, x, y
+	@param x, y
 	@return (terrain.terrain[x][y] == 'H');
 
 	Exemple Code Block / Visual
 	@code
-	isInHerb(mainPlayer, x, y);
+	isInHerb(x, y);
 	@endcode
 	*/
 	bool isInHerb(const int x, const int y) const;
@@ -243,12 +243,12 @@ private:
 	@brief
 	Lance la boucle de combat
 
-	@param mainPlayer, poke
+	@param mainPlayer, opponentPoke, isAgainstPokemon
 	@return none
 
 	Exemple Code Block / Visual
 	@code
-	launchBattle(mainPlayer, poke, true);
+	launchBattle(mainPlayer, opponentPoke, true);
 	@endcode
 	*/
 	void launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgainstPokemon);

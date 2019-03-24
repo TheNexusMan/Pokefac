@@ -74,7 +74,7 @@ public:
 	Renvoie la position x du personnage
 	
 	@param none
-	@return unsigned int x
+	@return posX
 	
 	Exemple Code Block / Visual
 	@code
@@ -87,7 +87,7 @@ public:
 	Renvoie la position y du personnage
 	
 	@param none
-	@return unsigned int y
+	@return posY
 	
 	Exemple Code Block / Visual
 	@code

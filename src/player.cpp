@@ -1,5 +1,33 @@
 #include "player.h"
 
+void player::moveUp()
+{
+	unsigned int x = getPosX();
+	unsigned int y = getPosY();
+	setNewPos(x-1, y);
+}
+
+void player::moveDown()
+{
+	unsigned int x = getPosX();
+	unsigned int y = getPosY();
+	setNewPos(x + 1, y);
+}
+
+void player::moveLeft()
+{
+	unsigned int x = getPosX();
+	unsigned int y = getPosY();
+	setNewPos(x, y-1);
+}
+
+void player::moveRight()
+{
+	unsigned int x = getPosX();
+	unsigned int y = getPosY();
+	setNewPos(x, y+ 1);
+}
+
 unsigned int player::getMoney()
 {
 	return money;
@@ -97,32 +125,4 @@ void player::changePlacePoke(unsigned int id1, unsigned int id2)
 bool player::hasFreePokeLocation()
 {
 	return nbPokemon < NBPLAYERPOKE;
-}
-
-void player::moveUp()
-{
-	unsigned int x = getPosX();
-	unsigned int y = getPosY();
-	setNewPos(x-1, y);
-}
-
-void player::moveDown()
-{
-	unsigned int x = getPosX();
-	unsigned int y = getPosY();
-	setNewPos(x + 1, y);
-}
-
-void player::moveLeft()
-{
-	unsigned int x = getPosX();
-	unsigned int y = getPosY();
-	setNewPos(x, y-1);
-}
-
-void player::moveRight()
-{
-	unsigned int x = getPosX();
-	unsigned int y = getPosY();
-	setNewPos(x, y+ 1);
 }
