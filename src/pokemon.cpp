@@ -10,14 +10,14 @@ void pokemon::receiveAttack(pokemon & poke, attack att)
 
 }
 
-void pokemon::initPokemon(const pokemon & poke)
+pokemon & pokemon::operator=(const pokemon & poke)
 {
 	id = poke.id;
 	name = poke.name;
 	type = poke.type;
 	isFound = poke.isFound;
 	level = poke.level;
-	health = poke.maxHealth;
+	health = poke.health;
 	maxHealth = poke.maxHealth;
 	attackStat = poke.attackStat;
 	defenseStat = poke.defenseStat;
@@ -27,6 +27,8 @@ void pokemon::initPokemon(const pokemon & poke)
 		attackChoice[i].name = poke.attackChoice[i].name;
 		attackChoice[i].damagePoints = poke.attackChoice[i].damagePoints;
 	}
+
+	return *this;
 }
 
 void pokemon::displayHealth() const

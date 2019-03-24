@@ -12,7 +12,7 @@ struct attack
 	unsigned int damagePoints;
 };
 
-class pokemon 
+class pokemon
 {
 public:
 
@@ -22,7 +22,7 @@ public:
 
 	void receiveAttack(pokemon & poke, attack att); //Fonction qui retourne le pokemon avec des points de vie en moins
 
-	void initPokemon(const pokemon & poke);
+	pokemon & operator=(const pokemon & poke);
 
 	void displayHealth() const;
 

@@ -112,6 +112,58 @@ public:
 
 	/**
 	@brief 
+	Renvoie un pokémon par référence en fonction de l'id passé en paramètre
+	
+	@param id
+	@return pokemon&
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.getPokemon(1);
+	@endcode */
+	pokemon& getPokemon(unsigned int id);
+
+	/**
+	@brief 
+	Renvoie un pokémon par en donnée en fonction de l'id passé en paramètre
+	
+	@param id
+	@return pokemon&
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.getPokemon(1);
+	@endcode */
+	pokemon getPokemon(unsigned int id) const;
+
+	/**
+	@brief 
+	Ehange le pokémon mort au combat par le premier vivant du tableau
+	
+	@param none
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.replaceDeadPokemon();
+	@endcode */
+	void replaceDeadPokemon();
+
+	/**
+	@brief 
+	Ehange les emplacements des pokémons en id1 et id2
+	
+	@param id1, id2
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.changePlacePoke(0, 5);
+	@endcode */
+	void changePlacePoke(unsigned int id1, unsigned int id2);
+
+	/**
+	@brief 
 	Renvoie vrai si le pokemon passé en paramètre est déjà possédé par le joueur
 	
 	@param poke

@@ -30,7 +30,6 @@ obj/loopTxT.o: src/loopTxT.cpp src/loopTxT.h
 obj/winTxt.o: src/winTxt.cpp src/winTxt.h
 	g++ -g -Wall -c src/winTxt.cpp -o obj/winTxt.o
 
-
 clean:
 	rm -f obj/*.o
 	rm -f bin/*
