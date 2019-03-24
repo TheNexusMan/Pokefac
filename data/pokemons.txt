@@ -11,6 +11,7 @@ Shell 10
 Crash 5
 Mult 20
 Make 15
+
 2
 Windosu
 Windows
@@ -24,6 +25,7 @@ Crash 10
 BlueScreen 5
 CMD 20
 Store 15
+
 3
 Salashell
 Linux

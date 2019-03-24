@@ -9,8 +9,8 @@ NPC::~NPC()
 {
 }
 
-char NPC::getRotation()
+char NPC::getOrientation()
 {
-	return rotation;
+	return orientation;
 }
 

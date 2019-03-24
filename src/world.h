@@ -29,7 +29,7 @@
 using namespace std;
 
 const unsigned int NBPOKEMON = 3;
-const unsigned int NB_NPC = 2;
+const unsigned int NB_NPC = 3;
 const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 
 	struct Door
@@ -199,7 +199,21 @@ public:
 	@brief
 	Lance le menu
 
-	@param win
+	@param gameOn
+	@return none
+
+	Exemple Visual
+	@code
+	world.menu(GameOn);
+	@endCode
+	*/
+	void menu(bool & gameOn);
+
+	/** 
+	@brief
+	Lance le menu des pokémon du joueur
+
+	@param none
 	@return none
 
 	Exemple Visual
@@ -207,10 +221,20 @@ public:
 	world.menu(win);
 	@endCode
 	*/
-	void menu(bool & gameOn);
-
 	void displayPokemon();
 
+	/** 
+	@brief
+	Option d'organisation des pokémon
+
+	@param pokeMenuOn
+	@return none
+
+	Exemple Visual
+	@code
+	world.menu(pokeMenuOn);
+	@endCode
+	*/
 	void organisePokemon(bool & pokeMenuOn);
 
 private:

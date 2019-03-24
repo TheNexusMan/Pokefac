@@ -13,8 +13,8 @@ characterTexture::~characterTexture()
 
 void characterTexture::loadImage()
 {
-	leftSide = IMG_Load("Emplacement ‡ DÈfinir");
-	rightSide = IMG_Load("Emplacement ‡ DÈfinir");
-	frontSide = IMG_Load("Emplacement ‡ DÈfinir");
-	backSide = IMG_Load("Emplacement ‡ DÈfinir");
+	leftSide = IMG_Load("Emplacement √† d√©finir");
+	rightSide = IMG_Load("Emplacement √† d√©finir");
+	frontSide = IMG_Load("Emplacement √† d√©finir");
+	backSide = IMG_Load("Emplacement √† d√©finir");
 }

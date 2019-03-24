@@ -3,16 +3,31 @@ Xavier-Urbain
 6
 7
 o
-2
+terrain1
 1
+2
 Je suis une phrase
 Et moi aussi !
+
 2
 Michel-Drucker
 14
 10
 s
+terrain1
 2
 2
 Top !
 La mer noire
+
+3
+Harry-Potter
+6
+4
+o
+terrain2
+0
+3
+Wilgardium leviosa !
+J'aime ta barbe Hagrid
+Ma baguette !

@@ -13,8 +13,8 @@ public:
 	character();
 	~character();
 
-
 	string name;
+	
 	//characterTexture texture;
 
 	/**

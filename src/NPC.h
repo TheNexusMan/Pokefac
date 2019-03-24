@@ -13,15 +13,54 @@ class NPC :
 	public character
 {
 public:
-	NPC();
-	~NPC();
-	char getRotation(); // Detecte la rotation des pnj pour la ligne (n, s, e ou o)
-					   // n = Nord; s = Sud; e = Est; o = Ouest
 	unsigned int id;
-	char rotation;
+	char orientation;
 	unsigned int nbDialog;
 	string dialog[4];
 	pokemon NPCPokemon;
+	string terrainName;
+
+	/**
+	@brief
+	Constructeur de la classe NPC
+	
+	@param none
+	@return none
+
+	Exemple Code Block / Visual
+	@code
+	NPC Harry;
+	@endcode
+	*/
+	NPC();
+
+	/**
+	@brief
+	Destrcuteur de la classe NPC
+	
+	@param none
+	@return none
+
+	Exemple Code Block / Visual
+	@code
+	none
+	@endcode
+	*/
+	~NPC();
+
+	/**
+	@brief
+	Retourne l'orientation du NPC (n = Nord, s = Sud, e = Est, o = Ouest)
+	
+	@param none
+	@return orientation
+
+	Exemple Code Block / Visual
+	@code
+	NPC.getOrientation();
+	@endcode
+	*/
+	char getOrientation();
 };
 
 #endif
