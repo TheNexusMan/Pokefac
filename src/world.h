@@ -50,6 +50,7 @@ public:
 	player mainPlayer;
 	pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
+	bool menuOn;
 
 	/**
 	@brief
@@ -193,6 +194,24 @@ public:
 	@endCode
 	*/
 	void teleport(player & mainPlayer, string terrain, unsigned int x, unsigned int y);
+
+	/** 
+	@brief
+	Lance le menu
+
+	@param win
+	@return none
+
+	Exemple Visual
+	@code
+	world.menu(win);
+	@endCode
+	*/
+	void menu(bool & gameOn);
+
+	void displayPokemon();
+
+	void organisePokemon(bool & pokeMenuOn);
 
 private:
 	/**

@@ -4,6 +4,7 @@
 world::world()
 {
 	initGame();
+	menuOn = false;
 }
 
 void world::initDoor()
@@ -126,6 +127,10 @@ void world::initGame()
 	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
 	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
 	initDoor(); // initialisation des portes
+
+	//DEBUG
+	mainPlayer.addPokemon(pokeTab[1]);
+	mainPlayer.addPokemon(pokeTab[2]);
 }
 
 int world::randomNumber()
@@ -168,7 +173,8 @@ void world::launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgain
 	srand(time(NULL));
 	pokemon & playerPoke = mainPlayer.firstPokemonAlive();
 	char attack;
-	int trainerAttack;
+	unsigned int trainerAttack;
+	unsigned int numPlayerAttack;
 
 	termClear();
 
@@ -193,17 +199,18 @@ void world::launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgain
 			if(isAgainstPokemon) cout << "5-Escape" << endl;
 
 			attack = getchar();
+			numPlayerAttack = attack - '0';
 
-			if(isAgainstPokemon && (attack - '0') == 5) return;
+			if(isAgainstPokemon && (numPlayerAttack) == 5) return;
 
-        }while((attack - '0') < 1 || (attack - '0') > 4);
+        }while((numPlayerAttack) < 1 || (numPlayerAttack) > 4);
 
-		opponentPoke.receiveAttack(playerPoke.attackChoice[attack - '0' - 1]);
+		opponentPoke.receiveAttack(playerPoke.attackChoice[numPlayerAttack - 1]);
 
 		termClear();
 
 		displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
-		cout << playerPoke.name << " attacks with: " << playerPoke.attackChoice[attack - '0' - 1].name << " " << playerPoke.attackChoice[attack - '0' - 1].damagePoints << endl;
+		cout << playerPoke.name << " attacks with: " << playerPoke.attackChoice[numPlayerAttack - 1].name << " " << playerPoke.attackChoice[numPlayerAttack - 1].damagePoints << endl;
 
 		if(playerPoke.health > 0 && opponentPoke.health > 0)
 		{
@@ -375,4 +382,177 @@ void world::teleport(player & mainPlayer, string terrain, unsigned int x, unsign
 		mainTerrain.initTerrain(terrain);
 		mainPlayer.setNewPos(x,y);
 	}
+}
+
+void world::menu(bool & gameOn)
+{
+	int key;
+
+	do{
+		termClear();
+
+		cout << "1- Pokémons" << endl;
+		cout << "2- Sauvegarde" << endl;
+		cout << "3- Quitter jeu" << endl;
+		cout << endl;
+		cout << "m- Fermer menu" << endl;
+
+		key = getchar();
+
+		switch (key)
+		{
+			case '1':
+				displayPokemon();
+				break;
+
+			case '2':
+				break;
+
+			case '3':
+				gameOn = false;
+				menuOn = false;
+				break;
+
+			case 'm':
+				menuOn = false;
+				break;
+		
+			default:
+				break;
+		}
+	} while(menuOn);
+}
+
+void world::displayPokemon()
+{
+	int key;
+	int keyInfoMenu;
+	bool pokeMenuOn = true;
+	unsigned int idPoke;
+	
+	do{
+		termClear();
+
+		for(unsigned int i = 0; i < NBPOKEMON; i++)
+		{
+			if(i < mainPlayer.nbPokemon)
+			{
+				cout << i+1 << "- " << mainPlayer.getPokemon(i).name << " ";
+				mainPlayer.getPokemon(i).displayHealth();
+				cout << endl;
+			}else{
+				cout << i+1 << "-" << endl;
+			}
+		}
+		
+		cout << endl;
+		cout << "o- Organiser" << endl;
+		cout << "r- Retour" << endl;
+		cout << "m- Fermer menu" << endl;
+
+		key = getchar();
+		idPoke = key - '0';
+
+		if(idPoke > 0 && idPoke <= mainPlayer.nbPokemon)
+		{
+			termClear();
+			mainPlayer.getPokemon(idPoke - 1).displayInfos();
+			keyInfoMenu = getchar();
+			if(keyInfoMenu == 'm') key = 'm';
+		}
+
+		switch (key)
+		{		
+			case 'o':
+				organisePokemon(pokeMenuOn);
+				break;
+
+			case 'r':
+				pokeMenuOn = false;
+				break;
+
+			case 'm':
+				pokeMenuOn = false;
+				menuOn = false;
+				break;
+		
+			default:
+				break;
+		}
+
+	} while(pokeMenuOn);
+}
+
+void world::organisePokemon(bool & pokeMenuOn)
+{
+	int key;
+	bool organiseMenuOn = true;
+	unsigned int indice = 0;
+	bool isTaken = false;
+
+	do{
+		termClear();
+
+		for(unsigned int i = 0; i < NBPOKEMON; i++)
+		{
+			if(i < mainPlayer.nbPokemon && indice == i && isTaken)
+			{
+				cout << "-  " << mainPlayer.getPokemon(i).name << " ";
+				mainPlayer.getPokemon(i).displayHealth();
+				cout << endl;
+			}else if(i < mainPlayer.nbPokemon && indice == i)
+			{
+				cout << "-" << mainPlayer.getPokemon(i).name << " ";
+				mainPlayer.getPokemon(i).displayHealth();
+				cout << endl;
+			}else{
+				cout << " " << mainPlayer.getPokemon(i).name << " ";
+				mainPlayer.getPokemon(i).displayHealth();
+				cout << endl;
+			}
+		}
+
+		cout << endl;
+		cout << "p- Prendre / déposer" << endl;
+		cout << "z/s- Monter / descendre" << endl;
+		cout << endl;
+		cout << "r- Retour" << endl;
+		cout << "m- Fermer menu" << endl;
+
+		key = getchar();
+
+		switch (key)
+		{		
+			case 's':
+				if(indice < mainPlayer.nbPokemon-1){
+					indice++;
+					if(isTaken) mainPlayer.changePlacePoke(indice-1, indice);
+				}
+				break;
+
+			case 'z':
+				if(indice > 0){
+					indice--;
+					if(isTaken) mainPlayer.changePlacePoke(indice+1, indice);
+				}
+				break;
+
+			case 'p':
+				isTaken = !isTaken;
+				break;
+
+			case 'r':
+				organiseMenuOn = false;
+				break;
+
+			case 'm':
+				organiseMenuOn = false;
+				pokeMenuOn = false;
+				menuOn = false;
+				break;
+		
+			default:
+				break;
+		}
+	} while(organiseMenuOn);
 }
