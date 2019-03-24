@@ -81,7 +81,7 @@ void txtLoop(world & world)
 					world.menuOn = true;
 					break;
 
-				case 'o':
+				case 'x':
 					gameOn = false;
 					break;
 			}
