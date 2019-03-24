@@ -4,11 +4,11 @@ terrain::terrain(){
 	
 }
 
-void terrain::initTerrain(int idTerrain, string nameTerrain)
+void terrain::initTerrain(string nameTerrain)
 {
+	terrainName = nameTerrain;
 	string path = "./data/" + nameTerrain + ".txt";
 	ifstream fichier (path);
-	terrainName = nameTerrain;
 
 	if(fichier.is_open())
 	{
@@ -30,7 +30,7 @@ void terrain::initTerrain(int idTerrain, string nameTerrain)
 
 		fichier.close();
 	}else{
-		cout << "Erreur d'ouverture du terrain" << idTerrain << endl;
+		cout << "Erreur d'ouverture du terrain : " << nameTerrain << endl;
 	}
 }
 

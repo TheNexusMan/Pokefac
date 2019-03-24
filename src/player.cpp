@@ -58,23 +58,32 @@ bool player::hasThisPokemon(const pokemon & poke)
 	return false;
 }
 
-void player::replaceDeadPokemon()
+pokemon& player::firstPokemonAlive()
 {
 	unsigned int idPokeAlive = 0;
-
-	while(tabPokemon[idPokeAlive].health <= 0 && idPokeAlive < nbPokemon)
-	{	
+	while(tabPokemon[idPokeAlive].health <= 0)
+	{
 		idPokeAlive++;
 	}
 
-	if(idPokeAlive >= nbPokemon)
+	return tabPokemon[idPokeAlive];
+}
+
+void player::treatAllPokemon()
+{
+	for(unsigned int i = 0; i < nbPokemon; i++)
 	{
-		for(unsigned int i = 0; i < nbPokemon; i++)
-		{
-			tabPokemon[i].health = tabPokemon[i].maxHealth;
-		}
+		tabPokemon[i].health = tabPokemon[i].maxHealth;
 	}
-	changePlacePoke(0, idPokeAlive);
+}
+
+bool player::allPokemonsAreDead()
+{
+	for(unsigned int i = 0; i < nbPokemon; i++)
+	{
+		if(tabPokemon[i].health > 0) return false;
+	}
+	return true;
 }
 
 void player::changePlacePoke(unsigned int id1, unsigned int id2)

@@ -20,12 +20,43 @@ public:
 	string name, type;
 	attack attackChoice[4];
 
-	void receiveAttack(pokemon & poke, attack att); //Fonction qui retourne le pokemon avec des points de vie en moins
+	/**
+	@brief 
+	Retire le nombre de point d'attaque à la vie du Pokémon passé en paramètre
+	
+	@param poke, att
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	poke.receiveAttack(poke, attack);
+	@endcode */
+	void receiveAttack(attack att);
 
-	pokemon & operator=(const pokemon & poke);
-
+	/**
+	@brief 
+	Affiche la vie du Pokémon sur sa vie maximum (health / maxHealth)
+	
+	@param none
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	poke.displayHealth();
+	@endcode */
 	void displayHealth() const;
 
+	/**
+	@brief 
+	Affiche les infos de base du Pokémon
+	
+	@param none
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	poke.displayInfos();
+	@endcode */
 	void displayInfos() const;
 };
 

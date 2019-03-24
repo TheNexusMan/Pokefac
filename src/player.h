@@ -35,7 +35,7 @@ public:
 	@brief
 	Ajoute de l'argent au player
 	
-	@param int adding
+	@param adding
 	@return none
 	Exemple Code Block / Visual
 	@code
@@ -49,7 +49,7 @@ public:
 	Recupere l'argent du joueur
 	
 	@param none
-	@return unsigned int money
+	@return unsigned int
 	Exemple Code Block / Visual
 	@code
 	player.getMoney();
@@ -58,9 +58,9 @@ public:
 
 	/**
 	@brief
-	Initialise les caract�ristiques de bases du player
+	Initialise les caractéristiques de bases du player
 	
-	@param none
+	@param poke
 	@return none
 	
 	Exemple Code Block / Visual
@@ -89,7 +89,7 @@ public:
 	Retourne le nombre de pokeballs actuelles
 	
 	@param none
-	@return pokeball
+	@return unsigned int
 	
 	Exemple Code Block / Visual
 	@code
@@ -113,7 +113,7 @@ public:
 	/**
 	@brief 
 	Renvoie un pokémon par référence en fonction de l'id passé en paramètre
-	
+
 	@param id
 	@return pokemon&
 	
@@ -138,16 +138,42 @@ public:
 
 	/**
 	@brief 
-	Ehange le pokémon mort au combat par le premier vivant du tableau
+	Retourne le premier pokémon vivant du tableau
+	
+	@param none
+	@return pokemon
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.firstPokemonAlive();
+	@endcode */
+	pokemon& firstPokemonAlive();
+
+	/**
+	@brief 
+	Restaure la vie de tous les pokémon du joueur
 	
 	@param none
 	@return none
 	
 	Exemple Code Block / Visual
 	@code
-	mainPlayer.replaceDeadPokemon();
+	mainPlayer.treatAllPokemon();
 	@endcode */
-	void replaceDeadPokemon();
+	void treatAllPokemon();
+
+	/**
+	@brief 
+	Test si tous les pokémon du joueur son morts
+	
+	@param none
+	@return bool
+	
+	Exemple Code Block / Visual
+	@code
+	mainPlayer.allPokemonsAreDead();
+	@endcode */
+	bool allPokemonsAreDead();
 
 	/**
 	@brief 

@@ -51,11 +51,6 @@ public:
 	pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
 
-
-
-
-
-
 	/**
 	@brief
 	Constructeur de la classe world
@@ -69,11 +64,6 @@ public:
 	@endcode
 	*/
 	world();
-	
-
-
-	void teleport(player & mainPlayer, unsigned int id, string terrain, unsigned int x, unsigned int y);
-
 
 	/**
 	@brief
@@ -88,10 +78,10 @@ public:
 	@endcode
 	*/
 	int randomNumber();
+
 	/**
 	@brief
 	Lance un combat al�atoire en fonction de la position (Hautes herbes ou non)
-
 
 	@param mainPlayer
 	@return none
@@ -107,7 +97,6 @@ public:
 	@brief
 	Retourne true si le d�placement est autoris�, false sinon
 	(Si Caract�re = # || N => false else => true)
-
 
 	@param x, y, mainPlayer
 	@return ((x >= 0) && (x < sizeTerrain) && (y >= 0) && (y < sizeTerrain) && (terrain.terrain[x][y] != '#') && (terrain.terrain[x][y] != 'N'))
@@ -133,22 +122,19 @@ public:
 	*/
 	void isInLine(NPC npc, player mainPlayer, const int x, const int y) const;
 	
-
-	
 	/**
 	@brief
-	Initialise le jeu (Fais appel � tous les inits de toutes les classes)
+	Initialise le jeu (Fais appel à tous les inits de toutes les classes)
 
-	@param npc
+	@param none
 	@return none
 
 	Exemple Code Block / Visual
 	@code
-	initGame(npc);
+	initGame();
 	@endcode
 	*/
-	void initGame(NPC npc);
-
+	void initGame();
 
 	/**
 	@brief
@@ -163,6 +149,7 @@ public:
 	@endcode
 	*/
 	void initDoor();
+
 	/**
 	@brief
 	Fonction retournant une porte
@@ -175,7 +162,7 @@ public:
 	@code
 	world.whichDoor(mainPlayer);
 	@endcode
-	 */
+	*/
 	Door whichDoor(player mainPlayer);
 
 	/** 
@@ -192,6 +179,20 @@ public:
 	@endCode
 	*/
 	void door();
+
+	/** 
+	@brief
+	Permet de téléporter le joueur
+
+	@param mainPlayer, terrain, x, y
+	@return none
+
+	Exemple Visual
+	@code
+	world.teleport(mainPlayer, terrain, x, y);
+	@endCode
+	*/
+	void teleport(player & mainPlayer, string terrain, unsigned int x, unsigned int y);
 
 private:
 	/**
@@ -224,20 +225,6 @@ private:
 
 	/**
 	@brief
-	Initialise le personnage joueur
-	@param player mainPlayer
-	@return none
-
-	Exemple Code Block / Visual
-	@code
-	initPlayer(mainPlayer);
-	@endcode	
-	*/
-	//void initPlayer(player & mainPlayer); // Remplira toutes les caract�ristiques du joueurs
-									   // Position && Nom ...
-
-	/**
-	@brief
 	Verifie si le Joueur est dans les hautes herbes
 	True si la position est dans un caract�re 'H'
 	false sinon
@@ -261,10 +248,24 @@ private:
 
 	Exemple Code Block / Visual
 	@code
-	launchBattle(mainPlayer, poke);
+	launchBattle(mainPlayer, poke, true);
 	@endcode
 	*/
-	void launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemon);
+	void launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgainstPokemon);
+
+	/**
+	@brief
+	Affiche la vie des deux adversaires
+
+	@param mainPlayer, playerPoke, opponentPoke, isAgainsPokemon
+	@return none
+
+	Exemple Code Block / Visual
+	@code
+	displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
+	@endcode
+	*/
+	void displayOpponentsLife(const player mainPlayer, const pokemon playerPoke, const pokemon opponentPoke, const bool isAgainstPokemon) const;
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
 	/**
@@ -295,21 +296,6 @@ private:
 	@endcode
 	*/
 	void debugWarning() const;
-
-	/**
-	@brief
-	Affiche la vie des deux adversaires
-
-	@param mainPlayer, poke, isAgainsPokemon
-	@return none
-
-	Exemple Code Block / Visual
-	@code
-	displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
-	@endcode
-	*/
-	void displayOpponentsLife(const player mainPlayer, const pokemon poke, const bool isAgainstPokemon) const;
-
 };
 
 #endif

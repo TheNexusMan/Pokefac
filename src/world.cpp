@@ -3,11 +3,7 @@
 
 world::world()
 {
-	initPokeTab(); //Initialisation du tableau Pok�mon
-	initNPCTab(); // Initialisation du tableau NPC
-	mainTerrain.initTerrain(1, "terrain1");
-	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
-	initDoor();
+	initGame();
 }
 
 void world::initDoor()
@@ -20,7 +16,6 @@ void world::initDoor()
 		{
 			for(unsigned int i = 0; i < NB_DOOR; i++)
 			{
-				file >> doors[i].id;
 				file >> doors[i].posX;
 				file >> doors[i].posY;
 				file >> doors[i].destPosX;
@@ -31,9 +26,7 @@ void world::initDoor()
 		}
 		file.close();
 	}
-	else cout << "Erreur dans l'ouverture du fichier" << endl;
-
-	
+	else cout << "Erreur dans l'ouverture du fichier" << endl;	
 }
 
 void world::initPokeTab()
@@ -63,7 +56,6 @@ void world::initPokeTab()
 				}
 			}
 		}
-
 		file.close();
 	}
 	else {
@@ -127,11 +119,13 @@ void world::debugWarning() const
 	cout << endl << endl;
 }
 
-void world::initGame(NPC npc)
+void world::initGame()
 {
-	//Placer toutes les inits ici
-	
-
+	initPokeTab(); //Initialisation du tableau Pok�mon
+	initNPCTab(); // Initialisation du tableau NPC
+	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
+	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
+	initDoor(); // initialisation des portes
 }
 
 int world::randomNumber()
@@ -169,30 +163,31 @@ bool world::isInHerb(const int x, const int y) const
 	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
-void world::launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemon)
+void world::launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgainstPokemon)
 {
 	srand(time(NULL));
+	pokemon & playerPoke = mainPlayer.firstPokemonAlive();
 	char attack;
 	int trainerAttack;
 
 	termClear();
 
-	if(isAgainstPokemon) cout << "A wild " << poke.name << " appears!" << endl;
+	if(isAgainstPokemon) cout << "A wild " << opponentPoke.name << " appears!" << endl;
 
 	getchar();
 
-	while(mainPlayer.getPokemon(0).health > 0 && poke.health > 0)
+	while(playerPoke.health > 0 && opponentPoke.health > 0)
 	{
 		do{
 			termClear();
 
-			displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
+			displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
 
 			cout << "Choose your attack :" << endl;
 
 			for(unsigned int i = 0; i < 4; i++)
 			{
-				cout << i+1 << "-" << mainPlayer.getPokemon(0).attackChoice[i].name << " " << mainPlayer.getPokemon(0).attackChoice[i].damagePoints << endl;
+				cout << i+1 << "-" << playerPoke.attackChoice[i].name << " " << playerPoke.attackChoice[i].damagePoints << endl;
 			}
 
 			if(isAgainstPokemon) cout << "5-Escape" << endl;
@@ -203,14 +198,14 @@ void world::launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemo
 
         }while((attack - '0') < 1 || (attack - '0') > 4);
 
-		poke.receiveAttack(poke, mainPlayer.getPokemon(0).attackChoice[attack - '0' - 1]);
+		opponentPoke.receiveAttack(playerPoke.attackChoice[attack - '0' - 1]);
 
 		termClear();
 
-		displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
-		cout << mainPlayer.getPokemon(0).name << " attacks with: " << mainPlayer.getPokemon(0).attackChoice[attack - '0' - 1].name << " " << mainPlayer.getPokemon(0).attackChoice[attack - '0' - 1].damagePoints << endl;
+		displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
+		cout << playerPoke.name << " attacks with: " << playerPoke.attackChoice[attack - '0' - 1].name << " " << playerPoke.attackChoice[attack - '0' - 1].damagePoints << endl;
 
-		if(mainPlayer.getPokemon(0).health > 0 && poke.health > 0)
+		if(playerPoke.health > 0 && opponentPoke.health > 0)
 		{
 			isAgainstPokemon ? cout << "The wild Pokemon attacks you!" << endl : cout << "The Trainer attacks you!" << endl;
 
@@ -218,27 +213,27 @@ void world::launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemo
 			termClear();
 
 			trainerAttack = rand() % 3;
-			mainPlayer.getPokemon(0).receiveAttack(mainPlayer.getPokemon(0), poke.attackChoice[trainerAttack]);
+			playerPoke.receiveAttack(opponentPoke.attackChoice[trainerAttack]);
 			
-			displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
-			cout << poke.name << " attacks with: " << poke.attackChoice[trainerAttack].name << " " << poke.attackChoice[trainerAttack].damagePoints << endl;
+			displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
+			cout << opponentPoke.name << " attacks with: " << opponentPoke.attackChoice[trainerAttack].name << " " << opponentPoke.attackChoice[trainerAttack].damagePoints << endl;
 
 			getchar();
 		}
 	}
 
 	termClear();
-	displayOpponentsLife(mainPlayer, poke, isAgainstPokemon);
+	displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
 
-	if(mainPlayer.getPokemon(0).health != 0 && isAgainstPokemon && mainPlayer.getPokeball() > 0 && mainPlayer.hasFreePokeLocation() && !mainPlayer.hasThisPokemon(poke))
+	if(playerPoke.health != 0 && isAgainstPokemon && mainPlayer.getPokeball() > 0 && mainPlayer.hasFreePokeLocation() && !mainPlayer.hasThisPokemon(opponentPoke))
 	{
-		mainPlayer.addPokemon(poke);
+		mainPlayer.addPokemon(opponentPoke);
 		cout << "You've captured:" << endl;
 		mainPlayer.tabPokemon[mainPlayer.nbPokemon-1].displayInfos();
 
 		getchar();
 
-	}else if(mainPlayer.getPokemon(0).health != 0 && !isAgainstPokemon)
+	}else if(playerPoke.health != 0 && !isAgainstPokemon)
 	{
 		cout << "You win the fight!" << endl;
 		mainPlayer.addMoney(100);
@@ -246,31 +241,36 @@ void world::launchBattle(player & mainPlayer, pokemon poke, bool isAgainstPokemo
 
 		getchar();
 	}
-	else if(mainPlayer.getPokemon(0).health == 0){
+	else if(playerPoke.health == 0){
 		cout << "You loose" << endl;
-		mainPlayer.replaceDeadPokemon();
 
 		getchar();
-		//teleport
+
+		if(mainPlayer.allPokemonsAreDead())
+		{
+			mainPlayer.treatAllPokemon();
+			teleport(mainPlayer, "house1", 8, 9);
+		}
 	}else{
 		cout << "You win but ";
 		if(!mainPlayer.hasFreePokeLocation()) cout << "you can't carry another Pokémon with you." << endl;
-		if(mainPlayer.hasThisPokemon(poke)) cout << "you already have this Pokémon" << endl;
+		if(mainPlayer.hasThisPokemon(opponentPoke)) cout << "you already have this Pokémon" << endl;
 		if(mainPlayer.getPokeball()== 0) cout << "you don't have Pokéball to capture this Pokémon" << endl;
 
 		getchar();
 	}
 }
 
-void world::displayOpponentsLife(const player mainPlayer, const pokemon poke, const bool isAgainstPokemon) const
+void world::displayOpponentsLife(const player mainPlayer, const pokemon playerPoke, const pokemon opponentPoke, const bool isAgainstPokemon) const
 {
-	cout << "Your Pokémon: " << mainPlayer.getPokemon(0).name << " ";
-	mainPlayer.getPokemon(0).displayHealth();
+	cout << "Your Pokémon: " << playerPoke.name << " ";
+	playerPoke.displayHealth();
 	cout << endl;
 	isAgainstPokemon ? cout << "Wild pokémon: " : cout << "Opponent Pokémon: ";
-	cout << poke.name << " ";
-	poke.displayHealth();
-	cout << endl << "---------------------------------" << endl << endl;
+	cout << opponentPoke.name << " ";
+	opponentPoke.displayHealth();
+	cout << endl;
+	cout << "---------------------------------" << endl << endl;
 }
 
 bool world::moveIsAllowed(player mainPlayer, const int x, const int y) const
@@ -343,13 +343,12 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 	}
 }
 
-
 void world::door()
 {
 	if(mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == 'O')
 	{
 	Door actualDoor = whichDoor(mainPlayer);
-	teleport(mainPlayer, actualDoor.id, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
+	teleport(mainPlayer, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
 	}
 }
 
@@ -366,16 +365,14 @@ Door world::whichDoor(player mainPlayer)
 	return returnedDoor;
 }
 
-void world::teleport(player & mainPlayer,unsigned int id, string terrain, unsigned int x, unsigned int y)
+void world::teleport(player & mainPlayer, string terrain, unsigned int x, unsigned int y)
 {
 	if(terrain == mainTerrain.terrainName)
 	{
 		mainPlayer.setNewPos(x,y);
 	}else
 	{	
-		mainTerrain.initTerrain(id, terrain);
+		mainTerrain.initTerrain(terrain);
 		mainPlayer.setNewPos(x,y);
-
 	}
-
 }
