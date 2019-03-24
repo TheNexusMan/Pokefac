@@ -4,9 +4,11 @@ terrain::terrain(){
 	
 }
 
-void terrain::initTerrain(int idTerrain)
+void terrain::initTerrain(int idTerrain, string nameTerrain)
 {
-	ifstream fichier ("./data/terrain1.txt");
+	string path = "./data/" + nameTerrain + ".txt";
+	ifstream fichier (path);
+	terrainName = nameTerrain;
 
 	if(fichier.is_open())
 	{

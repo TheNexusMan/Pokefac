@@ -30,6 +30,18 @@ using namespace std;
 
 const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 2;
+const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
+
+	struct Door
+	{
+		unsigned int id;
+		unsigned int posX;
+		unsigned int posY;
+		unsigned int destPosX;
+		unsigned int destPosY;
+		string terrainNamePos;
+		string terrainNameDest;
+	};
 
 class world{
 public:
@@ -37,6 +49,12 @@ public:
 	NPC NPCTab[NB_NPC];
 	player mainPlayer;
 	pokemon pokeTab[NBPOKEMON];
+	Door doors[NB_DOOR];
+
+
+
+
+
 
 	/**
 	@brief
@@ -52,6 +70,11 @@ public:
 	*/
 	world();
 	
+
+
+	void teleport(player & mainPlayer, unsigned int id, string terrain, unsigned int x, unsigned int y);
+
+
 	/**
 	@brief
 	Retourne un nombre al�atoire entre 0 et 100
@@ -125,6 +148,50 @@ public:
 	@endcode
 	*/
 	void initGame(NPC npc);
+
+
+	/**
+	@brief
+	Initialise toutes les portes via un fichier .txt
+
+	@param none
+	@return none
+
+	Exemple Visual
+	@code
+	world.initDoor();
+	@endcode
+	*/
+	void initDoor();
+	/**
+	@brief
+	Fonction retournant une porte
+	Permet de tester sur quelle porte se situe le joueur et de le téléporter ensuite
+
+	@param mainPlayer
+	@return returnedDoor
+
+	Exemple Visual
+	@code
+	world.whichDoor(mainPlayer);
+	@endcode
+	 */
+	Door whichDoor(player mainPlayer);
+
+	/** 
+	@brief
+	Procedure faisant appel à la fonction whichDoor
+	permet de téléporter le joueur dans un nouveau terrain
+
+	@param none
+	@return none
+
+	Exemple Visual
+	@code
+	world.door();
+	@endCode
+	*/
+	void door();
 
 private:
 	/**
