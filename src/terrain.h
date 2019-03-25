@@ -1,3 +1,12 @@
+/**
+@brief Class terrain, contient les fonctions et données relatives aux terrains
+
+@author pokeFac team
+@file terrain.h
+@version 1.0
+@date 19/03/2019
+
+*/
 #ifndef _TERRAIN_H
 #define _TERRAIN_H
 

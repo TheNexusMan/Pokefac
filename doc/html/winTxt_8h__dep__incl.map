@@ -1,0 +1,8 @@
+<map id="src/winTxt.h" name="src/winTxt.h">
+<area shape="rect" id="node2" href="$loopTxT_8cpp.html" title="src/loopTxT.cpp" alt="" coords="5,155,121,181"/>
+<area shape="rect" id="node3" href="$world_8h.html" title="Class World, gère tout le jeu et mets les autres class en relations. " alt="" coords="207,80,293,107"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="255,229,352,256"/>
+<area shape="rect" id="node7" href="$winTxt_8cpp.html" title="src/winTxt.cpp" alt="" coords="448,80,556,107"/>
+<area shape="rect" id="node4" href="$loopTxT_8h.html" title="src/loopTxT.h" alt="" coords="145,155,248,181"/>
+<area shape="rect" id="node6" href="$world_8cpp.html" title="src/world.cpp" alt="" coords="272,155,372,181"/>
+</map>

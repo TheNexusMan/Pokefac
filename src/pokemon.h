@@ -1,3 +1,12 @@
+/**
+@brief Class pokemon, contient les fonctions et données relatives aux pokémons
+
+@author pokeFac team
+@file pokemon.h
+@version 1.0
+@date 19/03/2019
+
+*/
 #ifndef _POKEMON_H
 #define _POKEMON_H
 
