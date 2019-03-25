@@ -17,6 +17,8 @@
 #include <cassert>
 //#include <SDL.h>
 //#include <SDL_image.h>
+#include <sys/stat.h>
+
 #include "pokemon.h"
 #include "NPC.h"
 #include "player.h"
@@ -50,7 +52,38 @@ public:
 	player mainPlayer;
 	pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
+	string gameSaveName;
 	bool menuOn;
+
+	/**
+	@brief
+	Permet de sauvegarder la partie pour la reprendre ultérieurement
+	Crée un dossier "saveGame" si inexistant
+
+	@param string saveName
+	@return none
+
+	Exemple Visual
+	@code
+	saveGame("save1");
+	@endcode
+	 */
+	void saveGame(string saveName);
+
+	/**
+	@brief
+	Permet de charger une partie sauvegardée sur le disque dur (via un .txt)
+	Charge les sauvegardes  dans "saveGame"
+
+	@param string saveName
+	@return none
+
+	Exemple Visual
+	@code
+	loadGame("save1");
+	@endcode
+	*/
+	void loadGame(string saveName);
 
 	/**
 	@brief

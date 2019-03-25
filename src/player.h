@@ -17,7 +17,7 @@ class player : public character
 {
 private:
 
-	unsigned int money;
+	unsigned int money = 0;
 //	badge tab[MAXB];
 	unsigned int pokeball;
 //	dynamicClassTab object[];

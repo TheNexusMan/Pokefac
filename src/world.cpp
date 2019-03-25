@@ -7,6 +7,62 @@ world::world()
 	menuOn = false;
 }
 
+
+
+void world::saveGame(string saveName)
+{
+	string finalPath = "./saveGames/";
+	string name = finalPath + saveName + ".txt";
+	mkdir(finalPath.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	ofstream file;
+	file.open(name);
+	file << saveName << "\n";
+	file << mainPlayer.getPosX() << "\n";
+	file << mainPlayer.getPosY() << "\n";
+	file << mainPlayer.getMoney() << "\n";
+	file << mainTerrain.terrainName << "\n";
+	for(unsigned int i = 0; i < NBPOKEMON; i++)
+	{
+		file << mainPlayer.getPokemon(i).id << "\n";
+		file << mainPlayer.getPokemon(i).health  << "\n"; 
+		//Rajouter la save de l'expérience et du niveau quand implémenté
+	}
+	file.close();
+			
+}
+
+void world::loadGame(string saveName)
+{
+	string name = "./saveGames/" + saveName + ".txt";
+	ifstream file(name);
+	unsigned int posX, posY, cash;
+	string nameTerrain;
+	if(file.is_open())
+	{
+		while(!file.eof())
+		{
+			file >> gameSaveName;
+			file >> posX;
+			file >> posY;
+			file >> cash;
+			file >> nameTerrain;
+			for(unsigned int i = 0; i < NBPOKEMON; i++)
+			{
+				file >> mainPlayer.getPokemon(i).id;
+				file >> mainPlayer.getPokemon(i).health;
+				//Rajouter le chargement de l'expérience et du niveau quand implémenté
+
+			}		
+		}
+		file.close();
+	} else cout << "Erreur dans l'ouverture du fichier" << endl;
+
+	mainTerrain.initTerrain(nameTerrain);
+	mainPlayer.setNewPos(posX, posY);
+	mainPlayer.addMoney(cash);
+}
+
+
 void world::initDoor()
 {
 	ifstream file("./data/doors.txt");
@@ -394,7 +450,8 @@ void world::menu(bool & gameOn)
 
 		cout << "1- Pokémons" << endl;
 		cout << "2- Sauvegarde" << endl;
-		cout << "3- Quitter le jeu" << endl;
+		cout << "3- Charger" << endl;
+		cout << "4- Quitter le jeu" << endl;
 		cout << endl;
 		cout << "m- Fermer menu" << endl;
 
@@ -407,9 +464,16 @@ void world::menu(bool & gameOn)
 				break;
 
 			case '2':
+				saveGame("saveData");
+				menuOn=false;
 				break;
 
 			case '3':
+				loadGame("saveData");
+				menuOn=false;
+				break;
+
+			case '4':
 				gameOn = false;
 				menuOn = false;
 				break;

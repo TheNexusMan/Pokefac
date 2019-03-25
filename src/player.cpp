@@ -35,7 +35,7 @@ unsigned int player::getMoney()
 
 void player::addMoney(unsigned int adding)
 {
-	money = money + adding;
+	money += adding;
 }
 
 void player::initPlayer(const pokemon poke)

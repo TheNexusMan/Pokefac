@@ -33,3 +33,6 @@ obj/winTxt.o: src/winTxt.cpp src/winTxt.h
 clean:
 	rm -f obj/*.o
 	rm -f bin/*
+
+veryclean: clean
+	rm -r saveGames
