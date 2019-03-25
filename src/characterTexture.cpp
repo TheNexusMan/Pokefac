@@ -1,17 +1,17 @@
-#include "characterTexture.h"
+#include "CharacterTexture.h"
 
 
-characterTexture::characterTexture()
+CharacterTexture::CharacterTexture()
 {
 	loadImage();
 }
 
 
-characterTexture::~characterTexture()
+CharacterTexture::~CharacterTexture()
 {
 }
 
-void characterTexture::loadImage()
+void CharacterTexture::loadImage()
 {
 	leftSide = IMG_Load("Emplacement à définir");
 	rightSide = IMG_Load("Emplacement à définir");

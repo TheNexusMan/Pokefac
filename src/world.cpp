@@ -54,12 +54,11 @@ void world::loadGame(string saveName)
 
 			}		
 		}
+		mainTerrain.initTerrain(nameTerrain);
+		mainPlayer.setNewPos(posX, posY);
+		mainPlayer.addMoney(cash);
 		file.close();
 	} else cout << "Erreur dans l'ouverture du fichier" << endl;
-
-	mainTerrain.initTerrain(nameTerrain);
-	mainPlayer.setNewPos(posX, posY);
-	mainPlayer.addMoney(cash);
 }
 
 
@@ -201,7 +200,7 @@ int world::randomNumber()
 	return random;
 }
 
-void world::randomCombat(player & mainPlayer)
+void world::randomCombat(Player & mainPlayer)
 {
 	unsigned int random = randomNumber();
 	if ((isInHerb(mainPlayer.getPosX(), mainPlayer.getPosY()) && (random % 5 == 0)))
@@ -225,10 +224,10 @@ bool world::isInHerb(const int x, const int y) const
 	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
-void world::launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgainstPokemon)
+void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon)
 {
 	srand(time(NULL));
-	pokemon & playerPoke = mainPlayer.firstPokemonAlive();
+	Pokemon & playerPoke = mainPlayer.firstPokemonAlive();
 	char attack;
 	unsigned int trainerAttack;
 	unsigned int numPlayerAttack;
@@ -326,7 +325,7 @@ void world::launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgain
 	}
 }
 
-void world::displayOpponentsLife(const player mainPlayer, const pokemon playerPoke, const pokemon opponentPoke, const bool isAgainstPokemon) const
+void world::displayOpponentsLife(const Player mainPlayer, const Pokemon playerPoke, const Pokemon opponentPoke, const bool isAgainstPokemon) const
 {
 	cout << "Joueur : " << playerPoke.name << " ";
 	playerPoke.displayHealth();
@@ -337,12 +336,12 @@ void world::displayOpponentsLife(const player mainPlayer, const pokemon playerPo
 	cout << "---------------------------------" << endl << endl;
 }
 
-bool world::moveIsAllowed(player mainPlayer, const int x, const int y) const
+bool world::moveIsAllowed(Player mainPlayer, const int x, const int y) const
 {
 	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N'));
 }
 
-void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
+void world::isInLine(NPC npc, Player mainPlayer, const int x, const int y) const
 {
 	int npcPosX = npc.getPosX();
 	int npcPosY = npc.getPosY();
@@ -416,7 +415,7 @@ void world::door()
 	}
 }
 
-Door world::whichDoor(player mainPlayer)
+Door world::whichDoor(Player mainPlayer)
 {
 	Door returnedDoor;
 	for(unsigned int i = 0; i < NB_DOOR; i++)
@@ -429,7 +428,7 @@ Door world::whichDoor(player mainPlayer)
 	return returnedDoor;
 }
 
-void world::teleport(player & mainPlayer, string terrain, unsigned int x, unsigned int y)
+void world::teleport(Player & mainPlayer, string terrain, unsigned int x, unsigned int y)
 {
 	if(terrain == mainTerrain.terrainName)
 	{

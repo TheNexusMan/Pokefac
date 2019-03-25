@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['addmoney',['addMoney',['../classplayer.html#a4231cba29f78cf562dbef452ea15f8c8',1,'player']]],
-  ['addpokemon',['addPokemon',['../classplayer.html#a1b78518b34e3ef6ca24321e087d02876',1,'player']]],
-  ['allpokemonsaredead',['allPokemonsAreDead',['../classplayer.html#ae4935e61c8e6caeee2a9499ea235e51b',1,'player']]]
+  ['addmoney',['addMoney',['../classPlayer.html#a0443a8d40e3f590628cddd6a99dfa3dd',1,'Player']]],
+  ['addpokemon',['addPokemon',['../classPlayer.html#a11276400a65cbc87a2619098bcf1ee75',1,'Player']]],
+  ['allpokemonsaredead',['allPokemonsAreDead',['../classPlayer.html#af94e98b8d77786c9a90785affe59ca5c',1,'Player']]]
 ];

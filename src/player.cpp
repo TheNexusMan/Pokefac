@@ -1,44 +1,44 @@
 #include "player.h"
 
-void player::moveUp()
+void Player::moveUp()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
 	setNewPos(x-1, y);
 }
 
-void player::moveDown()
+void Player::moveDown()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
 	setNewPos(x + 1, y);
 }
 
-void player::moveLeft()
+void Player::moveLeft()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
 	setNewPos(x, y-1);
 }
 
-void player::moveRight()
+void Player::moveRight()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
 	setNewPos(x, y+ 1);
 }
 
-unsigned int player::getMoney()
+unsigned int Player::getMoney()
 {
 	return money;
 }
 
-void player::addMoney(unsigned int adding)
+void Player::addMoney(unsigned int adding)
 {
 	money += adding;
 }
 
-void player::initPlayer(const pokemon poke)
+void Player::initPlayer(const Pokemon poke)
 {	
 	setPosX(1);
 	setPosY(2); //Place le joueur aux coordonnées (1,2)
@@ -48,17 +48,17 @@ void player::initPlayer(const pokemon poke)
 	nbPokemon = 1;
 }
 
-void player::setPokeball(int nb)
+void Player::setPokeball(int nb)
 {
 	pokeball += nb;
 }
 
-unsigned int player::getPokeball()
+unsigned int Player::getPokeball()
 {
 	return pokeball;
 }
 
-void player::addPokemon(const pokemon & poke)
+void Player::addPokemon(const Pokemon & poke)
 {
 	if(hasFreePokeLocation() && !hasThisPokemon(poke))
 	{
@@ -67,17 +67,17 @@ void player::addPokemon(const pokemon & poke)
 	}
 }
 
-pokemon& player::getPokemon(unsigned int id)
+Pokemon& Player::getPokemon(unsigned int id)
 {
 	return tabPokemon[id];
 }
 
-pokemon player::getPokemon(unsigned int id) const
+Pokemon Player::getPokemon(unsigned int id) const
 {
 	return tabPokemon[id];
 }
 
-bool player::hasThisPokemon(const pokemon & poke)
+bool Player::hasThisPokemon(const Pokemon & poke)
 {
 	for(unsigned int i = 0; i < nbPokemon; i++)
 	{
@@ -86,7 +86,7 @@ bool player::hasThisPokemon(const pokemon & poke)
 	return false;
 }
 
-pokemon& player::firstPokemonAlive()
+Pokemon& Player::firstPokemonAlive()
 {
 	unsigned int idPokeAlive = 0;
 	while(tabPokemon[idPokeAlive].health <= 0)
@@ -97,7 +97,7 @@ pokemon& player::firstPokemonAlive()
 	return tabPokemon[idPokeAlive];
 }
 
-void player::treatAllPokemon()
+void Player::treatAllPokemon()
 {
 	for(unsigned int i = 0; i < nbPokemon; i++)
 	{
@@ -105,7 +105,7 @@ void player::treatAllPokemon()
 	}
 }
 
-bool player::allPokemonsAreDead()
+bool Player::allPokemonsAreDead()
 {
 	for(unsigned int i = 0; i < nbPokemon; i++)
 	{
@@ -114,15 +114,15 @@ bool player::allPokemonsAreDead()
 	return true;
 }
 
-void player::changePlacePoke(unsigned int id1, unsigned int id2)
+void Player::changePlacePoke(unsigned int id1, unsigned int id2)
 {
-	pokemon tempPoke = tabPokemon[id1];
+	Pokemon tempPoke = tabPokemon[id1];
 
 	tabPokemon[id1] = tabPokemon[id2];
 	tabPokemon[id2] = tempPoke;
 }
 
-bool player::hasFreePokeLocation()
+bool Player::hasFreePokeLocation()
 {
 	return nbPokemon < NBPLAYERPOKE;
 }

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tabpokemon',['tabPokemon',['../classplayer.html#abe665f1f85e74a990464ef143d5228eb',1,'player']]],
+  ['tabpokemon',['tabPokemon',['../classPlayer.html#a92e50ef4f0d54070243195733ec0587e',1,'Player']]],
   ['termclear',['termClear',['../winTxt_8cpp.html#abfddca010a6ceb2c5292c98247a434ce',1,'termClear():&#160;winTxt.cpp'],['../winTxt_8h.html#abfddca010a6ceb2c5292c98247a434ce',1,'termClear():&#160;winTxt.cpp']]],
   ['terminit',['termInit',['../winTxt_8cpp.html#a67191e6d920e10b82b0868cb240228ae',1,'winTxt.cpp']]],
   ['termmove',['termMove',['../winTxt_8cpp.html#a0038303af38e1a50f24e3d4e33a4635b',1,'winTxt.cpp']]],
@@ -11,7 +11,7 @@ var searchData=
   ['terrainnamedest',['terrainNameDest',['../structDoor.html#aaf5239b260198079d607299b94c92bea',1,'Door']]],
   ['terrainnamepos',['terrainNamePos',['../structDoor.html#a48c83636447113b6165f12b610427c17',1,'Door']]],
   ['terraintab',['terrainTab',['../classterrain.html#a71bf11de33a79b35eea094143237b98b',1,'terrain']]],
-  ['treatallpokemon',['treatAllPokemon',['../classplayer.html#ac5e9849f427a0f11855c7da8393cc86b',1,'player']]],
+  ['treatallpokemon',['treatAllPokemon',['../classPlayer.html#a2784e44ddcdc6dfd988aaa8ab9707d7c',1,'Player']]],
   ['txtloop',['txtLoop',['../loopTxT_8cpp.html#a44b92ab427315a802f0e9d02910db68b',1,'txtLoop(world &amp;world):&#160;loopTxT.cpp'],['../loopTxT_8h.html#a44b92ab427315a802f0e9d02910db68b',1,'txtLoop(world &amp;world):&#160;loopTxT.cpp']]],
-  ['type',['type',['../classpokemon.html#a55846f49b17b788269104c5d540c364c',1,'pokemon']]]
+  ['type',['type',['../classPokemon.html#a7dd846fb563c539adde1e3d065f746c9',1,'Pokemon']]]
 ];

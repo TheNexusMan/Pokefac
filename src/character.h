@@ -1,5 +1,5 @@
 /**
-@brief Class character, contient les fonctions et données relatives aux character
+@brief Class Character, contient les fonctions et données relatives aux character
 
 @author pokeFac team
 @file character.h
@@ -12,19 +12,19 @@
 
 #include <iostream>
 #include <string>
-//#include "characterTexture.h"
+//#include "CharacterTexture.h"
 
 using namespace std;
 
-class character
+class Character
 {
 public:
-	character();
-	~character();
+	Character();
+	~Character();
 
 	string name;
 	
-	//characterTexture texture;
+	//CharacterTexture texture;
 
 	/**
 	@brief 

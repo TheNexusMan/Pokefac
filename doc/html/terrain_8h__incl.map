@@ -1,5 +1,5 @@
 <map id="src/terrain.h" name="src/terrain.h">
-<area shape="rect" id="node6" href="$player_8h.html" title="Class player, contient les fonctions et données relatives aux joueur, hérite de la classe character..." alt="" coords="137,80,205,107"/>
-<area shape="rect" id="node7" href="$character_8h.html" title="Class character, contient les fonctions et données relatives aux character. " alt="" coords="168,155,255,181"/>
-<area shape="rect" id="node8" href="$pokemon_8h.html" title="Class pokemon, contient les fonctions et données relatives aux pokémons. " alt="" coords="5,155,92,181"/>
+<area shape="rect" id="node6" href="$player_8h.html" title="Class Player, contient les fonctions et données relatives aux joueur, hérite de la classe Character..." alt="" coords="137,80,205,107"/>
+<area shape="rect" id="node7" href="$character_8h.html" title="Class Character, contient les fonctions et données relatives aux character. " alt="" coords="168,155,255,181"/>
+<area shape="rect" id="node8" href="$pokemon_8h.html" title="Class Pokemon, contient les fonctions et données relatives aux pokémons. " alt="" coords="5,155,92,181"/>
 </map>

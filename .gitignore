@@ -7,3 +7,6 @@ obj/*.o
 
 # Ignorer les executables dan bin/
 bin/pokefac
+
+# Ignorer fichier de sauvegarde
+data/saveGames/*

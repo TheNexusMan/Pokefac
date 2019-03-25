@@ -1,8 +1,8 @@
 /**
-@brief Class characterTexture, contient les fonctions et données relatives aux textures des personnages
+@brief Class CharacterTexture, contient les fonctions et données relatives aux textures des personnages
 
 @author pokeFac team
-@file characterTexture.h
+@file CharacterTexture.h
 @version 1.0
 @date 19/03/2019
 
@@ -12,11 +12,11 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-class characterTexture
+class CharacterTexture
 {
 public:
-	characterTexture();
-	~characterTexture();
+	CharacterTexture();
+	~CharacterTexture();
 
 	void loadImage();
 

@@ -1,5 +1,5 @@
 /**
-@brief Class NPC, contient les fonctions et données relatives aux NPC, hérite de la classe character
+@brief Class NPC, contient les fonctions et données relatives aux NPC, hérite de la classe Character
 
 @author pokeFac team
 @file NPC.h
@@ -18,14 +18,14 @@
 using namespace std;
 
 
-class NPC : public character
+class NPC : public Character
 {
 public:
 	unsigned int id;
 	char orientation;
 	unsigned int nbDialog;
 	string dialog[4];
-	pokemon NPCPokemon;
+	Pokemon NPCPokemon;
 	string terrainName;
 
 	/**

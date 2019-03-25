@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['player',['player',['../classplayer.html',1,'']]],
-  ['pokemon',['pokemon',['../classpokemon.html',1,'']]]
+  ['player',['Player',['../classPlayer.html',1,'']]],
+  ['pokemon',['Pokemon',['../classPokemon.html',1,'']]]
 ];

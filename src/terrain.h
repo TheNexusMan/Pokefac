@@ -63,7 +63,7 @@ public:
 	@code
 	terrain.displayTerrain(mainPlayer);
 	@endcode */
-	void displayTerrain(player mainPlayer);
+	void displayTerrain(Player mainPlayer);
 };
 
 #endif

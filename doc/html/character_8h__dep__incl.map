@@ -1,7 +1,7 @@
 <map id="src/character.h" name="src/character.h">
 <area shape="rect" id="node2" href="$character_8cpp.html" title="src/character.cpp" alt="" coords="5,80,128,107"/>
-<area shape="rect" id="node3" href="$NPC_8h.html" title="Class NPC, contient les fonctions et données relatives aux NPC, hérite de la classe character..." alt="" coords="153,80,237,107"/>
-<area shape="rect" id="node10" href="$player_8h.html" title="Class player, contient les fonctions et données relatives aux joueur, hérite de la classe character..." alt="" coords="291,80,381,107"/>
+<area shape="rect" id="node3" href="$NPC_8h.html" title="Class NPC, contient les fonctions et données relatives aux NPC, hérite de la classe Character..." alt="" coords="153,80,237,107"/>
+<area shape="rect" id="node10" href="$player_8h.html" title="Class Player, contient les fonctions et données relatives aux joueur, hérite de la classe Character..." alt="" coords="291,80,381,107"/>
 <area shape="rect" id="node4" href="$world_8h.html" title="Class World, gère tout le jeu et mets les autres class en relations. " alt="" coords="219,229,306,256"/>
 <area shape="rect" id="node9" href="$NPC_8cpp.html" title="src/NPC.cpp" alt="" coords="145,155,244,181"/>
 <area shape="rect" id="node5" href="$loopTxT_8cpp.html" title="src/loopTxT.cpp" alt="" coords="71,304,187,331"/>

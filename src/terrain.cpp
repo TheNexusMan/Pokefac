@@ -34,7 +34,7 @@ void terrain::initTerrain(string nameTerrain)
 	}
 }
 
-void terrain::displayTerrain(player mainPlayer)
+void terrain::displayTerrain(Player mainPlayer)
 {
 	for(unsigned int i = 0; i < SIZETERRAIN; i++)
 	{
