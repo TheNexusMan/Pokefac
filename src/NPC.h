@@ -1,3 +1,12 @@
+/**
+@brief Class NPC, contient les fonctions et données relatives aux NPC, hérite de la classe character
+
+@author pokeFac team
+@file NPC.h
+@version 1.0
+@date 19/03/2019
+
+*/
 #ifndef _NPC_H
 #define _NPC_H
 
@@ -9,8 +18,7 @@
 using namespace std;
 
 
-class NPC :
-	public character
+class NPC : public character
 {
 public:
 	unsigned int id;

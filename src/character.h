@@ -1,3 +1,12 @@
+/**
+@brief Class character, contient les fonctions et données relatives aux character
+
+@author pokeFac team
+@file character.h
+@version 1.0
+@date 19/03/2019
+
+*/
 #ifndef _CHARACTER_H
 #define _CHARACTER_H
 

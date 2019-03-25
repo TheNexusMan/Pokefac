@@ -1,3 +1,12 @@
+/**
+@brief Class winTxt, gère les fonctions de bases d'affichage dans un terminal
+
+@author pokeFac team
+@file winTxt.h
+@version 1.0
+@date 19/03/2019
+
+*/
 #ifndef WINTXT_H
 #define WINTXT_H
 

@@ -1,3 +1,12 @@
+/**
+@brief Class player, contient les fonctions et données relatives aux joueur, hérite de la classe character
+
+@author pokeFac team
+@file player.h
+@version 1.0
+@date 19/03/2019
+
+*/
 #ifndef PLAYER_H
 #define PLAYER_H 
 

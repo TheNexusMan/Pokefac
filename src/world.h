@@ -1,5 +1,5 @@
 /**
-@brief Class World, g�re tout le jeu et les mets en relations
+@brief Class World, gère tout le jeu et mets les autres class en relations
 
 @author pokeFac team
 @file world.h
