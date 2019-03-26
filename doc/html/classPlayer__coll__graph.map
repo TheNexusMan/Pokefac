@@ -1,0 +1,5 @@
+<map id="player" name="player">
+<area shape="rect" id="node2" href="$classcharacter.html" title="{character\n|+ name\l|+ character()\l+ ~character()\l+ setName()\l+ setNewPos()\l+ setPosX()\l+ setPosY()\l+ getPosX()\l+ getPosY()\l+ setIdleTexture()\l}" alt="" coords="5,175,131,369"/>
+<area shape="rect" id="node3" href="$classpokemon.html" title="{pokemon\n|+ id\l+ level\l+ health\l+ maxHealth\l+ attackStat\l+ defenseStat\l+ isFound\l+ name\l+ type\l|+ receiveAttack()\l+ displayHealth()\l+ displayInfos()\l}" alt="" coords="155,160,277,384"/>
+<area shape="rect" id="node4" href="$structattack.html" title="{attack\n|+ name\l+ damagePoints\l|}" alt="" coords="157,5,275,97"/>
+</map>
