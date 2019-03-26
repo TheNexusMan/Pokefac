@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['hasfreepokelocation',['hasFreePokeLocation',['../classplayer.html#af3979a8091f7822275a9dd34687f2a13',1,'player']]],
-  ['hasthispokemon',['hasThisPokemon',['../classplayer.html#af604ffd38229e620ca055d6a9a24fbe9',1,'player']]],
-  ['health',['health',['../classpokemon.html#af5ea9ab3dc27fd45656229b91e285c96',1,'pokemon']]]
+  ['hasfreepokelocation',['hasFreePokeLocation',['../classPlayer.html#a7051571cfe59f7ec438ea9985419f885',1,'Player']]],
+  ['hasthispokemon',['hasThisPokemon',['../classPlayer.html#a698bcd4916b7b7f4aac1f4757768e4b5',1,'Player']]],
+  ['health',['health',['../classPokemon.html#a0a54b03244c5aa91621e6f025bc58ac7',1,'Pokemon']]]
 ];

@@ -1,5 +1,5 @@
 /**
-@brief Class player, contient les fonctions et données relatives aux joueur, hérite de la classe character
+@brief Class Player, contient les fonctions et données relatives aux joueur, hérite de la classe Character
 
 @author pokeFac team
 @file player.h
@@ -22,7 +22,7 @@ using namespace std;
 const int MAXB = 5;
 const int NBPLAYERPOKE = 6;
 
-class player : public character
+class Player : public Character
 {
 private:
 
@@ -32,7 +32,7 @@ private:
 //	dynamicClassTab object[];
 
 public:
-	pokemon tabPokemon[NBPLAYERPOKE];
+	Pokemon tabPokemon[NBPLAYERPOKE];
 	unsigned int nbPokemon;
 
 	/**
@@ -120,7 +120,7 @@ public:
 	initPlayer();
 	//Definie la position / argent et nb pokeballs
 	@endcode */
-	void initPlayer(const pokemon poke);
+	void initPlayer(const Pokemon poke);
 		
 	/**
 	@brief
@@ -160,7 +160,7 @@ public:
 	@code
 	mainPlayer.addPokemon(poke);
 	@endcode */
-	void addPokemon(const pokemon & poke);
+	void addPokemon(const Pokemon & poke);
 
 	/**
 	@brief 
@@ -173,7 +173,7 @@ public:
 	@code
 	mainPlayer.getPokemon(1);
 	@endcode */
-	pokemon& getPokemon(unsigned int id);
+	Pokemon& getPokemon(unsigned int id);
 
 	/**
 	@brief 
@@ -186,7 +186,7 @@ public:
 	@code
 	mainPlayer.getPokemon(1);
 	@endcode */
-	pokemon getPokemon(unsigned int id) const;
+	Pokemon getPokemon(unsigned int id) const;
 
 	/**
 	@brief 
@@ -199,7 +199,7 @@ public:
 	@code
 	mainPlayer.hasThisPokemon(poke);
 	@endcode */
-	bool hasThisPokemon(const pokemon & poke);
+	bool hasThisPokemon(const Pokemon & poke);
 
 	/**
 	@brief 
@@ -212,7 +212,7 @@ public:
 	@code
 	mainPlayer.firstPokemonAlive();
 	@endcode */
-	pokemon& firstPokemonAlive();
+	Pokemon& firstPokemonAlive();
 
 	/**
 	@brief 

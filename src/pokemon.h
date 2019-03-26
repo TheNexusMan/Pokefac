@@ -1,5 +1,5 @@
 /**
-@brief Class pokemon, contient les fonctions et données relatives aux pokémons
+@brief Class Pokemon, contient les fonctions et données relatives aux pokémons
 
 @author pokeFac team
 @file pokemon.h
@@ -21,7 +21,7 @@ struct attack
 	unsigned int damagePoints;
 };
 
-class pokemon
+class Pokemon
 {
 public:
 

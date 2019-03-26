@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['attackchoice',['attackChoice',['../classpokemon.html#a0cf19636b83bebc770da82c71731fa95',1,'pokemon']]],
-  ['attackstat',['attackStat',['../classpokemon.html#a9b1dc5ddb4e7e75b66d0f03bb1e794fc',1,'pokemon']]]
+  ['attackchoice',['attackChoice',['../classPokemon.html#a9fdd368d1eb9350539539ffe1d6279bc',1,'Pokemon']]],
+  ['attackstat',['attackStat',['../classPokemon.html#af2e8e20519c9426ab6462cb8b9f24350',1,'Pokemon']]]
 ];

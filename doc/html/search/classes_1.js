@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['character',['character',['../classcharacter.html',1,'']]],
-  ['charactertexture',['characterTexture',['../classcharacterTexture.html',1,'']]]
+  ['character',['Character',['../classCharacter.html',1,'']]],
+  ['charactertexture',['CharacterTexture',['../classCharacterTexture.html',1,'']]]
 ];

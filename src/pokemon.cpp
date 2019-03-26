@@ -1,6 +1,6 @@
 #include "pokemon.h"
 
-void pokemon::receiveAttack(attack att)
+void Pokemon::receiveAttack(attack att)
 { 
 
 	if(health > 0 && health >= att.damagePoints)
@@ -10,12 +10,12 @@ void pokemon::receiveAttack(attack att)
 
 }
 
-void pokemon::displayHealth() const
+void Pokemon::displayHealth() const
 {
 	cout << health << "/" << maxHealth << "PV";
 }
 
-void pokemon::displayInfos() const
+void Pokemon::displayInfos() const
 {
 	cout << "Id : #" << id << endl;
 	cout << "Nom : " << name << endl;

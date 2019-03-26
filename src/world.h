@@ -35,16 +35,16 @@ const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 3;
 const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 
-	struct Door
-	{
-		unsigned int id;
-		unsigned int posX;
-		unsigned int posY;
-		unsigned int destPosX;
-		unsigned int destPosY;
-		string terrainNamePos;
-		string terrainNameDest;
-	};
+struct Door
+{
+	unsigned int id;
+	unsigned int posX;
+	unsigned int posY;
+	unsigned int destPosX;
+	unsigned int destPosY;
+	string terrainNamePos;
+	string terrainNameDest;
+};
 
 
 
@@ -52,8 +52,8 @@ class world{
 public:
 	terrain mainTerrain;
 	NPC NPCTab[NB_NPC];
-	player mainPlayer;
-	pokemon pokeTab[NBPOKEMON];
+	Player mainPlayer;
+	Pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
 	string gameSaveName;
 	bool menuOn;
@@ -128,7 +128,7 @@ public:
 	randomCombat(mainPlayer);
 	@endcode
 	*/
-	void randomCombat(player & mainPlayer);
+	void randomCombat(Player & mainPlayer);
 
 	/**
 	@brief
@@ -143,7 +143,7 @@ public:
 	moveIsAllowed(10,15);
 	@endcode
 	*/
-	bool moveIsAllowed(player mainPlayer, const int x, const int y) const;
+	bool moveIsAllowed(Player mainPlayer, const int x, const int y) const;
 
 	/**
 	@brief
@@ -157,7 +157,7 @@ public:
 	isInLine(npc,mainPlayer,x,y);
 	@endcode
 	*/
-	void isInLine(NPC npc, player mainPlayer, const int x, const int y) const;
+	void isInLine(NPC npc, Player mainPlayer, const int x, const int y) const;
 	
 	/**
 	@brief
@@ -200,7 +200,7 @@ public:
 	world.whichDoor(mainPlayer);
 	@endcode
 	*/
-	Door whichDoor(player mainPlayer);
+	Door whichDoor(Player mainPlayer);
 
 	/** 
 	@brief
@@ -229,7 +229,7 @@ public:
 	world.teleport(mainPlayer, terrain, x, y);
 	@endCode
 	*/
-	void teleport(player & mainPlayer, string terrain, unsigned int x, unsigned int y);
+	void teleport(Player & mainPlayer, string terrain, unsigned int x, unsigned int y);
 
 	/** 
 	@brief
@@ -330,7 +330,7 @@ private:
 	launchBattle(mainPlayer, opponentPoke, true);
 	@endcode
 	*/
-	void launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgainstPokemon);
+	void launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
 
 	/**
 	@brief
@@ -344,7 +344,7 @@ private:
 	displayOpponentsLife(mainPlayer, playerPoke, opponentPoke, isAgainstPokemon);
 	@endcode
 	*/
-	void displayOpponentsLife(const player mainPlayer, const pokemon playerPoke, const pokemon opponentPoke, const bool isAgainstPokemon) const;
+	void displayOpponentsLife(const Player mainPlayer, const Pokemon PlayerPoke, const Pokemon opponentPoke, const bool isAgainstPokemon) const;
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
 

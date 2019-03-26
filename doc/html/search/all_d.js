@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['setidletexture',['setIdleTexture',['../classcharacter.html#a155493f258f90e5bc50a4d34a631a1dd',1,'character']]],
-  ['setname',['setName',['../classcharacter.html#ac03548a560d07529f055178e6cb48319',1,'character']]],
-  ['setnewpos',['setNewPos',['../classcharacter.html#afe8a54c1e1ebe3c0a8daab357e29a197',1,'character']]],
-  ['setpokeball',['setPokeball',['../classplayer.html#a467c6670c118ef2909834c13bc15b24f',1,'player']]],
-  ['setposx',['setPosX',['../classcharacter.html#a99cbc4291cda0cb0d2eee28f06329dc9',1,'character']]],
-  ['setposy',['setPosY',['../classcharacter.html#a235c8b9f09f45d48d2b27e239bd99db7',1,'character']]],
+  ['savegame',['saveGame',['../classworld.html#a139a20c1e3d55e890d66fc041db6a6c4',1,'world']]],
+  ['setidletexture',['setIdleTexture',['../classCharacter.html#acd49aa8f21f5ad0a0b76e51ecbaf3586',1,'Character']]],
+  ['setname',['setName',['../classCharacter.html#aaf13b514eaba44edc6753b5edad3d61f',1,'Character']]],
+  ['setnewpos',['setNewPos',['../classCharacter.html#a0640976bfc43772cfae0b7db1fac52d0',1,'Character']]],
+  ['setpokeball',['setPokeball',['../classPlayer.html#a329e593ecb9e0538b74eedd87be845b2',1,'Player']]],
+  ['setposx',['setPosX',['../classCharacter.html#a70b79823ec54aa1f26047500e7c34359',1,'Character']]],
+  ['setposy',['setPosY',['../classCharacter.html#a1dfa9c2c1f517edeee987cddd2dfa13d',1,'Character']]],
   ['sizeterrain',['SIZETERRAIN',['../terrain_8h.html#a27fc49e28c353607e6b7eac7a3f44778',1,'terrain.h']]]
 ];
