@@ -273,6 +273,21 @@ public:
 	*/
 	void organisePokemon(bool & pokeMenuOn);
 
+	/**
+	@brief
+	Verifie si le joueur est sur une case de Soin 
+	et soigne ses pokemons
+
+	@param mainPlayer
+	@return none
+
+	code Visual
+	@end
+	world.healAll(mainPlayer);
+	@endcode
+	 */
+	void healAll(Player & mainPlayer);
+
 private:
 	/**
 	@brief
@@ -317,6 +332,24 @@ private:
 	@endcode
 	*/
 	bool isInHerb(const int x, const int y) const;
+	
+
+
+	/**
+	@brief
+	Vérifie si le joueur est sur une case de vie
+	true si la position est des dans un caractere 'V'
+	false sinon
+
+	@param x, y
+	@return (terrain.terrain[x][y] == 'V')
+
+	Exemple Visual
+	@code
+	isOnHeal(2, 4);
+	@endcode
+	 */
+	bool isOnHeal(const int x, const int y) const;
 
 	/**
 	@brief

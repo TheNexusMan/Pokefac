@@ -226,6 +226,21 @@ bool world::isInHerb(const int x, const int y) const
 	return (mainTerrain.terrainTab[x][y] == 'H');
 }
 
+void world::healAll(Player & mainPlayer)
+{
+	if(isOnHeal(mainPlayer.getPosX(), mainPlayer.getPosY()))
+	{
+		mainPlayer.treatAllPokemon();
+		write_to_log_file("Le joueur est sur une case de soin");
+		write_to_log_file("Les pokémons du joueur on été soignés");
+	}
+}
+
+bool world::isOnHeal(const int x, const int y) const
+{
+	return(mainTerrain.terrainTab[x][y] == 'V');
+}
+
 void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon)
 {
 	srand(time(NULL));
