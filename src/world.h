@@ -31,7 +31,8 @@
 
 using namespace std;
 
-const unsigned int NBPOKEMON = 3;
+const unsigned int NBPOKEMON = 10;
+const unsigned int NBPLAYERPOKEMON = 6;
 const unsigned int NB_NPC = 3;
 const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 

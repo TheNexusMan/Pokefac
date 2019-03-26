@@ -35,7 +35,7 @@ void world::saveGame(string saveName)
 	file << mainPlayer.getPosY() << "\n";
 	file << mainPlayer.getMoney() << "\n";
 	file << mainTerrain.terrainName << "\n";
-	for(unsigned int i = 0; i < NBPOKEMON; i++)
+	for(unsigned int i = 0; i < NBPLAYERPOKEMON; i++)
 	{
 		file << mainPlayer.getPokemon(i).id << "\n";
 		file << mainPlayer.getPokemon(i).health  << "\n"; 
@@ -60,7 +60,7 @@ void world::loadGame(string saveName)
 			file >> posY;
 			file >> cash;
 			file >> nameTerrain;
-			for(unsigned int i = 0; i < NBPOKEMON; i++)
+			for(unsigned int i = 0; i < NBPLAYERPOKEMON; i++)
 			{
 				file >> mainPlayer.getPokemon(i).id;
 				file >> mainPlayer.getPokemon(i).health;
@@ -215,7 +215,7 @@ void world::randomCombat(Player & mainPlayer)
 		write_to_log_file("randomNumber() = " + to_string(random) + " Random % 5 == 0");
 	    write_to_log_file("Lancement du combat");
 
-		unsigned int randomPoke = rand() % 3;
+		unsigned int randomPoke = rand() % NBPOKEMON;
 		launchBattle(mainPlayer, pokeTab[randomPoke], true);
 		}
 	}
@@ -489,7 +489,7 @@ void world::displayPokemon()
 	do{
 		termClear();
 
-		for(unsigned int i = 0; i < NBPOKEMON; i++)
+		for(unsigned int i = 0; i < NBPLAYERPOKEMON; i++)
 		{
 			if(i < mainPlayer.nbPokemon)
 			{
@@ -549,7 +549,7 @@ void world::organisePokemon(bool & pokeMenuOn)
 	do{
 		termClear();
 
-		for(unsigned int i = 0; i < NBPOKEMON; i++)
+		for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 		{
 			if(i < mainPlayer.nbPokemon && indice == i && isTaken)
 			{

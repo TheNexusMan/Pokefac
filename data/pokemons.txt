@@ -55,7 +55,8 @@ iCloud 20
 APPLE 5
 
 5
-PsykosQL 
+PsykosQL
+Web
 0
 1
 40
@@ -63,7 +64,7 @@ PsykosQL
 20
 20
 SELECT 10
-FROM	15
+FROM 15
 WHERE 5
 INSERT 6
 
@@ -94,6 +95,7 @@ def 10
 old 15
 import 10
 yield 5
+
 8
 IBMonita
 IBM
