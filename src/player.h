@@ -150,6 +150,19 @@ public:
 	unsigned int getPokeball();
 
 	/**
+	@brief
+	Désincrémente pokeball de 1
+	
+	@param none
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	usePokeball();
+	@endcode */
+	void usePokeball();
+
+	/**
 	@brief 
 	Ajoute le pokemon passé en paramètre
 	

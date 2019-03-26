@@ -244,7 +244,7 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 {
 	srand(time(NULL));
 	Pokemon * playerPoke = &mainPlayer.firstPokemonAlive();
-	bool menuBool;
+	bool menuBool = false;
 	char attack;
 	unsigned int numPlayerAttack;
 	unsigned int trainerAttack;
@@ -280,25 +280,32 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 
 		if(numPlayerAttack == 5)
 		{
+			unsigned int idOldPoke = playerPoke->id;
 			organisePokemon(menuBool);
-			playerPoke = &mainPlayer.firstPokemonAlive();
-			cout << endl << mainPlayer.firstPokemonAlive().name << " est envoyé sur le terrain !" << endl;
-			getchar();
 
-
+			if(idOldPoke != mainPlayer.firstPokemonAlive().id)
+			{
+				playerPoke = &mainPlayer.firstPokemonAlive();
+				termClear();
+				cout << mainPlayer.firstPokemonAlive().name << " est envoyé sur le terrain !" << endl;
+				getchar();
+			}
 		}else{
 			termClear();
 
 			opponentPoke.receiveAttack(playerPoke->attackChoice[numPlayerAttack - 1]);
 			displayOpponentsLife(mainPlayer, *playerPoke, opponentPoke, isAgainstPokemon);
 			cout << playerPoke->name << " attaque avec : " << playerPoke->attackChoice[numPlayerAttack - 1].name << " " << playerPoke->attackChoice[numPlayerAttack - 1].damagePoints << endl;
+			
+			getchar();
 		}
 	
 
 
 		if(opponentPoke.health > 0)
 		{
-			cout << endl;
+			termClear();
+			
 			isAgainstPokemon ? cout << "Le pokémon sauvage" : cout << "Le dresseur";
 			cout << " lance une attaque !" << endl;
 
@@ -316,6 +323,8 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 
 		if(playerPoke->health <= 0 && !mainPlayer.allPokemonsAreDead())
 		{
+			cout << playerPoke->name << " est KO, choisir un autre pokémon" << endl;
+			getchar();
 			organisePokemon(menuBool);
 			playerPoke = &mainPlayer.firstPokemonAlive();
 		}
@@ -329,6 +338,7 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 		mainPlayer.addPokemon(opponentPoke);
 		cout << "Attrapé !:" << endl;
 		mainPlayer.tabPokemon[mainPlayer.nbPokemon-1].displayInfos();
+		mainPlayer.usePokeball();
 
 		getchar();
 
@@ -353,9 +363,9 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 		}
 	}else{
 		cout << "Victoire mais ";
-		if(!mainPlayer.hasFreePokeLocation()) cout << "vous ne pouvez pas transporter de pokémon supplémentaire avec vous." << endl;
 		if(mainPlayer.hasThisPokemon(opponentPoke)) cout << "vous possédez déjà ce pokémon" << endl;
-		if(mainPlayer.getPokeball()== 0) cout << "vous n'avez plus de pokéball pour capturer ce pokémon" << endl;
+		if(!mainPlayer.hasFreePokeLocation() && !mainPlayer.hasThisPokemon(opponentPoke)) cout << "vous ne pouvez pas transporter de pokémon supplémentaire avec vous." << endl;
+		if(mainPlayer.getPokeball() == 0 && !mainPlayer.hasThisPokemon(opponentPoke) && mainPlayer.hasFreePokeLocation()) cout << "vous n'avez plus de pokéball pour capturer ce pokémon" << endl;
 
 		getchar();
 	}
@@ -606,7 +616,9 @@ void world::organisePokemon(bool & pokeMenuOn)
 		cout << "z/s- Monter / descendre" << endl;
 		cout << endl;
 		cout << "r- Retour" << endl;
-		cout << "m- Fermer menu" << endl;
+		if(pokeMenuOn){
+			cout << "m- Fermer menu" << endl;
+		}
 
 		key = getchar();
 

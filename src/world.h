@@ -263,6 +263,9 @@ public:
 	/** 
 	@brief
 	Option d'organisation des pokémon
+	Le paramètre pokeMenuOn permet deux choses : lors de l'utilisation de la fonction hors combat, il ferme
+	en cascade tous les menus si passé à false. Dans un combat, le paramètre est mis à false pour éviter l'affichage
+	de certains choix.
 
 	@param pokeMenuOn
 	@return none
