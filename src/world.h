@@ -18,6 +18,7 @@
 //#include <SDL.h>
 //#include <SDL_image.h>
 #include <sys/stat.h>
+#include <ctime>
 
 #include "pokemon.h"
 #include "NPC.h"
@@ -44,6 +45,8 @@ const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 		string terrainNamePos;
 		string terrainNameDest;
 	};
+
+
 
 class world{
 public:
@@ -344,23 +347,10 @@ private:
 	void displayOpponentsLife(const player mainPlayer, const pokemon playerPoke, const pokemon opponentPoke, const bool isAgainstPokemon) const;
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
-	/**
-	@brief
-	Affiche des '*' pour le DEBUG, donne des informations supl�mentaires
-
-	@param none
-	@return none
-
-	Exemple Code Block / Visual
-	@code
-	displayStars();
-	@endcode
-	*/
-	void displayStars() const;
 
 	/**
 	@brief
-	Pr�vient dans la console que le mode DEBUG est activ�
+	Prévient dans les logs du lancement du programme
 	Affiche des informations supl�mentaires � l'utilisateur
 
 	@param none
@@ -371,7 +361,7 @@ private:
 	debugWarning();
 	@endcode
 	*/
-	void debugWarning() const;
+	void logFilesStart() const;
 };
 
 #endif

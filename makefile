@@ -35,4 +35,5 @@ clean:
 	rm -f bin/*
 
 veryclean: clean
-	rm -r saveGames
+	rm -r data/saveGames
+	rm -r data/logs

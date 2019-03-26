@@ -6,12 +6,26 @@ world::world()
 	initGame();
 	menuOn = false;
 }
+void write_to_log_file(string text) //to_string(valeur);
+{
+	time_t now = time(0);
+	tm *ltm = localtime(&now);
 
+	string finalPath = "./data/logs/";
+	string name = finalPath + "logs.txt";
+	mkdir(finalPath.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH );
+	ofstream file;
+	file.open(name, ofstream::app);
+	file << "[" << 1900 + ltm->tm_year << "/" << 1+ ltm->tm_mon << "/" << ltm->tm_mday << ":" << ltm->tm_hour << ":" << 1 + ltm->tm_min << ":" << 1 + ltm->tm_sec << "] : ";
+	file << text << "\n";
+	file.close();
+
+}
 
 
 void world::saveGame(string saveName)
 {
-	string finalPath = "./saveGames/";
+	string finalPath = "./data/saveGames/";
 	string name = finalPath + saveName + ".txt";
 	mkdir(finalPath.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	ofstream file;
@@ -31,9 +45,9 @@ void world::saveGame(string saveName)
 			
 }
 
-void world::loadGame(string saveName)
+void world::loadGame(string saveName) 
 {
-	string name = "./saveGames/" + saveName + ".txt";
+	string name = "./data/saveGames/" + saveName + ".txt";
 	ifstream file(name);
 	unsigned int posX, posY, cash;
 	string nameTerrain;
@@ -51,11 +65,10 @@ void world::loadGame(string saveName)
 				file >> mainPlayer.getPokemon(i).id;
 				file >> mainPlayer.getPokemon(i).health;
 				//Rajouter le chargement de l'expérience et du niveau quand implémenté
-
 			}		
 		}
 		file.close();
-	} else cout << "Erreur dans l'ouverture du fichier" << endl;
+	} else write_to_log_file("WARNING : Erreur dans l'ouverture du fichier ./data/saveGames/" + saveName + ".txt");
 
 	mainTerrain.initTerrain(nameTerrain);
 	mainPlayer.setNewPos(posX, posY);
@@ -83,7 +96,7 @@ void world::initDoor()
 		}
 		file.close();
 	}
-	else cout << "Erreur dans l'ouverture du fichier" << endl;	
+	else write_to_log_file("WARNING : Erreur dans l'ouverture du fichier ./data/doors.txt");
 }
 
 void world::initPokeTab()
@@ -115,9 +128,7 @@ void world::initPokeTab()
 		}
 		file.close();
 	}
-	else {
-		cout << "Erreur d'ouverture du fichier pokemons" << endl;
-	}
+	else write_to_log_file("WARNING : Erreur dans l'ouvertur du fichier ./data/pokemons.txt");
 }
 
 void world::initNPCTab()
@@ -154,31 +165,22 @@ void world::initNPCTab()
 		}
 		file.close();
 	}
-	else {
-		cout << "Erreur dans l'ouverture du fichier ./data/NPCs.txt" << endl;
-	}
+	else write_to_log_file("WARNING : Erreur dans l'ouverture du fichier ./data/NPCs.txt");
 }
 
-void world::displayStars() const
-{
-	for (int i = 0; i < 50; i++)
-	{
-		cout << "*";
-	}
-	cout << endl;
-}
 
-void world::debugWarning() const
+void world::logFilesStart() const
 {
-	displayStars();
-	cout << "Le programme a ete lance en mode DEBUG" << endl;
-	cout << "Des informations suplementaires seront affichees dans la console" << endl << endl;
-	displayStars();
-	cout << endl << endl;
+	write_to_log_file("****************************************");
+	write_to_log_file("Lancement du programme");
+	write_to_log_file("Des informations suplementaires seront affichees dans le fichier ./data/logs.txt");
+	write_to_log_file("****************************************");
+
 }
 
 void world::initGame()
 {
+	logFilesStart();
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
 	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
@@ -193,30 +195,26 @@ void world::initGame()
 int world::randomNumber()
 {
 	int random = rand() % 100;
-	if (DEBUG)
-	{
-		cout << "Nombre aleatoire genere par randomNumber() => " << random << endl;
-	}
-
+	write_to_log_file("Nombre aleatoire genere par randomNumber() => " + to_string(random));
 	return random;
 }
 
 void world::randomCombat(player & mainPlayer)
-{
-	unsigned int random = randomNumber();
-	if ((isInHerb(mainPlayer.getPosX(), mainPlayer.getPosY()) && (random % 5 == 0)))
-	{
-		if (DEBUG)
-		{
-			displayStars();
-			cout << "Le joueur est dans l'herbe et la condition s'avere juste" << endl;
-			cout << "randomNumber() = " << random << " Random % 5 == 0" << endl;
-			cout << "Lancement du combat" << endl;
-			displayStars();
+{		
 
-		}
+	if ((isInHerb(mainPlayer.getPosX(), mainPlayer.getPosY())))
+	{
+		unsigned int random = randomNumber();
+		if(random % 5 == 0)
+		{
+			
+		write_to_log_file("Le joueur est dans l'herbe et la condition s'avere juste");
+		write_to_log_file("randomNumber() = " + to_string(random) + " Random % 5 == 0");
+	    write_to_log_file("Lancement du combat");
+
 		unsigned int randomPoke = rand() % 3;
 		launchBattle(mainPlayer, pokeTab[randomPoke], true);
+		}
 	}
 }
 
@@ -315,6 +313,7 @@ void world::launchBattle(player & mainPlayer, pokemon opponentPoke, bool isAgain
 		{
 			mainPlayer.treatAllPokemon();
 			teleport(mainPlayer, "house1", 8, 9);
+			write_to_log_file("Tous les pokemons sont mort téléportation du joueurs dans le terrain house1 aux coordonnées (8,9)");
 		}
 	}else{
 		cout << "Victoire mais ";
@@ -352,13 +351,10 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 		// Nord
 	case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
 	{
-		if (DEBUG)
-		{
-			displayStars();
-			cout << "Le joueur est au nord d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
-		}
+
+		write_to_log_file("Le joueur est au nord d'un npc et < 3 cases");
+		write_to_log_file("Le combat se lance");
+
 		//Engage le combat
 		break;
 	}
@@ -366,13 +362,10 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 			//Est
 	case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
 	{
-		if (DEBUG)
-		{
-			displayStars();
-			cout << "Le joueur est a l'est d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
-		}
+
+		write_to_log_file("Le joueur est a l'est d'un npc et < 3 cases");
+		write_to_log_file("Le combat se lance");
+
 		//Engage le combat
 		break;
 	}
@@ -380,13 +373,9 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 			//Sud
 	case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
 	{
-		if (DEBUG)
-		{
-			displayStars();
-			cout << "Le joueur est au sud d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
-		}
+
+		write_to_log_file("Le joueur est au sud d'un npc et < 3 cases");
+		write_to_log_file("Le combat se lance");
 		//Engage le combat
 		break;
 	}
@@ -394,13 +383,10 @@ void world::isInLine(NPC npc, player mainPlayer, const int x, const int y) const
 			// Ouest
 	case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
 	{
-		if (DEBUG)
-		{
-			displayStars();
-			cout << "Le joueur est a l'ouest d'un npc et < 3 cases" << endl;
-			cout << "Le combat se lance" << endl;
-			displayStars();
-		}
+
+		write_to_log_file("Le joueur est a l'ouest d'un npc et < 3 cases");
+		write_to_log_file("Le combat se lance");
+
 		//Engage le combats
 		break;
 	}
@@ -413,6 +399,7 @@ void world::door()
 	{
 	Door actualDoor = whichDoor(mainPlayer);
 	teleport(mainPlayer, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
+	write_to_log_file("Changement de terrain : " + actualDoor.terrainNameDest + " Nouvelle position du joueur : (" + to_string(actualDoor.destPosX) + "," + to_string(actualDoor.destPosY) +")");
 	}
 }
 
@@ -444,7 +431,6 @@ void world::teleport(player & mainPlayer, string terrain, unsigned int x, unsign
 void world::menu(bool & gameOn)
 {
 	int key;
-
 	do{
 		termClear();
 
@@ -465,11 +451,13 @@ void world::menu(bool & gameOn)
 
 			case '2':
 				saveGame("saveData");
+				write_to_log_file("Game Saved to ./data/saveGames/saveData.txt");
 				menuOn=false;
 				break;
 
 			case '3':
 				loadGame("saveData");
+				write_to_log_file("Game loaded from ./data/saveGames/saveData.txt");
 				menuOn=false;
 				break;
 
