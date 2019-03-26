@@ -229,8 +229,8 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 	Pokemon * playerPoke = &mainPlayer.firstPokemonAlive();
 	bool menuBool;
 	char attack;
-	unsigned int trainerAttack;
 	unsigned int numPlayerAttack;
+	unsigned int trainerAttack;
 
 	termClear();
 
@@ -257,28 +257,31 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 			attack = getchar();
 			numPlayerAttack = attack - '0';
 
-			if(isAgainstPokemon && (numPlayerAttack) == 6) return;
+			if(isAgainstPokemon && (numPlayerAttack == 6)) return;
 
-        }while((numPlayerAttack) < 1 || (numPlayerAttack) > 5);
+        }while((numPlayerAttack < 1) || (numPlayerAttack > 5));
 
-		if(attack == 5)
+		if(numPlayerAttack == 5)
 		{
 			organisePokemon(menuBool);
-			Pokemon * playerPoke = &mainPlayer.firstPokemonAlive();
-			cout << mainPlayer.firstPokemonAlive().name << " est envoyé sur le terrain !" << endl;
+			playerPoke = &mainPlayer.firstPokemonAlive();
+			cout << endl << mainPlayer.firstPokemonAlive().name << " est envoyé sur le terrain !" << endl;
 			getchar();
 
+
 		}else{
+			termClear();
+
 			opponentPoke.receiveAttack(playerPoke->attackChoice[numPlayerAttack - 1]);
+			displayOpponentsLife(mainPlayer, *playerPoke, opponentPoke, isAgainstPokemon);
+			cout << playerPoke->name << " attaque avec : " << playerPoke->attackChoice[numPlayerAttack - 1].name << " " << playerPoke->attackChoice[numPlayerAttack - 1].damagePoints << endl;
 		}
 	
-		termClear();
 
-		displayOpponentsLife(mainPlayer, *playerPoke, opponentPoke, isAgainstPokemon);
-		cout << playerPoke->name << " attaque avec : " << playerPoke->attackChoice[numPlayerAttack - 1].name << " " << playerPoke->attackChoice[numPlayerAttack - 1].damagePoints << endl;
 
 		if(opponentPoke.health > 0)
 		{
+			cout << endl;
 			isAgainstPokemon ? cout << "Le pokémon sauvage" : cout << "Le dresseur";
 			cout << " lance une attaque !" << endl;
 
@@ -297,6 +300,7 @@ void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgain
 		if(playerPoke->health <= 0 && !mainPlayer.allPokemonsAreDead())
 		{
 			organisePokemon(menuBool);
+			playerPoke = &mainPlayer.firstPokemonAlive();
 		}
 	}
 
@@ -571,7 +575,7 @@ void world::organisePokemon(bool & pokeMenuOn)
 	do{
 		termClear();
 
-		for(unsigned int i = 0; i < NBPOKEMON; i++)
+		for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 		{
 			if(i < mainPlayer.nbPokemon && indice == i && isTaken)
 			{

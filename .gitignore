@@ -10,3 +10,6 @@ bin/pokefac
 
 # Ignorer fichier de sauvegarde
 data/saveGames/*
+
+# Ignorer documentation Doxygen
+doc/html
