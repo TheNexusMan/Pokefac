@@ -13,3 +13,6 @@ data/saveGames/*
 
 # Ignorer documentation Doxygen
 doc/html
+
+# Ignorer les logs
+data/logs

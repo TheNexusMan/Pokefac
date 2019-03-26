@@ -18,6 +18,7 @@
 //#include <SDL.h>
 //#include <SDL_image.h>
 #include <sys/stat.h>
+#include <ctime>
 
 #include "pokemon.h"
 #include "NPC.h"
@@ -30,7 +31,8 @@
 
 using namespace std;
 
-const unsigned int NBPOKEMON = 3;
+const unsigned int NBPOKEMON = 10;
+const unsigned int NBPLAYERPOKEMON = 6;
 const unsigned int NB_NPC = 3;
 const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 
@@ -44,6 +46,8 @@ struct Door
 	string terrainNamePos;
 	string terrainNameDest;
 };
+
+
 
 class world{
 public:
@@ -270,6 +274,21 @@ public:
 	*/
 	void organisePokemon(bool & pokeMenuOn);
 
+	/**
+	@brief
+	Verifie si le joueur est sur une case de Soin 
+	et soigne ses pokemons
+
+	@param mainPlayer
+	@return none
+
+	code Visual
+	@end
+	world.healAll(mainPlayer);
+	@endcode
+	 */
+	void healAll(Player & mainPlayer);
+
 private:
 	/**
 	@brief
@@ -314,6 +333,24 @@ private:
 	@endcode
 	*/
 	bool isInHerb(const int x, const int y) const;
+	
+
+
+	/**
+	@brief
+	Vérifie si le joueur est sur une case de vie
+	true si la position est des dans un caractere 'V'
+	false sinon
+
+	@param x, y
+	@return (terrain.terrain[x][y] == 'V')
+
+	Exemple Visual
+	@code
+	isOnHeal(2, 4);
+	@endcode
+	 */
+	bool isOnHeal(const int x, const int y) const;
 
 	/**
 	@brief
@@ -344,23 +381,10 @@ private:
 	void displayOpponentsLife(const Player mainPlayer, const Pokemon PlayerPoke, const Pokemon opponentPoke, const bool isAgainstPokemon) const;
 
 	//Fonctions de DEBUG (Affiche dans la console pour SDL)
-	/**
-	@brief
-	Affiche des '*' pour le DEBUG, donne des informations supl�mentaires
-
-	@param none
-	@return none
-
-	Exemple Code Block / Visual
-	@code
-	displayStars();
-	@endcode
-	*/
-	void displayStars() const;
 
 	/**
 	@brief
-	Pr�vient dans la console que le mode DEBUG est activ�
+	Prévient dans les logs du lancement du programme
 	Affiche des informations supl�mentaires � l'utilisateur
 
 	@param none
@@ -371,7 +395,7 @@ private:
 	debugWarning();
 	@endcode
 	*/
-	void debugWarning() const;
+	void logFilesStart() const;
 };
 
 #endif

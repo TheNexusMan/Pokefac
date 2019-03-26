@@ -1,8 +1,0 @@
-<map id="src/world.h" name="src/world.h">
-<area shape="rect" id="node8" href="$pokemon_8h.html" title="Class Pokemon, contient les fonctions et données relatives aux pokémons. " alt="" coords="5,229,92,256"/>
-<area shape="rect" id="node10" href="$NPC_8h.html" title="Class NPC, contient les fonctions et données relatives aux NPC, hérite de la classe Character..." alt="" coords="149,80,212,107"/>
-<area shape="rect" id="node13" href="$player_8h.html" title="Class Player, contient les fonctions et données relatives aux joueur, hérite de la classe Character..." alt="" coords="309,155,377,181"/>
-<area shape="rect" id="node14" href="$terrain_8h.html" title="Class terrain, contient les fonctions et données relatives aux terrains. " alt="" coords="393,80,462,107"/>
-<area shape="rect" id="node15" href="$winTxt_8h.html" title="Class winTxt, gère les fonctions de bases d&#39;affichage dans un terminal. " alt="" coords="889,80,961,107"/>
-<area shape="rect" id="node11" href="$character_8h.html" title="Class Character, contient les fonctions et données relatives aux character. " alt="" coords="229,229,316,256"/>
-</map>
