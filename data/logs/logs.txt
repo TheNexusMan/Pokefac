@@ -1,0 +1,669 @@
+[2019/3/26:12:35:55] : ****************************************
+[2019/3/26:12:35:55] : Lancement du programme
+[2019/3/26:12:35:55] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:35:55] : ****************************************
+[2019/3/26:12:35:55] : ****************************************
+[2019/3/26:12:35:55] : Lancement du programme
+[2019/3/26:12:35:55] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:35:55] : ****************************************
+[2019/3/26:12:36:42] : ****************************************
+[2019/3/26:12:36:42] : Lancement du programme
+[2019/3/26:12:36:42] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:36:42] : ****************************************
+[2019/3/26:12:36:42] : ****************************************
+[2019/3/26:12:36:42] : Lancement du programme
+[2019/3/26:12:36:42] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:36:42] : ****************************************
+[2019/3/26:12:38:24] : ****************************************
+[2019/3/26:12:38:24] : Lancement du programme
+[2019/3/26:12:38:24] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:38:24] : ****************************************
+[2019/3/26:12:38:24] : ****************************************
+[2019/3/26:12:38:24] : Lancement du programme
+[2019/3/26:12:38:24] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:38:24] : ****************************************
+[2019/3/26:12:39:27] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:12:39:33] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:12:39:40] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:12:41:22] : ****************************************
+[2019/3/26:12:41:22] : Lancement du programme
+[2019/3/26:12:41:22] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:41:22] : ****************************************
+[2019/3/26:12:41:22] : ****************************************
+[2019/3/26:12:41:22] : Lancement du programme
+[2019/3/26:12:41:22] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:41:22] : ****************************************
+[2019/3/26:12:42:9] : ****************************************
+[2019/3/26:12:42:9] : Lancement du programme
+[2019/3/26:12:42:9] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:42:9] : ****************************************
+[2019/3/26:12:42:9] : ****************************************
+[2019/3/26:12:42:9] : Lancement du programme
+[2019/3/26:12:42:9] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:42:9] : ****************************************
+[2019/3/26:12:42:37] : ****************************************
+[2019/3/26:12:42:37] : Lancement du programme
+[2019/3/26:12:42:37] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:42:37] : ****************************************
+[2019/3/26:12:42:37] : ****************************************
+[2019/3/26:12:42:37] : Lancement du programme
+[2019/3/26:12:42:37] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:42:37] : ****************************************
+[2019/3/26:12:44:33] : ****************************************
+[2019/3/26:12:44:33] : Lancement du programme
+[2019/3/26:12:44:33] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:44:33] : ****************************************
+[2019/3/26:12:44:33] : ****************************************
+[2019/3/26:12:44:33] : Lancement du programme
+[2019/3/26:12:44:33] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:44:33] : ****************************************
+[2019/3/26:12:45:50] : ****************************************
+[2019/3/26:12:45:50] : Lancement du programme
+[2019/3/26:12:45:50] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:45:50] : ****************************************
+[2019/3/26:12:45:50] : ****************************************
+[2019/3/26:12:45:50] : Lancement du programme
+[2019/3/26:12:45:50] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:45:50] : ****************************************
+[2019/3/26:12:46:51] : ****************************************
+[2019/3/26:12:46:51] : Lancement du programme
+[2019/3/26:12:46:51] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:46:51] : ****************************************
+[2019/3/26:12:46:51] : ****************************************
+[2019/3/26:12:46:51] : Lancement du programme
+[2019/3/26:12:46:51] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:46:51] : ****************************************
+[2019/3/26:12:47:60] : ****************************************
+[2019/3/26:12:47:60] : Lancement du programme
+[2019/3/26:12:47:60] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:47:60] : ****************************************
+[2019/3/26:12:47:60] : ****************************************
+[2019/3/26:12:47:60] : Lancement du programme
+[2019/3/26:12:47:60] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:47:60] : ****************************************
+[2019/3/26:12:50:45] : ****************************************
+[2019/3/26:12:50:45] : Lancement du programme
+[2019/3/26:12:50:45] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:50:45] : ****************************************
+[2019/3/26:12:50:45] : ****************************************
+[2019/3/26:12:50:45] : Lancement du programme
+[2019/3/26:12:50:45] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:50:45] : ****************************************
+[2019/3/26:12:51:14] : ****************************************
+[2019/3/26:12:51:14] : Lancement du programme
+[2019/3/26:12:51:14] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:51:14] : ****************************************
+[2019/3/26:12:51:14] : ****************************************
+[2019/3/26:12:51:14] : Lancement du programme
+[2019/3/26:12:51:14] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:51:14] : ****************************************
+[2019/3/26:12:52:2] : ****************************************
+[2019/3/26:12:52:2] : Lancement du programme
+[2019/3/26:12:52:2] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:52:2] : ****************************************
+[2019/3/26:12:52:2] : ****************************************
+[2019/3/26:12:52:2] : Lancement du programme
+[2019/3/26:12:52:2] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:52:2] : ****************************************
+[2019/3/26:12:54:23] : ****************************************
+[2019/3/26:12:54:23] : Lancement du programme
+[2019/3/26:12:54:23] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:54:23] : ****************************************
+[2019/3/26:12:54:23] : ****************************************
+[2019/3/26:12:54:23] : Lancement du programme
+[2019/3/26:12:54:23] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:54:23] : ****************************************
+[2019/3/26:12:55:7] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:12:55:14] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:12:55:16] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:12:55:18] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:12:55:21] : ****************************************
+[2019/3/26:12:55:21] : Lancement du programme
+[2019/3/26:12:55:21] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:55:21] : ****************************************
+[2019/3/26:12:55:21] : ****************************************
+[2019/3/26:12:55:21] : Lancement du programme
+[2019/3/26:12:55:21] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:55:21] : ****************************************
+[2019/3/26:12:55:26] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/3/26:12:56:57] : ****************************************
+[2019/3/26:12:56:57] : Lancement du programme
+[2019/3/26:12:56:57] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:56:57] : ****************************************
+[2019/3/26:12:56:57] : ****************************************
+[2019/3/26:12:56:57] : Lancement du programme
+[2019/3/26:12:56:57] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:56:57] : ****************************************
+[2019/3/26:12:59:9] : ****************************************
+[2019/3/26:12:59:9] : Lancement du programme
+[2019/3/26:12:59:9] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:59:9] : ****************************************
+[2019/3/26:12:59:9] : ****************************************
+[2019/3/26:12:59:9] : Lancement du programme
+[2019/3/26:12:59:9] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:12:59:9] : ****************************************
+[2019/3/26:13:1:25] : ****************************************
+[2019/3/26:13:1:25] : Lancement du programme
+[2019/3/26:13:1:25] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:1:25] : ****************************************
+[2019/3/26:13:1:25] : ****************************************
+[2019/3/26:13:1:25] : Lancement du programme
+[2019/3/26:13:1:25] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:1:25] : ****************************************
+[2019/3/26:13:1:29] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:1:30] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:1:30] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:13:1:31] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/26:13:1:31] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:13:1:31] : randomNumber() = 15 Random % 5 == 0
+[2019/3/26:13:1:31] : Lancement du combat
+[2019/3/26:13:4:43] : ****************************************
+[2019/3/26:13:4:43] : Lancement du programme
+[2019/3/26:13:4:43] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:4:43] : ****************************************
+[2019/3/26:13:4:43] : ****************************************
+[2019/3/26:13:4:43] : Lancement du programme
+[2019/3/26:13:4:43] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:4:43] : ****************************************
+[2019/3/26:13:4:51] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:4:52] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:4:52] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:13:4:52] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/26:13:4:52] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:13:4:52] : randomNumber() = 15 Random % 5 == 0
+[2019/3/26:13:4:52] : Lancement du combat
+[2019/3/26:13:4:58] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/26:13:4:58] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:13:4:58] : randomNumber() = 15 Random % 5 == 0
+[2019/3/26:13:4:58] : Lancement du combat
+[2019/3/26:13:5:4] : Nombre aleatoire genere par randomNumber() => 92
+[2019/3/26:13:5:4] : Nombre aleatoire genere par randomNumber() => 94
+[2019/3/26:13:5:59] : ****************************************
+[2019/3/26:13:5:59] : Lancement du programme
+[2019/3/26:13:5:59] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:5:59] : ****************************************
+[2019/3/26:13:5:59] : ****************************************
+[2019/3/26:13:5:59] : Lancement du programme
+[2019/3/26:13:5:59] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:5:59] : ****************************************
+[2019/3/26:13:6:6] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/3/26:13:6:7] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,18)
+[2019/3/26:13:6:8] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/3/26:13:6:8] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,18)
+[2019/3/26:13:6:8] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/3/26:13:6:8] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,18)
+[2019/3/26:13:6:9] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/3/26:13:6:9] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,18)
+[2019/3/26:13:6:10] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/3/26:13:6:13] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,18)
+[2019/3/26:13:6:17] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:6:18] : Le joueur est sur une case de soin
+[2019/3/26:13:6:18] : Les pokémons du joueur on été soignés
+[2019/3/26:13:6:20] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:7:16] : ****************************************
+[2019/3/26:13:7:16] : Lancement du programme
+[2019/3/26:13:7:16] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:7:16] : ****************************************
+[2019/3/26:13:7:16] : ****************************************
+[2019/3/26:13:7:16] : Lancement du programme
+[2019/3/26:13:7:16] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:7:16] : ****************************************
+[2019/3/26:13:7:56] : ****************************************
+[2019/3/26:13:7:56] : Lancement du programme
+[2019/3/26:13:7:56] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:7:56] : ****************************************
+[2019/3/26:13:7:56] : ****************************************
+[2019/3/26:13:7:56] : Lancement du programme
+[2019/3/26:13:7:56] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:7:56] : ****************************************
+[2019/3/26:13:8:14] : ****************************************
+[2019/3/26:13:8:14] : Lancement du programme
+[2019/3/26:13:8:14] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:8:14] : ****************************************
+[2019/3/26:13:8:14] : ****************************************
+[2019/3/26:13:8:14] : Lancement du programme
+[2019/3/26:13:8:14] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:8:14] : ****************************************
+[2019/3/26:13:8:40] : ****************************************
+[2019/3/26:13:8:40] : Lancement du programme
+[2019/3/26:13:8:40] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:8:40] : ****************************************
+[2019/3/26:13:8:40] : ****************************************
+[2019/3/26:13:8:40] : Lancement du programme
+[2019/3/26:13:8:40] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:8:40] : ****************************************
+[2019/3/26:13:10:54] : ****************************************
+[2019/3/26:13:10:54] : Lancement du programme
+[2019/3/26:13:10:54] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:10:54] : ****************************************
+[2019/3/26:13:10:54] : ****************************************
+[2019/3/26:13:10:54] : Lancement du programme
+[2019/3/26:13:10:54] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:10:54] : ****************************************
+[2019/3/26:13:10:58] : ****************************************
+[2019/3/26:13:10:58] : Lancement du programme
+[2019/3/26:13:10:58] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:10:58] : ****************************************
+[2019/3/26:13:10:58] : ****************************************
+[2019/3/26:13:10:58] : Lancement du programme
+[2019/3/26:13:10:58] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:10:58] : ****************************************
+[2019/3/26:13:10:60] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:10:60] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:10:60] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:13:11:37] : ****************************************
+[2019/3/26:13:11:37] : Lancement du programme
+[2019/3/26:13:11:37] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:11:37] : ****************************************
+[2019/3/26:13:11:37] : ****************************************
+[2019/3/26:13:11:37] : Lancement du programme
+[2019/3/26:13:11:37] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:11:37] : ****************************************
+[2019/3/26:13:11:40] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:11:40] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:11:43] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:11:49] : Le joueur est sur une case de soin
+[2019/3/26:13:11:49] : Les pokémons du joueur on été soignés
+[2019/3/26:13:12:9] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:12:15] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:12:16] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:12:16] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:12:16] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:13:51] : ****************************************
+[2019/3/26:13:13:51] : Lancement du programme
+[2019/3/26:13:13:51] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:13:51] : ****************************************
+[2019/3/26:13:13:51] : ****************************************
+[2019/3/26:13:13:51] : Lancement du programme
+[2019/3/26:13:13:51] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:13:51] : ****************************************
+[2019/3/26:13:13:53] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:13:53] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:13:57] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:13:14:58] : ****************************************
+[2019/3/26:13:14:58] : Lancement du programme
+[2019/3/26:13:14:58] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:14:58] : ****************************************
+[2019/3/26:13:14:58] : ****************************************
+[2019/3/26:13:14:58] : Lancement du programme
+[2019/3/26:13:14:58] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:14:58] : ****************************************
+[2019/3/26:13:14:60] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:14:60] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:15:6] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:37] : ****************************************
+[2019/3/26:13:18:37] : Lancement du programme
+[2019/3/26:13:18:37] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:18:37] : ****************************************
+[2019/3/26:13:18:37] : ****************************************
+[2019/3/26:13:18:37] : Lancement du programme
+[2019/3/26:13:18:37] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:13:18:37] : ****************************************
+[2019/3/26:13:18:40] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:13:18:41] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:13:18:41] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:13:18:47] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:47] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:47] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:48] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:48] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:49] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:49] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:52] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:53] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:53] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:53] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:53] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:54] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:54] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:54] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:54] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:54] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:54] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:54] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:54] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:54] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:54] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:55] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:13:18:56] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:13:18:56] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:19:60] : ****************************************
+[2019/3/26:15:19:60] : Lancement du programme
+[2019/3/26:15:19:60] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:15:19:60] : ****************************************
+[2019/3/26:15:20:5] : ****************************************
+[2019/3/26:15:20:5] : Lancement du programme
+[2019/3/26:15:20:5] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:15:20:5] : ****************************************
+[2019/3/26:15:20:5] : ****************************************
+[2019/3/26:15:20:5] : Lancement du programme
+[2019/3/26:15:20:5] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:15:20:5] : ****************************************
+[2019/3/26:15:20:15] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:15:20:15] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:15:20:23] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:23] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:23] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:24] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:24] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:24] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:25] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:26] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:26] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:28] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:29] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:30] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:30] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:30] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:31] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:31] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:39] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:20:40] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:20:48] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:15:20:56] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/26:15:20:56] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:15:20:56] : randomNumber() = 15 Random % 5 == 0
+[2019/3/26:15:20:56] : Lancement du combat
+[2019/3/26:15:21:2] : Nombre aleatoire genere par randomNumber() => 85
+[2019/3/26:15:21:2] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:15:21:2] : randomNumber() = 85 Random % 5 == 0
+[2019/3/26:15:21:2] : Lancement du combat
+[2019/3/26:15:21:10] : Nombre aleatoire genere par randomNumber() => 80
+[2019/3/26:15:21:10] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:15:21:10] : randomNumber() = 80 Random % 5 == 0
+[2019/3/26:15:21:10] : Lancement du combat
+[2019/3/26:15:21:10] : Nombre aleatoire genere par randomNumber() => 63
+[2019/3/26:15:21:10] : Nombre aleatoire genere par randomNumber() => 5
+[2019/3/26:15:21:10] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:15:21:10] : randomNumber() = 5 Random % 5 == 0
+[2019/3/26:15:21:10] : Lancement du combat
+[2019/3/26:15:21:11] : Nombre aleatoire genere par randomNumber() => 63
+[2019/3/26:15:21:11] : Nombre aleatoire genere par randomNumber() => 5
+[2019/3/26:15:21:11] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:15:21:11] : randomNumber() = 5 Random % 5 == 0
+[2019/3/26:15:21:11] : Lancement du combat
+[2019/3/26:15:21:18] : Nombre aleatoire genere par randomNumber() => 69
+[2019/3/26:15:21:28] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:28] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:28] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:29] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:29] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:29] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:29] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:31] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:32] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:32] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:32] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:33] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:33] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:33] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:21:33] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:15:21:36] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:15:22:45] : ****************************************
+[2019/3/26:15:22:45] : Lancement du programme
+[2019/3/26:15:22:45] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:15:22:45] : ****************************************
+[2019/3/26:15:23:30] : ****************************************
+[2019/3/26:15:23:30] : Lancement du programme
+[2019/3/26:15:23:30] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:15:23:30] : ****************************************
+[2019/3/26:15:23:30] : ****************************************
+[2019/3/26:15:23:30] : Lancement du programme
+[2019/3/26:15:23:30] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:15:23:30] : ****************************************
+[2019/3/26:15:23:36] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:15:23:36] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:15:23:37] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:16:16:39] : ****************************************
+[2019/3/26:16:16:39] : Lancement du programme
+[2019/3/26:16:16:39] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:16:16:39] : ****************************************
+[2019/3/26:16:16:39] : ****************************************
+[2019/3/26:16:16:39] : Lancement du programme
+[2019/3/26:16:16:39] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/26:16:16:39] : ****************************************
+[2019/3/26:16:16:41] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/26:16:16:41] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/26:16:16:54] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:16:56] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:16:59] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:16:59] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:16:60] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:16:60] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:16:60] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:16:60] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:16:60] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:16:60] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:16:60] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:16:60] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:16:60] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:17:1] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:17:1] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:17:1] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:17:1] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:17:1] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:17:1] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:17:1] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:17:1] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:17:1] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:17:1] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/26:16:17:3] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/26:16:17:6] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/26:16:17:7] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/26:16:17:7] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/26:16:17:7] : randomNumber() = 15 Random % 5 == 0
+[2019/3/26:16:17:7] : Lancement du combat
+[2019/3/29:12:9:33] : ****************************************
+[2019/3/29:12:9:33] : Lancement du programme
+[2019/3/29:12:9:33] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:9:33] : ****************************************
+[2019/3/29:12:9:33] : ****************************************
+[2019/3/29:12:9:33] : Lancement du programme
+[2019/3/29:12:9:33] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:9:33] : ****************************************
+[2019/3/29:12:10:19] : ****************************************
+[2019/3/29:12:10:19] : Lancement du programme
+[2019/3/29:12:10:19] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:10:19] : ****************************************
+[2019/3/29:12:10:19] : ****************************************
+[2019/3/29:12:10:19] : Lancement du programme
+[2019/3/29:12:10:19] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:10:19] : ****************************************
+[2019/3/29:12:10:50] : ****************************************
+[2019/3/29:12:10:50] : Lancement du programme
+[2019/3/29:12:10:50] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:10:50] : ****************************************
+[2019/3/29:12:10:50] : ****************************************
+[2019/3/29:12:10:50] : Lancement du programme
+[2019/3/29:12:10:50] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:10:50] : ****************************************
+[2019/3/29:12:11:2] : ****************************************
+[2019/3/29:12:11:2] : Lancement du programme
+[2019/3/29:12:11:2] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:11:2] : ****************************************
+[2019/3/29:12:11:2] : ****************************************
+[2019/3/29:12:11:2] : Lancement du programme
+[2019/3/29:12:11:2] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:11:2] : ****************************************
+[2019/3/29:12:11:32] : ****************************************
+[2019/3/29:12:11:32] : Lancement du programme
+[2019/3/29:12:11:32] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:11:32] : ****************************************
+[2019/3/29:12:11:32] : ****************************************
+[2019/3/29:12:11:32] : Lancement du programme
+[2019/3/29:12:11:32] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:11:32] : ****************************************
+[2019/3/29:12:11:39] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:11:46] : ****************************************
+[2019/3/29:12:11:46] : Lancement du programme
+[2019/3/29:12:11:46] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:11:46] : ****************************************
+[2019/3/29:12:11:46] : ****************************************
+[2019/3/29:12:11:46] : Lancement du programme
+[2019/3/29:12:11:46] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:11:46] : ****************************************
+[2019/3/29:12:12:21] : ****************************************
+[2019/3/29:12:12:21] : Lancement du programme
+[2019/3/29:12:12:21] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:12:21] : ****************************************
+[2019/3/29:12:12:21] : ****************************************
+[2019/3/29:12:12:21] : Lancement du programme
+[2019/3/29:12:12:21] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:12:21] : ****************************************
+[2019/3/29:12:12:23] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:12:28] : ****************************************
+[2019/3/29:12:12:28] : Lancement du programme
+[2019/3/29:12:12:28] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:12:28] : ****************************************
+[2019/3/29:12:12:28] : ****************************************
+[2019/3/29:12:12:28] : Lancement du programme
+[2019/3/29:12:12:28] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:12:28] : ****************************************
+[2019/3/29:12:12:29] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:12:29] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/29:12:12:29] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/29:12:12:30] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:12:30] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:12:30] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:12:30] : Lancement du combat
+[2019/3/29:12:12:45] : ****************************************
+[2019/3/29:12:12:45] : Lancement du programme
+[2019/3/29:12:12:45] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:12:45] : ****************************************
+[2019/3/29:12:12:45] : ****************************************
+[2019/3/29:12:12:45] : Lancement du programme
+[2019/3/29:12:12:45] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:12:45] : ****************************************
+[2019/3/29:12:12:46] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:12:47] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/29:12:12:47] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/29:12:12:48] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:12:48] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:12:48] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:12:48] : Lancement du combat
+[2019/3/29:12:12:58] : Nombre aleatoire genere par randomNumber() => 93
+[2019/3/29:12:13:6] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:13:7] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:13:9] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:13:11] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:14:2] : ****************************************
+[2019/3/29:12:14:2] : Lancement du programme
+[2019/3/29:12:14:2] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:14:2] : ****************************************
+[2019/3/29:12:14:2] : ****************************************
+[2019/3/29:12:14:2] : Lancement du programme
+[2019/3/29:12:14:2] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:14:2] : ****************************************
+[2019/3/29:12:14:3] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:14:3] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/29:12:14:7] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:14:8] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:14:15] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/29:12:14:15] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:14:15] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:14:15] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:14:15] : Lancement du combat
+[2019/3/29:12:15:46] : ****************************************
+[2019/3/29:12:15:46] : Lancement du programme
+[2019/3/29:12:15:46] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:15:46] : ****************************************
+[2019/3/29:12:15:46] : ****************************************
+[2019/3/29:12:15:46] : Lancement du programme
+[2019/3/29:12:15:46] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:15:46] : ****************************************
+[2019/3/29:12:15:48] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:15:48] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/29:12:15:49] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/29:12:15:49] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:15:49] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:15:49] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:15:49] : Lancement du combat
+[2019/3/29:12:16:4] : Nombre aleatoire genere par randomNumber() => 73
+[2019/3/29:12:16:5] : Nombre aleatoire genere par randomNumber() => 57
+[2019/3/29:12:16:6] : Nombre aleatoire genere par randomNumber() => 6
+[2019/3/29:12:16:6] : Nombre aleatoire genere par randomNumber() => 81
+[2019/3/29:12:16:6] : Nombre aleatoire genere par randomNumber() => 69
+[2019/3/29:12:16:7] : Nombre aleatoire genere par randomNumber() => 1
+[2019/3/29:12:16:9] : Nombre aleatoire genere par randomNumber() => 87
+[2019/3/29:12:16:10] : Nombre aleatoire genere par randomNumber() => 3
+[2019/3/29:12:16:11] : Nombre aleatoire genere par randomNumber() => 74
+[2019/3/29:12:16:12] : Nombre aleatoire genere par randomNumber() => 8
+[2019/3/29:12:16:12] : Nombre aleatoire genere par randomNumber() => 58
+[2019/3/29:12:16:12] : Nombre aleatoire genere par randomNumber() => 16
+[2019/3/29:12:16:14] : Nombre aleatoire genere par randomNumber() => 30
+[2019/3/29:12:16:14] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:16:14] : randomNumber() = 30 Random % 5 == 0
+[2019/3/29:12:16:14] : Lancement du combat
+[2019/3/29:12:16:20] : Nombre aleatoire genere par randomNumber() => 96
+[2019/3/29:12:16:22] : Nombre aleatoire genere par randomNumber() => 75
+[2019/3/29:12:16:22] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:16:22] : randomNumber() = 75 Random % 5 == 0
+[2019/3/29:12:16:22] : Lancement du combat
+[2019/3/29:12:16:37] : Nombre aleatoire genere par randomNumber() => 76
+[2019/3/29:12:16:54] : Nombre aleatoire genere par randomNumber() => 41
+[2019/3/29:12:16:55] : Nombre aleatoire genere par randomNumber() => 59
+[2019/3/29:12:16:55] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:16:55] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:16:55] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:16:55] : Lancement du combat
+[2019/3/29:12:17:1] : Nombre aleatoire genere par randomNumber() => 9
+[2019/3/29:12:17:8] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:17:10] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:17:11] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:17:11] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:17:11] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:17:12] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:17:12] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:17:12] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:17:12] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:17:13] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:18:8] : ****************************************
+[2019/3/29:12:18:8] : Lancement du programme
+[2019/3/29:12:18:8] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:18:8] : ****************************************
+[2019/3/29:12:18:8] : ****************************************
+[2019/3/29:12:18:8] : Lancement du programme
+[2019/3/29:12:18:8] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:18:8] : ****************************************
+[2019/3/29:12:18:33] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:18:33] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:18:34] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/3/29:12:18:34] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/3/29:12:18:54] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:18:54] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/29:12:18:54] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/29:12:18:54] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:18:54] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:18:54] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:18:54] : Lancement du combat
+[2019/3/29:12:19:1] : Nombre aleatoire genere par randomNumber() => 75
+[2019/3/29:12:19:1] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:19:1] : randomNumber() = 75 Random % 5 == 0
+[2019/3/29:12:19:1] : Lancement du combat
+[2019/3/29:12:19:4] : Nombre aleatoire genere par randomNumber() => 10
+[2019/3/29:12:19:4] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:19:4] : randomNumber() = 10 Random % 5 == 0
+[2019/3/29:12:19:4] : Lancement du combat
+[2019/3/29:12:19:55] : ****************************************
+[2019/3/29:12:19:55] : Lancement du programme
+[2019/3/29:12:19:55] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:19:55] : ****************************************
+[2019/3/29:12:19:55] : ****************************************
+[2019/3/29:12:19:55] : Lancement du programme
+[2019/3/29:12:19:55] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/3/29:12:19:55] : ****************************************
+[2019/3/29:12:19:60] : Nombre aleatoire genere par randomNumber() => 83
+[2019/3/29:12:19:60] : Nombre aleatoire genere par randomNumber() => 86
+[2019/3/29:12:19:60] : Nombre aleatoire genere par randomNumber() => 77
+[2019/3/29:12:20:1] : Nombre aleatoire genere par randomNumber() => 15
+[2019/3/29:12:20:1] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:20:1] : randomNumber() = 15 Random % 5 == 0
+[2019/3/29:12:20:1] : Lancement du combat
+[2019/3/29:12:20:12] : Nombre aleatoire genere par randomNumber() => 91
+[2019/3/29:12:20:12] : Nombre aleatoire genere par randomNumber() => 92
+[2019/3/29:12:20:13] : Nombre aleatoire genere par randomNumber() => 34
+[2019/3/29:12:20:14] : Nombre aleatoire genere par randomNumber() => 95
+[2019/3/29:12:20:14] : Le joueur est dans l'herbe et la condition s'avere juste
+[2019/3/29:12:20:14] : randomNumber() = 95 Random % 5 == 0
+[2019/3/29:12:20:14] : Lancement du combat
+[2019/3/29:12:20:18] : Nombre aleatoire genere par randomNumber() => 21
