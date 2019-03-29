@@ -1,7 +1,17 @@
-all: bin/pokefac
+INCLUDE_SDL= -I/usr/include/SDL2
+LIBS_SDL=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
-bin/pokefac: obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o
-	g++ -g -Wall obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o -o bin/pokefac
+
+all: bin/pokefac bin/pokefacSDL
+
+bin/pokefac: obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o 
+	g++ -g -Wall obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o -o bin/pokefac 
+
+bin/pokefacSDL: obj/mainSDL.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o obj/sdlGameLoop.o
+	g++ -g -Wall obj/mainSDL.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o obj/sdlGameLoop.o -o bin/pokefacSDL $(LIBS_SDL)
+
+obj/mainSDL.o: src/main.cpp src/terrain.h src/world.h
+	g++ -g -Wall -c src/mainSDL.cpp -o obj/mainSDL.o $(LIBS_SDL) $(INCLUDE_SDL)
 
 obj/main.o: src/main.cpp src/terrain.h src/world.h
 	g++ -g -Wall -c src/main.cpp -o obj/main.o
@@ -29,6 +39,11 @@ obj/loopTxT.o: src/loopTxT.cpp src/loopTxT.h
 
 obj/winTxt.o: src/winTxt.cpp src/winTxt.h
 	g++ -g -Wall -c src/winTxt.cpp -o obj/winTxt.o
+
+obj/sdlGameLoop.o: src/sdlGameLoop.cpp src/sdlGameLoop.h
+	g++ -g -Wall -c src/sdlGameLoop.cpp -o obj/sdlGameLoop.o $(INCLUDE_SDL) -Isrc/
+
+
 
 clean:
 	rm -f obj/*.o

@@ -11,7 +11,7 @@ void Player::moveDown()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x + 1, y);
+	setNewPos(x+1, y);
 }
 
 void Player::moveLeft()
@@ -25,7 +25,7 @@ void Player::moveRight()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x, y+ 1);
+	setNewPos(x, y+1);
 }
 
 unsigned int Player::getMoney()
