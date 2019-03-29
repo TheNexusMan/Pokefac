@@ -216,7 +216,7 @@ void SdlGame::sdlDisplay(world world)
             }
         }
     }
-    im_Tree.draw(renderer, world.mainPlayer.getPosX()* TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+    im_Tree.draw(renderer, world.mainPlayer.getPosY()* TAILLE_SPRITE, world.mainPlayer.getPosX()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
     //im_Player.draw(renderer, world.mainPlayer.getPosX()*TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
 }
 
@@ -245,31 +245,31 @@ void SdlGame::sdlLoop(world & world)
             {
                 switch(events.key.keysym.scancode)
                 {
-                    case SDL_SCANCODE_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosY()-1, world.mainPlayer.getPosX()))
-                                            {
-                                                world.mainPlayer.moveLeft();
-                                                cout << world.mainPlayer.getPosX() << " " << world.mainPlayer.getPosY() << endl;
-                                                hasMoved = true;
-                                            }
-                                            break;
-                    case SDL_SCANCODE_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosY(), world.mainPlayer.getPosX()-1))
+                    case SDL_SCANCODE_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
                                             {
                                                 world.mainPlayer.moveUp();
-                                                cout << world.mainPlayer.getPosX() << " " << world.mainPlayer.getPosY() << endl;
+                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
-                    case SDL_SCANCODE_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosY()+1, world.mainPlayer.getPosX()))
+                    case SDL_SCANCODE_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
                                             {
-                                                world.mainPlayer.moveRight();
-                                                cout << world.mainPlayer.getPosX() << " " << world.mainPlayer.getPosY() << endl;
+                                                world.mainPlayer.moveLeft();
+                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
-                    case SDL_SCANCODE_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosY(), world.mainPlayer.getPosX()+1))
+                    case SDL_SCANCODE_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
                                             {
                                                 world.mainPlayer.moveDown();
-                                                cout << world.mainPlayer.getPosX() << " " << world.mainPlayer.getPosY() << endl;
+                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
+                                                hasMoved = true;
+                                            }
+                                            break;
+                    case SDL_SCANCODE_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
+                                            {
+                                                world.mainPlayer.moveRight();
+                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
