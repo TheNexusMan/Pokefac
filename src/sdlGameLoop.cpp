@@ -1,7 +1,7 @@
 #include "sdlGameLoop.h"
 
 
-const int TAILLE_SPRITE = 32;
+const int TAILLE_SPRITE = 71;
 
 float temps()
 {
@@ -122,8 +122,10 @@ SdlGame::SdlGame()
     } else withSound = false;
 
     int dimx, dimy;
-    dimx = SIZETERRAIN * TAILLE_SPRITE;
-    dimy = SIZETERRAIN * TAILLE_SPRITE;
+    //dimx = SIZETERRAIN * TAILLE_SPRITE;
+    //dimy = SIZETERRAIN * TAILLE_SPRITE;
+    dimx = 9 * TAILLE_SPRITE;
+    dimy = 9 * TAILLE_SPRITE;
 
     //Creation de la fenetre
     window = SDL_CreateWindow("PokeFac", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimx, dimy, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -140,6 +142,7 @@ SdlGame::SdlGame()
     im_GrassLand.loadFromFile("./data/textures/grass03.png", renderer);
     im_herbs.loadFromFile("./data/textures/grass.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
+    im_blackBackground.loadFromFile("./data/textures/blackBack.gif", renderer);
 
     //fin de l'ajout du chargement des images
 
@@ -220,6 +223,48 @@ void SdlGame::sdlDisplay(world world)
     //im_Player.draw(renderer, world.mainPlayer.getPosX()*TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
 }
 
+void SdlGame::sdlDisplaySecond(world world)
+{
+    SDL_SetRenderDrawColor(renderer, 230, 240, 255, 255);
+    SDL_RenderClear(renderer);
+
+    int dimx, dimy;
+    dimx = 9 * TAILLE_SPRITE;
+    dimy = 9 * TAILLE_SPRITE;
+    im_blackBackground.draw(renderer, 0,0,dimx,dimy);
+
+    int Xplayer = world.mainPlayer.getPosX();
+    int Yplayer = world.mainPlayer.getPosY();
+    
+
+    for(int x = Yplayer - 4; x < Yplayer + 5; x++)
+    {
+        for(int y = Xplayer - 4; y < Xplayer + 5; y++)
+        {
+            if(x >= 0 && x < SIZETERRAIN && y >= 0 && y < SIZETERRAIN)
+            {
+                if(world.mainTerrain.terrainTab[y][x] == '#')
+                {
+                    im_Tree.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE+10, TAILLE_SPRITE+10);
+                }
+                if(world.mainTerrain.terrainTab[y][x] == '.')
+                {
+                    im_GrassLand.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+                }
+                if(world.mainTerrain.terrainTab[y][x] == 'H')
+                {
+                    im_herbs.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+                }
+                if((world.mainTerrain.terrainTab[y][x] == 'O') || (world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
+                {
+                    im_MissingTexture.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+                }
+            }
+        }
+    }
+    im_Tree.draw(renderer, 4 * TAILLE_SPRITE, 4 * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+}
+
 void SdlGame::sdlLoop(world & world)
 {
     SDL_Event events;
@@ -283,7 +328,8 @@ void SdlGame::sdlLoop(world & world)
             }
 
         }
-        sdlDisplay(world);
+        //sdlDisplay(world);
+        sdlDisplaySecond(world);
         SDL_RenderPresent(renderer);
     }
 }
