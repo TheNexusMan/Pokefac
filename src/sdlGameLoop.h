@@ -5,6 +5,7 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <unistd.h>
 
 #include <iostream>
 #include <string>
@@ -60,11 +61,12 @@ class SdlGame
         SdlGame();
         ~SdlGame();
         void sdlLoop(world & world);
-        void sdlDisplay(world world);
         void sdlDisplayMenu();
         void sdlDisplayChatBox();
         void sdlDisplayBattle();
-
+        void sdlDisplayAllWorld(world world);
+        void sdlLaunchAnimation(world world, char direction);
+        void sdlDisplay(world world, int tileX, int tileY);
 };
 #endif
 

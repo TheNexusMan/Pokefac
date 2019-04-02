@@ -31,7 +31,8 @@
 
 using namespace std;
 
-const unsigned int NBPOKEMON = 3;
+const unsigned int NBPOKEMON = 10;
+const unsigned int NBPLAYERPOKEMON = 6;
 const unsigned int NB_NPC = 3;
 const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
 
@@ -262,6 +263,9 @@ public:
 	/** 
 	@brief
 	Option d'organisation des pokémon
+	Le paramètre pokeMenuOn permet deux choses : lors de l'utilisation de la fonction hors combat, il ferme
+	en cascade tous les menus si passé à false. Dans un combat, le paramètre est mis à false pour éviter l'affichage
+	de certains choix.
 
 	@param pokeMenuOn
 	@return none
@@ -360,10 +364,10 @@ private:
 
 	Exemple Code Block / Visual
 	@code
-	launchBattle(mainPlayer, opponentPoke, true);
+	battle(mainPlayer, opponentPoke, true);
 	@endcode
 	*/
-	void launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
+	void battle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
 
 	/**
 	@brief
