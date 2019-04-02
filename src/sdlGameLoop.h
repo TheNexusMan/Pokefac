@@ -57,9 +57,8 @@ class SdlGame
         ~SdlGame();
         void sdlLoop(world & world);
         void sdlDisplayAllWorld(world world);
-        void sdlDisplay(world world);
         void sdlLaunchAnimation(world world, char direction);
-        void displayAnimation(world world, int tileX, int tileY);
+        void sdlDisplay(world world, int tileX, int tileY);
 };
 #endif
 

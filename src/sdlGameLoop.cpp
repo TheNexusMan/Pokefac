@@ -222,42 +222,6 @@ void SdlGame::sdlDisplayAllWorld(world world)
     //im_Player.draw(renderer, world.mainPlayer.getPosX()*TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
 }
 
-void SdlGame::sdlDisplay(world world)
-{
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
-
-    int Xplayer = world.mainPlayer.getPosX();
-    int Yplayer = world.mainPlayer.getPosY();
-
-    for(int x = Yplayer - 4; x < Yplayer + 5; x++)
-    {
-        for(int y = Xplayer - 4; y < Xplayer + 5; y++)
-        {
-            if(x >= 0 && x < SIZETERRAIN && y >= 0 && y < SIZETERRAIN)
-            {
-                if(world.mainTerrain.terrainTab[y][x] == '#')
-                {
-                    im_Tree.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
-                if(world.mainTerrain.terrainTab[y][x] == '.')
-                {
-                    im_GrassLand.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
-                if(world.mainTerrain.terrainTab[y][x] == 'H')
-                {
-                    im_herbs.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
-                if((world.mainTerrain.terrainTab[y][x] == 'O') || (world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
-                {
-                    im_MissingTexture.draw(renderer, (x-Yplayer+4)*TAILLE_SPRITE, (y-Xplayer+4)*TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
-            }
-        }
-    }
-    im_Tree.draw(renderer, 4 * TAILLE_SPRITE, 4 * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-}
-
 void SdlGame::sdlLaunchAnimation(world world, char direction)
 {
     int tileX, tileY;
@@ -269,7 +233,9 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             tileY = 0;
             while(tileY < TAILLE_SPRITE)
             {
-                displayAnimation(world, tileX, tileY);
+                sdlDisplay(world, tileX, tileY);
+                SDL_RenderPresent(renderer);
+                SDL_RenderClear(renderer);
                 tileY = tileY + 3;
             }
             break;
@@ -279,7 +245,9 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             tileY = 0;
             while(tileX < TAILLE_SPRITE)
             {
-                displayAnimation(world, tileX, tileY);
+                sdlDisplay(world, tileX, tileY);
+                SDL_RenderPresent(renderer);
+                SDL_RenderClear(renderer);
                 tileX = tileX + 3;
             }
             break;
@@ -289,7 +257,9 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             tileY = 0;
             while(tileY >= -TAILLE_SPRITE)
             {
-                displayAnimation(world, tileX, tileY);
+                sdlDisplay(world, tileX, tileY);
+                SDL_RenderPresent(renderer);
+                SDL_RenderClear(renderer);
                 tileY = tileY - 3;
             }
             break;
@@ -299,7 +269,9 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             tileY = 0;
             while(tileX >= -TAILLE_SPRITE)
             {
-                displayAnimation(world, tileX, tileY);
+                sdlDisplay(world, tileX, tileY);
+                SDL_RenderPresent(renderer);
+                SDL_RenderClear(renderer);
                 tileX = tileX - 3;
             }
             break;
@@ -309,7 +281,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
     }
 }
 
-void SdlGame::displayAnimation(world world, int tileX, int tileY)
+void SdlGame::sdlDisplay(world world, int tileX, int tileY)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
@@ -343,8 +315,6 @@ void SdlGame::displayAnimation(world world, int tileX, int tileY)
         }
     }
     im_Tree.draw(renderer, 4 * TAILLE_SPRITE, 4 * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-    SDL_RenderPresent(renderer);
-    SDL_RenderClear(renderer);
 }
 
 void SdlGame::sdlLoop(world & world)
@@ -407,7 +377,6 @@ void SdlGame::sdlLoop(world & world)
                     
                 }
                 world.door();
-
             }
 
         }
@@ -436,7 +405,7 @@ void SdlGame::sdlLoop(world & world)
                     break;
             }
         }
-        sdlDisplay(world);
+        sdlDisplay(world, 0, 0);
         SDL_RenderPresent(renderer);
     }
 }
