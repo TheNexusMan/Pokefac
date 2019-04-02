@@ -1,4 +1,0 @@
-<map id="Character" name="Character">
-<area shape="rect" id="node2" href="$classNPC.html" title="{NPC\n|+ id\l+ orientation\l+ nbDialog\l+ dialog\l+ NPCPokemon\l+ terrainName\l|+ NPC()\l+ ~NPC()\l+ getOrientation()\l}" alt="" coords="5,277,128,457"/>
-<area shape="rect" id="node3" href="$classPlayer.html" title="{Player\n|+ tabPokemon\l+ nbPokemon\l|+ moveUp()\l+ moveDown()\l+ moveLeft()\l+ moveRight()\l+ addMoney()\l+ getMoney()\l+ initPlayer()\l+ setPokeball()\l+ getPokeball()\l+ addPokemon()\land 8 more...\l}" alt="" coords="153,248,271,487"/>
-</map>
