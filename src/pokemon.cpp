@@ -24,9 +24,9 @@ void Pokemon::displayInfos() const
 	displayHealth();
 	cout << endl << endl;;
 	cout << "Attaques :" << endl;
-	cout << "Nom     Puissance" << endl;
+	cout << "Nom Puissance" << endl;
 	for(unsigned int i = 0; i < 4; i++)
 	{
-		cout << attackChoice[i].name << "       " << attackChoice[i].damagePoints << endl;
+		cout << attackChoice[i].name << " " << attackChoice[i].damagePoints << endl;
 	}
 }
