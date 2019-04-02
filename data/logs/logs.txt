@@ -1,0 +1,78 @@
+[2019/4/2:10:22:8] : ****************************************
+[2019/4/2:10:22:8] : Lancement du programme
+[2019/4/2:10:22:8] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:22:8] : ****************************************
+[2019/4/2:10:22:8] : ****************************************
+[2019/4/2:10:22:8] : Lancement du programme
+[2019/4/2:10:22:8] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:22:8] : ****************************************
+[2019/4/2:10:23:11] : ****************************************
+[2019/4/2:10:23:11] : Lancement du programme
+[2019/4/2:10:23:11] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:23:11] : ****************************************
+[2019/4/2:10:23:11] : ****************************************
+[2019/4/2:10:23:11] : Lancement du programme
+[2019/4/2:10:23:11] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:23:11] : ****************************************
+[2019/4/2:10:24:60] : ****************************************
+[2019/4/2:10:24:60] : Lancement du programme
+[2019/4/2:10:24:60] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:24:60] : ****************************************
+[2019/4/2:10:24:60] : ****************************************
+[2019/4/2:10:24:60] : Lancement du programme
+[2019/4/2:10:24:60] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:24:60] : ****************************************
+[2019/4/2:10:25:24] : ****************************************
+[2019/4/2:10:25:24] : Lancement du programme
+[2019/4/2:10:25:24] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:25:24] : ****************************************
+[2019/4/2:10:25:24] : ****************************************
+[2019/4/2:10:25:24] : Lancement du programme
+[2019/4/2:10:25:24] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:25:24] : ****************************************
+[2019/4/2:10:26:28] : ****************************************
+[2019/4/2:10:26:28] : Lancement du programme
+[2019/4/2:10:26:28] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:26:28] : ****************************************
+[2019/4/2:10:26:28] : ****************************************
+[2019/4/2:10:26:28] : Lancement du programme
+[2019/4/2:10:26:28] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:26:28] : ****************************************
+[2019/4/2:10:35:19] : ****************************************
+[2019/4/2:10:35:19] : Lancement du programme
+[2019/4/2:10:35:19] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:35:19] : ****************************************
+[2019/4/2:10:35:19] : ****************************************
+[2019/4/2:10:35:19] : Lancement du programme
+[2019/4/2:10:35:19] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:35:19] : ****************************************
+[2019/4/2:10:36:7] : ****************************************
+[2019/4/2:10:36:7] : Lancement du programme
+[2019/4/2:10:36:7] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:36:7] : ****************************************
+[2019/4/2:10:36:7] : ****************************************
+[2019/4/2:10:36:7] : Lancement du programme
+[2019/4/2:10:36:7] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:36:7] : ****************************************
+[2019/4/2:10:36:48] : ****************************************
+[2019/4/2:10:36:48] : Lancement du programme
+[2019/4/2:10:36:48] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:36:48] : ****************************************
+[2019/4/2:10:36:48] : ****************************************
+[2019/4/2:10:36:48] : Lancement du programme
+[2019/4/2:10:36:48] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:36:48] : ****************************************
+[2019/4/2:10:37:59] : Changement de terrain : house1 Nouvelle position du joueur : (14,10)
+[2019/4/2:10:38:6] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,10)
+[2019/4/2:10:38:50] : ****************************************
+[2019/4/2:10:38:50] : Lancement du programme
+[2019/4/2:10:38:50] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:38:50] : ****************************************
+[2019/4/2:10:38:50] : ****************************************
+[2019/4/2:10:38:50] : Lancement du programme
+[2019/4/2:10:38:50] : Des informations suplementaires seront affichees dans le fichier ./data/logs.txt
+[2019/4/2:10:38:50] : ****************************************
+[2019/4/2:10:39:19] : Changement de terrain : terrain2 Nouvelle position du joueur : (10,1)
+[2019/4/2:10:39:49] : Nombre aleatoire genere par randomNumber() => 83
+[2019/4/2:10:39:54] : Changement de terrain : terrain1 Nouvelle position du joueur : (10,18)
+[2019/4/2:10:40:4] : Nombre aleatoire genere par randomNumber() => 86
