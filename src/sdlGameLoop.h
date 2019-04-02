@@ -53,6 +53,7 @@ class SdlGame
     Image im_GrassLand;
     Image im_herbs;
     Image im_MissingTexture;
+    Image im_chatBox;
     //Fin de rajout des images a charger
 
     public:
@@ -60,6 +61,8 @@ class SdlGame
         ~SdlGame();
         void sdlLoop(world & world);
         void sdlDisplay(world world);
+        void sdlDisplayMenu();
+        void sdlDisplayChatBox();
 
 };
 #endif

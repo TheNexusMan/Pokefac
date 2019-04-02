@@ -140,6 +140,7 @@ SdlGame::SdlGame()
     im_GrassLand.loadFromFile("./data/textures/grass03.png", renderer);
     im_herbs.loadFromFile("./data/textures/grass.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
+    im_chatBox.loadFromFile("./data/textures/chatbox.png", renderer);
 
     //fin de l'ajout du chargement des images
 
@@ -255,9 +256,9 @@ void SdlGame::sdlLoop(world & world)
             if(events.type == SDL_QUIT) quit = true;
             else if (events.type == SDL_KEYDOWN)
             {
-                switch(events.key.keysym.scancode)
+                switch(events.key.keysym.sym)
                 {
-                    case SDL_SCANCODE_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
+                    case SDLK_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
                                             {
                                                 world.mainPlayer.moveUp();
                                                // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
@@ -265,65 +266,58 @@ void SdlGame::sdlLoop(world & world)
                                                 
                                             }
                                             break;
-                    case SDL_SCANCODE_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
+                    case SDLK_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
                                             {
                                                 world.mainPlayer.moveLeft();
                                                // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
-                                            }
+                                            } 
                                             break;
-                    case SDL_SCANCODE_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
+                    case SDLK_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
                                             {
                                                 world.mainPlayer.moveDown();
                                                // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
-                    case SDL_SCANCODE_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
+                    case SDLK_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
                                             {
                                                 world.mainPlayer.moveRight();
                                                // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
-                    case SDL_SCANCODE_M:
-                                    if(world.menuOn)
-                                    {
-                                        world.menuOn = false;
-                                    }
-                                    if(!world.menuOn)
-                                    {
-                                        world.menuOn = true;
-                                    }
+                    case SDLK_m: 
+
+                                    world.menuOn = !world.menuOn;
                                     break;
                     
-                    case SDL_SCANCODE_X: 
+                    case SDLK_x: 
                                     quit=true;
-                                    break;
+                                    break; 
 
-                    case SDL_SCANCODE_1:
+                    case SDLK_1:
                     if(world.menuOn)
                     {
                         world.displayPokemon();
-
                     }      
                     break;
 
-                    case SDL_SCANCODE_2:
+                    case SDLK_2:
                     if(world.menuOn)
                     {
                         world.saveGame("saveData");
                         world.menuOn = false;
                     }
                      break;
-                    case SDL_SCANCODE_3:
+                    case SDLK_3:
                     if(world.menuOn)
                     {
                         world.loadGame("saveData");
                         world.menuOn = false;
                     }
                     break;
-                    case SDL_SCANCODE_4:
+                    case SDLK_4:
                     if(world.menuOn)
                     {
                         quit = true;
@@ -349,28 +343,39 @@ void SdlGame::sdlLoop(world & world)
 
         if(world.menuOn)
         {
-            SDL_Rect r;
-            r.x = 384;
-            r.y = 0;
-            r.w = 256;
-            r.h = 640;
-            SDL_SetRenderDrawColor(renderer, 255,255,255,255);
-            SDL_RenderFillRect(renderer, &r);
-            SDL_Rect positionMenu1;
-            positionMenu1.x = 400;
-            positionMenu1.y = 50;
-            positionMenu1.w = 200;
-            positionMenu1.h = 50;
-            SDL_RenderCopy(renderer, font_menuPoke.getTexture(),NULL, &positionMenu1);
-            positionMenu1.y += 100;
-
-            SDL_RenderCopy(renderer,font_menuSave.getTexture(), NULL, &positionMenu1);
-            positionMenu1.y += 100;
-            SDL_RenderCopy(renderer,font_menuLoad.getTexture(), NULL, &positionMenu1);
-            positionMenu1.y += 100;
-            SDL_RenderCopy(renderer, font_menuQuit.getTexture(), NULL, &positionMenu1);
-            SDL_RenderPresent(renderer);
+            sdlDisplayMenu();
+            //sdlDisplayChatBox();
         }
 
     }
+}
+
+void SdlGame::sdlDisplayMenu()
+{
+        SDL_Rect r;
+        r.x = 384;          
+        r.y = 0;
+        r.w = 256;
+        r.h = 640;
+        SDL_SetRenderDrawColor(renderer, 255,255,255,255);
+        SDL_RenderFillRect(renderer, &r);
+        //im_chatBox.draw(renderer, 384,0,256,640);
+        SDL_Rect positionMenu1;
+        positionMenu1.x = 400;
+        positionMenu1.y = 50;
+        positionMenu1.w = 200;
+        positionMenu1.h = 50;
+        SDL_RenderCopy(renderer, font_menuPoke.getTexture(),NULL, &positionMenu1);
+        positionMenu1.y += 100;
+        SDL_RenderCopy(renderer,font_menuSave.getTexture(), NULL, &positionMenu1);
+        positionMenu1.y += 100;
+        SDL_RenderCopy(renderer,font_menuLoad.getTexture(), NULL, &positionMenu1);
+        positionMenu1.y += 100;
+        SDL_RenderCopy(renderer, font_menuQuit.getTexture(), NULL, &positionMenu1);
+        SDL_RenderPresent(renderer);
+}
+
+void SdlGame::sdlDisplayChatBox()
+{
+    im_chatBox.draw(renderer,0,448,640,200);
 }
