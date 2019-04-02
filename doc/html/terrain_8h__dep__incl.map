@@ -1,8 +1,0 @@
-<map id="src/terrain.h" name="src/terrain.h">
-<area shape="rect" id="node2" href="$world_8h.html" title="Class World, gère tout le jeu et mets les autres class en relations. " alt="" coords="153,80,240,107"/>
-<area shape="rect" id="node7" href="$terrain_8cpp.html" title="src/terrain.cpp" alt="" coords="264,80,369,107"/>
-<area shape="rect" id="node3" href="$loopTxT_8cpp.html" title="src/loopTxT.cpp" alt="" coords="5,155,121,181"/>
-<area shape="rect" id="node4" href="$loopTxT_8h.html" title="src/loopTxT.h" alt="" coords="145,155,248,181"/>
-<area shape="rect" id="node6" href="$world_8cpp.html" title="src/world.cpp" alt="" coords="272,155,372,181"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="148,229,245,256"/>
-</map>

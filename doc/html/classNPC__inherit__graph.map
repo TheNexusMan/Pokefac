@@ -1,3 +1,0 @@
-<map id="NPC" name="NPC">
-<area shape="rect" id="node2" href="$classCharacter.html" title="{Character\n|+ name\l|+ Character()\l+ ~Character()\l+ setName()\l+ setNewPos()\l+ setPosX()\l+ setPosY()\l+ getPosX()\l+ getPosY()\l+ setIdleTexture()\l}" alt="" coords="5,5,131,200"/>
-</map>
