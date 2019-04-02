@@ -39,6 +39,10 @@ class SdlGame
 
         TTF_Font * font;
         Image font_im;
+        Image font_menuPoke;
+        Image font_menuSave;
+        Image font_menuLoad;
+        Image font_menuQuit;
         SDL_Color font_color;
 
         Mix_Chunk * sound;

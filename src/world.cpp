@@ -450,7 +450,7 @@ void world::menu(bool & gameOn)
 {
 	int key;
 	do{
-		termClear();
+		//termClear();
 
 		cout << "1- Pokémons" << endl;
 		cout << "2- Sauvegarde" << endl;

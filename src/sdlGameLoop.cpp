@@ -145,20 +145,32 @@ SdlGame::SdlGame()
 
 
     //Texte
-    /*
-    font == TTF_OpenFont("data/DejaVuSansCondensed.ttf",50);
+    
+    font = TTF_OpenFont("data/font/pokemon_pixel_font.ttf",50);
     if(font == NULL)
     {
         cout << "Failed to load the font SDL_TTF : " << TTF_GetError() << endl;
         SDL_Quit();
         exit(1);
     }
-    font_color.r = 50; 
-    font_color.g = 50;
-    font_color.b = 255;
-    font_im.setSurface(TTF_RenderText_Solid(fond, "Pokefac", font_color));
-    font_im.loadFromCurrentSurface(render);
-    */
+    font_color.r = 0; 
+    font_color.g = 0;
+    font_color.b = 0;
+    font_im.setSurface(TTF_RenderText_Solid(font, "Pokefac", font_color));
+    font_im.loadFromCurrentSurface(renderer);
+    font_menuPoke.setSurface(TTF_RenderText_Solid(font, "1- Pokemons", font_color));
+    font_menuPoke.loadFromCurrentSurface(renderer);
+
+    font_menuSave.setSurface(TTF_RenderText_Solid(font, "2- Sauvegarder", font_color));
+    font_menuSave.loadFromCurrentSurface(renderer);
+
+    font_menuLoad.setSurface(TTF_RenderText_Solid(font, "3- Charger", font_color));
+    font_menuLoad.loadFromCurrentSurface(renderer);
+
+    font_menuQuit.setSurface(TTF_RenderText_Solid(font, "4- Quitter", font_color));
+    font_menuQuit.loadFromCurrentSurface(renderer);
+
+    
 
    // Sounds
    if(withSound)
@@ -186,14 +198,12 @@ SdlGame::~SdlGame()
 
 void SdlGame::sdlDisplay(world world)
 {
-    SDL_SetRenderDrawColor(renderer, 230, 240, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
 
-    int dimx, dimy;
-    dimx = SIZETERRAIN * TAILLE_SPRITE;
-    dimy = SIZETERRAIN * TAILLE_SPRITE;
-    im_MissingTexture.draw(renderer, 0,0,dimx,dimy);
+
+
     for(unsigned int x = 0; x < SIZETERRAIN; x++)
     {
         for(unsigned int y = 0; y < SIZETERRAIN; y++)
@@ -218,6 +228,7 @@ void SdlGame::sdlDisplay(world world)
     }
     im_Tree.draw(renderer, world.mainPlayer.getPosY()* TAILLE_SPRITE, world.mainPlayer.getPosX()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
     //im_Player.draw(renderer, world.mainPlayer.getPosX()*TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+
 }
 
 void SdlGame::sdlLoop(world & world)
@@ -226,10 +237,11 @@ void SdlGame::sdlLoop(world & world)
     bool quit = false;
     bool hasMoved = false;
 
-    //Uint32 t = SDL_GetTicks(), nt;
+    //Uint32 t = SDL_GetTicks()., nt;
 
     while(!quit)
     {
+       
 
         if(hasMoved)
 		{
@@ -248,33 +260,76 @@ void SdlGame::sdlLoop(world & world)
                     case SDL_SCANCODE_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
                                             {
                                                 world.mainPlayer.moveUp();
-                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
+                                               // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
+                                                
                                             }
                                             break;
                     case SDL_SCANCODE_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
                                             {
                                                 world.mainPlayer.moveLeft();
-                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
+                                               // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
                     case SDL_SCANCODE_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
                                             {
                                                 world.mainPlayer.moveDown();
-                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
+                                               // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
                     case SDL_SCANCODE_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
                                             {
                                                 world.mainPlayer.moveRight();
-                                                cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
+                                               // cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
-                    case SDL_SCANCODE_X: quit=true;
-                                         break;
+                    case SDL_SCANCODE_M:
+                                    if(world.menuOn)
+                                    {
+                                        world.menuOn = false;
+                                    }
+                                    if(!world.menuOn)
+                                    {
+                                        world.menuOn = true;
+                                    }
+                                    break;
+                    
+                    case SDL_SCANCODE_X: 
+                                    quit=true;
+                                    break;
+
+                    case SDL_SCANCODE_1:
+                    if(world.menuOn)
+                    {
+                        world.displayPokemon();
+
+                    }      
+                    break;
+
+                    case SDL_SCANCODE_2:
+                    if(world.menuOn)
+                    {
+                        world.saveGame("saveData");
+                        world.menuOn = false;
+                    }
+                     break;
+                    case SDL_SCANCODE_3:
+                    if(world.menuOn)
+                    {
+                        world.loadGame("saveData");
+                        world.menuOn = false;
+                    }
+                    break;
+                    case SDL_SCANCODE_4:
+                    if(world.menuOn)
+                    {
+                        quit = true;
+                    }
+                    break;
+
                     default : break;
                     
                 }
@@ -283,7 +338,39 @@ void SdlGame::sdlLoop(world & world)
             }
 
         }
-        sdlDisplay(world);
+    
+        if(!world.menuOn)
+        {
+            sdlDisplay(world);
+        }
+
         SDL_RenderPresent(renderer);
+
+
+        if(world.menuOn)
+        {
+            SDL_Rect r;
+            r.x = 384;
+            r.y = 0;
+            r.w = 256;
+            r.h = 640;
+            SDL_SetRenderDrawColor(renderer, 255,255,255,255);
+            SDL_RenderFillRect(renderer, &r);
+            SDL_Rect positionMenu1;
+            positionMenu1.x = 400;
+            positionMenu1.y = 50;
+            positionMenu1.w = 200;
+            positionMenu1.h = 50;
+            SDL_RenderCopy(renderer, font_menuPoke.getTexture(),NULL, &positionMenu1);
+            positionMenu1.y += 100;
+
+            SDL_RenderCopy(renderer,font_menuSave.getTexture(), NULL, &positionMenu1);
+            positionMenu1.y += 100;
+            SDL_RenderCopy(renderer,font_menuLoad.getTexture(), NULL, &positionMenu1);
+            positionMenu1.y += 100;
+            SDL_RenderCopy(renderer, font_menuQuit.getTexture(), NULL, &positionMenu1);
+            SDL_RenderPresent(renderer);
+        }
+
     }
 }
