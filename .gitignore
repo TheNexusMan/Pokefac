@@ -6,7 +6,7 @@ src/.vscode
 obj/*.o
 
 # Ignorer les executables dan bin/
-bin/pokefac
+bin/*
 
 # Ignorer fichier de sauvegarde
 data/saveGames/*
