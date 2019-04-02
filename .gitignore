@@ -12,7 +12,7 @@ bin/*
 data/saveGames/*
 
 # Ignorer documentation Doxygen
-doc/html
+#doc/html
 
 # Ignorer les logs
 data/logs
