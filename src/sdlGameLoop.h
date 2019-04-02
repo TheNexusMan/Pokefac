@@ -5,6 +5,7 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <unistd.h>
 
 #include <iostream>
 #include <string>
@@ -49,15 +50,16 @@ class SdlGame
     Image im_GrassLand;
     Image im_herbs;
     Image im_MissingTexture;
-    Image im_blackBackground;
     //Fin de rajout des images a charger
 
     public:
         SdlGame();
         ~SdlGame();
         void sdlLoop(world & world);
+        void sdlDisplayAllWorld(world world);
         void sdlDisplay(world world);
-        void sdlDisplaySecond(world world);
+        void sdlLaunchAnimation(world world, char direction);
+        void displayAnimation(world world, int tileX, int tileY);
 };
 #endif
 
