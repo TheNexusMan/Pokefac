@@ -364,10 +364,10 @@ private:
 
 	Exemple Code Block / Visual
 	@code
-	launchBattle(mainPlayer, opponentPoke, true);
+	battle(mainPlayer, opponentPoke, true);
 	@endcode
 	*/
-	void launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
+	void battle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
 
 	/**
 	@brief

@@ -215,7 +215,7 @@ void world::randomCombat(Player & mainPlayer)
 	    write_to_log_file("Lancement du combat");
 
 		unsigned int randomPoke = rand() % NBPOKEMON;
-		launchBattle(mainPlayer, pokeTab[randomPoke], true);
+		battle(mainPlayer, pokeTab[randomPoke], true);
 		}
 	}
 }
@@ -240,7 +240,7 @@ bool world::isOnHeal(const int x, const int y) const
 	return(mainTerrain.terrainTab[x][y] == 'V');
 }
 
-void world::launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon)
+void world::battle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon)
 {
 	srand(time(NULL));
 	Pokemon * playerPoke = &mainPlayer.firstPokemonAlive();
