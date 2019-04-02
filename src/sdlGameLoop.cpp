@@ -352,6 +352,7 @@ void SdlGame::sdlLoop(world & world)
     SDL_Event events;
     bool quit = false;
     bool hasMoved = false;
+    char moveDirection;
 
     //Uint32 t = SDL_GetTicks(), nt;
 
@@ -374,32 +375,28 @@ void SdlGame::sdlLoop(world & world)
                 {
                     case SDL_SCANCODE_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
                                             {
-                                                sdlLaunchAnimation(world, 'u');
-                                                world.mainPlayer.moveUp();
+                                                moveDirection = 'u';
                                                 //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
                     case SDL_SCANCODE_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
                                             {
-                                                sdlLaunchAnimation(world, 'l');
-                                                world.mainPlayer.moveLeft();
+                                                moveDirection = 'l';
                                                 //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
                     case SDL_SCANCODE_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
                                             {
-                                                sdlLaunchAnimation(world, 'd');
-                                                world.mainPlayer.moveDown();
+                                                moveDirection = 'd';
                                                 //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
                                             break;
                     case SDL_SCANCODE_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
                                             {
-                                                sdlLaunchAnimation(world, 'r');
-                                                world.mainPlayer.moveRight();
+                                                moveDirection = 'r';
                                                 //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
                                                 hasMoved = true;
                                             }
@@ -414,7 +411,31 @@ void SdlGame::sdlLoop(world & world)
             }
 
         }
-        
+        if(hasMoved)
+        {
+            sdlLaunchAnimation(world, moveDirection);
+            switch (moveDirection)
+            {
+                case 'u':
+                    world.mainPlayer.moveUp();
+                    break;
+
+                case 'l':
+                    world.mainPlayer.moveLeft();
+                    break;
+
+                case 'd':
+                    world.mainPlayer.moveDown();
+                    break;
+
+                case 'r':
+                    world.mainPlayer.moveRight();
+                    break;
+            
+                default:
+                    break;
+            }
+        }
         sdlDisplay(world);
         SDL_RenderPresent(renderer);
     }
