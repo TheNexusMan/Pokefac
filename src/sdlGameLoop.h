@@ -63,6 +63,7 @@ class SdlGame
         void sdlDisplay(world world);
         void sdlDisplayMenu();
         void sdlDisplayChatBox();
+        void sdlDisplayBattle();
 
 };
 #endif

@@ -147,7 +147,7 @@ SdlGame::SdlGame()
 
     //Texte
     
-    font = TTF_OpenFont("data/font/pokemon_pixel_font.ttf",50);
+    font = TTF_OpenFont("./data/font/pokemon_pixel_font.ttf",50);
     if(font == NULL)
     {
         cout << "Failed to load the font SDL_TTF : " << TTF_GetError() << endl;
@@ -332,20 +332,22 @@ void SdlGame::sdlLoop(world & world)
             }
 
         }
-    
-        if(!world.menuOn)
+            if(world.menuOn)
         {
-            sdlDisplay(world);
+            sdlDisplayMenu();
+            //sdlDisplayChatBox();
+            
         }
+         if(!world.menuOn)
+         {
+            sdlDisplay(world);
+         }
+
 
         SDL_RenderPresent(renderer);
 
 
-        if(world.menuOn)
-        {
-            sdlDisplayMenu();
-            //sdlDisplayChatBox();
-        }
+
 
     }
 }
@@ -359,7 +361,6 @@ void SdlGame::sdlDisplayMenu()
         r.h = 640;
         SDL_SetRenderDrawColor(renderer, 255,255,255,255);
         SDL_RenderFillRect(renderer, &r);
-        //im_chatBox.draw(renderer, 384,0,256,640);
         SDL_Rect positionMenu1;
         positionMenu1.x = 400;
         positionMenu1.y = 50;
@@ -372,10 +373,24 @@ void SdlGame::sdlDisplayMenu()
         SDL_RenderCopy(renderer,font_menuLoad.getTexture(), NULL, &positionMenu1);
         positionMenu1.y += 100;
         SDL_RenderCopy(renderer, font_menuQuit.getTexture(), NULL, &positionMenu1);
-        SDL_RenderPresent(renderer);
 }
 
 void SdlGame::sdlDisplayChatBox()
 {
-    im_chatBox.draw(renderer,0,448,640,200);
+    im_chatBox.draw(renderer,0,448,639,200);
+}
+
+void SdlGame::sdlDisplayBattle()
+{
+    SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 440;
+    rect.w = 640;
+    rect.h = 200;
+  //  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+   // SDL_RenderClear(renderer);
+
+    SDL_RenderCopy(renderer, im_chatBox.getTexture(), NULL, &rect);
+
+
 }
