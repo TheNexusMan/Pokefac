@@ -238,7 +238,7 @@ void SdlGame::sdlLoop(world & world)
     bool quit = false;
     bool hasMoved = false;
 
-    //Uint32 t = SDL_GetTicks()., nt;
+
 
     while(!quit)
     {
@@ -334,8 +334,9 @@ void SdlGame::sdlLoop(world & world)
         }
             if(world.menuOn)
         {
-            sdlDisplayMenu();
+            //sdlDisplayMenu();
             //sdlDisplayChatBox();
+            sdlDisplayBattle();
             
         }
          if(!world.menuOn)
@@ -387,10 +388,12 @@ void SdlGame::sdlDisplayBattle()
     rect.y = 440;
     rect.w = 640;
     rect.h = 200;
-  //  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
-   // SDL_RenderClear(renderer);
+    
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, im_chatBox.getTexture(),NULL, &rect);
+    
 
-    SDL_RenderCopy(renderer, im_chatBox.getTexture(), NULL, &rect);
 
 
 }
