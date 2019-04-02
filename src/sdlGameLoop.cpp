@@ -139,7 +139,7 @@ SdlGame::SdlGame()
 
     //Ajout ici du chargement des images
     im_Tree.loadFromFile("./data/textures/tree.png", renderer);
-    im_GrassLand.loadFromFile("./data/textures/grass03.png", renderer);
+    im_GrassLand.loadFromFile("./data/textures/grass03_light.jpg", renderer);
     im_herbs.loadFromFile("./data/textures/grass.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
 
