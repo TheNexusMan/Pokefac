@@ -143,6 +143,7 @@ void world::initNPCTab()
 		string sentence;
 		unsigned int idPokemon;
 		unsigned int i = 0;
+		char orientation;
 
 		while (!file.eof() && i < NB_NPC)
 		{
@@ -152,7 +153,8 @@ void world::initNPCTab()
 			NPCTab[i].setPosX(pos);
 			file >> pos;
 			NPCTab[i].setPosY(pos);
-			file >> NPCTab[i].orientation;
+			file >> orientation;
+			NPCTab[i].setOrientation(orientation);
 			file >> NPCTab[i].terrainName;
 			file >> idPokemon;
 			NPCTab[i].NPCPokemon = pokeTab[idPokemon];
@@ -464,14 +466,11 @@ Door world::whichDoor(Player mainPlayer)
 
 void world::teleport(Player & mainPlayer, string terrain, unsigned int x, unsigned int y)
 {
-	if(terrain == mainTerrain.terrainName)
+	if(terrain != mainTerrain.terrainName)
 	{
-		mainPlayer.setNewPos(x,y);
-	}else
-	{	
 		mainTerrain.initTerrain(terrain);
-		mainPlayer.setNewPos(x,y);
 	}
+	mainPlayer.setNewPos(x,y);
 }
 
 void world::menu(bool & gameOn)

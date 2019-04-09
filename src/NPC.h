@@ -22,7 +22,6 @@ class NPC : public Character
 {
 public:
 	unsigned int id;
-	char orientation;
 	unsigned int nbDialog;
 	string dialog[4];
 	Pokemon NPCPokemon;
@@ -55,20 +54,6 @@ public:
 	@endcode
 	*/
 	~NPC();
-
-	/**
-	@brief
-	Retourne l'orientation du NPC (n = Nord, s = Sud, e = Est, o = Ouest)
-	
-	@param none
-	@return orientation
-
-	Exemple Code Block / Visual
-	@code
-	NPC.getOrientation();
-	@endcode
-	*/
-	char getOrientation();
 };
 
 #endif

@@ -143,8 +143,18 @@ SdlGame::SdlGame()
     im_herbs.loadFromFile("./data/textures/grass.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
     im_chatBox.loadFromFile("./data/textures/chatbox.png", renderer);
-
+    im_PlayerImage.loadFromFile("./data/textures/playerSprite.png", renderer);
     //fin de l'ajout du chargement des images
+
+
+    //Chargement des texture et données pour l'affichage du joueur
+    playerPosition.x = 4*TAILLE_SPRITE+5; //position de l'affichage du joueur
+    playerPosition.y = 4*TAILLE_SPRITE-2;
+    SDL_QueryTexture(im_PlayerImage.getTexture(), NULL, NULL, &textureWidth, &textureHeight);
+    frameSize = textureWidth / 4;
+    playerPosition.w = playerPosition.h = frameSize;
+    playerRect.x = playerRect.y = 0;
+    playerRect.w = playerRect.h = frameSize;
 
 
     //Texte
@@ -237,54 +247,96 @@ void SdlGame::sdlDisplayAllWorld(world world)
 void SdlGame::sdlLaunchAnimation(world world, char direction)
 {
     int tileX, tileY;
+    unsigned int refresh = 0;
     
     switch (direction)
     {
         case 'u':
             tileX = 0;
             tileY = 0;
+            playerRect.y = 3*frameSize;
             while(tileY < TAILLE_SPRITE)
             {
                 sdlDisplay(world, tileX, tileY);
+
+                if((refresh % 15) == 0)
+                {
+                    playerRect.x += frameSize;
+                    if(playerRect.x >= textureWidth) playerRect.x = 0;
+                }
+
+                SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
+
                 SDL_RenderPresent(renderer);
-                SDL_RenderClear(renderer);
                 tileY = tileY + 3;
+                refresh++;
             }
             break;
 
         case 'l':
             tileX = 0;
             tileY = 0;
+            playerRect.y = frameSize;
             while(tileX < TAILLE_SPRITE)
             {
                 sdlDisplay(world, tileX, tileY);
+
+                if((refresh % 15) == 0)
+                {
+                    playerRect.x += frameSize;
+                    if(playerRect.x >= textureWidth) playerRect.x = 0;
+                }
+
+                SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
+
                 SDL_RenderPresent(renderer);
-                SDL_RenderClear(renderer);
                 tileX = tileX + 3;
+                refresh++;
             }
             break;
 
         case 'd':
             tileX = 0;
             tileY = 0;
+            playerRect.y = 0;
             while(tileY >= -TAILLE_SPRITE)
             {
                 sdlDisplay(world, tileX, tileY);
+
+                if((refresh % 15) == 0)
+                {
+                    playerRect.x += frameSize;
+                    if(playerRect.x >= textureWidth) playerRect.x = 0;
+                }
+
+                SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
+
                 SDL_RenderPresent(renderer);
-                SDL_RenderClear(renderer);
                 tileY = tileY - 3;
+                refresh++;
             }
             break;
 
         case 'r':
             tileX = 0;
             tileY = 0;
+            playerRect.y = 2*frameSize;
             while(tileX >= -TAILLE_SPRITE)
             {
                 sdlDisplay(world, tileX, tileY);
+
+                if((refresh % 15) == 0)
+                {
+                    playerRect.x += frameSize;
+                    if(playerRect.x >= textureWidth) playerRect.x = 0;
+                }
+
+                SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
+
                 SDL_RenderPresent(renderer);
                 SDL_RenderClear(renderer);
                 tileX = tileX - 3;
+                refresh++;
             }
             break;
 
@@ -326,7 +378,35 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
             }
         }
     }
-    im_Tree.draw(renderer, 4 * TAILLE_SPRITE, 4 * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+
+    SDL_Rect tempPosPlayer = playerRect;
+
+    switch (world.mainPlayer.getOrientation())
+    {
+        case 'n':
+            tempPosPlayer.x = 0;
+            tempPosPlayer.y = 3*frameSize;
+            break;
+        
+        case 's':
+            tempPosPlayer.x = 0;
+            tempPosPlayer.y = 0;
+            break;
+        
+        case 'e':
+            tempPosPlayer.x = 0;
+            tempPosPlayer.y = 2*frameSize;
+            break;
+
+        case 'o':
+            tempPosPlayer.x = 0;
+            tempPosPlayer.y = frameSize;
+            break;
+    
+        default:
+            break;
+    }
+    SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &tempPosPlayer, &playerPosition);
 }
 
 void SdlGame::sdlLoop(world & world)
@@ -336,19 +416,8 @@ void SdlGame::sdlLoop(world & world)
     bool hasMoved = false;
     char moveDirection;
 
-
-
     while(!quit)
     {
-       
-
-        if(hasMoved)
-		{
-			world.randomCombat(world.mainPlayer);
-			world.healAll(world.mainPlayer);
-			
-			hasMoved = false;
-		}
         while(SDL_PollEvent(&events))
         {
             if(events.type == SDL_QUIT) quit = true;
@@ -356,76 +425,84 @@ void SdlGame::sdlLoop(world & world)
             {
                 switch(events.key.keysym.sym)
                 {
-                    case SDLK_UP: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
-                                            {
-                                                moveDirection = 'u';
-                                                //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
-                                                hasMoved = true;
-                                                
-                                            }
-                                            break;
-                    case SDLK_LEFT: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
-                                            {
-                                                moveDirection = 'l';
-                                                //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
-                                                hasMoved = true;
-                                            } 
-                                            break;
-                    case SDLK_DOWN: if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
-                                            {
-                                                moveDirection = 'd';
-                                                //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
-                                                hasMoved = true;
-                                            }
-                                            break;
-                    case SDLK_RIGHT:if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
-                                            {
-                                                moveDirection = 'r';
-                                                //cout << "X : " << world.mainPlayer.getPosX() << " Y : " << world.mainPlayer.getPosY() << endl;
-                                                hasMoved = true;
-                                            }
-                                            break;
-                    case SDLK_m: 
+                    case SDLK_UP:
+                        world.mainPlayer.setOrientation('n');
+                        if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
+                            {
+                                moveDirection = 'u';
+                                hasMoved = true;
+                            }
+                            break;
 
-                                    world.menuOn = !world.menuOn;
-                                    break;
+                    case SDLK_LEFT:
+                        world.mainPlayer.setOrientation('o');
+                        if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
+                            {
+                                moveDirection = 'l';
+                                hasMoved = true;
+                            } 
+                            break;
+
+                    case SDLK_DOWN:
+                        world.mainPlayer.setOrientation('s');
+                        if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
+                            {
+                                moveDirection = 'd';
+                                hasMoved = true;
+                            }
+                            break;
+
+                    case SDLK_RIGHT:
+                        world.mainPlayer.setOrientation('e');
+                        if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
+                            {
+                                moveDirection = 'r';
+                                hasMoved = true;
+                            }
+                            break;
+
+                    case SDLK_m: 
+                        world.menuOn = !world.menuOn;
+                        break;
                     
                     case SDLK_x: 
-                                    quit=true;
-                                    break; 
+                        quit=true;
+                        break; 
 
                     case SDLK_1:
-                    if(world.menuOn)
-                    {
-                        world.displayPokemon();
-                    }      
-                    break;
+                        if(world.menuOn)
+                        {
+                            world.displayPokemon();
+                        }      
+                        break;
 
                     case SDLK_2:
-                    if(world.menuOn)
-                    {
-                        world.saveGame("saveData");
-                        world.menuOn = false;
-                    }
-                     break;
-                    case SDLK_3:
-                    if(world.menuOn)
-                    {
-                        world.loadGame("saveData");
-                        world.menuOn = false;
-                    }
-                    break;
-                    case SDLK_4:
-                    if(world.menuOn)
-                    {
-                        quit = true;
-                    }
-                    break;
+                        if(world.menuOn)
+                        {
+                            world.saveGame("saveData");
+                            world.menuOn = false;
+                        }
+                        break;
 
-                    default : break;
+                    case SDLK_3:
+                        if(world.menuOn)
+                        {
+                            world.loadGame("saveData");
+                            world.menuOn = false;
+                        }
+                        break;
+
+                    case SDLK_4:
+                        if(world.menuOn)
+                        {
+                            quit = true;
+                        }
+                        break;
+
+                    default:
+                        break;
                     
                 }
-                world.door();
             }
 
         }
@@ -461,17 +538,20 @@ void SdlGame::sdlLoop(world & world)
                 default:
                     break;
             }
+
+            world.door();
+            world.randomCombat(world.mainPlayer);
+			world.healAll(world.mainPlayer);
+			
+			hasMoved = false;
         }
 
         if(!world.menuOn)
         {
             sdlDisplay(world, 0, 0);
         }
+
         SDL_RenderPresent(renderer);
-
-
-
-
     }
 }
 

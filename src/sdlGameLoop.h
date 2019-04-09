@@ -49,13 +49,19 @@ class SdlGame
         Mix_Chunk * sound;
         bool withSound;
 
-    //Rajouter les images a charger ici
-    Image im_Tree;
-    Image im_GrassLand;
-    Image im_herbs;
-    Image im_MissingTexture;
-    Image im_chatBox;
-    //Fin de rajout des images a charger
+        //Rajouter les images a charger ici
+        Image im_Tree;
+        Image im_GrassLand;
+        Image im_herbs;
+        Image im_MissingTexture;
+        Image im_chatBox;
+        Image im_PlayerImage;
+        //Fin de rajout des images a charger
+
+        int frameSize, textureWidth, textureHeight;
+        SDL_Texture *playerSpriteTexture;
+        SDL_Rect playerRect;
+        SDL_Rect playerPosition;
 
     public:
         SdlGame();

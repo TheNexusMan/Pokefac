@@ -117,7 +117,34 @@ public:
 	@endcode */
 	void setIdleTexture();
 
+	/**
+	@brief 
+	Retourne l'orientation du personnage (n = Nord, s = Sud, e = Est, o = Ouest)
+	
+	@param none
+	@return orientation
+	
+	Exemple Code Block / Visual
+	@code
+	NPC.getOrientation();
+	@endcode */
+	char getOrientation();
+
+	/**
+	@brief 
+	Modifie l'orientation du personnage avec une nouvelle orientation
+	
+	@param newOrientation
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	NPC.setOrientation('n');
+	@endcode */
+	void setOrientation(char newOrientation);
+
 private:
+	char orientation;
 	unsigned int posX;
 	unsigned int posY;
 };
