@@ -58,6 +58,8 @@ public:
 	Door doors[NB_DOOR];
 	string gameSaveName;
 	bool menuOn;
+	bool isSaving = false;
+	bool isLoading = false;
 
 	/**
 	@brief

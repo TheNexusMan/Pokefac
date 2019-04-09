@@ -25,6 +25,7 @@ void write_to_log_file(string text) //to_string(valeur);
 
 void world::saveGame(string saveName)
 {
+	isSaving = true;
 	string finalPath = "./data/saveGames/";
 	string name = finalPath + saveName + ".txt";
 	mkdir(finalPath.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -47,6 +48,7 @@ void world::saveGame(string saveName)
 
 void world::loadGame(string saveName) 
 {
+	isLoading = true;
 	string name = "./data/saveGames/" + saveName + ".txt";
 	ifstream file(name);
 	unsigned int posX, posY, cash;

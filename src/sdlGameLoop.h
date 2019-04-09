@@ -44,6 +44,12 @@ class SdlGame
         Image font_menuSave;
         Image font_menuLoad;
         Image font_menuQuit;
+        Image font_chatBox;
+        Image font_chatPokeGo;
+
+        Image font_gameSaved;
+        Image font_gameLoaded;
+
         SDL_Color font_color;
 
         Mix_Chunk * sound;
@@ -55,6 +61,11 @@ class SdlGame
     Image im_herbs;
     Image im_MissingTexture;
     Image im_chatBox;
+    Image im_battleBG;
+
+
+    //Pokemons
+    Image im_linuchu;
     //Fin de rajout des images a charger
 
     public:
@@ -62,11 +73,19 @@ class SdlGame
         ~SdlGame();
         void sdlLoop(world & world);
         void sdlDisplayMenu();
-        void sdlDisplayChatBox();
-        void sdlDisplayBattle();
         void sdlDisplayAllWorld(world world);
         void sdlLaunchAnimation(world world, char direction);
         void sdlDisplay(world world, int tileX, int tileY);
+
+        void sdlDisplayBattle(Uint32 &deltaTime, Uint32 &elapsedTime, bool dresseur);
+        void sdlDisplayChatBox(world world);
+        void sdlDisplayPokemonMenu();
+
+
+        void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
+        void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
+
+
 };
 #endif
 
