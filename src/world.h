@@ -33,7 +33,7 @@ using namespace std;
 
 const unsigned int NBPOKEMON = 3;
 const unsigned int NB_NPC = 3;
-const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
+const unsigned int NB_DOOR = 8; //Toujours un multiple de 2
 
 struct Door
 {
