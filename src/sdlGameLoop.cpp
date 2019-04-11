@@ -139,10 +139,14 @@ SdlGame::SdlGame()
     //Ajout ici du chargement des images
     im_Tree.loadFromFile("./data/textures/tree.png", renderer);
     im_GrassLand.loadFromFile("./data/textures/grass03_light.jpg", renderer);
-    im_herbs.loadFromFile("./data/textures/grass.png", renderer);
+    im_herbs.loadFromFile("./data/textures/haute_herbes.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
     im_chatBox.loadFromFile("./data/textures/chatbox.png", renderer);
     im_battleBG.loadFromFile("./data/textures/battleBG.png", renderer);
+
+    im_arena.loadFromFile("./data/textures/arena.png", renderer);
+
+    //Pokemons
     im_linuchu.loadFromFile("./data/textures/linuchu.png", renderer);
 
     //fin de l'ajout du chargement des images
@@ -231,7 +235,7 @@ void SdlGame::sdlDisplayAllWorld(world world)
             }
         }
     }
-    im_Tree.draw(renderer, world.mainPlayer.getPosY() * TAILLE_SPRITE, world.mainPlayer.getPosX() * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
+    // im_Tree.draw(renderer, world.mainPlayer.getPosY() * TAILLE_SPRITE, world.mainPlayer.getPosX() * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
     //im_Player.draw(renderer, world.mainPlayer.getPosX()*TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
 }
 
@@ -299,18 +303,25 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
+
     int Xplayer = world.mainPlayer.getPosX();
     int Yplayer = world.mainPlayer.getPosY();
+    
+    //im_GrassLand.draw(renderer, 0, 0, TAILLE_SPRITE*9, TAILLE_SPRITE*9 );
+
 
     for (int x = Yplayer - 5; x < Yplayer + 6; x++)
     {
         for (int y = Xplayer - 5; y < Xplayer + 6; y++)
         {
+
             if (x >= 0 && x < SIZETERRAIN && y >= 0 && y < SIZETERRAIN)
             {
+
                 if (world.mainTerrain.terrainTab[y][x] == '#')
                 {
-                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX - 20, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-55, TAILLE_SPRITE+50, TAILLE_SPRITE+100);
                 }
                 if (world.mainTerrain.terrainTab[y][x] == '.')
                 {
@@ -318,10 +329,15 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
                 }
                 if (world.mainTerrain.terrainTab[y][x] == 'H')
                 {
-                    im_herbs.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+
+                     im_herbs.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
+
+
                 if ((world.mainTerrain.terrainTab[y][x] == 'O') || (world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
                 {
+
                     im_MissingTexture.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
             }
@@ -329,6 +345,13 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
     }
     im_Tree.draw(renderer, 4 * TAILLE_SPRITE, 4 * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
 }
+
+
+
+
+///////////////////////////////////
+//              LOOP             //
+///////////////////////////////////
 
 void SdlGame::sdlLoop(world &world)
 {

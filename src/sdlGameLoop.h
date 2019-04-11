@@ -62,7 +62,7 @@ class SdlGame
     Image im_MissingTexture;
     Image im_chatBox;
     Image im_battleBG;
-
+    Image im_arena;
 
     //Pokemons
     Image im_linuchu;
