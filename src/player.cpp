@@ -40,8 +40,8 @@ void Player::addMoney(unsigned int adding)
 
 void Player::initPlayer(const Pokemon poke)
 {	
-	setPosX(1);
-	setPosY(2); //Place le joueur aux coordonnées (1,2)
+	setPosX(5);
+	setPosY(5); //Place le joueur aux coordonnées (5,5)
 	addMoney(100); //Lui donne 100 en Argent
 	setPokeball(3); // Lui donne 5 pokeballs
 	tabPokemon[0] = poke;

@@ -50,6 +50,12 @@ class SdlGame
         Image font_gameSaved;
         Image font_gameLoaded;
 
+
+        Image font_choosePoke;
+        
+        Image font_pokemonName;
+        Image font_pokemonHP;
+
         SDL_Color font_color;
 
         Mix_Chunk * sound;
@@ -62,6 +68,9 @@ class SdlGame
     Image im_MissingTexture;
     Image im_chatBox;
     Image im_battleBG;
+    Image im_sandRoad;
+
+
     Image im_arena;
 
     //Pokemons
@@ -79,12 +88,13 @@ class SdlGame
 
         void sdlDisplayBattle(Uint32 &deltaTime, Uint32 &elapsedTime, bool dresseur);
         void sdlDisplayChatBox(world world);
-        void sdlDisplayPokemonMenu();
+
 
 
         void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
         void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
-
+        
+        void sdlDisplayPokemonMenu(world world, bool inBattle);
 
 };
 #endif

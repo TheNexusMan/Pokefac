@@ -188,7 +188,7 @@ void world::initGame()
 	logFilesStart();
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
-	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
+	mainTerrain.initTerrain("house1"); // Initialisation du terrain1
 	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
 	initDoor(); // initialisation des portes
 
