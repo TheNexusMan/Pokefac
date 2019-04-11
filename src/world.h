@@ -57,6 +57,7 @@ public:
 	Pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
 	string gameSaveName;
+	bool hasMoved;
 	bool menuOn;
 
 	/**

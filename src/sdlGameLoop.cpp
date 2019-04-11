@@ -248,6 +248,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
 {
     int tileX, tileY;
     unsigned int refresh = 0;
+    playerRect.x = 0;
     
     switch (direction)
     {
@@ -258,8 +259,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             while(tileY < TAILLE_SPRITE)
             {
                 sdlDisplay(world, tileX, tileY);
-
-                if((refresh % 15) == 0)
+                if((refresh % 10) == 0)
                 {
                     playerRect.x += frameSize;
                     if(playerRect.x >= textureWidth) playerRect.x = 0;
@@ -268,7 +268,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
 
                 SDL_RenderPresent(renderer);
-                tileY = tileY + 3;
+                tileY = tileY + 2;
                 refresh++;
             }
             break;
@@ -281,7 +281,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             {
                 sdlDisplay(world, tileX, tileY);
 
-                if((refresh % 15) == 0)
+                if((refresh % 10) == 0)
                 {
                     playerRect.x += frameSize;
                     if(playerRect.x >= textureWidth) playerRect.x = 0;
@@ -290,20 +290,21 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
 
                 SDL_RenderPresent(renderer);
-                tileX = tileX + 3;
+                tileX = tileX + 2;
                 refresh++;
             }
             break;
 
         case 'd':
+            cout << "je repasse ici" << endl;
             tileX = 0;
             tileY = 0;
             playerRect.y = 0;
             while(tileY >= -TAILLE_SPRITE)
             {
                 sdlDisplay(world, tileX, tileY);
-
-                if((refresh % 15) == 0)
+        
+                if((refresh % 10) == 0)
                 {
                     playerRect.x += frameSize;
                     if(playerRect.x >= textureWidth) playerRect.x = 0;
@@ -312,8 +313,9 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &playerRect, &playerPosition);
 
                 SDL_RenderPresent(renderer);
-                tileY = tileY - 3;
+                tileY = tileY - 2;
                 refresh++;
+                cout << refresh << endl;
             }
             break;
 
@@ -325,7 +327,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             {
                 sdlDisplay(world, tileX, tileY);
 
-                if((refresh % 15) == 0)
+                if((refresh % 10) == 0)
                 {
                     playerRect.x += frameSize;
                     if(playerRect.x >= textureWidth) playerRect.x = 0;
@@ -335,7 +337,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
 
                 SDL_RenderPresent(renderer);
                 SDL_RenderClear(renderer);
-                tileX = tileX - 3;
+                tileX = tileX - 2;
                 refresh++;
             }
             break;
@@ -379,41 +381,44 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
         }
     }
 
-    SDL_Rect tempPosPlayer = playerRect;
-
-    switch (world.mainPlayer.getOrientation())
+    if(!world.hasMoved)
     {
-        case 'n':
-            tempPosPlayer.x = 0;
-            tempPosPlayer.y = 3*frameSize;
-            break;
-        
-        case 's':
-            tempPosPlayer.x = 0;
-            tempPosPlayer.y = 0;
-            break;
-        
-        case 'e':
-            tempPosPlayer.x = 0;
-            tempPosPlayer.y = 2*frameSize;
-            break;
+        SDL_Rect tempPosPlayer = playerRect;
 
-        case 'o':
-            tempPosPlayer.x = 0;
-            tempPosPlayer.y = frameSize;
-            break;
-    
-        default:
-            break;
+        switch (world.mainPlayer.getOrientation())
+        {
+            case 'n':
+                tempPosPlayer.x = 0;
+                tempPosPlayer.y = 3*frameSize;
+                break;
+            
+            case 's':
+                tempPosPlayer.x = 0;
+                tempPosPlayer.y = 0;
+                break;
+            
+            case 'e':
+                tempPosPlayer.x = 0;
+                tempPosPlayer.y = 2*frameSize;
+                break;
+
+            case 'o':
+                tempPosPlayer.x = 0;
+                tempPosPlayer.y = frameSize;
+                break;
+        
+            default:
+                break;
+        }
+        SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &tempPosPlayer, &playerPosition);
     }
-    SDL_RenderCopy(renderer, im_PlayerImage.getTexture(), &tempPosPlayer, &playerPosition);
 }
 
 void SdlGame::sdlLoop(world & world)
 {
     SDL_Event events;
     bool quit = false;
-    bool hasMoved = false;
+    world.hasMoved = false;
     char moveDirection;
 
     while(!quit)
@@ -430,7 +435,7 @@ void SdlGame::sdlLoop(world & world)
                         if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY()))
                             {
                                 moveDirection = 'u';
-                                hasMoved = true;
+                                world.hasMoved = true;
                             }
                             break;
 
@@ -439,7 +444,7 @@ void SdlGame::sdlLoop(world & world)
                         if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1))
                             {
                                 moveDirection = 'l';
-                                hasMoved = true;
+                                world.hasMoved = true;
                             } 
                             break;
 
@@ -448,7 +453,7 @@ void SdlGame::sdlLoop(world & world)
                         if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY()))
                             {
                                 moveDirection = 'd';
-                                hasMoved = true;
+                                world.hasMoved = true;
                             }
                             break;
 
@@ -457,7 +462,7 @@ void SdlGame::sdlLoop(world & world)
                         if(world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1))
                             {
                                 moveDirection = 'r';
-                                hasMoved = true;
+                                world.hasMoved = true;
                             }
                             break;
 
@@ -501,7 +506,6 @@ void SdlGame::sdlLoop(world & world)
 
                     default:
                         break;
-                    
                 }
             }
 
@@ -514,7 +518,7 @@ void SdlGame::sdlLoop(world & world)
             //sdlDisplayBattle();
         }
 
-        if(hasMoved)
+        if(world.hasMoved)
         {
             sdlLaunchAnimation(world, moveDirection);
             switch (moveDirection)
@@ -543,7 +547,7 @@ void SdlGame::sdlLoop(world & world)
             world.randomCombat(world.mainPlayer);
 			world.healAll(world.mainPlayer);
 			
-			hasMoved = false;
+			world.hasMoved = false;
         }
 
         if(!world.menuOn)
