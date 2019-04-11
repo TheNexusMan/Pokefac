@@ -296,7 +296,6 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
             break;
 
         case 'd':
-            cout << "je repasse ici" << endl;
             tileX = 0;
             tileY = 0;
             playerRect.y = 0;
@@ -315,7 +314,6 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY - 2;
                 refresh++;
-                cout << refresh << endl;
             }
             break;
 
@@ -423,6 +421,7 @@ void SdlGame::sdlLoop(world & world)
 
     while(!quit)
     {
+        SDL_FlushEvent(events.type);
         while(SDL_PollEvent(&events))
         {
             if(events.type == SDL_QUIT) quit = true;
@@ -508,7 +507,6 @@ void SdlGame::sdlLoop(world & world)
                         break;
                 }
             }
-
         }
 
         if(world.menuOn)
@@ -546,7 +544,6 @@ void SdlGame::sdlLoop(world & world)
             world.door();
             world.randomCombat(world.mainPlayer);
 			world.healAll(world.mainPlayer);
-			
 			world.hasMoved = false;
         }
 
