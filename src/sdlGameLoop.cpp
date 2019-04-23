@@ -451,14 +451,18 @@ void SdlGame::sdlLoop(world &world)
 
     Uint32 deltaTime = SDL_GetTicks(), elapsedTime;
 
+
+                   
+
+    while(!quit)
+    {
+            if( Mix_PlayingMusic() == 0)
+    {
         if (Mix_PlayMusic( sound, -1 ) == -1)
         {
             return 1;
         }
-                   
-
-    while(!quift)
-    {
+    } 
         SDL_FlushEvent(events.type);
         while (SDL_PollEvent(&events))
         {
