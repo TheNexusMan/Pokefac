@@ -98,7 +98,8 @@ class SdlGame
         void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
         void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
         
-        void sdlDisplayPokemonMenu(world world, bool inBattle);
+        void sdlDisplayPokemonMenu(world &world, bool inBattle);
+        void sdlDisplayPokemonInfos(world &world, int idPoke);
 
 };
 #endif

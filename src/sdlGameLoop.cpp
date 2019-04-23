@@ -518,7 +518,14 @@ void SdlGame::sdlLoop(world &world)
                         {
                             //world.displayPokemon();
                             sdlDisplayPokemonMenu(world, false);
-                        }      
+                            cout << "menu1" << endl;
+                        }else if(world.menuOn == 2)
+                        {
+                            cout << world.mainPlayer.nbPokemon << endl;
+                            cout << "menu2" << endl;
+                            if(world.mainPlayer.nbPokemon > 0)
+                                sdlDisplayPokemonInfos(world, 0);
+                        }
                         break;
 
                     case SDLK_2:
@@ -526,6 +533,11 @@ void SdlGame::sdlLoop(world &world)
                         {
                             world.saveGame("saveData");
                             world.menuOn = 0;
+                        }else if(world.menuOn == 2)
+                        {
+                            cout << world.mainPlayer.nbPokemon << endl;
+                            if(world.mainPlayer.nbPokemon > 1)
+                                sdlDisplayPokemonInfos(world, 1);
                         }
                         break;
 
@@ -534,6 +546,10 @@ void SdlGame::sdlLoop(world &world)
                         {
                             world.loadGame("saveData");
                             world.menuOn = 0;
+                        }else if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 2)
+                                sdlDisplayPokemonInfos(world, 2);
                         }
                         break;
 
@@ -541,6 +557,26 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 1)
                         {
                             quit = true;
+                        }else if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 3)
+                                sdlDisplayPokemonInfos(world, 3);
+                        }
+                        break;
+                    
+                    case SDLK_5:
+                        if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 4)
+                                sdlDisplayPokemonInfos(world, 4);
+                        }
+                        break;
+                    
+                    case SDLK_6:
+                        if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 5)
+                                sdlDisplayPokemonInfos(world, 5);
                         }
                         break;
 
@@ -550,7 +586,7 @@ void SdlGame::sdlLoop(world &world)
             }
         }
 
-        if (world.menuOn)
+        if (world.menuOn == 1)
         {
             sdlDisplayMenu();
             //sdlDisplayChatBox(world);
@@ -789,9 +825,10 @@ void SdlGame::sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world
     }
 }
 
-void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
+void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
 {
-    SDL_Event events;
+    world.menuOn = 2;
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_Rect forBattle;
@@ -834,10 +871,10 @@ void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
     {
         forBattle.y += 5;
         hpPos.y +=5;
-        for(int i = 0; i < 6; i++)
+        for(unsigned int i = 0; i < world.mainPlayer.nbPokemon; i++)
         {
-            pokemonNameStr = world.pokeTab[i].name;
-            pokemonHP = "-- HP : " + to_string(world.pokeTab[i].health) + " / " + to_string(world.pokeTab[i].maxHealth);
+            pokemonNameStr = world.mainPlayer.tabPokemon[i].name;
+            pokemonHP = "-- HP : " + to_string(world.mainPlayer.tabPokemon[i].health) + " / " + to_string(world.mainPlayer.tabPokemon[i].maxHealth);
 
             font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
             font_pokemonName.loadFromCurrentSurface(renderer);
@@ -850,43 +887,26 @@ void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
             forBattle.y +=100;
             hpPos.y = forBattle.y + 30;
         }
-
-        
-        if (events.type == SDL_KEYDOWN)
-        {
-            switch (events.key.keysym.sym)
-            {
-                case SDLK_1:
-                    world.mainPlayer.getPokemon(1).displayInfos();
-                break;
-                
-                case SDLK_2:
-                    world.mainPlayer.getPokemon(2).displayInfos();
-                break;
-
-                case SDLK_3:
-                    world.mainPlayer.getPokemon(3).displayInfos();
-                break;
-
-                case SDLK_4:
-                    world.mainPlayer.getPokemon(4).displayInfos();
-                break;
-
-                case SDLK_5:
-                    world.mainPlayer.getPokemon(5).displayInfos();
-                break;
-
-                case SDLK_6:
-                    world.mainPlayer.getPokemon(6).displayInfos();
-                break;
-                
-                default:
-                break;
-            }
-        }
-        SDL_FlushEvent(events.type);
-
     }
-    
+}
 
+void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
+{
+    world.menuOn = 3;
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+
+    // cout << "Id : #" << id << endl;
+	// cout << "Nom : " << name << endl;
+	// cout << "Type : " << type << endl;
+	// cout << "Vie : ";
+	// displayHealth();
+	// cout << endl << endl;;
+	// cout << "Attaques :" << endl;
+	// cout << "Nom Puissance" << endl;
+	// for(unsigned int i = 0; i < 4; i++)
+	// {
+	// 	cout << attackChoice[i].name << " " << attackChoice[i].damagePoints << endl;
+	// }
 }
