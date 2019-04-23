@@ -450,11 +450,12 @@ void SdlGame::sdlLoop(world &world)
     char moveDirection;
 
     Uint32 deltaTime = SDL_GetTicks(), elapsedTime;
-     if( Mix_PlayChannel( -1, scratch, 0 ) == -1 )
+
+     if( Mix_PlayChannel( -1, sound, 0 ) == -1 )
                     {
                         return 1;
                     }
-                    
+
     while(!quit)
     {
         SDL_FlushEvent(events.type);
