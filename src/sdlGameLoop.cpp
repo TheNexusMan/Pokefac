@@ -118,7 +118,7 @@ SdlGame::SdlGame()
         withSound = false;
     }
     else
-        withSound = false;
+        withSound = true;
 
     int dimx, dimy;
     //dimx = SIZETERRAIN * TAILLE_SPRITE;
