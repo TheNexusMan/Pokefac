@@ -203,7 +203,7 @@ SdlGame::SdlGame()
     // Sounds
     if (withSound)
     {
-        sound = Mix_LoadWAV("./data/Yeah.wav");
+        sound = Mix_LoadMUS("./data/Yeah.wav");
         if (sound == NULL)
         {
             cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
@@ -452,11 +452,8 @@ void SdlGame::sdlLoop(world &world)
     Uint32 deltaTime = SDL_GetTicks(), elapsedTime;
           
                if( Mix_PlayingMusic() == 0)
-                 {
-                     if (Mix_PlayMusic( sound, -1 ) == -1)
-                         {
-                          return 1;
-                        }
+                {
+                    Mix_PlayMusic( sound, -1 );
                 } 
                 
     while(!quit)
