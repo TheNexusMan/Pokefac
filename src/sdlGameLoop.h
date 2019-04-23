@@ -69,13 +69,17 @@ class SdlGame
     Image im_chatBox;
     Image im_battleBG;
     Image im_sandRoad;
-
-
+    Image im_PlayerImage;
     Image im_arena;
 
     //Pokemons
     Image im_linuchu;
     //Fin de rajout des images a charger
+
+    int frameSize, textureWidth, textureHeight;
+    SDL_Texture *playerSpriteTexture;
+    SDL_Rect playerRect;
+    SDL_Rect playerPosition;
 
     public:
         SdlGame();

@@ -43,3 +43,13 @@ unsigned int Character::getPosY()
 {
 	return posY;
 }
+
+char Character::getOrientation()
+{
+	return orientation;
+}
+
+void Character::setOrientation(char newOrientation)
+{
+	orientation = newOrientation;
+}
