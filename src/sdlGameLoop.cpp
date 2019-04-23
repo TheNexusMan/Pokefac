@@ -464,7 +464,7 @@ void SdlGame::sdlLoop(world &world)
                 {
                     case SDLK_UP:
                         world.mainPlayer.setOrientation('n');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && world.menuOn == 0)
                             {
                                 moveDirection = 'u';
                                 world.hasMoved = true;
@@ -473,7 +473,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_LEFT:
                         world.mainPlayer.setOrientation('o');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && world.menuOn == 0)
                             {
                                 moveDirection = 'l';
                                 world.hasMoved = true;
@@ -482,7 +482,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_DOWN:
                         world.mainPlayer.setOrientation('s');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && world.menuOn == 0)
                             {
                                 moveDirection = 'd';
                                 world.hasMoved = true;
@@ -491,15 +491,22 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_RIGHT:
                         world.mainPlayer.setOrientation('e');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && world.menuOn == 0)
                             {
                                 moveDirection = 'r';
                                 world.hasMoved = true;
                             }
                             break;
 
-                    case SDLK_m: 
-                        world.menuOn = !world.menuOn;
+                    case SDLK_m:
+                        if(world.menuOn == 1)
+                        {
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 0)
+                        {
+                            world.menuOn = 1;
+                        }
+                            
                         break;
                     
                     case SDLK_x: 
@@ -507,7 +514,7 @@ void SdlGame::sdlLoop(world &world)
                         break; 
 
                     case SDLK_1:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             //world.displayPokemon();
                             sdlDisplayPokemonMenu(world, false);
@@ -515,23 +522,23 @@ void SdlGame::sdlLoop(world &world)
                         break;
 
                     case SDLK_2:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             world.saveGame("saveData");
-                            world.menuOn = false;
+                            world.menuOn = 0;
                         }
                         break;
 
                     case SDLK_3:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             world.loadGame("saveData");
-                            world.menuOn = false;
+                            world.menuOn = 0;
                         }
                         break;
 
                     case SDLK_4:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             quit = true;
                         }
@@ -592,7 +599,7 @@ void SdlGame::sdlLoop(world &world)
 			world.hasMoved = false;
         }
 
-        if (!world.menuOn && !world.isSaving && !world.isLoading)
+        if (world.menuOn == 0 && !world.isSaving && !world.isLoading)
         {
             sdlDisplay(world, 0, 0);
         }
