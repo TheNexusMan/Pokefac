@@ -589,8 +589,6 @@ void SdlGame::sdlLoop(world &world)
         { 
             if( Mix_PlayChannel( -1, footstep, 0 ) == -1 )
                     {
-                         SDL_Quit();
-                        exit(1);
                     }
                     
             sdlLaunchAnimation(world, moveDirection);
@@ -620,6 +618,7 @@ void SdlGame::sdlLoop(world &world)
             world.randomCombat(world.mainPlayer);
 			world.healAll(world.mainPlayer);
 			world.hasMoved = false;
+            
         }
 
         if (!world.menuOn && !world.isSaving && !world.isLoading)
