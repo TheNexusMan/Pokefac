@@ -203,6 +203,7 @@ SdlGame::SdlGame()
     // Sounds
     if (withSound)
     {
+
         //chargement des musiques 
         sound = Mix_LoadMUS("./data/music/generalSong.wav");
         battle = Mix_LoadMUS("./data/music/battleMusic.wav");
@@ -466,8 +467,7 @@ void SdlGame::sdlLoop(world &world)
           
                if( Mix_PlayingMusic() == 0)
                  {
-                     Mix_PlayMusic( sound, -1 )
-                          
+                     Mix_PlayMusic( sound, -1 );
                 } 
 
     while(!quit)
