@@ -59,6 +59,8 @@ class SdlGame
         SDL_Color font_color;
 
         Mix_Music * sound;
+        Mix_Music * battle;
+        Mix_Chunk * footstep;
         bool withSound;
 
     //Rajouter les images a charger ici

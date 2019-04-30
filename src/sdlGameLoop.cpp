@@ -213,11 +213,10 @@ SdlGame::SdlGame()
             SDL_Quit();
             exit(1);
         }
+        
         //chargement des effets sonore
-         footstep = Mix_LoadWAV( "./data/music/pasHerbe.wav" );
+    footstep = Mix_LoadWAV( "./data/music/pasHerbe.wav" );
 
-
-   
     if( ( footstep == NULL ) )
     {
                     cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
@@ -590,7 +589,8 @@ void SdlGame::sdlLoop(world &world)
         { 
             if( Mix_PlayChannel( -1, footstep, 0 ) == -1 )
                     {
-                        return 1;
+                         SDL_Quit();
+                        exit(1);
                     }
                     
             sdlLaunchAnimation(world, moveDirection);
