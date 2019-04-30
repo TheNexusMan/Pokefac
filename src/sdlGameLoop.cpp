@@ -594,22 +594,22 @@ void SdlGame::sdlLoop(world &world)
             switch (moveDirection)
             {
             case 'u':
-                 Mix_PlayChannel( -1, footstep, 0 )
+                 Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveUp();
                 break;
 
             case 'l':
-                Mix_PlayChannel( -1, footstep, 0 )
+                Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveLeft();
                 break;
 
             case 'd':
-                Mix_PlayChannel( -1, footstep, 0 )
+                Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveDown();
                 break;
 
             case 'r':
-                Mix_PlayChannel( -1, footstep, 0 )
+                Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveRight();
                 break;
 
