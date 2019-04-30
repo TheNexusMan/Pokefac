@@ -71,6 +71,7 @@ class SdlGame
     Image im_sandRoad;
     Image im_PlayerImage;
     Image im_arena;
+    Image im_House;
 
     //Pokemons
     Image im_linuchu;
