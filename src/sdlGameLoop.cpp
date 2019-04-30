@@ -402,6 +402,11 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
                 {
                     im_MissingTexture.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
+
+                if((world.mainTerrain.terrainTab[y][x] == 'o'))
+                {
+                    world.whichDoor();
+                }
             }
         }
     }
