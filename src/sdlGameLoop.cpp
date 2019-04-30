@@ -118,7 +118,7 @@ SdlGame::SdlGame()
         withSound = false;
     }
     else
-        withSound = false;
+        withSound = true;
 
     int dimx, dimy;
     //dimx = SIZETERRAIN * TAILLE_SPRITE;
@@ -203,13 +203,26 @@ SdlGame::SdlGame()
     // Sounds
     if (withSound)
     {
-        sound = Mix_LoadWAV("./data/Yeah.wav");
-        if (sound == NULL)
+        //chargement des musiques 
+        sound = Mix_LoadMUS("./data/music/generalSong.wav");
+        battle = Mix_LoadMUS("./data/music/battleMusic.wav");
+        if ((sound == NULL) || (battle == NULL))
         {
             cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
             SDL_Quit();
             exit(1);
         }
+        //chargement des effets sonore
+         footstep = Mix_LoadWAV( "./data/music/pasHerbe.wav" );
+
+
+   
+    if( ( footstep == NULL ) )
+    {
+                    cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
+                  SDL_Quit();
+                 exit(1);
+    }
     }
 }
 
@@ -453,12 +466,10 @@ void SdlGame::sdlLoop(world &world)
           
                if( Mix_PlayingMusic() == 0)
                  {
-                     if (Mix_PlayMusic( sound, -1 ) == -1)
-                         {
-                          return 1;
-                        }
+                     Mix_PlayMusic( sound, -1 )
+                          
                 } 
-                
+
     while(!quit)
     {
 
@@ -576,7 +587,12 @@ void SdlGame::sdlLoop(world &world)
         }
 
         if(world.hasMoved)
-        {
+        { 
+            if( Mix_PlayChannel( -1, footstep, 0 ) == -1 )
+                    {
+                        return 1;
+                    }
+                    
             sdlLaunchAnimation(world, moveDirection);
             switch (moveDirection)
             {
