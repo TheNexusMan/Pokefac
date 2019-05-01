@@ -4,7 +4,7 @@
 world::world()
 {
 	initGame();
-	menuOn = false;
+	menuOn = 0;
 }
 void write_to_log_file(string text) //to_string(valeur);
 {
@@ -500,28 +500,28 @@ void world::menu(bool & gameOn)
 			case '2':
 				saveGame("saveData");
 				write_to_log_file("Game Saved to ./data/saveGames/saveData.txt");
-				menuOn=false;
+				menuOn=0;
 				break;
 
 			case '3':
 				loadGame("saveData");
 				write_to_log_file("Game loaded from ./data/saveGames/saveData.txt");
-				menuOn=false;
+				menuOn=0;
 				break;
 
 			case '4':
 				gameOn = false;
-				menuOn = false;
+				menuOn = 0;
 				break;
 
 			case 'm':
-				menuOn = false;
+				menuOn = 0;
 				break;
 		
 			default:
 				break;
 		}
-	} while(menuOn);
+	} while(menuOn == 1);
 }
 
 void world::displayPokemon()
@@ -574,7 +574,7 @@ void world::displayPokemon()
 
 			case 'm':
 				pokeMenuOn = false;
-				menuOn = false;
+				menuOn = 0;
 				break;
 		
 			default:
@@ -651,7 +651,7 @@ void world::organisePokemon(bool & pokeMenuOn)
 			case 'm':
 				organiseMenuOn = false;
 				pokeMenuOn = false;
-				menuOn = false;
+				menuOn = 0;
 				break;
 		
 			default:

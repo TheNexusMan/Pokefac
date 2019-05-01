@@ -59,7 +59,7 @@ public:
 	Door doors[NB_DOOR];
 	string gameSaveName;
 	bool hasMoved;
-	bool menuOn = false;
+	int menuOn = 0;
 	bool isSaving = false;
 	bool isLoading = false;
 

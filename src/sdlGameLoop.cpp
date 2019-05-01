@@ -198,7 +198,7 @@ SdlGame::SdlGame()
     font_gameLoaded.setSurface(TTF_RenderText_Solid(font, "Partie Chargee", font_color));
     font_gameLoaded.loadFromCurrentSurface(renderer);
 
-    font_choosePoke.setSurface(TTF_RenderText_Solid(font, "Choisissez un pokemon", font_color));
+    font_choosePoke.setSurface(TTF_RenderText_Solid(font, "Organiser vos pokemons", font_color));
     font_choosePoke.loadFromCurrentSurface(renderer);
     
 
@@ -512,7 +512,7 @@ void SdlGame::sdlLoop(world &world)
                 {
                     case SDLK_UP:
                         world.mainPlayer.setOrientation('n');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && world.menuOn == 0)
                             {
                                 moveDirection = 'u';
                                 world.hasMoved = true;
@@ -521,7 +521,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_LEFT:
                         world.mainPlayer.setOrientation('o');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && world.menuOn == 0)
                             {
                                 moveDirection = 'l';
                                 world.hasMoved = true;
@@ -530,7 +530,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_DOWN:
                         world.mainPlayer.setOrientation('s');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && world.menuOn == 0)
                             {
                                 moveDirection = 'd';
                                 world.hasMoved = true;
@@ -539,15 +539,22 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_RIGHT:
                         world.mainPlayer.setOrientation('e');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && world.menuOn == 0)
                             {
                                 moveDirection = 'r';
                                 world.hasMoved = true;
                             }
                             break;
 
-                    case SDLK_m: 
-                        world.menuOn = !world.menuOn;
+                    case SDLK_m:
+                        if(world.menuOn == 1)
+                        {
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 0)
+                        {
+                            world.menuOn = 1;
+                        }
+                            
                         break;
                     
                     case SDLK_x: 
@@ -555,34 +562,69 @@ void SdlGame::sdlLoop(world &world)
                         break; 
 
                     case SDLK_1:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
-                            world.menuOn = false;
                             //world.displayPokemon();
                             sdlDisplayPokemonMenu(world, false);
-                        }      
+                            cout << "menu1" << endl;
+                        }else if(world.menuOn == 2)
+                        {
+                            cout << world.mainPlayer.nbPokemon << endl;
+                            cout << "menu2" << endl;
+                            if(world.mainPlayer.nbPokemon > 0)
+                                sdlDisplayPokemonInfos(world, 0);
+                        }
                         break;
 
                     case SDLK_2:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             world.saveGame("saveData");
-                            world.menuOn = false;
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 2)
+                        {
+                            cout << world.mainPlayer.nbPokemon << endl;
+                            if(world.mainPlayer.nbPokemon > 1)
+                                sdlDisplayPokemonInfos(world, 1);
                         }
                         break;
 
                     case SDLK_3:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             world.loadGame("saveData");
-                            world.menuOn = false;
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 2)
+                                sdlDisplayPokemonInfos(world, 2);
                         }
                         break;
 
                     case SDLK_4:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             quit = true;
+                        }else if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 3)
+                                sdlDisplayPokemonInfos(world, 3);
+                        }
+                        break;
+                    
+                    case SDLK_5:
+                        if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 4)
+                                sdlDisplayPokemonInfos(world, 4);
+                        }
+                        break;
+                    
+                    case SDLK_6:
+                        if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 5)
+                                sdlDisplayPokemonInfos(world, 5);
                         }
                         break;
 
@@ -592,7 +634,7 @@ void SdlGame::sdlLoop(world &world)
             }
         }
 
-        if (world.menuOn)
+        if (world.menuOn == 1)
         {
             sdlDisplayMenu();
             //sdlDisplayChatBox(world);
@@ -641,7 +683,7 @@ void SdlGame::sdlLoop(world &world)
 			world.hasMoved = false;
         }
 
-        if (!world.menuOn && !world.isSaving && !world.isLoading)
+        if (world.menuOn == 0 && !world.isSaving && !world.isLoading)
         {
             sdlDisplay(world, 0, 0);
         }
@@ -756,8 +798,6 @@ void SdlGame::sdlDisplayBattle(Uint32 &deltaTime, Uint32 &elapsedTime, bool dres
         font_chatPokeGo.draw(renderer, 35,468,450,75);
     }
 
-    
-
 }
 
 void SdlGame::sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world &world)
@@ -833,8 +873,10 @@ void SdlGame::sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world
     }
 }
 
-void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
+void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
 {
+    world.menuOn = 2;
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_Rect forBattle;
@@ -873,17 +915,14 @@ void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
             forBattle.y +=75;
             hpPos.y = forBattle.y + 30;
         }
-
-
-    
     } else
     {
         forBattle.y += 5;
         hpPos.y +=5;
-        for(int i = 0; i < 6; i++)
+        for(unsigned int i = 0; i < world.mainPlayer.nbPokemon; i++)
         {
-            pokemonNameStr = world.pokeTab[i].name;
-            pokemonHP = "-- HP : " + to_string(world.pokeTab[i].health) + " / " + to_string(world.pokeTab[i].maxHealth);
+            pokemonNameStr = world.mainPlayer.tabPokemon[i].name;
+            pokemonHP = "-- HP : " + to_string(world.mainPlayer.tabPokemon[i].health) + " / " + to_string(world.mainPlayer.tabPokemon[i].maxHealth);
 
             font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
             font_pokemonName.loadFromCurrentSurface(renderer);
@@ -897,6 +936,25 @@ void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
             hpPos.y = forBattle.y + 30;
         }
     }
-    
+}
 
+void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
+{
+    world.menuOn = 3;
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+
+    // cout << "Id : #" << id << endl;
+	// cout << "Nom : " << name << endl;
+	// cout << "Type : " << type << endl;
+	// cout << "Vie : ";
+	// displayHealth();
+	// cout << endl << endl;;
+	// cout << "Attaques :" << endl;
+	// cout << "Nom Puissance" << endl;
+	// for(unsigned int i = 0; i < 4; i++)
+	// {
+	// 	cout << attackChoice[i].name << " " << attackChoice[i].damagePoints << endl;
+	// }
 }

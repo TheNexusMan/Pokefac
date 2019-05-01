@@ -1,7 +1,7 @@
 #include "sdlGameLoop.h"
 #include "world.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
     world mainWorld;
     SdlGame sg;
