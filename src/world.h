@@ -43,6 +43,7 @@ struct Door
 	unsigned int posY;
 	unsigned int destPosX;
 	unsigned int destPosY;
+	char orientation;
 	string terrainNamePos;
 	string terrainNameDest;
 };
@@ -196,15 +197,15 @@ public:
 	Fonction retournant une porte
 	Permet de tester sur quelle porte se situe le joueur et de le téléporter ensuite
 
-	@param mainPlayer
+	@param x, y
 	@return returnedDoor
 
 	Exemple Visual
 	@code
-	world.whichDoor(mainPlayer);
+	world.whichDoor(mainPlayer.getPosX(), mainPlayer.getPosY());
 	@endcode
 	*/
-	Door whichDoor(Player mainPlayer);
+	Door whichDoor(unsigned int x, unsigned int y);
 
 	/** 
 	@brief

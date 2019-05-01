@@ -95,6 +95,7 @@ void world::initDoor()
 				file >> doors[i].posY;
 				file >> doors[i].destPosX;
 				file >> doors[i].destPosY;
+				file >> doors[i].orientation;
 				file >> doors[i].terrainNamePos;
 				file >> doors[i].terrainNameDest;
 			}
@@ -447,18 +448,18 @@ void world::door()
 {
 	if(mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == 'O')
 	{
-	Door actualDoor = whichDoor(mainPlayer);
+	Door actualDoor = whichDoor(mainPlayer.getPosX(), mainPlayer.getPosY());
 	teleport(mainPlayer, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
 	write_to_log_file("Changement de terrain : " + actualDoor.terrainNameDest + " Nouvelle position du joueur : (" + to_string(actualDoor.destPosX) + "," + to_string(actualDoor.destPosY) +")");
 	}
 }
 
-Door world::whichDoor(Player mainPlayer)
+Door world::whichDoor(unsigned int x, unsigned int y)
 {
 	Door returnedDoor;
 	for(unsigned int i = 0; i < NB_DOOR; i++)
 	{
-		if((mainPlayer.getPosX() == doors[i].posX) && (mainPlayer.getPosY() == doors[i].posY) && mainTerrain.terrainName == doors[i].terrainNamePos)
+		if((x == doors[i].posX) && (y == doors[i].posY) && mainTerrain.terrainName == doors[i].terrainNamePos)
 		{
 			 returnedDoor = doors[i];
 		} 

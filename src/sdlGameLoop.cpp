@@ -148,6 +148,7 @@ SdlGame::SdlGame()
     im_PlayerImage.loadFromFile("./data/textures/playerSprite.png", renderer);
     im_House.loadFromFile("./data/textures/house.png", renderer);
     im_Wood.loadFromFile("./data/textures/wood.jpg", renderer);
+    im_Arrow.loadFromFile("./data/textures/sprite_arrow.png", renderer);
     //fin de l'ajout du chargement des images
 
     //Pokemons
@@ -404,6 +405,41 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
                 if(world.mainTerrain.terrainTab[y][x] == 'M')
                 {
                     im_House.draw(renderer,((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*5, TAILLE_SPRITE*5);
+                }
+
+                if(world.mainTerrain.terrainTab[y][x] == 'O')
+                {
+                    Door thisDoor = world.whichDoor(y, x);
+                    SDL_Rect arrowRect;
+                    arrowRect.w = arrowRect.h = 50;
+                    arrowRect.y = 0;
+                    switch (thisDoor.orientation)
+                    {
+                    case 'n':
+                        arrowRect.x = 50;
+                        break;
+                    
+                    case 's':
+                        arrowRect.x = 150;
+                        break;
+                    
+                    case 'e':
+                        arrowRect.x = 0;
+                        break;
+                    
+                    case 'o':
+                        arrowRect.x = 100;
+                        break;
+                    
+                    default:
+                        break;
+                    }
+                    
+                    SDL_Rect doorPosition;
+                    doorPosition.x = ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX;
+                    doorPosition.y = ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY;
+                    doorPosition.w = doorPosition.h = TAILLE_SPRITE;
+                    SDL_RenderCopy(renderer, im_Arrow.getTexture(), &arrowRect, &doorPosition);
                 }
 
                 if((world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
