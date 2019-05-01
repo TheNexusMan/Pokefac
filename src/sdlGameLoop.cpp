@@ -389,7 +389,7 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
 
                 if(world.mainTerrain.terrainTab[y][x] == '#')
                 {
-                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX - 20, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-55, TAILLE_SPRITE+50, TAILLE_SPRITE+100);
+                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-30, TAILLE_SPRITE+20, TAILLE_SPRITE+30);
                 }
 
                 if(world.mainTerrain.terrainTab[y][x] == 'H')
