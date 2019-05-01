@@ -34,6 +34,7 @@ terrain1
 19
 4
 1
+e
 terrain2
 terrain3
 
@@ -41,6 +42,7 @@ terrain3
 0
 2
 18
+o
 terrain3
 terrain2
 
@@ -48,6 +50,7 @@ terrain2
 0
 2
 18
+o
 terrain3
 terrain4
 
@@ -55,5 +58,6 @@ terrain4
 19
 18
 1
+e
 terrain4
 terrain3
