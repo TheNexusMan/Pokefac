@@ -138,7 +138,7 @@ SdlGame::SdlGame()
 
     //Ajout ici du chargement des images
     im_Tree.loadFromFile("./data/textures/tree.png", renderer);
-    im_GrassLand.loadFromFile("./data/textures/grass03_light.jpg", renderer);
+    im_GrassLand.loadFromFile("./data/textures/grass03.png", renderer);
     im_herbs.loadFromFile("./data/textures/haute_herbes.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
     im_chatBox.loadFromFile("./data/textures/chatbox.png", renderer);
@@ -147,6 +147,7 @@ SdlGame::SdlGame()
     im_arena.loadFromFile("./data/textures/arena.png", renderer);
     im_PlayerImage.loadFromFile("./data/textures/playerSprite.png", renderer);
     im_House.loadFromFile("./data/textures/house.png", renderer);
+    im_Wood.loadFromFile("./data/textures/wood.jpg", renderer);
     //fin de l'ajout du chargement des images
 
     //Pokemons
@@ -362,6 +363,9 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
+    string terrainName = world.mainTerrain.terrainName;
+    terrainName.pop_back();
+
     int Xplayer = world.mainPlayer.getPosX();
     int Yplayer = world.mainPlayer.getPosY();
 
@@ -372,25 +376,26 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
 
             if (x >= 0 && x < SIZETERRAIN && y >= 0 && y < SIZETERRAIN)
             {
-                if(x == 0 && y == 0)
+                if(x == 0 && y == 0 && terrainName == "terrain")
                 {
                     im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*SIZETERRAIN, TAILLE_SPRITE*SIZETERRAIN);
+                }
+
+                if(x == 4 && y == 4 && terrainName == "house")
+                {
+                    im_Wood.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*(SIZETERRAIN-8), TAILLE_SPRITE*(SIZETERRAIN-8));
                 }
 
                 if(world.mainTerrain.terrainTab[y][x] == '#')
                 {
                     im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX - 20, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-55, TAILLE_SPRITE+50, TAILLE_SPRITE+100);
                 }
-                if(world.mainTerrain.terrainTab[y][x] == '.')
-                {
-                    //im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
+
                 if(world.mainTerrain.terrainTab[y][x] == 'H')
                 {
-                    //im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
-
                     im_herbs.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
+
                 if(world.mainTerrain.terrainTab[y][x] == 'R')
                 {
                     im_sandRoad.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
