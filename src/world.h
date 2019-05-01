@@ -31,7 +31,8 @@
 
 using namespace std;
 
-const unsigned int NBPOKEMON = 3;
+const unsigned int NBPOKEMON = 10;
+const unsigned int NBPLAYERPOKEMON = 6;
 const unsigned int NB_NPC = 3;
 const unsigned int NB_DOOR = 8; //Toujours un multiple de 2
 
@@ -56,7 +57,10 @@ public:
 	Pokemon pokeTab[NBPOKEMON];
 	Door doors[NB_DOOR];
 	string gameSaveName;
-	bool menuOn;
+	bool hasMoved;
+	bool menuOn = false;
+	bool isSaving = false;
+	bool isLoading = false;
 
 	/**
 	@brief
@@ -262,6 +266,9 @@ public:
 	/** 
 	@brief
 	Option d'organisation des pokémon
+	Le paramètre pokeMenuOn permet deux choses : lors de l'utilisation de la fonction hors combat, il ferme
+	en cascade tous les menus si passé à false. Dans un combat, le paramètre est mis à false pour éviter l'affichage
+	de certains choix.
 
 	@param pokeMenuOn
 	@return none
@@ -272,6 +279,21 @@ public:
 	@endCode
 	*/
 	void organisePokemon(bool & pokeMenuOn);
+
+	/**
+	@brief
+	Verifie si le joueur est sur une case de Soin 
+	et soigne ses pokemons
+
+	@param mainPlayer
+	@return none
+
+	code Visual
+	@end
+	world.healAll(mainPlayer);
+	@endcode
+	 */
+	void healAll(Player & mainPlayer);
 
 private:
 	/**
@@ -317,6 +339,24 @@ private:
 	@endcode
 	*/
 	bool isInHerb(const int x, const int y) const;
+	
+
+
+	/**
+	@brief
+	Vérifie si le joueur est sur une case de vie
+	true si la position est des dans un caractere 'V'
+	false sinon
+
+	@param x, y
+	@return (terrain.terrain[x][y] == 'V')
+
+	Exemple Visual
+	@code
+	isOnHeal(2, 4);
+	@endcode
+	 */
+	bool isOnHeal(const int x, const int y) const;
 
 	/**
 	@brief
@@ -327,10 +367,10 @@ private:
 
 	Exemple Code Block / Visual
 	@code
-	launchBattle(mainPlayer, opponentPoke, true);
+	battle(mainPlayer, opponentPoke, true);
 	@endcode
 	*/
-	void launchBattle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
+	void battle(Player & mainPlayer, Pokemon opponentPoke, bool isAgainstPokemon);
 
 	/**
 	@brief

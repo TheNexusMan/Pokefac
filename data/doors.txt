@@ -28,13 +28,13 @@ terrain1
 
 2
 19
+4
 1
-8
 terrain2
 terrain3
 
+4
 0
-8
 2
 18
 terrain3
@@ -42,15 +42,14 @@ terrain2
 
 18
 0
-1
-8
+2
+18
 terrain3
 terrain4
 
-0
-8
+2
+19
 18
 1
 terrain4
 terrain3
-

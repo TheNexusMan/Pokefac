@@ -7,6 +7,13 @@ obj/*.o
 
 # Ignorer les executables dan bin/
 bin/pokefac
+bin/pokefacSDL
 
 # Ignorer fichier de sauvegarde
 data/saveGames/*
+
+# Ignorer documentation Doxygen
+doc/html
+
+# Ignorer les logs
+data/logs

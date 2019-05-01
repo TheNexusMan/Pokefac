@@ -11,7 +11,7 @@ void Player::moveDown()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x + 1, y);
+	setNewPos(x+1, y);
 }
 
 void Player::moveLeft()
@@ -25,7 +25,7 @@ void Player::moveRight()
 {
 	unsigned int x = getPosX();
 	unsigned int y = getPosY();
-	setNewPos(x, y+ 1);
+	setNewPos(x, y+1);
 }
 
 unsigned int Player::getMoney()
@@ -40,10 +40,10 @@ void Player::addMoney(unsigned int adding)
 
 void Player::initPlayer(const Pokemon poke)
 {	
-	setPosX(1);
-	setPosY(2); //Place le joueur aux coordonnées (1,2)
+	setPosX(5);
+	setPosY(5); //Place le joueur aux coordonnées (5,5)
 	addMoney(100); //Lui donne 100 en Argent
-	setPokeball(5); // Lui donne 5 pokeballs
+	setPokeball(3); // Lui donne 5 pokeballs
 	tabPokemon[0] = poke;
 	nbPokemon = 1;
 }
@@ -56,6 +56,11 @@ void Player::setPokeball(int nb)
 unsigned int Player::getPokeball()
 {
 	return pokeball;
+}
+
+void Player::usePokeball()
+{
+	pokeball--;
 }
 
 void Player::addPokemon(const Pokemon & poke)

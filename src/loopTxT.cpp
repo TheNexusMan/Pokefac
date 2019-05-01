@@ -37,6 +37,8 @@ void txtLoop(world & world)
 		if(hasMoved)
 		{
 			world.randomCombat(world.mainPlayer);
+			world.healAll(world.mainPlayer);
+			
 			hasMoved = false;
 		}
 
@@ -87,6 +89,7 @@ void txtLoop(world & world)
 			}
 
 			world.door();
+
 		}
 	} while (gameOn);
 }

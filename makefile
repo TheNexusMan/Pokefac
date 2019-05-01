@@ -1,7 +1,34 @@
-all: bin/pokefac
+ifeq ($(OS),Windows_NT)
+	INCLUDE_SDL = 	-Iextern/SDL2_mingw/SDL2-2.0.3/include \
+						-Iextern/SDL2_mingw/SDL2_ttf-2.0.12/i686-w64-mingw32/include/SDL2 \
+						-Iextern/SDL2_mingw/SDL2_image-2.0.0/i686-w64-mingw32/include/SDL2 \
+						-Iextern/SDL2_mingw/SDL2_mixer-2.0.1/i686-w64-mingw32/include/SDL2
 
-bin/pokefac: obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o
-	g++ -g -Wall obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o -o bin/pokefac
+	LIBS_SDL = -Lextern \
+			-Lextern/SDL2_mingw/SDL2-2.0.3/i686-w64-mingw32/lib \
+			-Lextern/SDL2_mingw/SDL2_ttf-2.0.12/i686-w64-mingw32/lib \
+			-Lextern/SDL2_mingw/SDL2_image-2.0.0/i686-w64-mingw32/lib \
+			-Lextern/SDL2_mingw/SDL2_mixer-2.0.1/i686-w64-mingw32/lib \
+			-lmingw32 -lSDL2main -lSDL2.dll -lSDL2_ttf.dll -lSDL2_image.dll -lSDL2_mixer.dll
+
+else
+	INCLUDE_SDL = -I/usr/include/SDL2
+	LIBS_SDL = -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
+endif
+
+
+
+
+all: bin/pokefac bin/pokefacSDL
+
+bin/pokefac: obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o 
+	g++ -g -Wall obj/main.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o -o bin/pokefac 
+
+bin/pokefacSDL: obj/mainSDL.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o obj/sdlGameLoop.o
+	g++ -g -Wall obj/mainSDL.o obj/pokemon.o obj/character.o obj/player.o obj/NPC.o obj/terrain.o obj/world.o obj/loopTxT.o obj/winTxt.o obj/sdlGameLoop.o -o bin/pokefacSDL $(LIBS_SDL)
+
+obj/mainSDL.o: src/main.cpp src/terrain.h src/world.h
+	g++ -g -Wall -c src/mainSDL.cpp -o obj/mainSDL.o $(LIBS_SDL) $(INCLUDE_SDL)
 
 obj/main.o: src/main.cpp src/terrain.h src/world.h
 	g++ -g -Wall -c src/main.cpp -o obj/main.o
@@ -29,6 +56,11 @@ obj/loopTxT.o: src/loopTxT.cpp src/loopTxT.h
 
 obj/winTxt.o: src/winTxt.cpp src/winTxt.h
 	g++ -g -Wall -c src/winTxt.cpp -o obj/winTxt.o
+
+obj/sdlGameLoop.o: src/sdlGameLoop.cpp src/sdlGameLoop.h
+	g++ -g -Wall -c src/sdlGameLoop.cpp -o obj/sdlGameLoop.o $(INCLUDE_SDL) -Isrc/
+
+
 
 clean:
 	rm -f obj/*.o
