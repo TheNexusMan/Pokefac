@@ -498,7 +498,6 @@ void SdlGame::sdlLoop(world &world)
 {
     SDL_Event events;
     bool quit = false;
-    bool displayHasChange = true;
     world.hasMoved = false;
     char moveDirection;
 
@@ -685,14 +684,12 @@ void SdlGame::sdlLoop(world &world)
             world.door();
             world.randomCombat(world.mainPlayer);
 			world.healAll(world.mainPlayer);
-            displayHasChange = true;
 			world.hasMoved = false;
         }
 
-        if (world.menuOn == 0 && !world.isSaving && !world.isLoading && displayHasChange)
+        if (world.menuOn == 0 && !world.isSaving && !world.isLoading)
         {
             sdlDisplay(world, 0, 0);
-            displayHasChange = false;
         }
         SDL_RenderPresent(renderer);
     }
