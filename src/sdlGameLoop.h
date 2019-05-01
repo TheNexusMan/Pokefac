@@ -56,7 +56,15 @@ class SdlGame
         Image font_pokemonName;
         Image font_pokemonHP;
 
+        //For display Info
+        Image font_pokemonType;
+        Image font_pokemonAttacks;
+        Image font_pokemonDamages;
+
+
         SDL_Color font_color;
+        SDL_Color font_red;
+        SDL_Color font_green;
 
         Mix_Chunk * sound;
         bool withSound;
@@ -93,16 +101,18 @@ class SdlGame
         void sdlLaunchAnimation(world world, char direction);
         void sdlDisplay(world world, int tileX, int tileY);
 
-        void sdlDisplayBattle(Uint32 &deltaTime, Uint32 &elapsedTime, bool dresseur);
+        void sdlDisplayBattle(world & world, bool dresseur, Pokemon poke);
         void sdlDisplayChatBox(world world);
 
 
 
-        void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
-        void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world &world);
+        void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
+        void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
         
         void sdlDisplayPokemonMenu(world &world, bool inBattle);
         void sdlDisplayPokemonInfos(world &world, int idPoke);
+
+        void sdlRandomCombat(world & world);
 
 };
 #endif

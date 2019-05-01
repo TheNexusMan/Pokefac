@@ -296,6 +296,22 @@ public:
 	 */
 	void healAll(Player & mainPlayer);
 
+	/**
+	@brief
+	Verifie si le Joueur est dans les hautes herbes
+	True si la position est dans un caract�re 'H'
+	false sinon
+
+	@param x, y
+	@return (terrain.terrain[x][y] == 'H');
+
+	Exemple Code Block / Visual
+	@code
+	isInHerb(x, y);
+	@endcode
+	*/
+	bool isInHerb(const int x, const int y) const;
+
 private:
 	/**
 	@brief
@@ -325,22 +341,6 @@ private:
 	*/
 	void initNPCTab();
 
-	/**
-	@brief
-	Verifie si le Joueur est dans les hautes herbes
-	True si la position est dans un caract�re 'H'
-	false sinon
-
-	@param x, y
-	@return (terrain.terrain[x][y] == 'H');
-
-	Exemple Code Block / Visual
-	@code
-	isInHerb(x, y);
-	@endcode
-	*/
-	bool isInHerb(const int x, const int y) const;
-	
 
 
 	/**
