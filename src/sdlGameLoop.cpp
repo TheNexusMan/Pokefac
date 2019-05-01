@@ -284,6 +284,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY + 2;
                 refresh++;
+                SDL_Delay(9);
             }
             break;
 
@@ -306,6 +307,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileX = tileX + 2;
                 refresh++;
+                SDL_Delay(9);
             }
             break;
 
@@ -328,6 +330,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY - 2;
                 refresh++;
+                SDL_Delay(9);
             }
             break;
 
@@ -351,6 +354,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderClear(renderer);
                 tileX = tileX - 2;
                 refresh++;
+                SDL_Delay(9);
             }
             break;
 
