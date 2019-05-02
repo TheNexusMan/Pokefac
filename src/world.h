@@ -62,6 +62,8 @@ public:
 	int menuOn = 0;
 	bool isSaving = false;
 	bool isLoading = false;
+	bool isInBattle = false;
+	Pokemon pokeInFight;
 
 	/**
 	@brief

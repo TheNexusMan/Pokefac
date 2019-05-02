@@ -101,7 +101,7 @@ class SdlGame
         void sdlLaunchAnimation(world world, char direction);
         void sdlDisplay(world world, int tileX, int tileY);
 
-        void sdlDisplayBattle(world & world, bool dresseur, Pokemon poke);
+        void sdlDisplayBattle(world & world, unsigned int action);
         void sdlDisplayChatBox(world world);
 
 
