@@ -1,33 +1,50 @@
 1
-Xavier-Urbain
+Xavinus-Urbanus
 6
-7
+8
 o
 terrain1
 1
 2
-Je suis une phrase
-Et moi aussi !
+01001010 01100101 01110110 01100001 01101001 01110011 01110100 11100010 10000000 10011001 01100001 01110011 01110011 01100001 01101001 01110011 01101111 01101110 01101110 01100101 01110010 11000010 10100000 00100001
+Je vais t'assaisonner !  
 
 2
-Michel-Drucker
-14
-10
+Nicolas-Prunus
+15
+11
 s
 terrain1
-2
-2
-Top !
-La mer noire
+3
+1
+void DirePhraseMechante(){cout << "Essaye de te mesurer à moi ! "}
 
 3
-Harry-Potter
-6
-4
-o
+Alexandrus-Meyer
+7
+5
+n
 terrain2
-0
+4
+1
+cout << "Tu ne domineras jamais mon arène"
+
+4
+Elodie-Desserus
+9
 3
-Wilgardium leviosa !
-J'aime ta barbe Hagrid
-Ma baguette !
+s
+terrain3
+6
+1
+string punchline = "Ici, c'est moi la reine ! "
+
+5
+Marie-Lefévrus
+9
+3
+s
+terrain4
+8
+1
+(Non, (moi (c'est) pas) Elodie !) 

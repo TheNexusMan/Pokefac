@@ -4,7 +4,7 @@
 world::world()
 {
 	initGame();
-	menuOn = false;
+	menuOn = 0;
 }
 void write_to_log_file(string text) //to_string(valeur);
 {
@@ -95,6 +95,7 @@ void world::initDoor()
 				file >> doors[i].posY;
 				file >> doors[i].destPosX;
 				file >> doors[i].destPosY;
+				file >> doors[i].orientation;
 				file >> doors[i].terrainNamePos;
 				file >> doors[i].terrainNameDest;
 			}
@@ -190,7 +191,7 @@ void world::initGame()
 	logFilesStart();
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
-	mainTerrain.initTerrain("house1"); // Initialisation du terrain1
+	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
 	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
 	initDoor(); // initialisation des portes
 
@@ -388,7 +389,7 @@ void world::displayOpponentsLife(const Player mainPlayer, const Pokemon playerPo
 
 bool world::moveIsAllowed(Player mainPlayer, const int x, const int y) const
 {
-	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N'));
+	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N') && (mainTerrain.terrainTab[x][y] != '-'));
 }
 
 void world::isInLine(NPC npc, Player mainPlayer, const int x, const int y) const
@@ -447,18 +448,18 @@ void world::door()
 {
 	if(mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == 'O')
 	{
-	Door actualDoor = whichDoor(mainPlayer);
+	Door actualDoor = whichDoor(mainPlayer.getPosX(), mainPlayer.getPosY());
 	teleport(mainPlayer, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
 	write_to_log_file("Changement de terrain : " + actualDoor.terrainNameDest + " Nouvelle position du joueur : (" + to_string(actualDoor.destPosX) + "," + to_string(actualDoor.destPosY) +")");
 	}
 }
 
-Door world::whichDoor(Player mainPlayer)
+Door world::whichDoor(unsigned int x, unsigned int y)
 {
 	Door returnedDoor;
 	for(unsigned int i = 0; i < NB_DOOR; i++)
 	{
-		if((mainPlayer.getPosX() == doors[i].posX) && (mainPlayer.getPosY() == doors[i].posY) && mainTerrain.terrainName == doors[i].terrainNamePos)
+		if((x == doors[i].posX) && (y == doors[i].posY) && mainTerrain.terrainName == doors[i].terrainNamePos)
 		{
 			 returnedDoor = doors[i];
 		} 
@@ -499,28 +500,28 @@ void world::menu(bool & gameOn)
 			case '2':
 				saveGame("saveData");
 				write_to_log_file("Game Saved to ./data/saveGames/saveData.txt");
-				menuOn=false;
+				menuOn=0;
 				break;
 
 			case '3':
 				loadGame("saveData");
 				write_to_log_file("Game loaded from ./data/saveGames/saveData.txt");
-				menuOn=false;
+				menuOn=0;
 				break;
 
 			case '4':
 				gameOn = false;
-				menuOn = false;
+				menuOn = 0;
 				break;
 
 			case 'm':
-				menuOn = false;
+				menuOn = 0;
 				break;
 		
 			default:
 				break;
 		}
-	} while(menuOn);
+	} while(menuOn == 1);
 }
 
 void world::displayPokemon()
@@ -573,7 +574,7 @@ void world::displayPokemon()
 
 			case 'm':
 				pokeMenuOn = false;
-				menuOn = false;
+				menuOn = 0;
 				break;
 		
 			default:
@@ -650,7 +651,7 @@ void world::organisePokemon(bool & pokeMenuOn)
 			case 'm':
 				organiseMenuOn = false;
 				pokeMenuOn = false;
-				menuOn = false;
+				menuOn = 0;
 				break;
 		
 			default:

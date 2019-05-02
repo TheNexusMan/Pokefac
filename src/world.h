@@ -34,7 +34,7 @@ using namespace std;
 const unsigned int NBPOKEMON = 10;
 const unsigned int NBPLAYERPOKEMON = 6;
 const unsigned int NB_NPC = 3;
-const unsigned int NB_DOOR = 4; //Toujours un multiple de 2
+const unsigned int NB_DOOR = 8; //Toujours un multiple de 2
 
 struct Door
 {
@@ -43,6 +43,7 @@ struct Door
 	unsigned int posY;
 	unsigned int destPosX;
 	unsigned int destPosY;
+	char orientation;
 	string terrainNamePos;
 	string terrainNameDest;
 };
@@ -58,9 +59,11 @@ public:
 	Door doors[NB_DOOR];
 	string gameSaveName;
 	bool hasMoved;
-	bool menuOn = false;
+	int menuOn = 0;
 	bool isSaving = false;
 	bool isLoading = false;
+	bool isInBattle = false;
+	Pokemon pokeInFight;
 
 	/**
 	@brief
@@ -196,15 +199,15 @@ public:
 	Fonction retournant une porte
 	Permet de tester sur quelle porte se situe le joueur et de le téléporter ensuite
 
-	@param mainPlayer
+	@param x, y
 	@return returnedDoor
 
 	Exemple Visual
 	@code
-	world.whichDoor(mainPlayer);
+	world.whichDoor(mainPlayer.getPosX(), mainPlayer.getPosY());
 	@endcode
 	*/
-	Door whichDoor(Player mainPlayer);
+	Door whichDoor(unsigned int x, unsigned int y);
 
 	/** 
 	@brief
@@ -295,6 +298,22 @@ public:
 	 */
 	void healAll(Player & mainPlayer);
 
+	/**
+	@brief
+	Verifie si le Joueur est dans les hautes herbes
+	True si la position est dans un caract�re 'H'
+	false sinon
+
+	@param x, y
+	@return (terrain.terrain[x][y] == 'H');
+
+	Exemple Code Block / Visual
+	@code
+	isInHerb(x, y);
+	@endcode
+	*/
+	bool isInHerb(const int x, const int y) const;
+
 private:
 	/**
 	@brief
@@ -324,22 +343,6 @@ private:
 	*/
 	void initNPCTab();
 
-	/**
-	@brief
-	Verifie si le Joueur est dans les hautes herbes
-	True si la position est dans un caract�re 'H'
-	false sinon
-
-	@param x, y
-	@return (terrain.terrain[x][y] == 'H');
-
-	Exemple Code Block / Visual
-	@code
-	isInHerb(x, y);
-	@endcode
-	*/
-	bool isInHerb(const int x, const int y) const;
-	
 
 
 	/**

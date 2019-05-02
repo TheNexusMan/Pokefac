@@ -25,7 +25,7 @@ void txtLoop(world & world)
 #endif
 		termClear();
 
-		if(world.menuOn)
+		if(world.menuOn == 1)
 		{
 			world.menu(gameOn);
 
@@ -80,7 +80,7 @@ void txtLoop(world & world)
 					break;
 				
 				case 'm':
-					world.menuOn = true;
+					world.menuOn = 1;
 					break;
 
 				case 'x':

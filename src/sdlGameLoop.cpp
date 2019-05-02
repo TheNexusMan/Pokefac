@@ -138,7 +138,7 @@ SdlGame::SdlGame()
 
     //Ajout ici du chargement des images
     im_Tree.loadFromFile("./data/textures/tree.png", renderer);
-    im_GrassLand.loadFromFile("./data/textures/grass03_light.jpg", renderer);
+    im_GrassLand.loadFromFile("./data/textures/grass03.png", renderer);
     im_herbs.loadFromFile("./data/textures/haute_herbes.png", renderer);
     im_MissingTexture.loadFromFile("./data/textures/error.png", renderer);
     im_chatBox.loadFromFile("./data/textures/chatbox.png", renderer);
@@ -146,6 +146,9 @@ SdlGame::SdlGame()
     im_sandRoad.loadFromFile("./data/textures/sand_road.jpg",renderer);
     im_arena.loadFromFile("./data/textures/arena.png", renderer);
     im_PlayerImage.loadFromFile("./data/textures/playerSprite.png", renderer);
+    im_House.loadFromFile("./data/textures/house.png", renderer);
+    im_Wood.loadFromFile("./data/textures/wood.jpg", renderer);
+    im_Arrow.loadFromFile("./data/textures/sprite_arrow.png", renderer);
     //fin de l'ajout du chargement des images
 
     //Pokemons
@@ -175,6 +178,15 @@ SdlGame::SdlGame()
     font_color.r = 0;
     font_color.g = 0;
     font_color.b = 0;
+
+    font_red.r = 255;
+    font_red.g = 0;
+    font_red.b = 0;
+
+    font_green.r = 0;
+    font_green.g = 255;
+    font_green.b = 0;
+
     font_im.setSurface(TTF_RenderText_Solid(font, "Pokefac", font_color));
     font_im.loadFromCurrentSurface(renderer);
     font_menuPoke.setSurface(TTF_RenderText_Solid(font, "1- Pokemons", font_color));
@@ -195,7 +207,7 @@ SdlGame::SdlGame()
     font_gameLoaded.setSurface(TTF_RenderText_Solid(font, "Partie Chargee", font_color));
     font_gameLoaded.loadFromCurrentSurface(renderer);
 
-    font_choosePoke.setSurface(TTF_RenderText_Solid(font, "Choisissez un pokemon", font_color));
+    font_choosePoke.setSurface(TTF_RenderText_Solid(font, "Organiser vos pokemons", font_color));
     font_choosePoke.loadFromCurrentSurface(renderer);
     
 
@@ -237,37 +249,6 @@ SdlGame::~SdlGame()
     SDL_Quit();
 }
 
-void SdlGame::sdlDisplayAllWorld(world world)
-{
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
-
-    for (unsigned int x = 0; x < SIZETERRAIN; x++)
-    {
-        for (unsigned int y = 0; y < SIZETERRAIN; y++)
-        {
-            if (world.mainTerrain.terrainTab[y][x] == '#')
-            {
-                im_Tree.draw(renderer, x * TAILLE_SPRITE, y * TAILLE_SPRITE, TAILLE_SPRITE + 10, TAILLE_SPRITE + 10);
-            }
-            if (world.mainTerrain.terrainTab[y][x] == '.')
-            {
-                im_GrassLand.draw(renderer, x * TAILLE_SPRITE, y * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-            }
-            if (world.mainTerrain.terrainTab[y][x] == 'H')
-            {
-                im_herbs.draw(renderer, x * TAILLE_SPRITE, y * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-            }
-            if ((world.mainTerrain.terrainTab[y][x] == 'O') || (world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
-            {
-                im_MissingTexture.draw(renderer, x * TAILLE_SPRITE, y * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-            }
-        }
-    }
-    // im_Tree.draw(renderer, world.mainPlayer.getPosY() * TAILLE_SPRITE, world.mainPlayer.getPosX() * TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-    //im_Player.draw(renderer, world.mainPlayer.getPosX()*TAILLE_SPRITE, world.mainPlayer.getPosY()* TAILLE_SPRITE, TAILLE_SPRITE, TAILLE_SPRITE);
-}
-
 void SdlGame::sdlLaunchAnimation(world world, char direction)
 {
     int tileX, tileY;
@@ -294,6 +275,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY + 2;
                 refresh++;
+                //SDL_Delay(9);
             }
             break;
 
@@ -316,6 +298,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileX = tileX + 2;
                 refresh++;
+                //SDL_Delay(9);
             }
             break;
 
@@ -338,6 +321,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY - 2;
                 refresh++;
+                //SDL_Delay(9);
             }
             break;
 
@@ -361,6 +345,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderClear(renderer);
                 tileX = tileX - 2;
                 refresh++;
+                //SDL_Delay(9);
             }
             break;
 
@@ -374,41 +359,86 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
+    string terrainName = world.mainTerrain.terrainName;
+    terrainName.pop_back();
+
     int Xplayer = world.mainPlayer.getPosX();
     int Yplayer = world.mainPlayer.getPosY();
 
-    for (int x = Yplayer - 5; x < Yplayer + 6; x++)
+    for (int x = Yplayer - SIZETERRAIN; x < Yplayer + SIZETERRAIN; x++)
     {
-        for (int y = Xplayer - 5; y < Xplayer + 6; y++)
+        for (int y = Xplayer - SIZETERRAIN; y < Xplayer + SIZETERRAIN; y++)
         {
 
             if (x >= 0 && x < SIZETERRAIN && y >= 0 && y < SIZETERRAIN)
             {
+                if(x == 0 && y == 0 && terrainName == "terrain")
+                {
+                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*SIZETERRAIN, TAILLE_SPRITE*SIZETERRAIN);
+                }
 
-                if (world.mainTerrain.terrainTab[y][x] == '#')
+                if(x == 4 && y == 4 && terrainName == "house")
                 {
-                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
-                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX - 20, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-55, TAILLE_SPRITE+50, TAILLE_SPRITE+100);
+                    im_Wood.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*(SIZETERRAIN-8), TAILLE_SPRITE*(SIZETERRAIN-8));
                 }
-                if (world.mainTerrain.terrainTab[y][x] == '.')
-                {
-                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
-                if (world.mainTerrain.terrainTab[y][x] == 'H')
-                {
-                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
 
-                     im_herbs.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                if(world.mainTerrain.terrainTab[y][x] == '#')
+                {
+                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-30, TAILLE_SPRITE+20, TAILLE_SPRITE+30);
                 }
+
+                if(world.mainTerrain.terrainTab[y][x] == 'H')
+                {
+                    im_herbs.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                }
+
                 if(world.mainTerrain.terrainTab[y][x] == 'R')
                 {
                     im_sandRoad.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
-
-
-                if ((world.mainTerrain.terrainTab[y][x] == 'O') || (world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
+                
+                if(world.mainTerrain.terrainTab[y][x] == 'M')
                 {
+                    im_House.draw(renderer,((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*5, TAILLE_SPRITE*5);
+                }
 
+                if(world.mainTerrain.terrainTab[y][x] == 'O')
+                {
+                    Door thisDoor = world.whichDoor(y, x);
+                    SDL_Rect arrowRect;
+                    arrowRect.w = arrowRect.h = 50;
+                    arrowRect.y = 0;
+                    switch (thisDoor.orientation)
+                    {
+                    case 'n':
+                        arrowRect.x = 50;
+                        break;
+                    
+                    case 's':
+                        arrowRect.x = 150;
+                        break;
+                    
+                    case 'e':
+                        arrowRect.x = 0;
+                        break;
+                    
+                    case 'o':
+                        arrowRect.x = 100;
+                        break;
+                    
+                    default:
+                        break;
+                    }
+                    
+                    SDL_Rect doorPosition;
+                    doorPosition.x = ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX;
+                    doorPosition.y = ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY;
+                    doorPosition.w = doorPosition.h = TAILLE_SPRITE;
+                    SDL_RenderCopy(renderer, im_Arrow.getTexture(), &arrowRect, &doorPosition);
+                }
+
+                if((world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
+                {
                     im_MissingTexture.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
             }
@@ -487,7 +517,7 @@ void SdlGame::sdlLoop(world &world)
                 {
                     case SDLK_UP:
                         world.mainPlayer.setOrientation('n');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && world.menuOn == 0 && !world.isInBattle)
                             {
                                 moveDirection = 'u';
                                 world.hasMoved = true;
@@ -496,7 +526,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_LEFT:
                         world.mainPlayer.setOrientation('o');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && world.menuOn == 0 && !world.isInBattle)
                             {
                                 moveDirection = 'l';
                                 world.hasMoved = true;
@@ -505,7 +535,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_DOWN:
                         world.mainPlayer.setOrientation('s');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && world.menuOn == 0 && !world.isInBattle)
                             {
                                 moveDirection = 'd';
                                 world.hasMoved = true;
@@ -514,15 +544,29 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_RIGHT:
                         world.mainPlayer.setOrientation('e');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && !world.menuOn)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && world.menuOn == 0 && !world.isInBattle)
                             {
                                 moveDirection = 'r';
                                 world.hasMoved = true;
                             }
                             break;
 
-                    case SDLK_m: 
-                        world.menuOn = !world.menuOn;
+                    case SDLK_m:
+                        if(world.menuOn == 1)
+                        {
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 0)
+                        {
+                            world.menuOn = 1;
+                        }else if (world.menuOn == 2)
+                        {
+                            world.menuOn = 0;
+                        }else if (world.menuOn == 3)
+                        {
+                            sdlDisplayPokemonMenu(world, false);
+                            world.menuOn = 2;
+                        }
+                            
                         break;
                     
                     case SDLK_x: 
@@ -530,34 +574,89 @@ void SdlGame::sdlLoop(world &world)
                         break; 
 
                     case SDLK_1:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
-                            world.menuOn = false;
                             //world.displayPokemon();
                             sdlDisplayPokemonMenu(world, false);
-                        }      
+                            cout << "menu1" << endl;
+                        }else if(world.menuOn == 2)
+                        {
+                            cout << world.mainPlayer.nbPokemon << endl;
+                            cout << "menu2" << endl;
+                            if(world.mainPlayer.nbPokemon > 0)
+                                sdlDisplayPokemonInfos(world, 0);
+                        }
+                        if(world.isInBattle)
+                        {
+                            sdlDisplayBattle(world, 1);
+                        }
                         break;
 
                     case SDLK_2:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             world.saveGame("saveData");
-                            world.menuOn = false;
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 2)
+                        {
+                            cout << world.mainPlayer.nbPokemon << endl;
+                            if(world.mainPlayer.nbPokemon > 1)
+                                sdlDisplayPokemonInfos(world, 1);
+                        }
+                        if(world.isInBattle)
+                        {
+                            sdlDisplayBattle(world, 2);
                         }
                         break;
 
                     case SDLK_3:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             world.loadGame("saveData");
-                            world.menuOn = false;
+                            world.menuOn = 0;
+                        }else if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 2)
+                                sdlDisplayPokemonInfos(world, 2);
+                        }
+                        if(world.isInBattle)
+                        {
+                            sdlDisplayBattle(world, 3);
                         }
                         break;
 
                     case SDLK_4:
-                        if(world.menuOn)
+                        if(world.menuOn == 1)
                         {
                             quit = true;
+                        }else if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 3)
+                                sdlDisplayPokemonInfos(world, 3);
+                        }
+                        if(world.isInBattle)
+                        {
+                            sdlDisplayBattle(world, 4);
+                        }
+                        break;
+                    
+                    case SDLK_5:
+                        if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 4)
+                                sdlDisplayPokemonInfos(world, 4);
+                        }
+                        if(world.isInBattle)
+                        {
+                            sdlDisplayBattle(world, 5);
+                        }
+                        break;
+                    
+                    case SDLK_6:
+                        if(world.menuOn == 2)
+                        {
+                            if(world.mainPlayer.nbPokemon > 5)
+                                sdlDisplayPokemonInfos(world, 5);
                         }
                         break;
 
@@ -567,11 +666,11 @@ void SdlGame::sdlLoop(world &world)
             }
         }
 
-        if (world.menuOn)
+        if (world.menuOn == 1)
         {
             sdlDisplayMenu();
             //sdlDisplayChatBox(world);
-            //sdlDisplayBattle(deltaTime, elapsedTime, false);
+            // sdlDisplayBattle(deltaTime, elapsedTime, false);
             //sdlDisplayPokemonMenu(world, true);
         }
 
@@ -583,6 +682,11 @@ void SdlGame::sdlLoop(world &world)
         if(world.isLoading)
         {
             sdlDisplayGameLoaded(deltaTime, elapsedTime, world);
+        }
+
+        if(world.isInBattle)
+        {
+            sdlDisplayBattle(world, 0);
         }
 
         if(world.hasMoved)
@@ -618,13 +722,15 @@ void SdlGame::sdlLoop(world &world)
             }
 
             world.door();
-            world.randomCombat(world.mainPlayer);
+            
+
+            sdlRandomCombat(world);
 			world.healAll(world.mainPlayer);
 			world.hasMoved = false;
 
         }
 
-        if (!world.menuOn && !world.isSaving && !world.isLoading)
+        if (world.menuOn == 0 && !world.isSaving && !world.isLoading && !world.isInBattle)
         {
             sdlDisplay(world, 0, 0);
         }
@@ -670,78 +776,6 @@ void SdlGame::sdlDisplayChatBox(world world)
     SDL_RenderCopy(renderer, font_chatBox.getTexture(), NULL, &textPos);
 }
 
-void SdlGame::sdlDisplayBattle(Uint32 &deltaTime, Uint32 &elapsedTime, bool dresseur)
-{
-
-    bool displayStart;
-    bool displayPokeGo;
-    elapsedTime = SDL_GetTicks();
-
-    Uint32 timing = elapsedTime - deltaTime;
-    if(timing < 5000)
-    {
-        displayStart = true;
-    } else displayStart = false;
-
-    if(timing < 5000 || timing > 7500)
-    {
-        displayPokeGo = false;
-    } else displayPokeGo = true;
-
-
-
-    im_chatBox.draw(renderer,0,440,640,200);
-    im_battleBG.draw(renderer, 0,0,640,440);
-
-    if(timing > 4000)
-    {
-        im_linuchu.draw(renderer, 375, 100, 150,150); //Pokemon Sauvage / Dresseur
-    }
-/* 
-    if(timing > 6000)
-    {
-        //Pokemon du joueur
-    } */
-
-    if(timing > 7500)
-    {
-        
-    }
-
-
-
-    string sentence;
-
-    if(dresseur)
-    {
-        sentence = "Un dresseur veut se battre !";
-    } else
-    {
-        sentence = "Un Pokemon Sauvage apparait !";
-    }
-    
-
-    font_chatBox.setSurface(TTF_RenderText_Solid(font, sentence.c_str(), font_color));
-    font_chatBox.loadFromCurrentSurface(renderer);
-    
-
-    string pokeGo = "Nom Go !";
-    font_chatPokeGo.setSurface(TTF_RenderText_Solid(font, pokeGo.c_str(), font_color));
-    font_chatPokeGo.loadFromCurrentSurface(renderer);
- 
-    if(displayStart)
-    {
-        font_chatBox.draw(renderer,35,468,550,125);
-    }
-  
-    if(displayPokeGo)
-    {
-        font_chatPokeGo.draw(renderer, 35,468,450,75);
-    }
-
-    
-
-}
 
 void SdlGame::sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world &world)
 {
@@ -777,7 +811,7 @@ void SdlGame::sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime, world 
     {
         SDL_RenderCopy(renderer, im_chatBox.getTexture(), NULL, &rectOne);
         SDL_RenderCopy(renderer, font_gameSaved.getTexture(), NULL, &rectTwo);
-        //im_chatBox.draw(renderer,35,468,550,125);
+
     }
 }
 
@@ -816,8 +850,10 @@ void SdlGame::sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world
     }
 }
 
-void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
+void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
 {
+    world.menuOn = 2;
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_Rect forBattle;
@@ -856,17 +892,14 @@ void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
             forBattle.y +=75;
             hpPos.y = forBattle.y + 30;
         }
-
-
-    
     } else
     {
         forBattle.y += 5;
         hpPos.y +=5;
-        for(int i = 0; i < 6; i++)
+        for(unsigned int i = 0; i < world.mainPlayer.nbPokemon; i++)
         {
-            pokemonNameStr = world.pokeTab[i].name;
-            pokemonHP = "-- HP : " + to_string(world.pokeTab[i].health) + " / " + to_string(world.pokeTab[i].maxHealth);
+            pokemonNameStr = world.mainPlayer.tabPokemon[i].name;
+            pokemonHP = "-- HP : " + to_string(world.mainPlayer.tabPokemon[i].health) + " / " + to_string(world.mainPlayer.tabPokemon[i].maxHealth);
 
             font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
             font_pokemonName.loadFromCurrentSurface(renderer);
@@ -880,6 +913,271 @@ void SdlGame::sdlDisplayPokemonMenu(world world, bool inBattle)
             hpPos.y = forBattle.y + 30;
         }
     }
-    
+}
 
+void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
+{
+    world.menuOn = 3;
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_RenderClear(renderer);
+
+    SDL_Rect posT;
+    posT.x = 50;
+    posT.y = 35;
+    posT.h = 40;
+    posT.w = 200;
+
+
+    string pokemonName, pokemonTypeInfo, pokemonType, pokemonAttacks, pokemonDamages;
+
+
+    pokemonName = world.pokeTab[idPoke].name;
+    pokemonTypeInfo = "Type :";
+    pokemonType = world.pokeTab[idPoke].type;
+    font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonName.c_str(), font_color));
+    font_pokemonName.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &posT);
+
+    posT.x = 350;
+    posT.w = 50;
+
+    font_pokemonType.setSurface(TTF_RenderText_Solid(font, pokemonTypeInfo.c_str(), font_color));
+    font_pokemonType.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonType.getTexture(),NULL, &posT);
+
+    posT.x +=75;
+
+    font_pokemonType.setSurface(TTF_RenderText_Solid(font, pokemonType.c_str(), font_color));
+    font_pokemonType.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonType.getTexture(),NULL, &posT);
+
+    posT.x = 50;
+    posT.y = 150;
+    posT.w = 200;
+
+    pokemonAttacks = "Attaques :";
+    font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+    font_pokemonAttacks.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posT);
+    posT.x = 350;
+    pokemonAttacks = "Degats :";
+    font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+    font_pokemonAttacks.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posT);
+
+    posT.x = 50;
+    posT.y = 225;
+
+    SDL_Rect posD;
+    posD.x = 350;
+    posD.y = 225;
+    posD.h = 40;
+    posD.w = 50;
+
+    for(int i = 0; i < 4; i++)
+    {
+        pokemonAttacks = world.pokeTab[idPoke].attackChoice[i].name;
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posT);
+        posT.y += 100;
+        pokemonAttacks = to_string(world.pokeTab[idPoke].attackChoice[i].damagePoints);
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posD);
+        posD.y += 100;
+    }
+}
+
+void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
+{
+    srand(time(NULL));
+    bool hasAttacked = false;
+    Pokemon * playerPoke = &world.mainPlayer.firstPokemonAlive();
+
+    if(action > 0 && action < 5)
+    {
+        world.pokeInFight.receiveAttack(playerPoke->attackChoice[action-1]);
+        hasAttacked = true;
+
+        im_chatBox.draw(renderer,0,440,640,200);
+        
+        SDL_Rect posWin;
+        posWin.x = 60;
+        posWin.y = 485;
+        posWin.w = 500;
+        posWin.h = 100;
+
+        string win = "Vous attaquez avec " + playerPoke->attackChoice[action-1].name + " " + to_string(playerPoke->attackChoice[action-1].damagePoints);
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, win.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posWin);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(2500);
+    }
+
+    im_battleBG.draw(renderer, 0,0,640,440);
+
+    string pokemonHealth, pokemonName;
+    pokemonName = world.pokeInFight.name;
+
+    // Boite de vie et nom du pokemon Sauvage/dresseur
+    pokemonHealth = "HP :" + to_string(world.pokeInFight.health) + "/" + to_string(world.pokeInFight.maxHealth);
+
+    SDL_Rect posLife;
+    posLife.x = 60;
+    posLife.y = 150;
+    posLife.w = 180;
+    posLife.h = 60;
+    
+    im_chatBox.draw(renderer, 50,50,250,200);
+    if(world.pokeInFight.health < 15)
+    {
+        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_red));
+        font_pokemonHP.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); 
+    } else
+    {
+        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_green)); 
+        font_pokemonHP.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife);   
+    }
+    
+    posLife.y = 80;
+    font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonName.c_str(), font_color));
+    font_pokemonHP.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage nom
+
+
+
+    // Boite de vie et nom du pokémon du joueur
+    string yourLife = "HP: " + to_string(playerPoke->health) + "/" + to_string(playerPoke->maxHealth);
+    im_chatBox.draw(renderer, 375, 300, 200,125);
+    
+    posLife.x = 400;
+    posLife.y = 330;
+    posLife.w = 115;
+
+    if(playerPoke->health < 15)
+    {
+        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_red));
+        font_pokemonHP.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
+    } else
+    {
+        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_green));
+        font_pokemonHP.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
+    }
+
+
+
+    im_linuchu.draw(renderer, 375, 100, 150,150); // affichage du pokemon adverse (les coordonnées)
+    im_linuchu.draw(renderer, 175, 350, 150,150); // affichage du pokemon joueur
+
+
+    // Boite de dialogue en bas
+    
+    im_chatBox.draw(renderer,0,440,640,200);
+
+    if(world.pokeInFight.health == 0 && world.mainPlayer.getPokeball() > 0 && world.mainPlayer.hasFreePokeLocation() && !world.mainPlayer.hasThisPokemon(world.pokeInFight))
+    {
+        SDL_Rect posWin;
+        posWin.x = 60;
+        posWin.y = 485;
+        posWin.w = 500;
+        posWin.h = 100;
+
+        string win = "Le pokemon est attrape !";
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, win.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posWin);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(2500);
+
+        world.mainPlayer.addPokemon(world.pokeInFight);
+        world.isInBattle = false;
+    }
+
+    if(hasAttacked && world.isInBattle)
+    {
+        int opponentAttack = rand() % 3;
+        playerPoke->receiveAttack(world.pokeInFight.attackChoice[opponentAttack]);
+
+        SDL_Rect posWin;
+        posWin.x = 60;
+        posWin.y = 485;
+        posWin.w = 500;
+        posWin.h = 100;
+
+        string win = world.pokeInFight.name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, win.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posWin);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(2500);
+    }
+    
+    if(action != 5 && world.isInBattle)
+    {
+        string attacksName;
+        SDL_Rect posAttacks;
+        posAttacks.x = 40;
+        posAttacks.y = 460;
+        posAttacks.w = 100;
+        posAttacks.h = 80;
+
+        for(int i = 0; i < 4; i++)
+        {
+            attacksName = to_string(i+1) + "-" + playerPoke->attackChoice[i].name + " " + to_string(playerPoke->attackChoice[action].damagePoints);
+
+            font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
+            font_pokemonAttacks.loadFromCurrentSurface(renderer);
+            SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posAttacks);
+            
+            posAttacks.x += 150;
+        }
+
+        posAttacks.x = 260;
+        posAttacks.y = 540;
+        attacksName = "5- Fuite";
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posAttacks);
+    }
+
+    if(action == 5 && world.isInBattle)
+    {
+        SDL_Rect posFuite;
+        posFuite.x = 80;
+        posFuite.y = 485;
+        posFuite.w = 500;
+        posFuite.h = 100;
+
+        string fuite = "Vous prenez la fuite !";
+        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, fuite.c_str(), font_color));
+        font_pokemonAttacks.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posFuite);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(1500);
+
+        world.isInBattle = false;
+    }
+}
+
+void SdlGame::sdlRandomCombat(world & world)
+{
+
+    if((world.isInHerb(world.mainPlayer.getPosX(), world.mainPlayer.getPosY())))
+    {
+        unsigned int random = world.randomNumber();
+
+        if(random % 5 == 0)
+        {
+            unsigned int randomPoke = rand() % NBPOKEMON;
+            world.pokeInFight = world.pokeTab[randomPoke];
+            world.isInBattle = true;
+        }
+    }
 }
