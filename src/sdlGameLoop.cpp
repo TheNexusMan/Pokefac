@@ -149,6 +149,7 @@ SdlGame::SdlGame()
     im_House.loadFromFile("./data/textures/house.png", renderer);
     im_Wood.loadFromFile("./data/textures/wood.jpg", renderer);
     im_Arrow.loadFromFile("./data/textures/sprite_arrow.png", renderer);
+    im_Life.loadFromFile("./data/textures/life.png", renderer);
     //fin de l'ajout du chargement des images
 
     //Pokemons
@@ -424,7 +425,12 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
                     SDL_RenderCopy(renderer, im_Arrow.getTexture(), &arrowRect, &doorPosition);
                 }
 
-                if((world.mainTerrain.terrainTab[y][x] == 'N') || (world.mainTerrain.terrainTab[y][x] == 'V'))
+                if((world.mainTerrain.terrainTab[y][x] == 'V'))
+                {
+                    im_Life.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                }
+
+                if((world.mainTerrain.terrainTab[y][x] == 'N'))
                 {
                     im_MissingTexture.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }

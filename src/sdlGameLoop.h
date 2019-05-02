@@ -82,6 +82,7 @@ class SdlGame
     Image im_House;
     Image im_Wood;
     Image im_Arrow;
+    Image im_Life;
 
     //Pokemons
     Image im_linuchu;
