@@ -240,6 +240,48 @@ public:
 
 	/** 
 	@brief
+	Fonction retournant un NPC
+
+	@param mainPlayer
+	@return NPC
+
+	Exemple Visual
+	@code
+	world.whichNPC(mainPlayer);
+	@endCode
+	*/
+	NPC* whichNPC(Player & mainPlayer);
+
+	/** 
+	@brief
+	Place sur le terrain pour tous les NPC, en fonction de leur orientation, 3 tirets qui représente les trois cases qu'ils visualisent 
+
+	@param terrain
+	@return none 
+
+	Exemple Visual
+	@code
+	world.initTerrainNPC(terrain);
+	@endCode
+	*/
+	void initTerrainNPC(string terrain);
+
+	/** 
+	@brief
+	Lance un combat contre un NPC si le joueur passe sur une des trois cases devant ce NPC
+
+	@param none
+	@return none
+
+	Exemple Visual
+	@code
+	world.NPCBattle();
+	@endCode
+	*/
+	void NPCBattle();
+
+	/** 
+	@brief
 	Lance le menu
 
 	@param gameOn

@@ -192,6 +192,7 @@ void world::initGame()
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
 	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
+	initTerrainNPC("terrain1"); // Initialise les cases d'intéraction avec les NPC
 	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de départ
 	initDoor(); // Initialisation des portes
 }
@@ -389,58 +390,6 @@ bool world::moveIsAllowed(Player mainPlayer, const int x, const int y) const
 	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N') && (mainTerrain.terrainTab[x][y] != '*'));
 }
 
-void world::isInLine(NPC npc, Player mainPlayer, const int x, const int y) const
-{
-	int npcPosX = npc.getPosX();
-	int npcPosY = npc.getPosY();
-	switch (npc.getOrientation())
-	{
-
-		// Nord
-	case 'n': if ((y == npcPosY - 1 || npcPosY - 2 || npcPosY - 3) && (x == npcPosX))
-	{
-
-		write_to_log_file("Le joueur est au nord d'un npc et < 3 cases");
-		write_to_log_file("Le combat se lance");
-
-		//Engage le combat
-		break;
-	}
-
-			//Est
-	case 'e':	if ((x == npcPosX + 1 || npcPosX + 2 || npcPosX + 3) && (y == npcPosY))
-	{
-
-		write_to_log_file("Le joueur est a l'est d'un npc et < 3 cases");
-		write_to_log_file("Le combat se lance");
-
-		//Engage le combat
-		break;
-	}
-
-			//Sud
-	case 's':	if ((y == npcPosY + 1 || npcPosY + 2 || npcPosY + 3) && (x == npcPosX))
-	{
-
-		write_to_log_file("Le joueur est au sud d'un npc et < 3 cases");
-		write_to_log_file("Le combat se lance");
-		//Engage le combat
-		break;
-	}
-
-			// Ouest
-	case 'o':if ((x == npcPosX - 1 || npcPosX - 2 || npcPosX - 3) && (y == npcPosY))
-	{
-
-		write_to_log_file("Le joueur est a l'ouest d'un npc et < 3 cases");
-		write_to_log_file("Le combat se lance");
-
-		//Engage le combats
-		break;
-	}
-	}
-}
-
 void world::door()
 {
 	if(mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == 'O')
@@ -464,11 +413,124 @@ Door world::whichDoor(unsigned int x, unsigned int y)
 	return returnedDoor;
 }
 
+NPC* world::whichNPC(Player & mainPlayer)
+{
+	unsigned int PlayerPosX = mainPlayer.getPosX();
+	unsigned int PlayerPosY = mainPlayer.getPosY();
+
+	for (unsigned int i=0; i < NB_NPC; i++)
+	{
+		switch (NPCTab[i].getOrientation())
+		{
+
+			// Nord
+			case 'n': 
+				if ((PlayerPosY == NPCTab[i].getPosY() - 1 || NPCTab[i].getPosY() - 2 || NPCTab[i].getPosY() - 3) && (PlayerPosX == NPCTab[i].getPosX()))
+				{
+					return &NPCTab[i];
+					break;
+				}
+
+			//Est
+			case 'e': 
+				if ((PlayerPosX == NPCTab[i].getPosX() + 1 || NPCTab[i].getPosX() + 2 || NPCTab[i].getPosX() + 3) && (PlayerPosY == NPCTab[i].getPosY()))
+				{
+					return &NPCTab[i];
+					break;
+				}
+
+			//Sud
+			case 's':
+				if ((PlayerPosY == NPCTab[i].getPosY() + 1 || NPCTab[i].getPosY() + 2 || NPCTab[i].getPosY() + 3) && (PlayerPosX == NPCTab[i].getPosX()))
+				{
+					return &NPCTab[i];
+					break;
+				}
+
+			// Ouest
+			case 'o': 
+				if ((PlayerPosX == NPCTab[i].getPosX() - 1 || NPCTab[i].getPosX() - 2 || NPCTab[i].getPosX() - 3) && (PlayerPosY == NPCTab[i].getPosY()))
+				{
+					return &NPCTab[i];
+					break;
+				}
+			default :
+				break;
+		}
+	}
+
+	return NULL;
+}
+
+void world::initTerrainNPC(string terrain)
+{
+	for (unsigned int i=0; i < NB_NPC; i++)
+	{
+		if (NPCTab[i].terrainName == terrain)
+		{
+			switch (NPCTab[i].getOrientation())
+			{
+
+				// Nord
+				case 'n': 
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-1] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-1]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-2] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-2]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-3] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-3]='-';
+					break;
+
+				//Est
+				case 'e': 
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()+1][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()+1][NPCTab[i].getPosY()]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()+2][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()+2][NPCTab[i].getPosY()]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()+3][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()+3][NPCTab[i].getPosY()]='-';
+					break;
+
+				//Sud
+				case 's': 
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+1] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+1]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+2] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+2]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+3] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+3]='-';
+					break;
+
+				// Ouest
+				case 'o':
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()-1][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()-1][NPCTab[i].getPosY()]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()-2][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()-2][NPCTab[i].getPosY()]='-';
+					if (mainTerrain.terrainTab[NPCTab[i].getPosX()-3][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()-3][NPCTab[i].getPosY()]='-';
+					break;
+
+				default :
+					break;
+			}
+		}
+	}
+}
+
+void world::NPCBattle()
+{
+	if (mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == '-')
+	{
+		termClear();
+		NPC * npc = whichNPC(mainPlayer);
+		if (npc->beaten == 0) 
+		{
+			cout<<npc->id;
+			getchar();
+			//battle();
+		}
+		else{
+			cout<<"Tu as déjà battu ce champion d'arène ! ";
+			getchar();
+		} 
+	} 
+}
+
 void world::teleport(Player & mainPlayer, string terrain, unsigned int x, unsigned int y)
 {
 	if(terrain != mainTerrain.terrainName)
 	{
 		mainTerrain.initTerrain(terrain);
+		initTerrainNPC(terrain);
 	}
 	mainPlayer.setNewPos(x,y);
 }

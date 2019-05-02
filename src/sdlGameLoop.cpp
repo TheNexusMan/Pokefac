@@ -489,6 +489,8 @@ void SdlGame::sdlLoop(world &world)
 
     while(!quit)
     {
+        termClear();
+        world.mainTerrain.displayTerrain(world.mainPlayer);
         SDL_FlushEvent(events.type);
         while (SDL_PollEvent(&events))
         {
@@ -698,6 +700,7 @@ void SdlGame::sdlLoop(world &world)
 
             sdlRandomCombat(world);
 			world.healAll(world.mainPlayer);
+            world.NPCBattle();
 			world.hasMoved = false;
         }
 
@@ -1185,4 +1188,23 @@ void SdlGame::sdlRandomCombat(world & world)
             world.isInBattle = true;
         }
     }
+}
+
+void SdlGame::sdlNPCBattle(world & world)
+{
+	if (world.mainTerrain.terrainTab[world.mainPlayer.getPosX()][world.mainPlayer.getPosY()] == '-')
+	{
+		termClear();
+		NPC * npc = world.whichNPC(world.mainPlayer);
+		if (npc->beaten == 0) 
+		{
+			cout<<npc->id;
+			getchar();
+			sdlDisplayBattle(world, 0);
+		}
+		else{
+			cout<<"Tu as déjà battu ce champion d'arène ! ";
+			getchar();
+		} 
+	} 
 }

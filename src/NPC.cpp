@@ -3,6 +3,7 @@
 
 NPC::NPC()
 {
+    beaten = false;
 }
 
 NPC::~NPC()

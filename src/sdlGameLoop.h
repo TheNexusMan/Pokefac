@@ -117,6 +117,7 @@ class SdlGame
         void sdlDisplayPokemonInfos(world &world, int idPoke);
 
         void sdlRandomCombat(world & world);
+        void sdlNPCBattle(world & world);
 
 };
 #endif
