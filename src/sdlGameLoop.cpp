@@ -1178,6 +1178,8 @@ void SdlGame::sdlRandomCombat(world & world)
             unsigned int randomPoke = rand() % NBPOKEMON;
             world.pokeInFight = world.pokeTab[randomPoke];
             world.isInBattle = true;
+            Mix_HaltMusic();
+            Mix_PlayMusic(battle,-1);
         }
     }
 }
