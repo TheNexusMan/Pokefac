@@ -959,31 +959,37 @@ void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
     }
 }
 
+void SdlGame::sdlDisplaySentence(string sentence)
+{
+    im_chatBox.draw(renderer,0,440,640,200);
+
+    SDL_Rect posSentence;
+    posSentence.x = 30;
+    posSentence.y = 470;
+    posSentence.w = sentence.size()*12;
+    posSentence.h = 50;
+
+    font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, sentence.c_str(), font_color));
+    font_pokemonAttacks.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posSentence);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(2500);
+}
+
 void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
 {
     srand(time(NULL));
     bool hasAttacked = false;
     Pokemon * playerPoke = &world.mainPlayer.firstPokemonAlive();
 
+    // Si une attaque a été lancé par le joueur
     if(action > 0 && action < 5)
     {
         world.pokeInFight.receiveAttack(playerPoke->attackChoice[action-1]);
         hasAttacked = true;
 
-        im_chatBox.draw(renderer,0,440,640,200);
-        
-        SDL_Rect posWin;
-        posWin.x = 60;
-        posWin.y = 485;
-        posWin.w = 500;
-        posWin.h = 100;
-
-        string win = "Vous attaquez avec " + playerPoke->attackChoice[action-1].name + " " + to_string(playerPoke->attackChoice[action-1].damagePoints);
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, win.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posWin);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(2500);
+        string sentence = "Vous attaquez avec " + playerPoke->attackChoice[action-1].name + " " + to_string(playerPoke->attackChoice[action-1].damagePoints);
+        sdlDisplaySentence(sentence);
     }
 
     im_battleBG.draw(renderer, 0,0,640,440);
@@ -991,8 +997,8 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     string pokemonHealth, pokemonName;
     pokemonName = world.pokeInFight.name;
 
-    // Boite de vie et nom du pokemon Sauvage/dresseur
-    pokemonHealth = "HP :" + to_string(world.pokeInFight.health) + "/" + to_string(world.pokeInFight.maxHealth);
+    // Affichage boite de vie et de nom du pokemon sauvage/dresseur
+    pokemonHealth = "HP : " + to_string(world.pokeInFight.health) + "/" + to_string(world.pokeInFight.maxHealth);
 
     SDL_Rect posLife;
     posLife.x = 60;
@@ -1020,8 +1026,8 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
 
 
 
-    // Boite de vie et nom du pokémon du joueur
-    string yourLife = "HP: " + to_string(playerPoke->health) + "/" + to_string(playerPoke->maxHealth);
+    // Boite de vie et du nom du pokémon du joueur
+    string yourLife = "HP : " + to_string(playerPoke->health) + "/" + to_string(playerPoke->maxHealth);
     im_chatBox.draw(renderer, 375, 300, 200,125);
     
     posLife.x = 400;
@@ -1046,50 +1052,62 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     im_linuchu.draw(renderer, 175, 350, 150,150); // affichage du pokemon joueur
 
 
-    // Boite de dialogue en bas
-    
-    im_chatBox.draw(renderer,0,440,640,200);
-
+    // Si le pokémon est vaincu et qu'on peut l'attraper
     if(world.pokeInFight.health == 0 && world.mainPlayer.getPokeball() > 0 && world.mainPlayer.hasFreePokeLocation() && !world.mainPlayer.hasThisPokemon(world.pokeInFight))
     {
-        SDL_Rect posWin;
-        posWin.x = 60;
-        posWin.y = 485;
-        posWin.w = 500;
-        posWin.h = 100;
-
-        string win = "Le pokemon est attrape !";
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, win.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posWin);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(2500);
-
         world.mainPlayer.addPokemon(world.pokeInFight);
         world.isInBattle = false;
+
+        string sentence = "Le pokemon est attrape !";
+        sdlDisplaySentence(sentence);
     }
 
+    // Le pokémon adverse nous attaque après notre attaque
     if(hasAttacked && world.isInBattle)
     {
         int opponentAttack = rand() % 3;
         playerPoke->receiveAttack(world.pokeInFight.attackChoice[opponentAttack]);
 
-        SDL_Rect posWin;
-        posWin.x = 60;
-        posWin.y = 485;
-        posWin.w = 500;
-        posWin.h = 100;
+        string sentence = world.pokeInFight.name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
+        sdlDisplaySentence(sentence);
+    }
 
-        string win = world.pokeInFight.name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, win.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posWin);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(2500);
+    // Si le pokémon du joueur est mort
+    if(playerPoke->health == 0 && world.isInBattle)
+    {
+        string sentence;
+        string yourLife = "HP : " + to_string(playerPoke->health) + "/" + to_string(playerPoke->maxHealth);
+        if(playerPoke->health < 15)
+        {
+            font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_red));
+            font_pokemonHP.loadFromCurrentSurface(renderer);
+            SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
+        } else
+        {
+            font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_green));
+            font_pokemonHP.loadFromCurrentSurface(renderer);
+            SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
+        }
+
+        if(world.mainPlayer.allPokemonsAreDead())
+        {
+            world.mainPlayer.treatAllPokemon();
+            world.teleport(world.mainPlayer, "house1", 9, 10);
+            world.isInBattle = false;
+
+            sentence = "Defaite...";
+        }else{
+
+            sentence = playerPoke->name + " est KO, " + world.mainPlayer.firstPokemonAlive().name + " est envoye !";
+        }
+        
+        sdlDisplaySentence(sentence);
     }
     
+    // Affichage des différentes attaques possibles
     if(action != 5 && world.isInBattle)
     {
+        im_chatBox.draw(renderer,0,440,640,200);
         string attacksName;
         SDL_Rect posAttacks;
         posAttacks.x = 40;
@@ -1099,7 +1117,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
 
         for(int i = 0; i < 4; i++)
         {
-            attacksName = to_string(i+1) + "-" + playerPoke->attackChoice[i].name + " " + to_string(playerPoke->attackChoice[action].damagePoints);
+            attacksName = to_string(i+1) + "-" + playerPoke->attackChoice[i].name + " " + to_string(playerPoke->attackChoice[i].damagePoints);
 
             font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
             font_pokemonAttacks.loadFromCurrentSurface(renderer);
@@ -1116,22 +1134,13 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posAttacks);
     }
 
+    // Fuite
     if(action == 5 && world.isInBattle)
     {
-        SDL_Rect posFuite;
-        posFuite.x = 80;
-        posFuite.y = 485;
-        posFuite.w = 500;
-        posFuite.h = 100;
-
-        string fuite = "Vous prenez la fuite !";
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, fuite.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posFuite);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(1500);
-
         world.isInBattle = false;
+
+        string sentence = "Vous prenez la fuite !";
+        sdlDisplaySentence(sentence);
     }
 }
 

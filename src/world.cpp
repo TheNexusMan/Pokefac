@@ -192,11 +192,8 @@ void world::initGame()
 	initPokeTab(); //Initialisation du tableau Pok�mon
 	initNPCTab(); // Initialisation du tableau NPC
 	mainTerrain.initTerrain("terrain1"); // Initialisation du terrain1
-	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de d�part
-	initDoor(); // initialisation des portes
-
-	//DEBUG
-	mainPlayer.addPokemon(pokeTab[1]);
+	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de départ
+	initDoor(); // Initialisation des portes
 }
 
 int world::randomNumber()

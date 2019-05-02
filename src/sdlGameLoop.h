@@ -101,6 +101,7 @@ class SdlGame
         void sdlLaunchAnimation(world world, char direction);
         void sdlDisplay(world world, int tileX, int tileY);
 
+        void sdlDisplaySentence(string sentence);
         void sdlDisplayBattle(world & world, unsigned int action);
         void sdlDisplayChatBox(world world);
 
