@@ -124,7 +124,21 @@ public:
 		
 	/**
 	@brief
-	Permet de definir le nombre de pokeballs (fais un somme)
+	Permet d'ajouter des pokeballs
+	
+	@param nb
+	@return none
+	
+	Exemple Code Block / Visual
+	@code
+	addPokeball(5);
+	//Fais pokeball += 5
+	@endcode */
+	void addPokeball(int nb);
+
+	/**
+	@brief
+	Permet de definir le nombre de pokeballs
 	
 	@param nb
 	@return none
@@ -132,7 +146,6 @@ public:
 	Exemple Code Block / Visual
 	@code
 	setPokeball(5);
-	//Fais pokeball += 5
 	@endcode */
 	void setPokeball(int nb);
 
