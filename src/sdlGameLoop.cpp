@@ -489,6 +489,9 @@ void SdlGame::sdlLoop(world &world)
 
     while(!quit)
     {
+        // termClear();
+        // world.mainTerrain.displayTerrain(world.mainPlayer);
+
         SDL_FlushEvent(events.type);
         while (SDL_PollEvent(&events))
         {

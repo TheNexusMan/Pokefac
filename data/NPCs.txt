@@ -17,7 +17,7 @@ s
 terrain1
 3
 2
-direPhraseMechante()cout "Essaye de te mesurer a moi !"
+meanWords()cout "Essaye de te mesurer a moi !"
 bool sad = true;
 
 3
@@ -28,7 +28,7 @@ n
 terrain2
 4
 2
-cout "Tu ne domineras jamais mon arene"
+cout "Tu ne domineras jamais mon arene !"
 cout "Voila ton 20, vas jouer ailleurs"
 
 4
@@ -43,7 +43,7 @@ string punchline = "Ici, c'est moi la reine !"
 string perdante = "snif"
 
 5
-Marie-Lefévrus
+Marie-Lefevrus
 8
 2
 s

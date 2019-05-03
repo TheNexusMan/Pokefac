@@ -34,7 +34,6 @@ class Image {
 class SdlGame
 {
     private:
-        world mainWorld;
         SDL_Window * window;
         SDL_Renderer * renderer;
 
@@ -98,7 +97,6 @@ class SdlGame
         ~SdlGame();
         void sdlLoop(world & world);
         void sdlDisplayMenu();
-        void sdlDisplayAllWorld(world world);
         void sdlLaunchAnimation(world world, char direction);
         void sdlDisplay(world world, int tileX, int tileY);
 

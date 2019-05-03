@@ -4,8 +4,8 @@
 world::world()
 {
 	initGame();
-	menuOn = 0;
 }
+
 void write_to_log_file(string text) //to_string(valeur);
 {
 	time_t now = time(0);
@@ -21,7 +21,6 @@ void write_to_log_file(string text) //to_string(valeur);
 	file.close();
 
 }
-
 
 void world::saveGame(string saveName)
 {
@@ -42,8 +41,7 @@ void world::saveGame(string saveName)
 		file << mainPlayer.getPokemon(i).health  << "\n"; 
 		//Rajouter la save de l'expérience et du niveau quand implémenté
 	}
-	file.close();
-			
+	file.close();		
 }
 
 void world::loadGame(string saveName) 
@@ -394,9 +392,9 @@ void world::door()
 {
 	if(mainTerrain.terrainTab[mainPlayer.getPosX()][mainPlayer.getPosY()] == 'O')
 	{
-	Door actualDoor = whichDoor(mainPlayer.getPosX(), mainPlayer.getPosY());
-	teleport(mainPlayer, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
-	write_to_log_file("Changement de terrain : " + actualDoor.terrainNameDest + " Nouvelle position du joueur : (" + to_string(actualDoor.destPosX) + "," + to_string(actualDoor.destPosY) +")");
+		Door actualDoor = whichDoor(mainPlayer.getPosX(), mainPlayer.getPosY());
+		teleport(mainPlayer, actualDoor.terrainNameDest, actualDoor.destPosX, actualDoor.destPosY);
+		write_to_log_file("Changement de terrain : " + actualDoor.terrainNameDest + " Nouvelle position du joueur : (" + to_string(actualDoor.destPosX) + "," + to_string(actualDoor.destPosY) +")");
 	}
 }
 
@@ -420,42 +418,45 @@ NPC* world::whichNPC(Player & mainPlayer)
 
 	for (unsigned int i=0; i < NB_NPC; i++)
 	{
-		switch (NPCTab[i].getOrientation())
+		if(NPCTab[i].terrainName == mainTerrain.terrainName)
 		{
+			switch (NPCTab[i].getOrientation())
+			{
 
-			// Nord
-			case 'n': 
-				if ((PlayerPosY == NPCTab[i].getPosY() - 1 || NPCTab[i].getPosY() - 2 || NPCTab[i].getPosY() - 3) && (PlayerPosX == NPCTab[i].getPosX()))
-				{
-					return &NPCTab[i];
-					break;
-				}
+				// Ouest
+				case 'o': 
+					if ((PlayerPosY == NPCTab[i].getPosY() - 1 || NPCTab[i].getPosY() - 2 || NPCTab[i].getPosY() - 3) && (PlayerPosX == NPCTab[i].getPosX()))
+					{
+						return &NPCTab[i];
+						break;
+					}
 
-			//Est
-			case 'e': 
-				if ((PlayerPosX == NPCTab[i].getPosX() + 1 || NPCTab[i].getPosX() + 2 || NPCTab[i].getPosX() + 3) && (PlayerPosY == NPCTab[i].getPosY()))
-				{
-					return &NPCTab[i];
-					break;
-				}
+				// Sud
+				case 's': 
+					if ((PlayerPosX == NPCTab[i].getPosX() + 1 || NPCTab[i].getPosX() + 2 || NPCTab[i].getPosX() + 3) && (PlayerPosY == NPCTab[i].getPosY()))
+					{
+						return &NPCTab[i];
+						break;
+					}
 
-			//Sud
-			case 's':
-				if ((PlayerPosY == NPCTab[i].getPosY() + 1 || NPCTab[i].getPosY() + 2 || NPCTab[i].getPosY() + 3) && (PlayerPosX == NPCTab[i].getPosX()))
-				{
-					return &NPCTab[i];
-					break;
-				}
+				// Est
+				case 'e':
+					if ((PlayerPosY == NPCTab[i].getPosY() + 1 || NPCTab[i].getPosY() + 2 || NPCTab[i].getPosY() + 3) && (PlayerPosX == NPCTab[i].getPosX()))
+					{
+						return &NPCTab[i];
+						break;
+					}
 
-			// Ouest
-			case 'o': 
-				if ((PlayerPosX == NPCTab[i].getPosX() - 1 || NPCTab[i].getPosX() - 2 || NPCTab[i].getPosX() - 3) && (PlayerPosY == NPCTab[i].getPosY()))
-				{
-					return &NPCTab[i];
+				// Nord
+				case 'n': 
+					if ((PlayerPosX == NPCTab[i].getPosX() - 1 || NPCTab[i].getPosX() - 2 || NPCTab[i].getPosX() - 3) && (PlayerPosY == NPCTab[i].getPosY()))
+					{
+						return &NPCTab[i];
+						break;
+					}
+				default :
 					break;
-				}
-			default :
-				break;
+			}
 		}
 	}
 
@@ -464,8 +465,11 @@ NPC* world::whichNPC(Player & mainPlayer)
 
 void world::initTerrainNPC(string terrain)
 {
+	cout << "Nom du terrain : " << terrain << endl;
 	for (unsigned int i=0; i < NB_NPC; i++)
 	{
+		cout << NPCTab[i].name << endl;
+		cout << NPCTab[i].terrainName << endl;
 		if (NPCTab[i].terrainName == terrain)
 		{
 			switch (NPCTab[i].getOrientation())
