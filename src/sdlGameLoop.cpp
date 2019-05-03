@@ -172,8 +172,6 @@ SdlGame::SdlGame()
     if (font == NULL)
     {
         cout << "Failed to load the font SDL_TTF : " << TTF_GetError() << endl;
-        SDL_Quit();
-        exit(1);
     }
     font_color.r = 0;
     font_color.g = 0;
@@ -222,19 +220,15 @@ SdlGame::SdlGame()
         if ((sound == NULL) || (battle == NULL))
         {
             cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
-            SDL_Quit();
-            exit(1);
         }
         
         //chargement des effets sonore
-    footstep = Mix_LoadWAV( "./data/music/pasHerbe.wav" );
+        footstep = Mix_LoadWAV( "./data/music/pasHerbe.wav" );
 
-    if( ( footstep == NULL ) )
-    {
-                    cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
-                  SDL_Quit();
-                 exit(1);
-    }
+        if(footstep == NULL)
+        {
+            cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
+        }
     }
 }
 
@@ -254,6 +248,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
     int tileX, tileY;
     unsigned int refresh = 0;
     playerRect.x = 0;
+    Mix_PlayChannel(-1, footstep, 0);
     
     switch (direction)
     {
@@ -493,22 +488,13 @@ void SdlGame::sdlLoop(world &world)
     char moveDirection;
 
     Uint32 deltaTime = SDL_GetTicks(), elapsedTime;
-                Mix_HaltMusic();
-               if( Mix_PlayingMusic() == 0)
-                 {
-                     Mix_PlayMusic( sound, -1 );
-                } 
+    Mix_PlayMusic( sound, -1 );
 
     while(!quit)
     {
-
-
-         
         SDL_FlushEvent(events.type);
         while (SDL_PollEvent(&events))
         {
- 
-
             if (events.type == SDL_QUIT)
                 quit = true;
             else if (events.type == SDL_KEYDOWN)
@@ -691,29 +677,22 @@ void SdlGame::sdlLoop(world &world)
 
         if(world.hasMoved)
         { 
-         
-                  
-
             sdlLaunchAnimation(world, moveDirection);
             switch (moveDirection)
             {
             case 'u':
-                 Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveUp();
                 break;
 
             case 'l':
-                Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveLeft();
                 break;
 
             case 'd':
-                Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveDown();
                 break;
 
             case 'r':
-                Mix_PlayChannel( -1, footstep, 0 );
                 world.mainPlayer.moveRight();
                 break;
 
@@ -727,7 +706,6 @@ void SdlGame::sdlLoop(world &world)
             sdlRandomCombat(world);
 			world.healAll(world.mainPlayer);
 			world.hasMoved = false;
-
         }
 
         if (world.menuOn == 0 && !world.isSaving && !world.isLoading && !world.isInBattle)
@@ -1164,6 +1142,12 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
 
         world.isInBattle = false;
     }
+
+    if(world.isInBattle == false)
+    {
+        Mix_HaltMusic();
+        Mix_PlayMusic(sound, -1);
+    }
 }
 
 void SdlGame::sdlRandomCombat(world & world)
@@ -1179,7 +1163,7 @@ void SdlGame::sdlRandomCombat(world & world)
             world.pokeInFight = world.pokeTab[randomPoke];
             world.isInBattle = true;
             Mix_HaltMusic();
-            Mix_PlayMusic(battle,-1);
+            Mix_PlayMusic(battle, -1);
         }
     }
 }
