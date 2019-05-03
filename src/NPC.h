@@ -26,7 +26,7 @@ public:
 	string dialog[4];
 	Pokemon NPCPokemon;
 	string terrainName;
-	bool beaten;
+	bool beaten = false;
 
 	/**
 	@brief

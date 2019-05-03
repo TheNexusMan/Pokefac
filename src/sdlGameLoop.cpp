@@ -489,8 +489,6 @@ void SdlGame::sdlLoop(world &world)
 
     while(!quit)
     {
-        termClear();
-        world.mainTerrain.displayTerrain(world.mainPlayer);
         SDL_FlushEvent(events.type);
         while (SDL_PollEvent(&events))
         {
@@ -700,8 +698,8 @@ void SdlGame::sdlLoop(world &world)
 
             sdlRandomCombat(world);
 			world.healAll(world.mainPlayer);
-            world.NPCBattle();
 			world.hasMoved = false;
+            sdlNPCBattle(world);
         }
 
         if (world.menuOn == 0 && !world.isSaving && !world.isLoading && !world.isInBattle)
@@ -1073,7 +1071,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
 
 
     // Si le pokémon est vaincu et qu'on peut l'attraper
-    if(world.pokeInFight.health == 0)
+    if(!world.isAgainstNPC && world.pokeInFight.health == 0)
     {
         string sentence = "Victoire !";
         string sentence2;
@@ -1103,13 +1101,27 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         sdlDisplayBattleSentence(sentence, sentence2);
     }
 
+    // Si le dresseur adverse est vaincu
+    if(world.isAgainstNPC && world.pokeInFight.health == 0)
+    {
+        world.mainPlayer.addMoney(100);
+        world.isInBattle = false;
+        world.NPCInFight->beaten = true;
+        string sentence = world.NPCInFight->name + " est vaincu !";
+        string sentence2 = "Vous recevez 100 pokedollars";
+        sdlDisplayBattleSentence(sentence, sentence2);
+    }
+
     // Le pokémon adverse nous attaque après notre attaque
     if(hasAttacked && world.isInBattle)
     {
         int opponentAttack = rand() % 3;
         playerPoke->receiveAttack(world.pokeInFight.attackChoice[opponentAttack]);
-
-        string sentence = world.pokeInFight.name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
+        string sentence;
+        if(world.isAgainstNPC)
+            sentence = world.NPCInFight->name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
+        else
+            sentence = world.pokeInFight.name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
         sdlDisplayBattleSentence(sentence);
     }
 
@@ -1194,17 +1206,18 @@ void SdlGame::sdlNPCBattle(world & world)
 {
 	if (world.mainTerrain.terrainTab[world.mainPlayer.getPosX()][world.mainPlayer.getPosY()] == '-')
 	{
-		termClear();
 		NPC * npc = world.whichNPC(world.mainPlayer);
 		if (npc->beaten == 0) 
 		{
-			cout<<npc->id;
-			getchar();
-			sdlDisplayBattle(world, 0);
+
+            world.NPCInFight = npc;
+            world.pokeInFight = npc->NPCPokemon;
+            world.isInBattle = true;
+            world.isAgainstNPC = true;
+            string sentence = npc->name + " :";
+            string sentence2 = npc->dialog[0];
+            sdlDisplay(world, 0, 0);
+            sdlDisplayBattleSentence(sentence, sentence2);
 		}
-		else{
-			cout<<"Tu as déjà battu ce champion d'arène ! ";
-			getchar();
-		} 
 	} 
 }

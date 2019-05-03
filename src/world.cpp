@@ -471,29 +471,29 @@ void world::initTerrainNPC(string terrain)
 			switch (NPCTab[i].getOrientation())
 			{
 
-				// Nord
-				case 'n': 
+				// Ouest
+				case 'o': 
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-1] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-1]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-2] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-2]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-3] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()-3]='-';
 					break;
 
-				//Est
-				case 'e': 
+				// Sud
+				case 's': 
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()+1][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()+1][NPCTab[i].getPosY()]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()+2][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()+2][NPCTab[i].getPosY()]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()+3][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()+3][NPCTab[i].getPosY()]='-';
 					break;
 
-				//Sud
-				case 's': 
+				// Est
+				case 'e': 
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+1] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+1]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+2] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+2]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+3] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()][NPCTab[i].getPosY()+3]='-';
 					break;
 
-				// Ouest
-				case 'o':
+				// Nord
+				case 'n':
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()-1][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()-1][NPCTab[i].getPosY()]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()-2][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()-2][NPCTab[i].getPosY()]='-';
 					if (mainTerrain.terrainTab[NPCTab[i].getPosX()-3][NPCTab[i].getPosY()] == '.') mainTerrain.terrainTab[NPCTab[i].getPosX()-3][NPCTab[i].getPosY()]='-';

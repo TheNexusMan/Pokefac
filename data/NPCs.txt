@@ -1,50 +1,54 @@
 1
 Xavinus-Urbanus
-6
-8
-o
+5
+7
+n
 terrain1
 1
 2
-01001010 01100101 01110110 01100001 01101001 01110011 01110100 11100010 10000000 10011001 01100001 01110011 01110011 01100001 01101001 01110011 01101111 01101110 01101110 01100101 01110010 11000010 10100000 00100001
-Je vais t'assaisonner !  
+Je vais t'assaisonner !
+Tu es trop fort :(
 
 2
 Nicolas-Prunus
-15
-11
+14
+10
 s
 terrain1
 3
-1
-void DirePhraseMechante(){cout << "Essaye de te mesurer à moi ! "}
+2
+direPhraseMechante()cout "Essaye de te mesurer a moi !"
+bool sad = true;
 
 3
 Alexandrus-Meyer
-7
-5
+6
+4
 n
 terrain2
 4
-1
-cout << "Tu ne domineras jamais mon arène"
+2
+cout "Tu ne domineras jamais mon arene"
+cout "Voila ton 20, vas jouer ailleurs"
 
 4
 Elodie-Desserus
-9
-3
+8
+2
 s
 terrain3
 6
-1
-string punchline = "Ici, c'est moi la reine ! "
+2
+string punchline = "Ici, c'est moi la reine !"
+string perdante = "snif"
 
 5
 Marie-Lefévrus
-9
-3
+8
+2
 s
 terrain4
 8
-1
-(Non, (moi (c'est) pas) Elodie !) 
+2
+(Non, (moi (c'est) pas) Elodie !)
+(pourquoi(moi(?)))
