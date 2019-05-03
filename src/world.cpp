@@ -465,11 +465,8 @@ NPC* world::whichNPC(Player & mainPlayer)
 
 void world::initTerrainNPC(string terrain)
 {
-	cout << "Nom du terrain : " << terrain << endl;
 	for (unsigned int i=0; i < NB_NPC; i++)
 	{
-		cout << NPCTab[i].name << endl;
-		cout << NPCTab[i].terrainName << endl;
 		if (NPCTab[i].terrainName == terrain)
 		{
 			switch (NPCTab[i].getOrientation())
