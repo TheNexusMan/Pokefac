@@ -676,7 +676,7 @@ void SdlGame::sdlLoop(world &world)
         }
 
         if(world.hasMoved)
-        { 
+        {
             sdlLaunchAnimation(world, moveDirection);
             switch (moveDirection)
             {
