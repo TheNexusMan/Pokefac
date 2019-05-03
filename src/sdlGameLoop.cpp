@@ -118,7 +118,7 @@ SdlGame::SdlGame()
         withSound = false;
     }
     else
-        withSound = false;
+        withSound = true;
 
     int dimx, dimy;
     //dimx = SIZETERRAIN * TAILLE_SPRITE;
@@ -173,8 +173,6 @@ SdlGame::SdlGame()
     if (font == NULL)
     {
         cout << "Failed to load the font SDL_TTF : " << TTF_GetError() << endl;
-        SDL_Quit();
-        exit(1);
     }
     font_color.r = 0;
     font_color.g = 0;
@@ -216,12 +214,21 @@ SdlGame::SdlGame()
     // Sounds
     if (withSound)
     {
-        sound = Mix_LoadWAV("PATH");
-        if (sound == NULL)
+
+        //chargement des musiques 
+        sound = Mix_LoadMUS("./data/music/generalSong.wav");
+        battle = Mix_LoadMUS("./data/music/battleMusic.wav");
+        if ((sound == NULL) || (battle == NULL))
         {
             cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
-            SDL_Quit();
-            exit(1);
+        }
+        
+        //chargement des effets sonore
+        footstep = Mix_LoadWAV( "./data/music/pasHerbe.wav" );
+
+        if(footstep == NULL)
+        {
+            cout << "Failed to load son.wave ! SDL_mixer Error : " << Mix_GetError() << endl;
         }
     }
 }
@@ -242,6 +249,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
     int tileX, tileY;
     unsigned int refresh = 0;
     playerRect.x = 0;
+    Mix_PlayChannel(-1, footstep, 0);
     
     switch (direction)
     {
@@ -486,6 +494,7 @@ void SdlGame::sdlLoop(world &world)
     char moveDirection;
 
     Uint32 deltaTime = SDL_GetTicks(), elapsedTime;
+    Mix_PlayMusic( sound, -1 );
 
     while(!quit)
     {
@@ -1187,6 +1196,12 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         string sentence = "Vous prenez la fuite !";
         sdlDisplayBattleSentence(sentence);
     }
+
+    if(world.isInBattle == false)
+    {
+        Mix_HaltMusic();
+        Mix_PlayMusic(sound, -1);
+    }
 }
 
 void SdlGame::sdlRandomCombat(world & world)
@@ -1201,6 +1216,8 @@ void SdlGame::sdlRandomCombat(world & world)
             unsigned int randomPoke = rand() % NBPOKEMON;
             world.pokeInFight = world.pokeTab[randomPoke];
             world.isInBattle = true;
+            Mix_HaltMusic();
+            Mix_PlayMusic(battle, -1);
         }
     }
 }

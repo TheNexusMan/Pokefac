@@ -65,7 +65,9 @@ class SdlGame
         SDL_Color font_red;
         SDL_Color font_green;
 
-        Mix_Chunk * sound;
+        Mix_Music * sound;
+        Mix_Music * battle;
+        Mix_Chunk * footstep;
         bool withSound;
 
     //Rajouter les images a charger ici
