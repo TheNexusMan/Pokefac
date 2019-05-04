@@ -920,9 +920,18 @@ void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
         pokemonHP = "-- HP : " + to_string(world.mainPlayer.tabPokemon[i].health) + " / " + to_string(world.mainPlayer.tabPokemon[i].maxHealth);
 
 
+        if(world.mainPlayer.tabPokemon[i].health <= (world.mainPlayer.tabPokemon[i].maxHealth / 3))
+        {
+            font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_red));
+            font_pokemonHP.loadFromCurrentSurface(renderer);
 
-        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_color));
-        font_pokemonHP.loadFromCurrentSurface(renderer);
+        }else
+        {
+            font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_green));
+            font_pokemonHP.loadFromCurrentSurface(renderer);
+        }
+        
+
 
         //SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
         SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &hpPos);
