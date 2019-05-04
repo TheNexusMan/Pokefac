@@ -1236,6 +1236,8 @@ void SdlGame::sdlNPCBattle(world & world)
             world.isAgainstNPC = true;
             string sentence = npc->name + " :";
             string sentence2 = npc->dialog[0];
+            Mix_HaltMusic();
+            Mix_PlayMusic(battle, -1);
             sdlDisplay(world, 0, 0);
             sdlDisplayBattleSentence(sentence, sentence2);
 		}
