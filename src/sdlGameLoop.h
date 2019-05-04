@@ -57,21 +57,21 @@ class Image {
 };
 
 struct Battle{
-    bool isInBattle = false;
-	bool isAgainstNPC = false;
-    bool oppLifeHasChanged = true;
-    bool playerLifeHasChanged = true;
-    bool endTurn = true;
-    bool firstTurn = true;
+    bool isInBattle;
+	bool isAgainstNPC;
+    bool oppLifeHasChanged;
+    bool playerLifeHasChanged;
+    bool endTurn;
+    bool firstTurn;
 	NPC * NPCInFight;
 	Pokemon pokeInFight;
 };
 
 struct Menu{
-    bool organizePoke = false;
-	bool isTaken = false;
-    bool isModified = false;
-    unsigned int indice = 0;
+    bool organizePoke;
+	bool isTaken;
+    bool isModified;
+    unsigned int indice;
 };
 
 class SdlGame
@@ -294,8 +294,34 @@ private:
         @param world & world
         @return none
         */
-        void sdlRandomCombat(world & world);
-        void sdlNPCBattle(world & world);
+        void sdlLaunchRandomCombat(world & world);
+
+        /**
+        @brief
+        Lance un combat contre le NPC correspondant à la case où se positionne le joueur
+
+        @param world & world
+        @return none
+        */
+        void sdlLaunchNPCBattle(world & world);
+
+        /**
+        @brief
+        Initialise les informations de la strucure Battle
+
+        @param none
+        @return none
+        */
+        void initInfosBattle();
+
+        /**
+        @brief
+        Initialise les informations de la strucure Menu
+
+        @param none
+        @return none
+        */
+        void initInfosMenu();
 
 };
 #endif
