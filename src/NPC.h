@@ -27,6 +27,7 @@ public:
 	Pokemon NPCPokemon;
 	string terrainName;
 	bool beaten = false;
+	string image;
 
 	/**
 	@brief

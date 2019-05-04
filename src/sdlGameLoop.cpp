@@ -150,6 +150,8 @@ SdlGame::SdlGame()
     im_Wood.loadFromFile("./data/textures/wood.jpg", renderer);
     im_Arrow.loadFromFile("./data/textures/sprite_arrow.png", renderer);
     im_Life.loadFromFile("./data/textures/life.png", renderer);
+    im_NPCMan.loadFromFile("./data/NPC/man.png", renderer);
+    im_NPCWoman.loadFromFile("./data/NPC/woman.png", renderer);
     //fin de l'ajout du chargement des images
 
     //Pokemons
@@ -368,36 +370,52 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
 
             if (x >= 0 && x < SIZETERRAIN && y >= 0 && y < SIZETERRAIN)
             {
+                int posSpriteX = ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX;
+                int posSpriteY = ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY;
+
+                // Affichage de l'herbe sur tout le terrain
                 if(x == 0 && y == 0 && terrainName == "terrain")
                 {
-                    im_GrassLand.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*SIZETERRAIN, TAILLE_SPRITE*SIZETERRAIN);
+                    im_GrassLand.draw(renderer, posSpriteX, posSpriteY, TAILLE_SPRITE*SIZETERRAIN, TAILLE_SPRITE*SIZETERRAIN);
                 }
 
-                if(x == 4 && y == 4 && terrainName == "house")
+                // Affichage du parquet dans la maison
+                if(x == 8 && y == 6 && terrainName == "house")
                 {
-                    im_Wood.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*(SIZETERRAIN-8), TAILLE_SPRITE*(SIZETERRAIN-8));
+                    im_Wood.draw(renderer, posSpriteX, posSpriteY, TAILLE_SPRITE*(SIZETERRAIN-15), TAILLE_SPRITE*(SIZETERRAIN-13));
                 }
 
+                // Affichage des arbres
                 if(world.mainTerrain.terrainTab[y][x] == '#')
                 {
-                    im_Tree.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY-30, TAILLE_SPRITE+20, TAILLE_SPRITE+30);
+                    im_Tree.draw(renderer, posSpriteX, posSpriteY-30, TAILLE_SPRITE+20, TAILLE_SPRITE+30);
                 }
 
+                // Affichage des hautes herbes
                 if(world.mainTerrain.terrainTab[y][x] == 'H')
                 {
-                    im_herbs.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                    im_herbs.draw(renderer, posSpriteX, posSpriteY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
 
+                // Affichage du chemin en sable
                 if(world.mainTerrain.terrainTab[y][x] == 'R')
                 {
-                    im_sandRoad.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                    im_sandRoad.draw(renderer, posSpriteX, posSpriteY, TAILLE_SPRITE, TAILLE_SPRITE);
                 }
                 
+                // Affichage de la maison sur son emplacement
                 if(world.mainTerrain.terrainTab[y][x] == 'M')
                 {
-                    im_House.draw(renderer,((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE*5, TAILLE_SPRITE*5);
+                    im_House.draw(renderer,posSpriteX, posSpriteY, TAILLE_SPRITE*5, TAILLE_SPRITE*5);
                 }
 
+                // Affichage de la case de vie
+                if((world.mainTerrain.terrainTab[y][x] == 'V'))
+                {
+                    im_Life.draw(renderer, posSpriteX, posSpriteY, TAILLE_SPRITE, TAILLE_SPRITE);
+                }
+
+                // Affichage des flèches pour les portes
                 if(world.mainTerrain.terrainTab[y][x] == 'O')
                 {
                     Door thisDoor = world.whichDoor(y, x);
@@ -427,20 +445,52 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
                     }
                     
                     SDL_Rect doorPosition;
-                    doorPosition.x = ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX;
-                    doorPosition.y = ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY;
+                    doorPosition.x = posSpriteX;
+                    doorPosition.y = posSpriteY;
                     doorPosition.w = doorPosition.h = TAILLE_SPRITE;
                     SDL_RenderCopy(renderer, im_Arrow.getTexture(), &arrowRect, &doorPosition);
                 }
 
-                if((world.mainTerrain.terrainTab[y][x] == 'V'))
+                // Affichage des NPC
+                if(world.mainTerrain.terrainTab[y][x] == 'N')
                 {
-                    im_Life.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
-                }
-
-                if((world.mainTerrain.terrainTab[y][x] == 'N'))
-                {
-                    im_MissingTexture.draw(renderer, ((x - Yplayer + 4) * TAILLE_SPRITE) + tileX, ((y - Xplayer + 4) * TAILLE_SPRITE) + tileY, TAILLE_SPRITE, TAILLE_SPRITE);
+                    NPC thisNPC = world.whichNPCDisplay(y, x);
+                    SDL_Rect NPCRect;
+                    int spriteW, spriteH;
+                    SDL_QueryTexture(im_NPCMan.getTexture(), NULL, NULL, &spriteW, &spriteH);
+                    NPCRect.w = spriteW / 13;
+                    NPCRect.h = spriteH / 21;
+                    NPCRect.x = 0;
+                    switch (thisNPC.getOrientation())
+                    {
+                    case 'n':
+                        NPCRect.y = 0;
+                        break;
+                    
+                    case 's':
+                        NPCRect.y = NPCRect.h*2;
+                        break;
+                    
+                    case 'e':
+                        NPCRect.y = NPCRect.h*3;
+                        break;
+                    
+                    case 'o':
+                        NPCRect.y = NPCRect.h;
+                        break;
+                    
+                    default:
+                        break;
+                    }
+                    
+                    SDL_Rect NPCPosition;
+                    NPCPosition.x = posSpriteX-2;
+                    NPCPosition.y = posSpriteY-20;
+                    NPCPosition.w = NPCPosition.h = TAILLE_SPRITE+7;
+                    if(thisNPC.image == "man")
+                        SDL_RenderCopy(renderer, im_NPCMan.getTexture(), &NPCRect, &NPCPosition);
+                    else
+                        SDL_RenderCopy(renderer, im_NPCWoman.getTexture(), &NPCRect, &NPCPosition);
                 }
             }
         }

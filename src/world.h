@@ -242,10 +242,10 @@ public:
 
 	/** 
 	@brief
-	Fonction retournant un NPC
+	Fonction retournant un pointeur sur un NPC
 
 	@param mainPlayer
-	@return NPC
+	@return &NPCTab[i]
 
 	Exemple Visual
 	@code
@@ -253,6 +253,20 @@ public:
 	@endCode
 	*/
 	NPC* whichNPC(Player & mainPlayer);
+
+	/** 
+	@brief
+	Fonction retournant un NPC à afficher
+
+	@param x, y
+	@return NPCTab[i]
+
+	Exemple Visual
+	@code
+	world.whichNPCDisplay(x, y);
+	@endCode
+	*/
+	NPC whichNPCDisplay(unsigned int x, unsigned int y);
 
 	/** 
 	@brief

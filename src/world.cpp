@@ -157,6 +157,7 @@ void world::initNPCTab()
 			file >> orientation;
 			NPCTab[i].setOrientation(orientation);
 			file >> NPCTab[i].terrainName;
+			file >> NPCTab[i].image;
 			file >> idPokemon;
 			NPCTab[i].NPCPokemon = pokeTab[idPokemon];
 			file >> NPCTab[i].nbDialog;
@@ -461,6 +462,23 @@ NPC* world::whichNPC(Player & mainPlayer)
 	}
 
 	return NULL;
+}
+
+NPC world::whichNPCDisplay(unsigned int x, unsigned int y)
+{
+	for(unsigned int i = 0; i < NB_NPC; i++)
+	{
+		if(NPCTab[i].getPosX() == x && NPCTab[i].getPosY() == y) return NPCTab[i];
+	}
+
+	NPC NPCPeace;
+	NPCPeace.name = "Infirmière Joelle";
+	NPCPeace.setPosX(x);
+	NPCPeace.setPosY(y);
+	NPCPeace.setOrientation('s');
+	NPCPeace.image = "woman";
+
+	return NPCPeace;
 }
 
 void world::initTerrainNPC(string terrain)

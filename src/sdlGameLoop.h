@@ -33,42 +33,42 @@ class Image {
 
 class SdlGame
 {
-    private:
-        SDL_Window * window;
-        SDL_Renderer * renderer;
+private:
+    SDL_Window * window;
+    SDL_Renderer * renderer;
 
-        TTF_Font * font;
-        Image font_im;
-        Image font_menuPoke;
-        Image font_menuSave;
-        Image font_menuLoad;
-        Image font_menuQuit;
-        Image font_chatBox;
-        Image font_chatPokeGo;
+    TTF_Font * font;
+    Image font_im;
+    Image font_menuPoke;
+    Image font_menuSave;
+    Image font_menuLoad;
+    Image font_menuQuit;
+    Image font_chatBox;
+    Image font_chatPokeGo;
 
-        Image font_gameSaved;
-        Image font_gameLoaded;
-
-
-        Image font_choosePoke;
-        
-        Image font_pokemonName;
-        Image font_pokemonHP;
-
-        //For display Info
-        Image font_pokemonType;
-        Image font_pokemonAttacks;
-        Image font_pokemonDamages;
+    Image font_gameSaved;
+    Image font_gameLoaded;
 
 
-        SDL_Color font_color;
-        SDL_Color font_red;
-        SDL_Color font_green;
+    Image font_choosePoke;
+    
+    Image font_pokemonName;
+    Image font_pokemonHP;
 
-        Mix_Music * sound;
-        Mix_Music * battle;
-        Mix_Chunk * footstep;
-        bool withSound;
+    //For display Info
+    Image font_pokemonType;
+    Image font_pokemonAttacks;
+    Image font_pokemonDamages;
+
+
+    SDL_Color font_color;
+    SDL_Color font_red;
+    SDL_Color font_green;
+
+    Mix_Music * sound;
+    Mix_Music * battle;
+    Mix_Chunk * footstep;
+    bool withSound;
 
     //Rajouter les images a charger ici
     Image im_Tree;
@@ -84,6 +84,8 @@ class SdlGame
     Image im_Wood;
     Image im_Arrow;
     Image im_Life;
+    Image im_NPCMan;
+    Image im_NPCWoman;
 
     //Pokemons
     Image im_linuchu;
@@ -94,30 +96,30 @@ class SdlGame
     SDL_Rect playerRect;
     SDL_Rect playerPosition;
 
-    public:
-        SdlGame();
-        ~SdlGame();
-        void sdlLoop(world & world);
-        void sdlDisplayMenu();
-        void sdlLaunchAnimation(world world, char direction);
-        void sdlDisplay(world world, int tileX, int tileY);
+public:
+    SdlGame();
+    ~SdlGame();
+    void sdlLoop(world & world);
+    void sdlDisplayMenu();
+    void sdlLaunchAnimation(world world, char direction);
+    void sdlDisplay(world world, int tileX, int tileY);
 
-        void sdlDisplayBattleOpponentLife(world world);
-        void sdlDisplayBattlePlayerLife(Pokemon playerPoke);
-        void sdlDisplayBattleSentence(string sentence, string sentence2 = "");
-        void sdlDisplayBattle(world & world, unsigned int action);
-        void sdlDisplayChatBox(world world);
+    void sdlDisplayBattleOpponentLife(world world);
+    void sdlDisplayBattlePlayerLife(Pokemon playerPoke);
+    void sdlDisplayBattleSentence(string sentence, string sentence2 = "");
+    void sdlDisplayBattle(world & world, unsigned int action);
+    void sdlDisplayChatBox(world world);
 
 
 
-        void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
-        void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
-        
-        void sdlDisplayPokemonMenu(world &world, bool inBattle);
-        void sdlDisplayPokemonInfos(world &world, int idPoke);
+    void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
+    void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
+    
+    void sdlDisplayPokemonMenu(world &world, bool inBattle);
+    void sdlDisplayPokemonInfos(world &world, int idPoke);
 
-        void sdlRandomCombat(world & world);
-        void sdlNPCBattle(world & world);
+    void sdlRandomCombat(world & world);
+    void sdlNPCBattle(world & world);
 
 };
 #endif
