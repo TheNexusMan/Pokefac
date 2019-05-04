@@ -19,7 +19,6 @@ void write_to_log_file(string text) //to_string(valeur);
 	file << "[" << 1900 + ltm->tm_year << "/" << 1+ ltm->tm_mon << "/" << ltm->tm_mday << ":" << ltm->tm_hour << ":" << 1 + ltm->tm_min << ":" << 1 + ltm->tm_sec << "] : ";
 	file << text << "\n";
 	file.close();
-
 }
 
 void world::saveGame(string saveName)
@@ -540,7 +539,7 @@ void world::NPCBattle()
 		else{
 			cout<<"Tu as déjà battu ce champion d'arène ! ";
 			getchar();
-		} 
+		}
 	} 
 }
 

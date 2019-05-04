@@ -121,8 +121,6 @@ SdlGame::SdlGame()
         withSound = true;
 
     int dimx, dimy;
-    //dimx = SIZETERRAIN * TAILLE_SPRITE;
-    //dimy = SIZETERRAIN * TAILLE_SPRITE;
     dimx = 9 * TAILLE_SPRITE;
     dimy = 9 * TAILLE_SPRITE;
 
@@ -1291,5 +1289,5 @@ void SdlGame::sdlNPCBattle(world & world)
             sdlDisplay(world, 0, 0);
             sdlDisplayBattleSentence(sentence, sentence2);
 		}
-	} 
+	}
 }
