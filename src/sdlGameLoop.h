@@ -31,6 +31,17 @@ class Image {
         void setSurface(SDL_Surface * surf);
 };
 
+struct Battle{
+    bool isInBattle = false;
+	bool isAgainstNPC = false;
+    bool oppLifeHasChanged = true;
+    bool playerLifeHasChanged = true;
+    bool endTurn = true;
+    bool firstTurn = true;
+	NPC * NPCInFight;
+	Pokemon pokeInFight;
+};
+
 class SdlGame
 {
 private:
@@ -95,6 +106,8 @@ private:
     SDL_Texture *playerSpriteTexture;
     SDL_Rect playerRect;
     SDL_Rect playerPosition;
+
+    Battle infosBattle;
 
 public:
     SdlGame();

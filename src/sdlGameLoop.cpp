@@ -552,6 +552,14 @@ void SdlGame::sdlLoop(world &world)
         SDL_FlushEvent(events.type);
         while (SDL_PollEvent(&events))
         {
+            termClear();
+            cout << "isInBattle = " << infosBattle.isInBattle << endl;
+            cout << "isAgainstNPC = " << infosBattle.isAgainstNPC << endl;
+            cout << "oppLifeHasChanged = " << infosBattle.oppLifeHasChanged << endl;
+            cout << "playerLifeHasChanged = " << infosBattle.playerLifeHasChanged << endl;
+            cout << "endTurn = " << infosBattle.endTurn << endl;
+            cout << "firstTurn = " << infosBattle.firstTurn << endl;
+
             if (events.type == SDL_QUIT)
                 quit = true;
             else if (events.type == SDL_KEYDOWN)
@@ -560,7 +568,7 @@ void SdlGame::sdlLoop(world &world)
                 {
                     case SDLK_UP:
                         world.mainPlayer.setOrientation('n');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && world.menuOn == 0 && !world.isInBattle)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()-1, world.mainPlayer.getPosY())) && world.menuOn == 0 && !infosBattle.isInBattle)
                             {
                                 moveDirection = 'u';
                                 world.hasMoved = true;
@@ -569,7 +577,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_LEFT:
                         world.mainPlayer.setOrientation('o');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && world.menuOn == 0 && !world.isInBattle)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY()-1)) && world.menuOn == 0 && !infosBattle.isInBattle)
                             {
                                 moveDirection = 'l';
                                 world.hasMoved = true;
@@ -578,7 +586,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_DOWN:
                         world.mainPlayer.setOrientation('s');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && world.menuOn == 0 && !world.isInBattle)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX()+1 , world.mainPlayer.getPosY())) && world.menuOn == 0 && !infosBattle.isInBattle)
                             {
                                 moveDirection = 'd';
                                 world.hasMoved = true;
@@ -587,7 +595,7 @@ void SdlGame::sdlLoop(world &world)
 
                     case SDLK_RIGHT:
                         world.mainPlayer.setOrientation('e');
-                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && world.menuOn == 0 && !world.isInBattle)
+                        if((world.moveIsAllowed(world.mainPlayer, world.mainPlayer.getPosX(), world.mainPlayer.getPosY() + 1)) && world.menuOn == 0 && !infosBattle.isInBattle)
                             {
                                 moveDirection = 'r';
                                 world.hasMoved = true;
@@ -626,7 +634,7 @@ void SdlGame::sdlLoop(world &world)
                             if(world.mainPlayer.nbPokemon > 0)
                                 sdlDisplayPokemonInfos(world, 0);
                         }
-                        if(world.isInBattle)
+                        if(infosBattle.isInBattle)
                         {
                             sdlDisplayBattle(world, 1);
                         }
@@ -642,7 +650,7 @@ void SdlGame::sdlLoop(world &world)
                             if(world.mainPlayer.nbPokemon > 1)
                                 sdlDisplayPokemonInfos(world, 1);
                         }
-                        if(world.isInBattle)
+                        if(infosBattle.isInBattle)
                         {
                             sdlDisplayBattle(world, 2);
                         }
@@ -658,7 +666,7 @@ void SdlGame::sdlLoop(world &world)
                             if(world.mainPlayer.nbPokemon > 2)
                                 sdlDisplayPokemonInfos(world, 2);
                         }
-                        if(world.isInBattle)
+                        if(infosBattle.isInBattle)
                         {
                             sdlDisplayBattle(world, 3);
                         }
@@ -673,7 +681,7 @@ void SdlGame::sdlLoop(world &world)
                             if(world.mainPlayer.nbPokemon > 3)
                                 sdlDisplayPokemonInfos(world, 3);
                         }
-                        if(world.isInBattle)
+                        if(infosBattle.isInBattle)
                         {
                             sdlDisplayBattle(world, 4);
                         }
@@ -685,7 +693,7 @@ void SdlGame::sdlLoop(world &world)
                             if(world.mainPlayer.nbPokemon > 4)
                                 sdlDisplayPokemonInfos(world, 4);
                         }
-                        if(world.isInBattle)
+                        if(infosBattle.isInBattle)
                         {
                             sdlDisplayBattle(world, 5);
                         }
@@ -723,7 +731,7 @@ void SdlGame::sdlLoop(world &world)
             sdlDisplayGameLoaded(deltaTime, elapsedTime, world);
         }
 
-        if(world.isInBattle)
+        if(infosBattle.isInBattle)
         {
             sdlDisplayBattle(world, 0);
         }
@@ -762,7 +770,7 @@ void SdlGame::sdlLoop(world &world)
             sdlNPCBattle(world);
         }
 
-        if (world.menuOn == 0 && !world.isSaving && !world.isLoading && !world.isInBattle)
+        if (world.menuOn == 0 && !world.isSaving && !world.isLoading && !infosBattle.isInBattle)
         {
             sdlDisplay(world, 0, 0);
         }
@@ -1026,7 +1034,7 @@ void SdlGame::sdlDisplayBattleOpponentLife(world world)
 {
     // Affichage boite de vie et de nom du pokemon sauvage/dresseur
 
-    string pokemonHealth = "HP : " + to_string(world.pokeInFight.health) + "/" + to_string(world.pokeInFight.maxHealth);
+    string pokemonHealth = "HP : " + to_string(infosBattle.pokeInFight.health) + "/" + to_string(infosBattle.pokeInFight.maxHealth);
 
     SDL_Rect posLife;
     posLife.x = 60;
@@ -1035,7 +1043,7 @@ void SdlGame::sdlDisplayBattleOpponentLife(world world)
     posLife.h = 60;
     
     im_chatBox.draw(renderer, 50,50,250,200);
-    if(world.pokeInFight.health < 15)
+    if(infosBattle.pokeInFight.health < 15)
     {
         font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_red));
         font_pokemonHP.loadFromCurrentSurface(renderer);
@@ -1048,9 +1056,11 @@ void SdlGame::sdlDisplayBattleOpponentLife(world world)
     }
     
     posLife.y = 80;
-    font_pokemonHP.setSurface(TTF_RenderText_Solid(font, world.pokeInFight.name.c_str(), font_color));
+    font_pokemonHP.setSurface(TTF_RenderText_Solid(font, infosBattle.pokeInFight.name.c_str(), font_color));
     font_pokemonHP.loadFromCurrentSurface(renderer);
     SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage nom
+
+    infosBattle.oppLifeHasChanged = false;
 }
 
 void SdlGame::sdlDisplayBattlePlayerLife(Pokemon playerPoke)
@@ -1068,14 +1078,14 @@ void SdlGame::sdlDisplayBattlePlayerLife(Pokemon playerPoke)
     if(playerPoke.health < 15)
     {
         font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_red));
-        font_pokemonHP.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
     } else
     {
         font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_green));
-        font_pokemonHP.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
     }
+    font_pokemonHP.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
+
+    infosBattle.playerLifeHasChanged = false;
 }
 
 void SdlGame::sdlDisplayBattleSentence(string sentence, string sentence2)
@@ -1114,47 +1124,52 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     // Si une attaque a été lancé par le joueur
     if(action > 0 && action < 5)
     {
-        world.pokeInFight.receiveAttack(playerPoke->attackChoice[action-1]);
+        infosBattle.pokeInFight.receiveAttack(playerPoke->attackChoice[action-1]);
         hasAttacked = true;
+        infosBattle.oppLifeHasChanged = true;
 
         string sentence = "Vous attaquez avec " + playerPoke->attackChoice[action-1].name + " " + to_string(playerPoke->attackChoice[action-1].damagePoints);
         sdlDisplayBattleSentence(sentence);
     }
 
-    im_battleBG.draw(renderer, 0, 0, 640, 440);
-    sdlDisplayBattleOpponentLife(world);
-    sdlDisplayBattlePlayerLife(*playerPoke);
+    if(infosBattle.firstTurn)
+    {
+        im_battleBG.draw(renderer, 0, 0, 640, 440);
+        im_linuchu.draw(renderer, 375, 100, 150,150); // affichage du pokemon adverse (les coordonnées)
+        im_linuchu.draw(renderer, 175, 350, 150,150); // affichage du pokemon joueur
+        infosBattle.firstTurn = false;
+    }
+
+    if(infosBattle.oppLifeHasChanged)
+        sdlDisplayBattleOpponentLife(world);
+    if(infosBattle.playerLifeHasChanged)
+        sdlDisplayBattlePlayerLife(*playerPoke);
     
-
-    im_linuchu.draw(renderer, 375, 100, 150,150); // affichage du pokemon adverse (les coordonnées)
-    im_linuchu.draw(renderer, 175, 350, 150,150); // affichage du pokemon joueur
-
-
     // Si le pokémon est vaincu et qu'on peut l'attraper
-    if(!world.isAgainstNPC && world.pokeInFight.health == 0)
+    if(!infosBattle.isAgainstNPC && infosBattle.pokeInFight.health == 0)
     {
         string sentence = "Victoire !";
         string sentence2;
-        if(world.mainPlayer.getPokeball() > 0 && world.mainPlayer.hasFreePokeLocation() && !world.mainPlayer.hasThisPokemon(world.pokeInFight))
+        if(world.mainPlayer.getPokeball() > 0 && world.mainPlayer.hasFreePokeLocation() && !world.mainPlayer.hasThisPokemon(infosBattle.pokeInFight))
         {
-            world.mainPlayer.addPokemon(world.pokeInFight);
+            world.mainPlayer.addPokemon(infosBattle.pokeInFight);
             world.mainPlayer.usePokeball();
-            world.isInBattle = false;
+            infosBattle.isInBattle = false;
             sentence2 = "Le pokemon est attrape !";
         }
-        else if(world.mainPlayer.hasThisPokemon(world.pokeInFight))
+        else if(world.mainPlayer.hasThisPokemon(infosBattle.pokeInFight))
         {
-            world.isInBattle = false;
+            infosBattle.isInBattle = false;
             sentence2 = "Vous possedez deja ce pokemon";
         }
-		else if(!world.mainPlayer.hasFreePokeLocation() && !world.mainPlayer.hasThisPokemon(world.pokeInFight))
+		else if(!world.mainPlayer.hasFreePokeLocation() && !world.mainPlayer.hasThisPokemon(infosBattle.pokeInFight))
         {
-            world.isInBattle = false;
+            infosBattle.isInBattle = false;
             sentence2 = "Plus de place pour ce pokemon";
         }
             
 		else{
-            world.isInBattle = false;
+            infosBattle.isInBattle = false;
             sentence2 = "Vous n'avez plus de pokeball";
         }
         
@@ -1162,31 +1177,33 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     }
 
     // Si le dresseur adverse est vaincu
-    if(world.isAgainstNPC && world.pokeInFight.health == 0)
+    if(infosBattle.isAgainstNPC && infosBattle.pokeInFight.health == 0)
     {
         world.mainPlayer.addMoney(100);
-        world.isInBattle = false;
-        world.NPCInFight->beaten = true;
-        string sentence = world.NPCInFight->name + " est vaincu !";
+        infosBattle.isInBattle = false;
+        infosBattle.NPCInFight->beaten = true;
+        string sentence = infosBattle.NPCInFight->name + " est vaincu !";
         string sentence2 = "Vous recevez 100 pokedollars";
         sdlDisplayBattleSentence(sentence, sentence2);
     }
 
     // Le pokémon adverse nous attaque après notre attaque
-    if(hasAttacked && world.isInBattle)
+    if(hasAttacked && infosBattle.isInBattle)
     {
         int opponentAttack = rand() % 3;
-        playerPoke->receiveAttack(world.pokeInFight.attackChoice[opponentAttack]);
+        playerPoke->receiveAttack(infosBattle.pokeInFight.attackChoice[opponentAttack]);
         string sentence;
-        if(world.isAgainstNPC)
-            sentence = world.NPCInFight->name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
+        if(infosBattle.isAgainstNPC)
+            sentence = infosBattle.NPCInFight->name + " attaque avec " + infosBattle.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(infosBattle.pokeInFight.attackChoice[opponentAttack].damagePoints);
         else
-            sentence = world.pokeInFight.name + " attaque avec " + world.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(world.pokeInFight.attackChoice[opponentAttack].damagePoints);
+            sentence = infosBattle.pokeInFight.name + " attaque avec " + infosBattle.pokeInFight.attackChoice[opponentAttack].name + " " + to_string(infosBattle.pokeInFight.attackChoice[opponentAttack].damagePoints);
         sdlDisplayBattleSentence(sentence);
+        infosBattle.playerLifeHasChanged = true;
+        infosBattle.endTurn = true;
     }
 
     // Si le pokémon du joueur est mort
-    if(playerPoke->health == 0 && world.isInBattle)
+    if(playerPoke->health == 0 && infosBattle.isInBattle)
     {
         string sentence;
         sdlDisplayBattlePlayerLife(*playerPoke);
@@ -1195,7 +1212,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         {
             world.mainPlayer.treatAllPokemon();
             world.teleport(world.mainPlayer, "house1", 9, 10);
-            world.isInBattle = false;
+            infosBattle.isInBattle = false;
 
             sentence = "Defaite...";
         }else{
@@ -1207,7 +1224,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     }
     
     // Affichage des différentes attaques possibles
-    if(action != 5 && world.isInBattle)
+    if(action != 5 && infosBattle.isInBattle && infosBattle.endTurn)
     {
         im_chatBox.draw(renderer,0,440,640,200);
         string attacksName;
@@ -1234,21 +1251,27 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
         font_pokemonAttacks.loadFromCurrentSurface(renderer);
         SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posAttacks);
+
+        infosBattle.endTurn = false;
     }
 
     // Fuite
-    if(action == 5 && world.isInBattle)
+    if(action == 5 && infosBattle.isInBattle)
     {
-        world.isInBattle = false;
+        infosBattle.isInBattle = false;
 
         string sentence = "Vous prenez la fuite !";
         sdlDisplayBattleSentence(sentence);
     }
 
-    if(world.isInBattle == false)
+    if(infosBattle.isInBattle == false)
     {
         Mix_HaltMusic();
         Mix_PlayMusic(sound, -1);
+        infosBattle.firstTurn = true;
+        infosBattle.endTurn = true;
+        infosBattle.oppLifeHasChanged = true;
+        infosBattle.playerLifeHasChanged = true;
     }
 }
 
@@ -1262,8 +1285,9 @@ void SdlGame::sdlRandomCombat(world & world)
         if(random % 5 == 0)
         {
             unsigned int randomPoke = rand() % NBPOKEMON;
-            world.pokeInFight = world.pokeTab[randomPoke];
-            world.isInBattle = true;
+            infosBattle.pokeInFight = world.pokeTab[randomPoke];
+            infosBattle.isInBattle = true;
+            infosBattle.isAgainstNPC = false;
             Mix_HaltMusic();
             Mix_PlayMusic(battle, -1);
         }
@@ -1278,10 +1302,10 @@ void SdlGame::sdlNPCBattle(world & world)
 		if (npc->beaten == 0) 
 		{
 
-            world.NPCInFight = npc;
-            world.pokeInFight = npc->NPCPokemon;
-            world.isInBattle = true;
-            world.isAgainstNPC = true;
+            infosBattle.NPCInFight = npc;
+            infosBattle.pokeInFight = npc->NPCPokemon;
+            infosBattle.isInBattle = true;
+            infosBattle.isAgainstNPC = true;
             string sentence = npc->name + " :";
             string sentence2 = npc->dialog[0];
             Mix_HaltMusic();

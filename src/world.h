@@ -62,10 +62,6 @@ public:
 	int menuOn = 0;
 	bool isSaving = false;
 	bool isLoading = false;
-	bool isInBattle = false;
-	bool isAgainstNPC = false;
-	NPC * NPCInFight;
-	Pokemon pokeInFight;
 
 	/**
 	@brief
