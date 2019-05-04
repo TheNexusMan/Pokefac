@@ -512,7 +512,7 @@ void SdlGame::sdlLoop(world &world)
                                 moveDirection = 'u';
                                 world.hasMoved = true;
                             }
-                            if(world.menuOn == 2 && world.organizePoke == true && world.isTaken == true)
+                            if(world.menuOn == 2 && world.organizePoke == true)
                             {
                                 if(world.indice > 0)
                                 {
@@ -539,7 +539,7 @@ void SdlGame::sdlLoop(world &world)
                                 moveDirection = 'd';
                                 world.hasMoved = true;
                             }
-                            if(world.menuOn == 2 && world.organizePoke == true && world.isTaken == true)
+                            if(world.menuOn == 2 && world.organizePoke == true)
                             {
                                 if(world.indice < world.mainPlayer.nbPokemon)
                                 {
@@ -1113,7 +1113,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     
 
 
-    string pokemonPath = "./data/pokemon/" + world.pokeTab[0].namePic;
+    string pokemonPath = "./data/pokemon/" + playerPoke->namePic;
     const char * completePath = pokemonPath.c_str();
     im_PokeBattle.loadFromFile(completePath,renderer);
 
