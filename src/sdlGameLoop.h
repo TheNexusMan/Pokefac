@@ -56,44 +56,62 @@ class Image {
         void setSurface(SDL_Surface * surf);
 };
 
+struct Battle{
+    bool isInBattle = false;
+	bool isAgainstNPC = false;
+    bool oppLifeHasChanged = true;
+    bool playerLifeHasChanged = true;
+    bool endTurn = true;
+    bool firstTurn = true;
+	NPC * NPCInFight;
+	Pokemon pokeInFight;
+};
+
+struct Menu{
+    bool organizePoke = false;
+	bool isTaken = false;
+    bool isModified = false;
+    unsigned int indice = 0;
+};
+
 class SdlGame
 {
-    private:
-        SDL_Window * window;
-        SDL_Renderer * renderer;
+private:
+    SDL_Window * window;
+    SDL_Renderer * renderer;
 
-        TTF_Font * font;
-        Image font_im;
-        Image font_menuPoke;
-        Image font_menuSave;
-        Image font_menuLoad;
-        Image font_menuQuit;
-        Image font_chatBox;
-        Image font_chatPokeGo;
+    TTF_Font * font;
+    Image font_im;
+    Image font_menuPoke;
+    Image font_menuSave;
+    Image font_menuLoad;
+    Image font_menuQuit;
+    Image font_chatBox;
+    Image font_chatPokeGo;
 
-        Image font_gameSaved;
-        Image font_gameLoaded;
-
-
-        Image font_choosePoke;
-        
-        Image font_pokemonName;
-        Image font_pokemonHP;
-
-        //For display Info
-        Image font_pokemonType;
-        Image font_pokemonAttacks;
-        Image font_pokemonDamages;
+    Image font_gameSaved;
+    Image font_gameLoaded;
 
 
-        SDL_Color font_color;
-        SDL_Color font_red;
-        SDL_Color font_green;
+    Image font_choosePoke;
+    
+    Image font_pokemonName;
+    Image font_pokemonHP;
 
-        Mix_Music * sound;
-        Mix_Music * battle;
-        Mix_Chunk * footstep;
-        bool withSound;
+    //For display Info
+    Image font_pokemonType;
+    Image font_pokemonAttacks;
+    Image font_pokemonDamages;
+
+
+    SDL_Color font_color;
+    SDL_Color font_red;
+    SDL_Color font_green;
+
+    Mix_Music * sound;
+    Mix_Music * battle;
+    Mix_Chunk * footstep;
+    bool withSound;
 
     //Rajouter les images a charger ici
     Image im_Tree;
@@ -109,6 +127,8 @@ class SdlGame
     Image im_Wood;
     Image im_Arrow;
     Image im_Life;
+    Image im_NPCMan;
+    Image im_NPCWoman;
 
     //Pokemons
 
@@ -121,6 +141,9 @@ class SdlGame
     SDL_Texture *playerSpriteTexture;
     SDL_Rect playerRect;
     SDL_Rect playerPosition;
+
+    Battle infosBattle;
+    Menu infosMenu;
 
     public:
     	/**
@@ -206,7 +229,7 @@ class SdlGame
         void sdlDisplayBattlePlayerLife(Pokemon playerPoke);
     	/**
         @brief
-        Affiche Une phrase au lencement du combat
+        Affiche une phrase lors d'un combat
 
         @param string sentence, string sentence2 = ""
         @return none

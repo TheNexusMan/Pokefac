@@ -4,6 +4,7 @@ Xavinus-Urbanus
 7
 n
 terrain1
+man
 1
 2
 Je vais t'assaisonner !
@@ -15,6 +16,7 @@ Nicolas-Prunus
 10
 s
 terrain1
+man
 3
 2
 meanWords()cout "Essaye de te mesurer a moi !"
@@ -26,6 +28,7 @@ Alexandrus-Meyer
 4
 n
 terrain2
+man
 4
 2
 cout "Tu ne domineras jamais mon arene !"
@@ -37,6 +40,7 @@ Elodie-Desserus
 2
 s
 terrain3
+woman
 6
 2
 string punchline = "Ici, c'est moi la reine !"
@@ -48,6 +52,7 @@ Marie-Lefevrus
 2
 s
 terrain4
+woman
 8
 2
 (Non, (moi (c'est) pas) Elodie !)

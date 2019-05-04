@@ -19,7 +19,6 @@ void write_to_log_file(string text) //to_string(valeur);
 	file << "[" << 1900 + ltm->tm_year << "/" << 1+ ltm->tm_mon << "/" << ltm->tm_mday << ":" << ltm->tm_hour << ":" << 1 + ltm->tm_min << ":" << 1 + ltm->tm_sec << "] : ";
 	file << text << "\n";
 	file.close();
-
 }
 
 void world::saveGame(string saveName)
@@ -35,7 +34,8 @@ void world::saveGame(string saveName)
 	file << mainPlayer.getPosY() << "\n";
 	file << mainPlayer.getMoney() << "\n";
 	file << mainTerrain.terrainName << "\n";
-	for(unsigned int i = 0; i < NBPLAYERPOKEMON; i++)
+	file << mainPlayer.nbPokemon;
+	for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 	{
 		file << mainPlayer.getPokemon(i).id << "\n";
 		file << mainPlayer.getPokemon(i).health  << "\n"; 
@@ -60,7 +60,8 @@ void world::loadGame(string saveName)
 			file >> posY;
 			file >> cash;
 			file >> nameTerrain;
-			for(unsigned int i = 0; i < NBPLAYERPOKEMON; i++)
+			file >> mainPlayer.nbPokemon;
+			for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 			{
 				file >> mainPlayer.getPokemon(i).id;
 				file >> mainPlayer.getPokemon(i).health;
@@ -158,6 +159,7 @@ void world::initNPCTab()
 			file >> orientation;
 			NPCTab[i].setOrientation(orientation);
 			file >> NPCTab[i].terrainName;
+			file >> NPCTab[i].image;
 			file >> idPokemon;
 			NPCTab[i].NPCPokemon = pokeTab[idPokemon];
 			file >> NPCTab[i].nbDialog;
@@ -466,6 +468,23 @@ NPC* world::whichNPC(Player & mainPlayer)
 	return NULL;
 }
 
+NPC world::whichNPCDisplay(unsigned int x, unsigned int y)
+{
+	for(unsigned int i = 0; i < NB_NPC; i++)
+	{
+		if(NPCTab[i].getPosX() == x && NPCTab[i].getPosY() == y) return NPCTab[i];
+	}
+
+	NPC NPCPeace;
+	NPCPeace.name = "Infirmière Joelle";
+	NPCPeace.setPosX(x);
+	NPCPeace.setPosY(y);
+	NPCPeace.setOrientation('s');
+	NPCPeace.image = "woman";
+
+	return NPCPeace;
+}
+
 void world::initTerrainNPC(string terrain)
 {
 	for (unsigned int i=0; i < NB_NPC; i++)
@@ -525,7 +544,7 @@ void world::NPCBattle()
 		else{
 			cout<<"Tu as déjà battu ce champion d'arène ! ";
 			getchar();
-		} 
+		}
 	} 
 }
 
