@@ -1,3 +1,14 @@
+/**
+@brief Class SdlGameLoop, Gère tout l'affichage du SDL
+
+@author pokeFac team
+@file sdlGameLoop.h
+@version 1.0
+@date 19/03/2019
+
+*/
+
+
 #ifndef _SDLGAMELOOP_H
 #define _SDLGAMELOOP_H
 
@@ -24,8 +35,22 @@ class Image {
         bool has_changed;
     public:
         Image();
+    	/**
+        @brief
+        Charge une image en fonction d'un fichier
+
+        @param const chat* filename, SDL_Renderer * renderer
+        @return none
+        */
         void loadFromFile(const char* fileName, SDL_Renderer * renderer);
         void loadFromCurrentSurface(SDL_Renderer * renderer);
+        /**
+        @brief
+        Dessine l'image dans la fênetre aux coordonnées choises
+
+        @param SDL_Renderer * renderer, int x, int y, int w=-1, int h=-1
+        @return none
+        */
         void draw(SDL_Renderer * renderer, int x, int y, int w=-1, int h=-1);
         SDL_Texture * getTexture() const;
         void setSurface(SDL_Surface * surf);
@@ -98,27 +123,154 @@ class SdlGame
     SDL_Rect playerPosition;
 
     public:
+    	/**
+        @brief
+        Constructeur de la classe SDLGame, initilise les librairies SDL
+
+        @param none
+        @return none
+        */
         SdlGame();
+    	/**
+        @brief
+        Destructeur de la classe SDLGame
+
+        @param none
+        @return none
+        */
         ~SdlGame();
+    	/**
+        @brief
+        Boucle d'évenement du jeu
+
+        @param world & worlds
+        @return none
+
+        Exemple Visual
+        @code
+        sdlLoop(mainWorld);
+        @endcode
+        */
         void sdlLoop(world & world);
+    	/**
+        @brief
+        Génere l'affichage du menu pause (touche M)
+
+        @param none
+        @return none
+
+        Exemple Visual
+        @code
+        SdlDisplayMenu();
+        @endcode
+        */
         void sdlDisplayMenu();
+    	/**
+        @brief
+        Gère l'animation du joueur lors d'un déplacement
+
+        @param world world, char direction
+        @return none
+
+        */
         void sdlLaunchAnimation(world world, char direction);
+    	/**
+        @brief
+        Génere l'affichage du terrain
+
+        @param world world, int tileX, int tileY
+        @return none
+
+        Exemple Visual
+        @code
+        SdlDisplay(world, 15, 2);
+        @endcode
+        */
         void sdlDisplay(world world, int tileX, int tileY);
 
+    	/**
+        @brief
+        Affiche les points de vie du pokemon adverse
+
+        @param world world
+        @return none
+        */
         void sdlDisplayBattleOpponentLife(world world);
+    	/**
+        @brief
+        Affiche les points de vie du pokemon du joueur
+
+        @param Pokemon playerPoke
+        @return none
+        */
         void sdlDisplayBattlePlayerLife(Pokemon playerPoke);
+    	/**
+        @brief
+        Affiche Une phrase au lencement du combat
+
+        @param string sentence, string sentence2 = ""
+        @return none
+        */
         void sdlDisplayBattleSentence(string sentence, string sentence2 = "");
+    	/**
+        @brief
+        Gère le combat entre un joueur et un pokemon/dresseur
+
+        @param world &world, unsigned int action
+        @return none
+        */
         void sdlDisplayBattle(world & world, unsigned int action);
+    	/**
+        @brief
+        Affiche une barre de dialogue
+
+        @param world world
+        @return none
+        */
         void sdlDisplayChatBox(world world);
 
 
+    	/**
+        @brief
+        Sauvegarde la partie et affiche un message
 
+        @param Uint32 &deltaTime, Uint32 &elapsedTime, world & world
+        @return none
+        */
         void sdlDisplayGameSaved(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
+    	/**
+        @brief
+        Charge la partie et affiche un message
+
+        @param Uint32 &deltaTime, Uint32 &elapsedTime, world & world
+        @return none
+        */
         void sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime,world &world);
         
+        /**
+        @brief
+        Affiche le menu pokemon (Touche M -> 1)
+
+        @param world & world, bool inBattle
+        @return none
+        */
         void sdlDisplayPokemonMenu(world &world, bool inBattle);
+        /**
+        @brief
+        Affiche les infos du pokémon sélectionné (Touche M -> 1 -> (1 à 6))
+
+        @param world &world, int idPoke
+        @return none
+        */
         void sdlDisplayPokemonInfos(world &world, int idPoke);
 
+    	/**
+        @brief
+        Lance un combat aléatoire en fonction de la position dans les hautes herbes
+
+        @param world & world
+        @return none
+        */
         void sdlRandomCombat(world & world);
         void sdlNPCBattle(world & world);
 
