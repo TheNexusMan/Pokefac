@@ -153,7 +153,6 @@ SdlGame::SdlGame()
     //fin de l'ajout du chargement des images
 
     //Pokemons
-    im_linuchu.loadFromFile("./data/textures/linuchu.png", renderer);
 
     //fin de l'ajout du chargement des images
 
@@ -517,6 +516,15 @@ void SdlGame::sdlLoop(world &world)
                                 moveDirection = 'u';
                                 world.hasMoved = true;
                             }
+                            if(world.menuOn == 2 && world.organizePoke == true && world.isTaken == true)
+                            {
+                                if(world.indice > 0)
+                                {
+                                    world.indice--;
+                                    if(world.isTaken) world.mainPlayer.changePlacePoke(world.indice + 1, world.indice);
+                                }
+                            }
+
                             break;
 
                     case SDLK_LEFT:
@@ -534,6 +542,14 @@ void SdlGame::sdlLoop(world &world)
                             {
                                 moveDirection = 'd';
                                 world.hasMoved = true;
+                            }
+                            if(world.menuOn == 2 && world.organizePoke == true && world.isTaken == true)
+                            {
+                                if(world.indice < world.mainPlayer.nbPokemon)
+                                {
+                                    world.indice++;
+                                    if(world.isTaken) world.mainPlayer.changePlacePoke(world.indice - 1, world.indice);
+                                }
                             }
                             break;
 
@@ -650,6 +666,21 @@ void SdlGame::sdlLoop(world &world)
                                 sdlDisplayPokemonInfos(world, 5);
                         }
                         break;
+
+                    case SDLK_p:
+                        if(world.menuOn == 2 && world.organizePoke == true)
+                        {
+                            world.isTaken = !world.isTaken;
+                            cout << world.organizePoke << endl;
+                        }
+                        break;
+
+                    case SDLK_o:
+                        if(world.menuOn == 2)
+                        {
+                            world.organizePoke = !world.organizePoke;
+                            cout << world.organizePoke << endl;
+                        }
 
                     default:
                         break;
@@ -852,51 +883,54 @@ void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
     hpPos.h = 35;
     hpPos.w = 100;
 
+
+
     string pokemonNameStr;
     string pokemonHP;
     //Boite de dialogue bas (Cas changement de pokemon)
-    if(inBattle)
-    {
 
-        im_chatBox.draw(renderer,0,480,640,160);
-        font_choosePoke.draw(renderer,35,500,550,115);
-        for(int i = 0; i < 6; i++)
-        {
-            pokemonNameStr = world.pokeTab[i].name;
-            pokemonHP = "-- HP : " + to_string(world.pokeTab[i].health) + " / " + to_string(world.pokeTab[i].maxHealth);
-
-            font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
-            font_pokemonName.loadFromCurrentSurface(renderer);
-
-            font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_color));
-            font_pokemonHP.loadFromCurrentSurface(renderer);
-
-            SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
-            SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &hpPos);
-            forBattle.y +=75;
-            hpPos.y = forBattle.y + 30;
-        }
-    } else
-    {
         forBattle.y += 5;
         hpPos.y +=5;
         for(unsigned int i = 0; i < world.mainPlayer.nbPokemon; i++)
         {
-            pokemonNameStr = world.mainPlayer.tabPokemon[i].name;
+
+            if(i < world.mainPlayer.nbPokemon && world.indice == i && world.isTaken && world.organizePoke)
+            {
+                pokemonNameStr = "* " + world.mainPlayer.tabPokemon[i].name;
+                font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_green));
+                font_pokemonName.loadFromCurrentSurface(renderer);
+                SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+                
+
+            } else if (i < world.mainPlayer.nbPokemon && world.indice == i && world.organizePoke)
+            {
+                pokemonNameStr = "*" + world.mainPlayer.tabPokemon[i].name;
+                font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
+                font_pokemonName.loadFromCurrentSurface(renderer);
+                SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+
+            } else
+            {
+                pokemonNameStr = " " + world.mainPlayer.tabPokemon[i].name;
+                font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
+                font_pokemonName.loadFromCurrentSurface(renderer);
+                SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+
+            }
             pokemonHP = "-- HP : " + to_string(world.mainPlayer.tabPokemon[i].health) + " / " + to_string(world.mainPlayer.tabPokemon[i].maxHealth);
 
-            font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
-            font_pokemonName.loadFromCurrentSurface(renderer);
+
 
             font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_color));
             font_pokemonHP.loadFromCurrentSurface(renderer);
 
-            SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+            //SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
             SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &hpPos);
+             //SDL_RenderPresent(renderer);
+
             forBattle.y +=100;
             hpPos.y = forBattle.y + 30;
         }
-    }
 }
 
 void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
@@ -987,7 +1021,7 @@ void SdlGame::sdlDisplayBattleOpponentLife(world world)
     posLife.h = 60;
     
     im_chatBox.draw(renderer, 50,50,250,200);
-    if(world.pokeInFight.health < 15)
+    if(world.pokeInFight.health <= (world.pokeInFight.maxHealth / 3))
     {
         font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_red));
         font_pokemonHP.loadFromCurrentSurface(renderer);
@@ -1078,8 +1112,17 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     sdlDisplayBattlePlayerLife(*playerPoke);
     
 
-    im_linuchu.draw(renderer, 375, 100, 150,150); // affichage du pokemon adverse (les coordonnées)
-    im_linuchu.draw(renderer, 175, 350, 150,150); // affichage du pokemon joueur
+
+    string pokemonPath = "./data/pokemon/" + world.pokeTab[0].namePic;
+    const char * completePath = pokemonPath.c_str();
+    im_PokeBattle.loadFromFile(completePath,renderer);
+
+    im_PokeBattle.draw(renderer, 175,350,150,150); //pokemon du joueur
+
+    pokemonPath = "./data/pokemon/" + world.pokeInFight.namePic;
+    completePath = pokemonPath.c_str();
+    im_PokeBattleOpp.loadFromFile(completePath, renderer);
+    im_PokeBattleOpp.draw(renderer, 375,100,150,150);
 
 
     // Si le pokémon est vaincu et qu'on peut l'attraper

@@ -26,7 +26,7 @@ class Pokemon
 public:
 
 	unsigned int id, level, health, maxHealth, attackStat, defenseStat, isFound;
-	string name, type;
+	string name, type, namePic;
 	attack attackChoice[4];
 
 	/**

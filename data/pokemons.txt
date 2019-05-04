@@ -7,6 +7,7 @@ OS
 50
 10
 10
+linuchu.png
 Shell 10
 Crash 5
 Mult 20
@@ -21,6 +22,7 @@ Windows
 60
 10
 10
+windosu.png
 Crash 10
 BlueScreen 5
 CMD 20
@@ -35,6 +37,7 @@ Linux
 40
 15
 15
+salashell.jpg
 git 10
 ls 5
 cp 20
@@ -49,6 +52,7 @@ IOS
 30
 9
 9
+macolossa.png
 IMac 5
 Macintosh 10
 iCloud 20
@@ -63,6 +67,7 @@ Web
 40
 20
 20
+Psykosql.png
 SELECT 10
 FROM 15
 WHERE 5
@@ -77,6 +82,7 @@ JS
 45
 5
 5
+Javasinge.png
 let 5
 var 10
 document.getElementById 15 
@@ -91,6 +97,7 @@ python
 15
 20
 20
+Pytroli.png
 def 10
 old 15
 import 10
@@ -105,6 +112,7 @@ IBM
 15
 20
 20
+IBMonita.png
 LOAD 5
 STORE  9
 COMPARE 9
@@ -119,6 +127,7 @@ PHP
 14
 8
 8
+Pahpilusion.png
 <?php 5
 $var 14
 echo 10
@@ -133,6 +142,7 @@ Scheme
 9
 12
 12
+Dracauscheme.png
 () 5
 (()) 10
 (()()) 15

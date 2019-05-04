@@ -122,6 +122,7 @@ void world::initPokeTab()
 				file >> pokeTab[i].maxHealth;
 				file >> pokeTab[i].attackStat;
 				file >> pokeTab[i].defenseStat;
+				file >> pokeTab[i].namePic;
 
 				for (unsigned int j = 0; j < 4; j++)
 				{

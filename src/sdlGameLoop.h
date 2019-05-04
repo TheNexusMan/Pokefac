@@ -86,7 +86,10 @@ class SdlGame
     Image im_Life;
 
     //Pokemons
-    Image im_linuchu;
+
+
+    Image im_PokeBattle;
+    Image im_PokeBattleOpp;
     //Fin de rajout des images a charger
 
     int frameSize, textureWidth, textureHeight;

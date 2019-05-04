@@ -64,6 +64,13 @@ public:
 	bool isLoading = false;
 	bool isInBattle = false;
 	bool isAgainstNPC = false;
+	
+	
+	bool organizePoke = false;
+	bool isTaken = false;
+	unsigned int indice = 0;
+
+
 	NPC * NPCInFight;
 	Pokemon pokeInFight;
 
