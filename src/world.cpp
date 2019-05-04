@@ -194,6 +194,8 @@ void world::initGame()
 	initTerrainNPC("terrain1"); // Initialise les cases d'intéraction avec les NPC
 	mainPlayer.initPlayer(pokeTab[0]); // Initialise le Joueur de départ
 	initDoor(); // Initialisation des portes
+
+	mainPlayer.addPokemon(pokeTab[1]);
 }
 
 int world::randomNumber()

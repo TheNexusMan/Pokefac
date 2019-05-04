@@ -45,8 +45,7 @@ void Player::initPlayer(const Pokemon poke)
 	addMoney(100); //Lui donne 100 en Argent
 	addPokeball(3); // Lui donne 3 pokeballs
 	tabPokemon[0] = poke;
-	tabPokemon[1] = poke;
-	nbPokemon = 2;
+	nbPokemon = 1;
 }
 
 void Player::addPokeball(int nb)
