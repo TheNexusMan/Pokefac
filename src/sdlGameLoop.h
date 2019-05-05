@@ -27,7 +27,7 @@ using namespace std;
 #include "world.h"
 
 
-
+//! \brief Classe pour le SDL
 class Image {
     private: 
         SDL_Surface * surface;
@@ -56,6 +56,7 @@ class Image {
         void setSurface(SDL_Surface * surf);
 };
 
+//! \brief Structure de gestion des combats
 struct Battle{
     bool isInBattle;
 	bool isAgainstNPC;
@@ -66,7 +67,7 @@ struct Battle{
 	NPC * NPCInFight;
 	Pokemon pokeInFight;
 };
-
+//! \brief Structure de gestion du Menu
 struct Menu{
     bool organizePoke;
 	bool isTaken;
@@ -74,7 +75,7 @@ struct Menu{
     unsigned int indice;
     unsigned int idPokeInfo;
 };
-
+//! \brief Classe gérant tout ce qui touche l'affichage SDL
 class SdlGame
 {
 private:

@@ -15,11 +15,14 @@
 
 using namespace std;
 
+//! \brief Structure stockant les attaques
 struct attack
 {
 	string name; 
 	unsigned int damagePoints;
 };
+
+//! \brief Gère tout ce qui touche les pokemons
 
 class Pokemon
 {
