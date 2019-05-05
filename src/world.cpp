@@ -34,7 +34,8 @@ void world::saveGame(string saveName)
 	file << mainPlayer.getPosY() << "\n";
 	file << mainPlayer.getMoney() << "\n";
 	file << mainTerrain.terrainName << "\n";
-	file << mainPlayer.nbPokemon;
+	file << mainPlayer.nbPokemon << "\n";
+	cout << "nombre pokemons : " << mainPlayer.nbPokemon;
 	for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 	{
 		file << mainPlayer.getPokemon(i).id << "\n";
