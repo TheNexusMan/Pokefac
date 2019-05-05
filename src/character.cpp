@@ -29,11 +29,6 @@ void Character::setPosY(unsigned int y)
 	posY = y;
 }
 
-void Character::setIdleTexture()
-{
-	// A definir
-}
-
 unsigned int Character::getPosX()
 {
 	return posX;

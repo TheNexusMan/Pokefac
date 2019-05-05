@@ -106,19 +106,6 @@ public:
 
 	/**
 	@brief 
-	Etabli la position de la texture du personnage
-	
-	@param none
-	@return none
-	
-	Exemple Code Block / Visual
-	@code
-	NPC.setIdleTexture();
-	@endcode */
-	void setIdleTexture();
-
-	/**
-	@brief 
 	Retourne l'orientation du personnage (n = Nord, s = Sud, e = Est, o = Ouest)
 	
 	@param none
