@@ -129,7 +129,7 @@ PHP
 8
 Pahpilusion.png
 php 5
-$var 14
+var 14
 echo 10
 GET 5
 
