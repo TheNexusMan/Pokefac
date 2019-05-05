@@ -20,7 +20,7 @@ using namespace std;
 
 const int SIZETERRAIN = 20;
 
-
+//! \brief Gère le terrain (Tableau)
 class terrain{
 public:
 	char terrainTab[SIZETERRAIN][SIZETERRAIN];

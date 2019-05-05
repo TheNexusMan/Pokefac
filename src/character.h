@@ -16,6 +16,7 @@
 
 using namespace std;
 
+//! \brief Classé héritée par Player.h et NPC.h
 class Character
 {
 public:

@@ -36,6 +36,7 @@ const unsigned int NBPLAYERPOKEMON = 6;
 const unsigned int NB_NPC = 5;
 const unsigned int NB_DOOR = 8; //Toujours un multiple de 2
 
+//! \brief Structure gérant les portes (téléporteurs)
 struct Door
 {
 	unsigned int id;
@@ -49,7 +50,7 @@ struct Door
 };
 
 
-
+//! \brief Gère tout ce qui touche la partie
 class world{
 public:
 	terrain mainTerrain;
