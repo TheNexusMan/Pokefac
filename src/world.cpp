@@ -33,6 +33,7 @@ void world::saveGame(string saveName)
 	file << mainPlayer.getPosX() << "\n";
 	file << mainPlayer.getPosY() << "\n";
 	file << mainPlayer.getMoney() << "\n";
+	file << mainPlayer.getPokeball() << "\n";
 	file << mainTerrain.terrainName << "\n";
 	file << mainPlayer.nbPokemon << "\n";
 	for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
@@ -53,7 +54,7 @@ void world::loadGame(string saveName)
 	isLoading = true;
 	string name = "./data/saveGames/" + saveName + ".txt";
 	ifstream file(name);
-	unsigned int posX, posY, cash;
+	unsigned int posX, posY, cash, pokeballs;
 	string nameTerrain;
 	if(file.is_open())
 	{
@@ -63,6 +64,7 @@ void world::loadGame(string saveName)
 			file >> posX;
 			file >> posY;
 			file >> cash;
+			file >> pokeballs;
 			file >> nameTerrain;
 			file >> mainPlayer.nbPokemon;
 			for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
@@ -80,6 +82,7 @@ void world::loadGame(string saveName)
 		initTerrainNPC(nameTerrain);
 		mainPlayer.setNewPos(posX, posY);
 		mainPlayer.setMoney(cash);
+		mainPlayer.setPokeball(pokeballs);
 		file.close();
 	} else write_to_log_file("WARNING : Erreur dans l'ouverture du fichier ./data/saveGames/" + saveName + ".txt");
 
