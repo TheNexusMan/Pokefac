@@ -70,7 +70,7 @@ void world::loadGame(string saveName)
 		}
 		mainTerrain.initTerrain(nameTerrain);
 		mainPlayer.setNewPos(posX, posY);
-		mainPlayer.addMoney(cash);
+		mainPlayer.setMoney(cash);
 		file.close();
 	} else write_to_log_file("WARNING : Erreur dans l'ouverture du fichier ./data/saveGames/" + saveName + ".txt");
 

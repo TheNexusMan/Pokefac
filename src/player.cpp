@@ -38,6 +38,11 @@ void Player::addMoney(unsigned int adding)
 	money += adding;
 }
 
+void Player::setMoney(unsigned int moneyToSet)
+{
+	money = moneyToSet;
+}
+
 void Player::initPlayer(const Pokemon poke)
 {	
 	setPosX(5);

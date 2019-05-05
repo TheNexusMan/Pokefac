@@ -96,6 +96,19 @@ public:
 	@endcode */
 	void addMoney(unsigned int adding);
 
+	/**
+	@brief
+	Définie l'argent au player
+	
+	@param moneyToSet
+	@return none
+	Exemple Code Block / Visual
+	@code
+	player.setMoney(10)
+	//met 10 en argent au joueur
+	@endcode */
+	void setMoney(unsigned int moneyToSet);
+
 	/** 
 	@brief
 	Recupere l'argent du joueur
