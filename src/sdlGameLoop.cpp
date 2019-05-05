@@ -269,7 +269,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY + 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9); // A commenter sur virtual box
             }
             break;
 
@@ -292,7 +292,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileX = tileX + 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9); // A commenter sur virtual box
             }
             break;
 
@@ -315,7 +315,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY - 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9); // A commenter sur virtual box
             }
             break;
 
@@ -339,7 +339,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderClear(renderer);
                 tileX = tileX - 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9); // A commenter sur virtual box
             }
             break;
 
