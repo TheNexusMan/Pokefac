@@ -72,6 +72,7 @@ struct Menu{
 	bool isTaken;
     bool isModified;
     unsigned int indice;
+    unsigned int idPokeInfo;
 };
 
 class SdlGame
@@ -95,13 +96,23 @@ private:
 
     Image font_choosePoke;
     
-    Image font_pokemonName;
-    Image font_pokemonHP;
+    Image font_pokemonName[NBPLAYERPOKE];
+    Image font_pokemonNameInfo;
+    Image font_pokemonHP[NBPLAYERPOKE];
+    Image font_pokemonTitleNPC;
+    Image font_pokemonHPNPC;
+    Image font_pokemonHPPlayer;
 
     //For display Info
+    Image font_pokemonTypeTitle;
     Image font_pokemonType;
-    Image font_pokemonAttacks;
-    Image font_pokemonDamages;
+    Image font_pokemonAttacksTitle;
+    Image font_pokemonDamagesTitle;
+    Image font_pokemonAttacks[4];
+    Image font_pokemonDamages[4];
+    Image font_sentence;
+    Image font_sentence2;
+    Image font_fuite;
 
 
     SDL_Color font_color;
@@ -277,7 +288,7 @@ private:
         @param world & world, bool inBattle
         @return none
         */
-        void sdlDisplayPokemonMenu(world &world, bool inBattle);
+        void sdlDisplayPokemonMenu(world &worl);
         /**
         @brief
         Affiche les infos du pokémon sélectionné (Touche M -> 1 -> (1 à 6))
@@ -285,7 +296,7 @@ private:
         @param world &world, int idPoke
         @return none
         */
-        void sdlDisplayPokemonInfos(world &world, int idPoke);
+        void sdlDisplayPokemonInfos(world &world);
 
     	/**
         @brief

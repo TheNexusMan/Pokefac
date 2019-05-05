@@ -269,7 +269,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY + 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9);
             }
             break;
 
@@ -292,7 +292,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileX = tileX + 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9);
             }
             break;
 
@@ -315,7 +315,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderPresent(renderer);
                 tileY = tileY - 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9);
             }
             break;
 
@@ -339,7 +339,7 @@ void SdlGame::sdlLaunchAnimation(world world, char direction)
                 SDL_RenderClear(renderer);
                 tileX = tileX - 2;
                 refresh++;
-                //SDL_Delay(9);
+                SDL_Delay(9);
             }
             break;
 
@@ -626,7 +626,8 @@ void SdlGame::sdlLoop(world &world)
                             world.menuOn = 1;
                         }else if (world.menuOn == 3)
                         {
-                            sdlDisplayPokemonMenu(world, false);
+                            infosMenu.isModified = true;
+                            sdlDisplayPokemonMenu(world);
                             world.menuOn = 2;
                         }
                             
@@ -640,11 +641,15 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 1)
                         {
                             infosMenu.isModified = true;
-                            sdlDisplayPokemonMenu(world, false);
+                            sdlDisplayPokemonMenu(world);
                         }else if(world.menuOn == 2)
                         {
                             if(world.mainPlayer.nbPokemon > 0)
-                                sdlDisplayPokemonInfos(world, 0);
+                            {
+                                infosMenu.idPokeInfo = 0;
+                                infosMenu.isModified = true;
+                                sdlDisplayPokemonInfos(world);
+                            }
                         }
                         if(infosBattle.isInBattle)
                         {
@@ -660,7 +665,11 @@ void SdlGame::sdlLoop(world &world)
                         }else if(world.menuOn == 2)
                         {
                             if(world.mainPlayer.nbPokemon > 1)
-                                sdlDisplayPokemonInfos(world, 1);
+                            {
+                                infosMenu.idPokeInfo = 1;
+                                infosMenu.isModified = true;
+                                sdlDisplayPokemonInfos(world);
+                            }
                         }
                         if(infosBattle.isInBattle)
                         {
@@ -676,7 +685,11 @@ void SdlGame::sdlLoop(world &world)
                         }else if(world.menuOn == 2)
                         {
                             if(world.mainPlayer.nbPokemon > 2)
-                                sdlDisplayPokemonInfos(world, 2);
+                            {
+                                infosMenu.idPokeInfo = 2;
+                                infosMenu.isModified = true;
+                                sdlDisplayPokemonInfos(world);
+                            }
                         }
                         if(infosBattle.isInBattle)
                         {
@@ -691,7 +704,11 @@ void SdlGame::sdlLoop(world &world)
                         }else if(world.menuOn == 2)
                         {
                             if(world.mainPlayer.nbPokemon > 3)
-                                sdlDisplayPokemonInfos(world, 3);
+                            {
+                                infosMenu.idPokeInfo = 3;
+                                infosMenu.isModified = true;
+                                sdlDisplayPokemonInfos(world);
+                            }
                         }
                         if(infosBattle.isInBattle)
                         {
@@ -703,7 +720,11 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 2)
                         {
                             if(world.mainPlayer.nbPokemon > 4)
-                                sdlDisplayPokemonInfos(world, 4);
+                            {
+                                infosMenu.idPokeInfo = 4;
+                                infosMenu.isModified = true;
+                                sdlDisplayPokemonInfos(world);
+                            }
                         }
                         if(infosBattle.isInBattle)
                         {
@@ -715,7 +736,11 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 2)
                         {
                             if(world.mainPlayer.nbPokemon > 5)
-                                sdlDisplayPokemonInfos(world, 5);
+                            {
+                                infosMenu.idPokeInfo = 5;
+                                infosMenu.isModified = true;
+                                sdlDisplayPokemonInfos(world);
+                            }
                         }
                         break;
 
@@ -742,15 +767,19 @@ void SdlGame::sdlLoop(world &world)
 
         if (world.menuOn == 1)
         {
+            sdlDisplay(world, 0, 0);
             sdlDisplayMenu();
-            //sdlDisplayChatBox(world);
-            // sdlDisplayBattle(deltaTime, elapsedTime, false);
-            //sdlDisplayPokemonMenu(world, true);
         }
 
         if(world.menuOn == 2)
         {
-            sdlDisplayPokemonMenu(world, false);
+            sdlDisplayPokemonMenu(world);
+            infosMenu.isModified = false;
+        }
+
+        if(world.menuOn == 3)
+        {
+            sdlDisplayPokemonInfos(world);
             infosMenu.isModified = false;
         }
 
@@ -923,7 +952,7 @@ void SdlGame::sdlDisplayGameLoaded(Uint32 &deltaTime, Uint32 &elapsedTime, world
     }
 }
 
-void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
+void SdlGame::sdlDisplayPokemonMenu(world &world)
 {
     world.menuOn = 2;
 
@@ -957,10 +986,10 @@ void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
             if(infosMenu.isModified)
             {
                 pokemonNameStr = "* " + world.mainPlayer.tabPokemon[i].name;
-                font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_green));
-                font_pokemonName.loadFromCurrentSurface(renderer);
-                SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+                font_pokemonName[i].setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_green));
+                font_pokemonName[i].loadFromCurrentSurface(renderer);
             }
+            SDL_RenderCopy(renderer, font_pokemonName[i].getTexture(), NULL, &forBattle);
             
 
         } else if (i < world.mainPlayer.nbPokemon && infosMenu.indice == i && infosMenu.organizePoke)
@@ -968,20 +997,20 @@ void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
             if(infosMenu.isModified)
             {
                 pokemonNameStr = "*" + world.mainPlayer.tabPokemon[i].name;
-                font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
-                font_pokemonName.loadFromCurrentSurface(renderer);
+                font_pokemonName[i].setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
+                font_pokemonName[i].loadFromCurrentSurface(renderer);
             }
-            SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+            SDL_RenderCopy(renderer, font_pokemonName[i].getTexture(), NULL, &forBattle);
 
         } else
         {
             if(infosMenu.isModified)
             {
                 pokemonNameStr = " " + world.mainPlayer.tabPokemon[i].name;
-                font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
-                font_pokemonName.loadFromCurrentSurface(renderer);
+                font_pokemonName[i].setSurface(TTF_RenderText_Solid(font, pokemonNameStr.c_str(), font_color));
+                font_pokemonName[i].loadFromCurrentSurface(renderer);
             }
-            SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &forBattle);
+            SDL_RenderCopy(renderer, font_pokemonName[i].getTexture(), NULL, &forBattle);
 
         }
         pokemonHP = "-- HP : " + to_string(world.mainPlayer.tabPokemon[i].health) + " / " + to_string(world.mainPlayer.tabPokemon[i].maxHealth);
@@ -990,25 +1019,26 @@ void SdlGame::sdlDisplayPokemonMenu(world &world, bool inBattle)
         {
             if(world.mainPlayer.tabPokemon[i].health <= (world.mainPlayer.tabPokemon[i].maxHealth / 3))
             {
-                font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_red));
-                font_pokemonHP.loadFromCurrentSurface(renderer);
+                font_pokemonHP[i].setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_red));
+                font_pokemonHP[i].loadFromCurrentSurface(renderer);
 
             }else
             {
-                font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_green));
-                font_pokemonHP.loadFromCurrentSurface(renderer);
+                font_pokemonHP[i].setSurface(TTF_RenderText_Solid(font, pokemonHP.c_str(), font_green));
+                font_pokemonHP[i].loadFromCurrentSurface(renderer);
             }
         }
 
-        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &hpPos);
+        SDL_RenderCopy(renderer, font_pokemonHP[i].getTexture(), NULL, &hpPos);
 
         forBattle.y +=100;
         hpPos.y = forBattle.y + 30;
     }
 }
 
-void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
+void SdlGame::sdlDisplayPokemonInfos(world &world)
 {
+    unsigned int idPoke = infosMenu.idPokeInfo;
     world.menuOn = 3;
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
@@ -1023,40 +1053,56 @@ void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
 
     string pokemonName, pokemonTypeInfo, pokemonType, pokemonAttacks, pokemonDamages;
 
-
-    pokemonName = world.mainPlayer.tabPokemon[idPoke].name;
-    pokemonTypeInfo = "Type :";
-    pokemonType = world.mainPlayer.tabPokemon[idPoke].type;
-    font_pokemonName.setSurface(TTF_RenderText_Solid(font, pokemonName.c_str(), font_color));
-    font_pokemonName.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonName.getTexture(), NULL, &posT);
+    if(infosMenu.isModified)
+    {
+        pokemonName = world.mainPlayer.tabPokemon[idPoke].name;
+        pokemonTypeInfo = "Type :";
+        pokemonType = world.mainPlayer.tabPokemon[idPoke].type;
+        font_pokemonNameInfo.setSurface(TTF_RenderText_Solid(font, pokemonName.c_str(), font_color));
+        font_pokemonNameInfo.loadFromCurrentSurface(renderer);
+    }
+    SDL_RenderCopy(renderer, font_pokemonNameInfo.getTexture(), NULL, &posT);
 
     posT.x = 350;
     posT.w = 50;
 
-    font_pokemonType.setSurface(TTF_RenderText_Solid(font, pokemonTypeInfo.c_str(), font_color));
-    font_pokemonType.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonType.getTexture(),NULL, &posT);
+    if(infosMenu.isModified)
+    {
+        font_pokemonTypeTitle.setSurface(TTF_RenderText_Solid(font, pokemonTypeInfo.c_str(), font_color));
+        font_pokemonTypeTitle.loadFromCurrentSurface(renderer);
+    }
+    SDL_RenderCopy(renderer, font_pokemonTypeTitle.getTexture(),NULL, &posT);
 
     posT.x +=75;
 
-    font_pokemonType.setSurface(TTF_RenderText_Solid(font, pokemonType.c_str(), font_color));
-    font_pokemonType.loadFromCurrentSurface(renderer);
+    if(infosMenu.isModified)
+    {
+        font_pokemonType.setSurface(TTF_RenderText_Solid(font, pokemonType.c_str(), font_color));
+        font_pokemonType.loadFromCurrentSurface(renderer);
+    }
     SDL_RenderCopy(renderer, font_pokemonType.getTexture(),NULL, &posT);
 
     posT.x = 50;
     posT.y = 150;
     posT.w = 200;
 
-    pokemonAttacks = "Attaques :";
-    font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
-    font_pokemonAttacks.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posT);
+    if(infosMenu.isModified)
+    {
+        pokemonAttacks = "Attaques :";
+        font_pokemonAttacksTitle.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+        font_pokemonAttacksTitle.loadFromCurrentSurface(renderer);
+    }
+    SDL_RenderCopy(renderer, font_pokemonAttacksTitle.getTexture(),NULL, &posT);
+    
     posT.x = 350;
-    pokemonAttacks = "Degats :";
-    font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
-    font_pokemonAttacks.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posT);
+
+    if(infosMenu.isModified)
+    {
+        pokemonAttacks = "Degats :";
+        font_pokemonDamagesTitle.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+        font_pokemonDamagesTitle.loadFromCurrentSurface(renderer);
+    }
+    SDL_RenderCopy(renderer, font_pokemonDamagesTitle.getTexture(),NULL, &posT);
 
     posT.x = 50;
     posT.y = 225;
@@ -1069,15 +1115,22 @@ void SdlGame::sdlDisplayPokemonInfos(world &world, int idPoke)
 
     for(int i = 0; i < 4; i++)
     {
-        pokemonAttacks = world.mainPlayer.tabPokemon[idPoke].attackChoice[i].name;
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posT);
+        if(infosMenu.isModified)
+        {
+            pokemonAttacks = world.mainPlayer.tabPokemon[idPoke].attackChoice[i].name;
+            font_pokemonAttacks[i].setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+            font_pokemonAttacks[i].loadFromCurrentSurface(renderer);
+        }
+        SDL_RenderCopy(renderer, font_pokemonAttacks[i].getTexture(),NULL, &posT);
         posT.y += 100;
-        pokemonAttacks = to_string(world.mainPlayer.tabPokemon[idPoke].attackChoice[i].damagePoints);
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(),NULL, &posD);
+
+        if(infosMenu.isModified)
+        {
+            pokemonAttacks = to_string(world.mainPlayer.tabPokemon[idPoke].attackChoice[i].damagePoints);
+            font_pokemonDamages[i].setSurface(TTF_RenderText_Solid(font, pokemonAttacks.c_str(), font_color));
+            font_pokemonDamages[i].loadFromCurrentSurface(renderer);
+        }
+        SDL_RenderCopy(renderer, font_pokemonDamages[i].getTexture(),NULL, &posD);
         posD.y += 100;
     }
 }
@@ -1095,22 +1148,26 @@ void SdlGame::sdlDisplayBattleOpponentLife(world world)
     posLife.h = 60;
     
     im_chatBox.draw(renderer, 50,50,250,200);
-    if(infosBattle.pokeInFight.health <= (infosBattle.pokeInFight.maxHealth / 3))
+    if(infosBattle.oppLifeHasChanged)
     {
-        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_red));
-        font_pokemonHP.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); 
-    } else
-    {
-        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_green)); 
-        font_pokemonHP.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife);   
+        if(infosBattle.pokeInFight.health <= (infosBattle.pokeInFight.maxHealth / 3))
+        {
+            font_pokemonHPNPC.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_red));
+        } else
+        {
+            font_pokemonHPNPC.setSurface(TTF_RenderText_Solid(font, pokemonHealth.c_str(), font_green));
+        }
+        font_pokemonHPNPC.loadFromCurrentSurface(renderer);
     }
+    SDL_RenderCopy(renderer, font_pokemonHPNPC.getTexture(), NULL, &posLife);  
     
     posLife.y = 80;
-    font_pokemonHP.setSurface(TTF_RenderText_Solid(font, infosBattle.pokeInFight.name.c_str(), font_color));
-    font_pokemonHP.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage nom
+    if(infosBattle.oppLifeHasChanged)
+    {
+        font_pokemonTitleNPC.setSurface(TTF_RenderText_Solid(font, infosBattle.pokeInFight.name.c_str(), font_color));
+        font_pokemonTitleNPC.loadFromCurrentSurface(renderer);
+    }
+    SDL_RenderCopy(renderer, font_pokemonTitleNPC.getTexture(), NULL, &posLife); //affichage nom
 
     infosBattle.oppLifeHasChanged = false;
 }
@@ -1127,15 +1184,18 @@ void SdlGame::sdlDisplayBattlePlayerLife(Pokemon playerPoke)
     posLife.w = 115;
     posLife.h = 60;
 
-    if(playerPoke.health < 15)
+    if(infosBattle.playerLifeHasChanged)
     {
-        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_red));
-    } else
-    {
-        font_pokemonHP.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_green));
+        if(playerPoke.health < 15)
+        {
+            font_pokemonHPPlayer.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_red));
+        } else
+        {
+            font_pokemonHPPlayer.setSurface(TTF_RenderText_Solid(font, yourLife.c_str(), font_green));
+        }
+        font_pokemonHPPlayer.loadFromCurrentSurface(renderer);
     }
-    font_pokemonHP.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonHP.getTexture(), NULL, &posLife); //affichage vie
+    SDL_RenderCopy(renderer, font_pokemonHPPlayer.getTexture(), NULL, &posLife); //affichage vie
 
     infosBattle.playerLifeHasChanged = false;
 }
@@ -1150,17 +1210,17 @@ void SdlGame::sdlDisplayBattleSentence(string sentence, string sentence2)
     posSentence.w = sentence.size()*12;
     posSentence.h = 50;
 
-    font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, sentence.c_str(), font_color));
-    font_pokemonAttacks.loadFromCurrentSurface(renderer);
-    SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posSentence);
+    font_sentence.setSurface(TTF_RenderText_Solid(font, sentence.c_str(), font_color));
+    font_sentence.loadFromCurrentSurface(renderer);
+    SDL_RenderCopy(renderer, font_sentence.getTexture(), NULL, &posSentence);
 
     if(sentence2 != "")
     {
         posSentence.y = 520;
         posSentence.w = sentence2.size()*12;
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, sentence2.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posSentence);
+        font_sentence2.setSurface(TTF_RenderText_Solid(font, sentence2.c_str(), font_color));
+        font_sentence2.loadFromCurrentSurface(renderer);
+        SDL_RenderCopy(renderer, font_sentence2.getTexture(), NULL, &posSentence);
     }
 
     SDL_RenderPresent(renderer);
@@ -1184,29 +1244,32 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         sdlDisplayBattleSentence(sentence);
     }
 
+    im_battleBG.draw(renderer, 0, 0, 640, 440);
+    
     if(infosBattle.firstTurn)
     {
-        im_battleBG.draw(renderer, 0, 0, 640, 440);
-        
         string pokemonPath = "./data/pokemon/" + playerPoke->namePic;
         const char * completePath = pokemonPath.c_str();
         im_PokeBattle.loadFromFile(completePath,renderer);
+    }
+    im_PokeBattle.draw(renderer, 175,350,150,150); //pokemon du joueur
 
-        im_PokeBattle.draw(renderer, 175,350,150,150); //pokemon du joueur
-
-        pokemonPath = "./data/pokemon/" + infosBattle.pokeInFight.namePic;
-        completePath = pokemonPath.c_str();
+    if(infosBattle.firstTurn)
+    {
+        string pokemonPath = "./data/pokemon/" + infosBattle.pokeInFight.namePic;
+        const char * completePath = pokemonPath.c_str();
         im_PokeBattleOpp.loadFromFile(completePath, renderer);
-        im_PokeBattleOpp.draw(renderer, 375,100,150,150);
+    }
+    im_PokeBattleOpp.draw(renderer, 375,100,150,150);
 
+    if(infosBattle.firstTurn)
+    {
         infosBattle.firstTurn = false;
         infosBattle.endTurn = true;
     }
 
-    if(infosBattle.oppLifeHasChanged)
-        sdlDisplayBattleOpponentLife(world);
-    if(infosBattle.playerLifeHasChanged)
-        sdlDisplayBattlePlayerLife(*playerPoke);
+    sdlDisplayBattleOpponentLife(world);
+    sdlDisplayBattlePlayerLife(*playerPoke);
     
     // Si le pokémon est vaincu et qu'on peut l'attraper
     if(!infosBattle.isAgainstNPC && infosBattle.pokeInFight.health == 0)
@@ -1229,8 +1292,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
         {
             infosBattle.isInBattle = false;
             sentence2 = "Plus de place pour ce pokemon";
-        }
-            
+        }   
 		else{
             infosBattle.isInBattle = false;
             sentence2 = "Vous n'avez plus de pokeball";
@@ -1289,7 +1351,7 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
     }
     
     // Affichage des différentes attaques possibles
-    if(action != 5 && infosBattle.isInBattle && infosBattle.endTurn)
+    if(action != 5 && infosBattle.isInBattle)
     {
         im_chatBox.draw(renderer,0,440,640,200);
         string attacksName;
@@ -1301,21 +1363,27 @@ void SdlGame::sdlDisplayBattle(world & world, unsigned int action)
 
         for(int i = 0; i < 4; i++)
         {
-            attacksName = to_string(i+1) + "-" + playerPoke->attackChoice[i].name + " " + to_string(playerPoke->attackChoice[i].damagePoints);
+            if(infosBattle.endTurn)
+            {
+                attacksName = to_string(i+1) + "-" + playerPoke->attackChoice[i].name + " " + to_string(playerPoke->attackChoice[i].damagePoints);
 
-            font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
-            font_pokemonAttacks.loadFromCurrentSurface(renderer);
-            SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posAttacks);
+                font_pokemonAttacks[i].setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
+                font_pokemonAttacks[i].loadFromCurrentSurface(renderer);
+            }
+            SDL_RenderCopy(renderer, font_pokemonAttacks[i].getTexture(), NULL, &posAttacks);
             
             posAttacks.x += 150;
         }
 
         posAttacks.x = 260;
         posAttacks.y = 540;
-        attacksName = "5- Fuite";
-        font_pokemonAttacks.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
-        font_pokemonAttacks.loadFromCurrentSurface(renderer);
-        SDL_RenderCopy(renderer, font_pokemonAttacks.getTexture(), NULL, &posAttacks);
+        if(infosBattle.endTurn)
+        {
+            attacksName = "5- Fuite";
+            font_fuite.setSurface(TTF_RenderText_Solid(font, attacksName.c_str(), font_color));
+            font_fuite.loadFromCurrentSurface(renderer);
+        }
+        SDL_RenderCopy(renderer, font_fuite.getTexture(), NULL, &posAttacks);
 
         infosBattle.endTurn = false;
     }
