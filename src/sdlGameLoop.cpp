@@ -656,6 +656,7 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 1)
                         {
                             world.saveGame("saveData");
+                            SDL_Delay(1000);
                             world.menuOn = 0;
                         }else if(world.menuOn == 2)
                         {
@@ -672,6 +673,7 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 1)
                         {
                             world.loadGame("saveData");
+                            SDL_Delay(1000);
                             world.menuOn = 0;
                         }else if(world.menuOn == 2)
                         {
