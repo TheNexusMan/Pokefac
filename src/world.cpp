@@ -34,7 +34,6 @@ void world::saveGame(string saveName)
 	file << mainPlayer.getPosY() << "\n";
 	file << mainPlayer.getMoney() << "\n";
 	file << mainPlayer.getPokeball() << "\n";
-	file << mainTerrain.terrainName << "\n";
 	file << mainPlayer.nbPokemon << "\n";
 	for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 	{
@@ -46,6 +45,7 @@ void world::saveGame(string saveName)
 	{
 		file << NPCTab[i].beaten << "\n";
 	}
+	file << mainTerrain.terrainName;
 	file.close();		
 }
 
@@ -54,7 +54,7 @@ void world::loadGame(string saveName)
 	isLoading = true;
 	string name = "./data/saveGames/" + saveName + ".txt";
 	ifstream file(name);
-	unsigned int posX, posY, cash, pokeballs;
+	unsigned int posX, posY, cash, pokeballs, idPoke;
 	string nameTerrain;
 	if(file.is_open())
 	{
@@ -65,11 +65,11 @@ void world::loadGame(string saveName)
 			file >> posY;
 			file >> cash;
 			file >> pokeballs;
-			file >> nameTerrain;
 			file >> mainPlayer.nbPokemon;
 			for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 			{
-				file >> mainPlayer.getPokemon(i).id;
+				file >> idPoke;
+				mainPlayer.getPokemon(i) = pokeTab[idPoke-1];
 				file >> mainPlayer.getPokemon(i).health;
 				//Rajouter le chargement de l'expérience et du niveau quand implémenté
 			}
@@ -77,6 +77,7 @@ void world::loadGame(string saveName)
 			{
 				file >> NPCTab[i].beaten;
 			}
+			file >> nameTerrain;
 		}
 		mainTerrain.initTerrain(nameTerrain);
 		initTerrainNPC(nameTerrain);
