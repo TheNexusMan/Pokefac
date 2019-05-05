@@ -17,7 +17,7 @@
 
 using namespace std;
 
-
+//! \brief Gestion des NPC
 class NPC : public Character
 {
 public:

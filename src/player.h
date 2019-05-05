@@ -22,6 +22,8 @@ using namespace std;
 const int MAXB = 5;
 const int NBPLAYERPOKE = 6;
 
+//! \brief Gestion du personnages
+
 class Player : public Character
 {
 private:
