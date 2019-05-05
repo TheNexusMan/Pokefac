@@ -47,40 +47,40 @@ Changer de terrain / entrer dans un bâtiment :
 combats
     Vous pouvez combattre des NPC ou des pokémons sauvages.
     Les combats se déroulent de la même façon :
-        Vous pouvez fuir ou choisir une attaque avec un certain nombre de points d'attaque qui diminuerons la vie du pokémon adverse.
+        Vous pouvez fuir ou choisir une attaque avec un certain nombre de points d'attaque qui diminuera la vie du pokémon adverse.
         Si vous attaquez et que le pokémon est toujours en vie, il contre-attaquera.
         Si la vie du pokémon adverse arrive à 0, c'est une victoire.
         Si votre pokémon est KO, le pokémon suivant et vivant de votre liste de pokémon sera envoyé.
         Si tous vos pokémon sont KO, vous serez envoyé dans un centre de réanimation sur la case de vie.
 
 Case de vie
-    Si vos pokémons ont souffert lors d'un combat, vous pouvez aller vous placer sur la case de vie symbolisé par une croix blanche dans un cercle rouge.
+    Si vos pokémons ont souffert lors d'un combat, vous pouvez aller vous placer sur la case de vie symbolisée par une croix blanche dans un cercle rouge.
 
 Pokémon sauvages / attraper des pokémons :
     En vous plaçant sur une case de haute herbe, vous avez une 1 sur 5 de lancer un combat contre un pokémon tiré aléatoirement.
-    Si vous gagnez, le pokémon est ajouter à votre collection seulement si les conditions suivantes son validées :
+    Si vous gagnez, le pokémon est ajouté à votre collection seulement si les conditions suivantes sont validées :
         - si vous avez assez de place sur vous
         - si vous ne possédez pas déjà ce pokémon
         - si vous avez au moins une pokeball
 
     ATTENTION les pokémons vaincus et récupérés gardent leur vie à 0, il faudra passer dans un centre de réanimation pokémon
-    pour les soignés (croix rouge dans la maison du terrain1)
+    pour les soigner (croix rouge dans la maison du terrain1)
 
 NPC :
     Si vous vous placez sur une des trois cases en face d'un NPC, un combat sera lancé. En cas de victoire, une somme de
     pokedollar sera ajouté dans votre porte-monnaie.
     Un seul pokémon à combattre par NPC.
-    Une fois vaincu, le NPC ne vous embettera plus.
+    Une fois vaincu, le NPC ne vous embêtera plus.
 
 Menu :
     pokémons
         Vous pouvez voir les pokémons que vous transportez en allant dans la section "Pokémons" du menu. Vous pourrez y
         trouver toutes les informations les concernant.
-        Vous pouvez également les organiser différement seulement vos choix pour le lancement des combats.
+        Vous pouvez également les organiser différemment seulement vos choix pour le lancement des combats.
     
     Sauvegarde
         Sauvegarde toutes les données de votre partie :
-            - vos pokémons et leurs état
+            - vos pokémons et leurs états
             - votre nombre de pokéball
             - votre position
             - votre argent
@@ -124,7 +124,7 @@ Maison*.txt
     * = mur
     N = NPC
     O = porte
-    V = vie, regènère la vie des pokémons
+    V = vie
 
 pokemons.txt
     Id
@@ -135,7 +135,7 @@ pokemons.txt
     Vie
     Vie maximum
     Stat d'attaque
-    Stat de défence
+    Stat de défense
     Image
     nom attaque 1 | points de dommage
     nom attaque 2 | points de dommage
