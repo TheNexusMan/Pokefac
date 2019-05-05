@@ -37,7 +37,7 @@ Linux
 40
 15
 15
-salashell.jpg
+salashell.png
 git 10
 ls 5
 cp 20
