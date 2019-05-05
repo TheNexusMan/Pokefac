@@ -35,7 +35,6 @@ void world::saveGame(string saveName)
 	file << mainPlayer.getMoney() << "\n";
 	file << mainTerrain.terrainName << "\n";
 	file << mainPlayer.nbPokemon << "\n";
-	cout << "nombre pokemons : " << mainPlayer.nbPokemon;
 	for(unsigned int i = 0; i < mainPlayer.nbPokemon; i++)
 	{
 		file << mainPlayer.getPokemon(i).id << "\n";
@@ -75,9 +74,6 @@ void world::loadGame(string saveName)
 		file.close();
 	} else write_to_log_file("WARNING : Erreur dans l'ouverture du fichier ./data/saveGames/" + saveName + ".txt");
 
-	mainTerrain.initTerrain(nameTerrain);
-	mainPlayer.setNewPos(posX, posY);
-	mainPlayer.addMoney(cash);
 }
 
 
