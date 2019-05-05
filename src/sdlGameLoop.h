@@ -335,6 +335,15 @@ private:
         */
         void initInfosMenu();
 
+        /**
+        @brief
+        Interragir avec l'élément devant le joueur
+
+        @param world
+        @return none
+        */
+        void interaction(world & world);
+
 };
 #endif
 

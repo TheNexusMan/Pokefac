@@ -450,43 +450,49 @@ void SdlGame::sdlDisplay(world world, int tileX, int tileY)
                 // Affichage des NPC
                 if(world.mainTerrain.terrainTab[y][x] == 'N')
                 {
-                    NPC thisNPC = world.whichNPCDisplay(y, x);
+                    NPC *thisNPC = world.whichNPCDisplay(y, x);
                     SDL_Rect NPCRect;
                     int spriteW, spriteH;
                     SDL_QueryTexture(im_NPCMan.getTexture(), NULL, NULL, &spriteW, &spriteH);
-                    NPCRect.w = spriteW / 13;
-                    NPCRect.h = spriteH / 21;
-                    NPCRect.x = 0;
-                    switch (thisNPC.getOrientation())
-                    {
-                    case 'n':
-                        NPCRect.y = 0;
-                        break;
-                    
-                    case 's':
-                        NPCRect.y = NPCRect.h*2;
-                        break;
-                    
-                    case 'e':
-                        NPCRect.y = NPCRect.h*3;
-                        break;
-                    
-                    case 'o':
-                        NPCRect.y = NPCRect.h;
-                        break;
-                    
-                    default:
-                        break;
-                    }
-                    
                     SDL_Rect NPCPosition;
                     NPCPosition.x = posSpriteX-2;
                     NPCPosition.y = posSpriteY-20;
                     NPCPosition.w = NPCPosition.h = TAILLE_SPRITE+7;
-                    if(thisNPC.image == "man")
-                        SDL_RenderCopy(renderer, im_NPCMan.getTexture(), &NPCRect, &NPCPosition);
-                    else
+                    NPCRect.w = spriteW / 13;
+                    NPCRect.h = spriteH / 21;
+                    NPCRect.x = 0;
+                    if(thisNPC != NULL)
+                    {
+                        switch (thisNPC->getOrientation())
+                        {
+                        case 'n':
+                            NPCRect.y = 0;
+                            break;
+                        
+                        case 's':
+                            NPCRect.y = NPCRect.h*2;
+                            break;
+                        
+                        case 'e':
+                            NPCRect.y = NPCRect.h*3;
+                            break;
+                        
+                        case 'o':
+                            NPCRect.y = NPCRect.h;
+                            break;
+                        
+                        default:
+                            break;
+                        }
+                        if(thisNPC->image == "man")
+                            SDL_RenderCopy(renderer, im_NPCMan.getTexture(), &NPCRect, &NPCPosition);
+                        else
+                            SDL_RenderCopy(renderer, im_NPCWoman.getTexture(), &NPCRect, &NPCPosition);
+                    }else{
+                        NPCRect.y = NPCRect.h*2;
                         SDL_RenderCopy(renderer, im_NPCWoman.getTexture(), &NPCRect, &NPCPosition);
+                    }
+                    
                 }
             }
         }
@@ -616,7 +622,7 @@ void SdlGame::sdlLoop(world &world)
                         if(world.menuOn == 1)
                         {
                             world.menuOn = 0;
-                        }else if(world.menuOn == 0)
+                        }else if(world.menuOn == 0 && !infosBattle.isInBattle)
                         {
                             world.menuOn = 1;
                         }else if (world.menuOn == 2)
@@ -746,12 +752,14 @@ void SdlGame::sdlLoop(world &world)
                         }
                         break;
 
-                    case SDLK_p:
+                    case SDLK_SPACE:
                         if(world.menuOn == 2 && infosMenu.organizePoke == true)
                         {
                             infosMenu.isTaken = !infosMenu.isTaken;
                             infosMenu.isModified = true;
                         }
+                        if(world.menuOn == 0 && !infosBattle.isInBattle)
+                            interaction(world);
                         break;
 
                     case SDLK_o:
@@ -1467,4 +1475,72 @@ void SdlGame::initInfosMenu()
 	infosMenu.isTaken = false;
     infosMenu.isModified = false;
     infosMenu.indice = 0;
+}
+
+void SdlGame::interaction(world & world)
+{
+    unsigned int posPlayerX = world.mainPlayer.getPosX();
+    unsigned int posPlayerY = world.mainPlayer.getPosY();
+    bool NPCFound = false;
+    NPC *npc;
+    switch (world.mainPlayer.getOrientation())
+    {
+    case 'n':
+        if(world.mainTerrain.terrainTab[posPlayerX-1][posPlayerY] == 'N')
+        {
+            npc = world.whichNPCDisplay(posPlayerX-1, posPlayerY);
+            NPCFound = true;
+        }
+        break;
+    case 's':
+        if(world.mainTerrain.terrainTab[posPlayerX+1][posPlayerY] == 'N')
+        {
+            npc = world.whichNPCDisplay(posPlayerX+1, posPlayerY);
+            NPCFound = true;
+        }
+        break;
+    case 'e':
+        if(world.mainTerrain.terrainTab[posPlayerX][posPlayerY+1] == 'N')
+        {
+            npc = world.whichNPCDisplay(posPlayerX, posPlayerY+1);
+            NPCFound = true;
+        }
+        break;
+    case 'o':
+        if(world.mainTerrain.terrainTab[posPlayerX][posPlayerY-1] == 'N')
+        {
+            npc = world.whichNPCDisplay(posPlayerX, posPlayerY-1);
+            NPCFound = true;
+        }
+        break;
+    
+    default:
+        break;
+    }
+    if(NPCFound)
+    {
+        string sentence;
+        string sentence2;
+        if(npc == NULL)
+        {
+            sentence = "Infirmiere Joelle :";
+            sentence2 = "Placez vous sur le cercle rouge !";
+        }else{
+            sentence = npc->name + " :";
+            if(npc->beaten)
+            {
+                sentence2 = npc->dialog[1];
+            }else{
+                infosBattle.NPCInFight = npc;
+                infosBattle.pokeInFight = npc->NPCPokemon;
+                infosBattle.isInBattle = true;
+                infosBattle.isAgainstNPC = true;
+                sentence2 = npc->dialog[0];
+                Mix_HaltMusic();
+                Mix_PlayMusic(battle, -1);
+                sdlDisplay(world, 0, 0);
+            }
+        }
+        sdlDisplayBattleSentence(sentence, sentence2);
+    }
 }

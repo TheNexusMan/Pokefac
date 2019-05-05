@@ -256,14 +256,14 @@ public:
 	Fonction retournant un NPC à afficher
 
 	@param x, y
-	@return NPCTab[i]
+	@return &NPC
 
 	Exemple Visual
 	@code
 	world.whichNPCDisplay(x, y);
 	@endCode
 	*/
-	NPC whichNPCDisplay(unsigned int x, unsigned int y);
+	NPC* whichNPCDisplay(unsigned int x, unsigned int y);
 
 	/** 
 	@brief

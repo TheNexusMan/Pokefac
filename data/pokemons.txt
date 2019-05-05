@@ -128,10 +128,10 @@ PHP
 8
 8
 Pahpilusion.png
-<?php 5
+php 5
 $var 14
 echo 10
-?>  5
+GET 5
 
 10
 DracauScheme
