@@ -41,6 +41,10 @@ void world::saveGame(string saveName)
 		file << mainPlayer.getPokemon(i).health  << "\n"; 
 		//Rajouter la save de l'expérience et du niveau quand implémenté
 	}
+	for(unsigned int i = 0; i < NB_NPC; i++)
+	{
+		file << NPCTab[i].beaten << "\n";
+	}
 	file.close();		
 }
 
@@ -66,9 +70,14 @@ void world::loadGame(string saveName)
 				file >> mainPlayer.getPokemon(i).id;
 				file >> mainPlayer.getPokemon(i).health;
 				//Rajouter le chargement de l'expérience et du niveau quand implémenté
-			}		
+			}
+			for(unsigned int i = 0; i < NB_NPC; i++)
+			{
+				file >> NPCTab[i].beaten;
+			}
 		}
 		mainTerrain.initTerrain(nameTerrain);
+		initTerrainNPC(nameTerrain);
 		mainPlayer.setNewPos(posX, posY);
 		mainPlayer.setMoney(cash);
 		file.close();
