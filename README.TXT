@@ -15,10 +15,12 @@ Lancer le jeu : bin/pokefacSdl
 
 
 ///////////////////////////CONTROLES\\\\\\\\\\\\\\\\\\\\\\\\\\\
+En jeu :
 Flèche haut = haut
 Flèche bas = bas
 Flèche gauche = gauche
 Flèche droite = droite
+Barre espace = intéragir avec les NPC
 M = ouvrir/fermer menu
 X = quitter le jeu
 
@@ -31,7 +33,7 @@ O = lancer le mode organisation
 
 En mode organisation du menu pokémons :
 Flèche haut = monter la sélection du pokémon (symbolisé par une *)
-P = prendre/déposer un pokémon (vous pouvez changer l'ordre du pokémon prit en le déplaçant avec les flèches haut et bas)
+Barre espace = prendre/déposer un pokémon (vous pouvez changer l'ordre du pokémon prit en le déplaçant avec les flèches haut et bas)
 
 Lors d'un combat :
 1, 2, 3, 4 = choisir les attaques
@@ -67,8 +69,8 @@ Pokémon sauvages / attraper des pokémons :
     pour les soigner (croix rouge dans la maison du terrain1)
 
 NPC :
-    Si vous vous placez sur une des trois cases en face d'un NPC, un combat sera lancé. En cas de victoire, une somme de
-    pokedollar sera ajouté dans votre porte-monnaie.
+    Pour lancer un combat avec un NPC, il faut soit se placer sur une des trois cases en face de lui, soit lui parler.
+    En cas de victoire, une somme de 100 pokedollars sera ajouté dans votre porte-monnaie.
     Un seul pokémon à combattre par NPC.
     Une fois vaincu, le NPC ne vous embêtera plus.
 

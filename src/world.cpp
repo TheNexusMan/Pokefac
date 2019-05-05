@@ -482,7 +482,8 @@ NPC* world::whichNPCDisplay(unsigned int x, unsigned int y)
 {
 	for(unsigned int i = 0; i < NB_NPC; i++)
 	{
-		if(NPCTab[i].getPosX() == x && NPCTab[i].getPosY() == y) return &NPCTab[i];
+		if(NPCTab[i].getPosX() == x && NPCTab[i].getPosY() == y && mainTerrain.terrainName == NPCTab[i].terrainName)
+			return &NPCTab[i];
 	}
 
 	return NULL;
