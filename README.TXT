@@ -9,7 +9,7 @@ Elisa SEBELLIN P1709454
 
 
 ///////////////////////////LANCER LE JEU\\\\\\\\\\\\\\\\\\\\\\\\\\\
-ATTENTION : Risque de ralentissement si le jeu est lancé sur un VM
+ATTENTION : Risque de ralentissement si le jeu est lancé sur une VM
     Dans ce cas, il faut commenter les lignes 272, 295, 318 et 342 du fichier src/sdlGameLoop.cpp
 Se placer à la racine du dossier pokefac : cd .../pokefac
 Compiler le jeu : make
