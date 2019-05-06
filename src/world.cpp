@@ -400,7 +400,7 @@ void world::displayOpponentsLife(const Player mainPlayer, const Pokemon playerPo
 
 bool world::moveIsAllowed(Player mainPlayer, const int x, const int y) const
 {
-	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N') && (mainTerrain.terrainTab[x][y] != '*'));
+	return ((x >= 0) && (x < SIZETERRAIN) && (y >= 0) && (y < SIZETERRAIN) && (mainTerrain.terrainTab[x][y] != '#') && (mainTerrain.terrainTab[x][y] != 'N') && (mainTerrain.terrainTab[x][y] != '*') && (mainTerrain.terrainTab[x][y] != 'M'));
 }
 
 void world::door()
